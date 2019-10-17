@@ -1,0 +1,25 @@
+
+$rb6 = 0
+$rb1 = 0
+$rb2 = 0
+$rb3 = 0
+$rb4 = 0
+$rb5 = 0
+$robot_robot1_x = -0
+$robot_robot1_y = 0
+$robot_robot1_z = 0
+$robot_robot2_x = -8.88178e-016
+$robot_robot2_y = 0
+$robot_robot2_z = -116.872
+$robot_robot3_x = 3.55271e-015
+$robot_robot3_y = 154.592
+$robot_robot3_z = -206.377
+$robot_robot4_x = -43.9083
+$robot_robot4_y = 120.2
+$robot_robot4_z = -90.4089
+$robot_robot5_x = -36.4106
+$robot_robot5_y = 247.79
+$robot_robot5_z = -62.6742
+$robot_robot6_x = -12.079
+$robot_robot6_y = 90.7235
+$robot_robot6_z = 41.0172
