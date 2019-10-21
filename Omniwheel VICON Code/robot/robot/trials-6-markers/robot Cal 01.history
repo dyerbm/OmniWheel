@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<Trial name="robot Cal 01" notes="">
+
+  <Parameters>
+    <Param header="0" name="Capture Date" value="2019-Oct-16 12:33:35"/>
+    <Param header="0" name="x2d" value="robot Cal 01.x2d"/>
+  </Parameters>
+
+</Trial>

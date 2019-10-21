@@ -3,8 +3,9 @@ timeglobal=0;
 tglobal=tic;
 
 matcounter = 1; % Starting row for output matrix
-max_operation = 10; % Maximum time robot will move
+max_operation = 20; % Maximum time robot will move
 matrixsize = max_operation * 100 + 100; % Based on the time for operation, will wait 1 second after robot stops to end recording
+firstLine = 0; %for zeroing position of robot
  
 Sheet1Mat = zeros(matrixsize,14);
 
@@ -25,6 +26,12 @@ delete(instrfind);
 port = 'COM7'; % Replace with whatever the USB serial bus from the XBee module is on (was 7)
 serialPortObj = serial(port, 'BaudRate', 9600);
 fopen(serialPortObj);
+
+%% make data out file
+prompt={'Please enter the name of the desired notebook'};
+title='Excel notebook name';
+notebook_name = inputdlg(prompt,title);
+notebook_name_raw = strcat(notebook_name{1}, '_raw', '.xlsx');
 
 %% CONNECT TO DATA STREAM
 % Load the SDK
@@ -163,67 +170,74 @@ while(timeglobal <= max_operation)
     end
         
 %% Processing the data in real time
-
     % Getting angle relative to x axis.
     vector_ca = [(rb4(1) - rb5(1))/1000, (rb4(2) - rb5(2))/1000];
 
     theta = atan(vector_ca(2)/vector_ca(1));
-
+    
     % Find xR, yR, thetaR - Real values
 
     xR = rb5(1);
     yR = rb5(2);
     thetaR = theta;
-
-    % Find xD, yD, thetaD - Desired values
-
-    [xD, yD, thetaD] = expectedPath(timeglobal);
-
-    xD = xD + 500;
-    yD = yD + 500;
+ 
+    %determine starting position of the robot
+    if (xR~=0 && yR~=0 && firstLine == 0 )
+        xRi = xR;
+        yRi = yR;
+        firstLine=1;
     
-    % Error terms
+    elseif (firstLine~=0)
+        % Find xD, yD, thetaD - Desired values
 
-    xE = xD - xR;
-    yE = yD - yR;
-    thetaE = thetaD - thetaR;
-    
-    thetaE = min(thetaE, pi-thetaE);
+        [xD, yD, thetaD] = expectedPath(timeglobal);
 
-    kp = [0.05,0.05,0.2;+0.05,-0.05,0.2;-0.05,-0.05,0.2;-0.05,0.05,0.2].*20;
-    ki = [0.03,0.03,0.01;0.03,-0.03,0.01;-0.03,-0.03,0.01;-0.03,+0.03,0.01].*2;
-    
-    err = [xE; yE; thetaE];
-    integrator_error = integrator_error + err;
-    
-    u = kp*err + ki*err
-    %u = kp*err
-    
-    t=timeglobal;
+        xD = xD+xRi;
+        yD = yD+yRi;
+        thetaD = 0;
 
-    if (u(1) > 255 || u(2) > 255 || u(3) > 255 || u(4) > 255)
-        u1 = u(1);
-        u2 = u(2);
-        u3 = u(3);
-        u4 = u(4);
-        big = max(u1, u2);
-        big = max(big, u3);
-        big = max(big, u4);
-        u = u./abs(big)*255;
+        % Error terms
+
+        xE = xD - xR;
+        yE = yD - yR;
+        thetaE = thetaD - thetaR;
+
+        thetaE = min(thetaE, pi-thetaE);
+
+        kp = [0.05,0.05,0.2;+0.05,-0.05,0.2;-0.05,-0.05,0.2;-0.05,0.05,0.2].*5;
+        ki = [0.03,0.03,0.01;0.03,-0.03,0.01;-0.03,-0.03,0.01;-0.03,+0.03,0.01].*1;
+
+        err = [xE; yE; thetaE]
+        integrator_error = integrator_error + err;
+
+        u = kp*err + ki*err;
+        %u = kp*err
+
+        t=timeglobal;
+
+        if (abs(u(1)) > 160 || abs(u(2)) > 160 || abs(u(3)) > 160 || abs(u(4)) > 160)
+            u1 = u(1);
+            u2 = u(2);
+            u3 = u(3);
+            u4 = u(4);
+            big = max(u1, u2);
+            big = max(big, u3);
+            big = max(big, u4);
+            u = u./abs(big)*160;
+        end
+
+        [u', err', integrator_error'];
+        volts_to_send = sprintf('%d,%d,%d,%d*', int16(u(1)), int16(u(2)), int16(u(3)), int16(u(4)))
+        fprintf(serialPortObj, volts_to_send);
+
+        Sheet1Mat(matcounter,:) = [timeglobal, xR, yR, thetaR, xD, yD, thetaD, xE, yE, thetaE, u(1), u(2), u(3), u(4)]; % Gives raw data
+
+        matcounter = matcounter + 1;
+
+        timeglobal = toc(tglobal);
     end
-
-    [u', err', integrator_error'];
-    volts_to_send = sprintf('%d,%d,%d,%d*', u(1), u(2), u(3), u(4));
-    fprintf(serialPortObj, volts_to_send);
-
-    Sheet1Mat(matcounter,:) = [timeglobal, xR, yR, thetaR, xD, yD, thetaD, xE, yE, thetaE, u(1), u(2), u(3), u(4)]; % Gives raw data
-
-    matcounter = matcounter + 1;
-
-    timeglobal = toc(tglobal);
-
 end % end of while loop, everything before this runs until the end of the script
 
 fprintf(serialPortObj, '0,0,0,0*');
 
-xlswrite("C:\Users\Vicon\Desktop\Biglar Begian VICON\" + strcat('Controller_Output', '.xlsx'), Sheet1Mat);
+xlswrite("./Raw Data/" + notebook_name_raw, Sheet1Mat);

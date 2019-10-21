@@ -10,7 +10,7 @@ marker_4_lost = false;
 marker_5_lost = false;
 
 matcounter = 1; % Starting row for output matrix
-max_operation = 3; % Maximum time robot will move
+max_operation = 40; % Maximum time robot will move
 matrixsize = max_operation * 100 + 100; % Based on the time for operation, will wait 1 second after robot stops to end recording
  
 Sheet1Mat = zeros(matrixsize,21);
@@ -23,13 +23,6 @@ delete(instrfind);
 port = 'COM7'; % Replace with whatever the USB serial bus from the XBee module is on (was 7)
 serialPortObj = serial(port, 'BaudRate', 9600);
 fopen(serialPortObj);
-
-%% get data for the operating volatage range for the robot
-prompt={'Enter voltages to be sent to motors (range is -12 to 12, separate by ,) eg. 0,0,0,0'};
-title='Voltage Selection';
-answer = inputdlg(prompt,title);
-volts_to_send = strcat(answer{1}, '*');
-u = (sscanf(volts_to_send,'%d,%d,%d,%d*'))';
 
 %% Get name of notebook from user
 prompt={'Please enter the name of the desired notebook'};
@@ -68,9 +61,6 @@ flag1=0;
 DATACORRECTION=0;       
 data=[1000,1000];
 
-fprintf(serialPortObj, volts_to_send);
-tglobal=tic;
-
 rb1 = [0,0,0];
 rb2 = [0,0,0];
 rb3 = [0,0,0];
@@ -78,7 +68,7 @@ rb4 = [0,0,0];
 rb5 = [0,0,0];
 
 %% GET DATA
-
+tglobal=tic;
 while(matcounter <= matrixsize)
     
     % 1 - Get a frame
@@ -206,22 +196,37 @@ while(matcounter <= matrixsize)
             
         end % end of robot segment
         
-
-        % Save Sheet1 Data
-        Sheet1Mat(matcounter,:) = [timeglobal, timenow, rb1, rb2, rb3, rb4, rb5, u]; % Gives raw data
-        
-        matcounter = matcounter + 1;
-        
         % At 100HZ, this value should be fixed at 10ms between each
         % iteration
         timenow = 0.010;
         timeglobal = toc(tglobal);
+        
+        if (timeglobal > max_operation)
+            volts_to_send = '0,0,0,0*';
+            u = [0,0,0,0];
+            fprintf(serialPortObj, volts_to_send);
+        else
+            circletime=5
+            speed=160
+            %u = [int16(sin(pi/20*timeglobal)*200),int16(sin(pi/20*timeglobal)*200),int16(sin(pi/20*timeglobal)*200),int16(sin(pi/20*timeglobal)*200)];
+            u = [int16(sin(2*pi/circletime*timeglobal)*speed),int16(cos(2*pi/circletime*timeglobal)*speed),int16(-sin(2*pi/circletime*timeglobal)*speed),int16(-cos(2*pi/circletime*timeglobal)*speed)];
+            volts_to_send = strcat(int2str(u(1)),',',int2str(u(2)),',',int2str(u(3)),',',int2str(u(4)),'*')
+            timeglobal
+            fprintf(serialPortObj, volts_to_send);
+        end
+
+        
+        % Save Sheet1 Data
+        Sheet1Mat(matcounter,:) = [timeglobal, timenow, rb1, rb2, rb3, rb4, rb5, u]; % Gives raw data
+        
+        matcounter = matcounter + 1;
 
     end
 
 end % end of while loop, everything before this runs until the end of the script
 
+
 volts_to_send = '0,0,0,0*';
 u = [0,0,0,0];
 fprintf(serialPortObj, volts_to_send);
-xlswrite("C:\Users\Vicon\Desktop\Biglar Begian VICON\" + notebook_name_raw, Sheet1Mat);
+xlswrite("./Raw Data/" + notebook_name_raw, Sheet1Mat);
