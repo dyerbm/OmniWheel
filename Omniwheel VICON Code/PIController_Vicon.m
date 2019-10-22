@@ -240,4 +240,4 @@ end % end of while loop, everything before this runs until the end of the script
 
 fprintf(serialPortObj, '0,0,0,0*');
 
-xlswrite("./Raw Data/" + notebook_name_raw, Sheet1Mat);
+xlswrite("C:/Users/Vicon/Desktop/Git/Omniwheel VICON Code/Raw Data/" + notebook_name_raw, Sheet1Mat);

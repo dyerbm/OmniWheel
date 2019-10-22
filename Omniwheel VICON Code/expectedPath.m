@@ -11,10 +11,10 @@ function [xD, yD, thetaD] = expectedPath(time)
     
     
     %% Do a circle
-    radius=1000;
+    radius=800;
     circleTime = 10;
     yD=radius*sin(2*pi/circleTime*time);
-    xD=radius*cos(2*pi/circleTime*time);
+    xD=radius*cos(2*pi/circleTime*time)-radius;
     thetaD=atan(1)-pi/4;
 
 
