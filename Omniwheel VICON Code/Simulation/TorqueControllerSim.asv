@@ -4,7 +4,11 @@ clc
 clear all
 
 dt=0.01;
+<<<<<<< HEAD
 t_final=20;
+=======
+t_final=10;
+>>>>>>> 6bf0134214142f8157939bfb67f94111a9b8151e
 
 outputs = zeros(t_final/dt,7);
 
@@ -33,8 +37,13 @@ Tdot=z2(3)*[-sin(z1(3)),cos(z1(3)),0;-cos(z1(3)),-sin(z1(3)),0;0,0,0];
 Nstar=Iw/rw*(S+I)*R*Tdot;
 Mstar=rw*Q\M+Iw/rw*(S+I)*R*T;
 
+<<<<<<< HEAD
 k1=[-4.1,0,0;0,-4.1,0;0,0,-4.1]; % THESE BETTER HAVE NEGATIVE EIGSSSS
 k2=[-5,0,0;0,-5,0;0,0,-5];
+=======
+k1=[-6.1,0,0;0,-6.1,0;0,0,-6.1]; % THESE BETTER HAVE NEGATIVE EIGSSSS
+k2=[-5,0,0;0,-5,0;0,0,-5.2];
+>>>>>>> 6bf0134214142f8157939bfb67f94111a9b8151e
 
 u=-k1*(dyd-z2)-k2*(yd-z1);
 tau=Mstar*(ddyd+u)+Nstar*z1;
@@ -49,9 +58,15 @@ randominput = rand(3,20)*6-3;
 for t=1:t_final/dt
     
    %sinusoidal functions
+<<<<<<< HEAD
 %    yd = [0.4*cos(t*dt);0.4*sin(t*dt);0];
 %    dyd = [-0.4*sin(t*dt);0.4*cos(t*dt);0];
 %    ddyd = [-0.4*cos(t*dt);-0.4*sin(t*dt);0];
+=======
+   yd = [0.4*cos(t*dt);0.4*sin(t*dt);0];
+   dyd = [-0.4*sin(t*dt);0.4*cos(t*dt);0];
+   ddyd = [-0.4*cos(t*dt);-0.4*sin(t*dt);0];
+>>>>>>> 6bf0134214142f8157939bfb67f94111a9b8151e
 
    %go to a point
 %     yd=[1;0;0];
@@ -68,8 +83,13 @@ for t=1:t_final/dt
 %    dyd=[0;0;0];
 %    ddyd=[0;0;0];
 
+<<<<<<< HEAD
 %    %Rose Plot
    ped=3/2;
+=======
+   %Rose Plot
+   ped=4;
+>>>>>>> 6bf0134214142f8157939bfb67f94111a9b8151e
    yd=[cos(ped*t*dt)*cos(t*dt);cos(ped*t*dt)*sin(t*dt);0]*0.4;
    dyd = [sin(t*dt)*(-cos(ped*t*dt))-ped*cos(t*dt)*sin(ped*t*dt);
        cos(t*dt)*cos(ped*t*dt)-ped*sin(t*dt)*sin(ped*t*dt);
@@ -104,6 +124,7 @@ for t=1:t_final/dt
     outputs(int32(t),:)=[t*dt,yd(1),yd(2),yd(3),y(1),y(2),y(3)];
 end
 
+<<<<<<< HEAD
 figure
 plot(outputs(:,1),outputs(:,2),outputs(:,1),outputs(:,5),outputs(:,1),outputs(:,3),outputs(:,1),outputs(:,6),outputs(:,1),outputs(:,4),outputs(:,1),outputs(:,7));
 legend('x_{desired}','x_{real}','y_{desired}','y_{real}','\theta_{desired}','\theta_{real}')
@@ -121,3 +142,10 @@ plot(outputs(:,1),outputs(:,2)-outputs(:,5),outputs(:,1),outputs(:,3)-outputs(:,
 legend('x','y','\theta')
 xlabel('time (s)')
 ylabel('Error (m,\theta)')
+=======
+plot(outputs(:,1),outputs(:,2),outputs(:,1),outputs(:,5),outputs(:,1),outputs(:,3),outputs(:,1),outputs(:,6),outputs(:,1),outputs(:,4),outputs(:,1),outputs(:,7));
+legend('x_{desired}','x_{real}','y_{desired}','y_{real}','theta_{desired}','theta_{real}')
+
+plot(outputs(:,2),outputs(:,3),outputs(:,5),outputs(:,6))
+
+>>>>>>> 6bf0134214142f8157939bfb67f94111a9b8151e
