@@ -11,7 +11,7 @@ outputs = zeros(t_final/dt,7);
 y=[0;0;0];yd=[0;0;0];dyd=[0;0;0];ddyd=[0;0;0]; %will redefine these
 
 z2=[0;0;0]; %velocities
-z1=[0.4;0;0]; %position
+z1=[0;0;0]; %position
 
 Iw=0.0000427; %wheel moment of inertia - FIX THIS VALUE
 rw=0.034925; %wheel radius
@@ -33,8 +33,8 @@ Tdot=z2(3)*[-sin(z1(3)),cos(z1(3)),0;-cos(z1(3)),-sin(z1(3)),0;0,0,0];
 Nstar=Iw/rw*(S+I)*R*Tdot;
 Mstar=rw*Q\M+Iw/rw*(S+I)*R*T;
 
-k1=[-4.1,0,0;0,-4.1,0;0,0,-4.1]; % THESE BETTER HAVE NEGATIVE EIGSSSS
-k2=[-5,0,0;0,-5,0;0,0,-5];
+k1=[-6.1,0,0;0,-6.1,0;0,0,-6.1]; % THESE BETTER HAVE NEGATIVE EIGSSSS
+k2=[-5,0,0;0,-5,0;0,0,-5.2];
 
 u=-k1*(dyd-z2)-k2*(yd-z1);
 tau=Mstar*(ddyd+u)+Nstar*z1;
@@ -48,10 +48,10 @@ randominput = rand(3,20)*6-3;
 
 for t=1:t_final/dt
     
-%    %sinusoidal functions
-%    yd = [0.4*cos(t*dt);0.4*sin(t*dt);0];
-%    dyd = [-0.4*sin(t*dt);0.4*cos(t*dt);0];
-%    ddyd = [-0.4*cos(t*dt);-0.4*sin(t*dt);0];
+   %sinusoidal functions
+   yd = [0.4*cos(t*dt);0.4*sin(t*dt);0];
+   dyd = [-0.4*sin(t*dt);0.4*cos(t*dt);0];
+   ddyd = [-0.4*cos(t*dt);-0.4*sin(t*dt);0];
 
    %go to a point
 %     yd=[1;0;0];
@@ -104,13 +104,8 @@ for t=1:t_final/dt
     outputs(int32(t),:)=[t*dt,yd(1),yd(2),yd(3),y(1),y(2),y(3)];
 end
 
-figure
 plot(outputs(:,1),outputs(:,2),outputs(:,1),outputs(:,5),outputs(:,1),outputs(:,3),outputs(:,1),outputs(:,6),outputs(:,1),outputs(:,4),outputs(:,1),outputs(:,7));
 legend('x_{desired}','x_{real}','y_{desired}','y_{real}','theta_{desired}','theta_{real}')
 
-figure
 plot(outputs(:,2),outputs(:,3),outputs(:,5),outputs(:,6))
 
-figure
-plot(outputs(:,1),outputs(:,2)-outputs(:,5),outputs(:,1),outputs(:,3)-outputs(:,6),outputs(:,1),outputs(:,4)-outputs(:,7));
-legend('x_{error}','y_{error}','theta_{error}')
