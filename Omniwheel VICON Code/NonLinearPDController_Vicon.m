@@ -51,8 +51,6 @@ u=-k1*(dyd-z2)-k2*(yd-z1);
 tau=Mstar*(ddyd+u)+Nstar*z1;
 
 
-
-
 %% select serial port.
 delete(instrfind);
 port = 'COM7'; % Replace with whatever the USB serial bus from the XBee module is on (was 7)

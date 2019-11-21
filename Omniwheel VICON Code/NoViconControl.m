@@ -26,7 +26,7 @@ port = 'COM17'; % Replace with whatever the USB serial bus from the XBee module 
 serialPortObj = serial(port, 'BaudRate', 9600);
 fopen(serialPortObj);
 
-volts_to_send = "0,0,255,0*";
+volts_to_send = "0,0,0,0*";
 
 while(timeglobal <= max_operation)
     %volts_to_send

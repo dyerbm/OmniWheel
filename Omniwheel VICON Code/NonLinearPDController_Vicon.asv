@@ -4,9 +4,9 @@ startTime=tic;
 
 matcounter = 1; % Starting row for output matrix
 max_operation = 10; % Maximum time robot will move
-matrixsize = max_operation * 100 + 100; % Based on the time for operation, will wait 1 second after robot stops to end recording
- 
-Sheet1Mat = zeros(matrixsize,14);
+matrixsize = uint64((max_operation+1)/dt); % Based on the time for operation, will wait 1 second after robot stops to end recording
+
+Sheet1Mat = zeros(matrixsize,11);
 
 %marker positions
 rb1=[0,0,0];
@@ -49,8 +49,6 @@ k2=[-5,0,0;0,-5,0;0,0,-5];
 %define controller and torque
 u=-k1*(dyd-z2)-k2*(yd-z1);
 tau=Mstar*(ddyd+u)+Nstar*z1;
-
-
 
 
 %% select serial port.
@@ -247,15 +245,13 @@ while(timeGlobal <= max_operation)
             tau = tau./max(abs(tau))*23.144;
         end
         
-        tau = tau./23.144*255;
-        
-        t=timeGlobal;
+        %create  and send PWM values based on torques
+        PWM = int16(tau./23.144*255); 
+        PWMString = sprintf('%d,%d,%d,%d*', PWM(1), PWM(2), PWM(3), PWM(4));
+        fprintf(serialPortObj, PWMString);
 
-        volts_to_send = sprintf('%d.5,%d.5,%d.5,%d.5*', u(1), u(2), u(3), u(4));
-        fprintf(serialPortObj, volts_to_send);
-
-        Sheet1Mat(matcounter,:) = [timeGlobal, xR, yR, thetaR, xD, yD, thetaD, xE, yE, thetaE, u(1), u(2), u(3), u(4)]; % Gives raw data
-
+        %save it all to a sheet
+        Sheet1Mat(matcounter,:) = [timeGlobal, z1(1),z1(2),z1(3), yd(1),yd(2),yd(3), PWM(1), PWM(2), PWM(3), PWM(4)]; % Gives raw data
         matcounter = matcounter + 1;
 
         timeGlobal = toc(startTime);
