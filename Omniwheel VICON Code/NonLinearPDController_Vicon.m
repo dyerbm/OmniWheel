@@ -1,12 +1,19 @@
-dt=0.01; %polling rate of the vicon system (actually 50Hz?)
+clc
+clear all
+
+dt=0.02; %polling rate of the vicon system (actually 50Hz?)
 timeGlobal=0;
 startTime=tic;
 
 matcounter = 1; % Starting row for output matrix
-max_operation = 10; % Maximum time robot will move
-matrixsize = uint64((max_operation+1)/dt); % Based on the time for operation, will wait 1 second after robot stops to end recording
+max_operation = 2; % Maximum time robot will move
+matrixsize = uint64((max_operation)/dt); % Based on the time for operation, will wait 1 second after robot stops to end recording
+firstLine=0;
 
 Sheet1Mat = zeros(matrixsize,11);
+sim = zeros(matrixsize,7);
+simz1=[0;0;0];
+simz2=[0;0;0];
 
 %marker positions
 rb1=[0,0,0];
@@ -199,19 +206,23 @@ while(timeGlobal <= max_operation)
     vector_ca = [(rb4(1) - rb5(1))/1000, (rb4(2) - rb5(2))/1000];
 
     theta = atan(vector_ca(2)/vector_ca(1));
+    
+    xR = rb5(1);
+    yR = rb5(2);
+    thetaR = theta;
 
     %determine starting position of the robot
-    if (xR~=0 && yR~=0 && firstLine == 0 )
+    if (firstLine == 0 )
         xRi = xR;
         yRi = yR;
         firstLine=1;
     
-    elseif (firstLine~=0)
+    else
     
         % Find xR, yR, thetaR - Real values
 
-        xD = xD+xRi;
-        yD = yD+yRi;
+        xR = xR-xRi;
+        yR = yR-yRi;
         thetaR = theta;
 
         z1old=z1; %old position vector
@@ -221,6 +232,7 @@ while(timeGlobal <= max_operation)
         % Find xD, yD, thetaD - Desired values
 
         [yd, dyd, ddyd] = desired_trajectory(timeGlobal);
+        
 
         % Recalculate dynamics dependancies
 
@@ -238,15 +250,19 @@ while(timeGlobal <= max_operation)
         u=-k1*(dyd-z2)-k2*(yd-z1);
         
         %calculate torque
-        tau=Mstar*(ddyd+u)+Nstar*z1
+        tau=Mstar*(ddyd+u)+Nstar*z1;
 
         %normalize the torques
         if max(abs(tau))>23.144 %max torque of 23.144 Nm
             tau = tau./max(abs(tau))*23.144;
         end
         
+        %find the simulation position
+        simz1=simz2*dt+simz1;
+        simz2=Mstar\(tau-Nstar*simz2)*dt+simz2;
+        
         %create  and send PWM values based on torques
-        PWM = int16(tau./23.144*255); 
+        PWM = int16(tau./23.144*255);
         PWMString = sprintf('%d,%d,%d,%d*', PWM(1), PWM(2), PWM(3), PWM(4));
         fprintf(serialPortObj, PWMString);
 
@@ -255,9 +271,20 @@ while(timeGlobal <= max_operation)
         matcounter = matcounter + 1;
 
         timeGlobal = toc(startTime);
+
+
+        sim(matcounter,:)=[timeGlobal,yd(1),yd(2),yd(3),simz1(1),simz1(2),simz1(3)];
     end
 end % end of while loop, everything before this runs until the end of the script
 
+figure
+plot(sim(:,2),sim(:,3),sim(:,5),sim(:,6))
+legend('desired path','real path')
+xlabel('x position (m)')
+ylabel('y position (m)')
+
+fprintf(serialPortObj, '0,0,0,0*');
+pause(0.2)
 fprintf(serialPortObj, '0,0,0,0*');
 
-xlswrite("C:\Users\Vicon\Desktop\Biglar Begian VICON\" + strcat('Controller_Output', '.xlsx'), Sheet1Mat);
+xlswrite(".\" + strcat('Controller_Output', '.xlsx'), Sheet1Mat);

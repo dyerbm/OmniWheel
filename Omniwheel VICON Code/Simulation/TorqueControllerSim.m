@@ -89,7 +89,7 @@ for t=1:t_final/dt
     Mstar=rw*pinv(Q)*M+Iw/rw*(S+I)*R*T;
     
     y=z1;
-    u=-k1*(dyd-z2)-k2*(yd-z1);
+    u=-k1*(dyd-z2)-k2*(yd-z1)
     tau=Mstar*(ddyd+u)+Nstar*z1 %WATCH IT U SILLY SILLY MAN
 
     
