@@ -1,7 +1,7 @@
 function [yd, dyd, ddyd] = desired_trajectory(t)
     
     %% move in a line
-    yd=[-500;0;0];
+    yd=[0;-500;0];
     dyd=[0;0;0];
     ddyd=[0;0;0];
 

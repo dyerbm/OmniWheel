@@ -6,7 +6,7 @@ timeGlobal=0;
 startTime=tic;
 
 matcounter = 1; % Starting row for output matrix
-max_operation = 2; % Maximum time robot will move
+max_operation = 4; % Maximum time robot will move
 matrixsize = uint64((max_operation)/dt); % Based on the time for operation, will wait 1 second after robot stops to end recording
 firstLine=0;
 
@@ -38,8 +38,8 @@ IR=0.05; %robot moment of inertia
 I=eye(4);
 S=[0,0,0,0;0,0,0,0;0,0,0,0;0,0,0,0];
 M=[m,0,0;0,m,0;0,0,IR];
-Q=[-sin(z1(3)), -sin(z1(3)+pi/2), -sin(z1(3)+pi), -sin(z1(3)+3*pi/2);
-    cos(z1(3)), cos(z1(3)+pi/2), cos(z1(3)+pi), cos(z1(3)+3*pi/2);
+Q=[-sin(z1(3)+1*pi/4), -sin(z1(3)+pi/2+1*pi/4), -sin(z1(3)+pi+1*pi/4), -sin(z1(3)+3*pi/2+1*pi/4);
+    cos(z1(3)+1*pi/4), cos(z1(3)+pi/2+1*pi/4), cos(z1(3)+pi+1*pi/4), cos(z1(3)+3*pi/2+1*pi/4);
     rR,rR,rR,rR];
 R=[0,1,rw;-1,0,rw;0,-1,rw;1,0,rw];
 T=[cos(z1(3)),sin(z1(3)),0;-sin(z1(3)),cos(z1(3)),0;0,0,1];
@@ -95,9 +95,9 @@ flag1=0;
 DATACORRECTION=0;       
 data=[1000,1000];
 
-volts_to_send = "0,0,0,0*";
+PWMvalue = "100,100,100,100*";
 
-fprintf(serialPortObj, volts_to_send);
+fprintf(serialPortObj, PWMvalue);
 tglobal=tic;
 
 
@@ -221,13 +221,16 @@ while(timeGlobal <= max_operation)
     
         % Find xR, yR, thetaR - Real values
 
-        xR = xR-xRi;
-        yR = yR-yRi;
+        xR = (xR-xRi);
+        yR = (yR-yRi); 
         thetaR = theta;
 
         z1old=z1; %old position vector
-        z1=[xR;yR;thetaR]; %position vector
-        z2=(z1-z1old)*dt; %velocity vector
+        z1=[xR/1000;yR/1000;thetaR]; %position vector in meters
+        timeNow=toc(startTime);
+        z2=(z1-z1old)*(timeNow-timeGlobal); %velocity vector
+        
+        timeGlobal = timeNow;
 
         % Find xD, yD, thetaD - Desired values
 
@@ -236,8 +239,8 @@ while(timeGlobal <= max_operation)
 
         % Recalculate dynamics dependancies
 
-        Q=[-sin(z1(3)), -sin(z1(3)+pi/2), -sin(z1(3)+pi), -sin(z1(3)+3*pi/2);
-        cos(z1(3)), cos(z1(3)+pi/2), cos(z1(3)+pi), cos(z1(3)+3*pi/2);
+        Q=[-sin(z1(3)+1*pi/4), -sin(z1(3)+pi/2+1*pi/4), -sin(z1(3)+pi+1*pi/4), -sin(z1(3)+3*pi/2+1*pi/4);
+        cos(z1(3)+1*pi/4), cos(z1(3)+pi/2+1*pi/4), cos(z1(3)+pi+1*pi/4), cos(z1(3)+3*pi/2+1*pi/4);
         rR,rR,rR,rR];
         T=[cos(z1(3)),sin(z1(3)),0;-sin(z1(3)),cos(z1(3)),0;0,0,1];
         Tdot=z2(3)*[-sin(z1(3)),cos(z1(3)),0;-cos(z1(3)),-sin(z1(3)),0;0,0,0];
@@ -263,14 +266,14 @@ while(timeGlobal <= max_operation)
         
         %create  and send PWM values based on torques
         PWM = int16(tau./23.144*255);
-        PWMString = sprintf('%d,%d,%d,%d*', PWM(1), PWM(2), PWM(3), PWM(4));
+        PWMString = sprintf('%.0f,%.0f,%.0f,%.0f*', PWM(1),PWM(2),PWM(3),PWM(4))
         fprintf(serialPortObj, PWMString);
+        
+        
 
         %save it all to a sheet
-        Sheet1Mat(matcounter,:) = [timeGlobal, z1(1),z1(2),z1(3), yd(1),yd(2),yd(3), PWM(1), PWM(2), PWM(3), PWM(4)]; % Gives raw data
+        Sheet1Mat(matcounter,:) = [timeGlobal, xR,yR,thetaR, yd(1),yd(2),yd(3), PWM(1), PWM(2), PWM(3), PWM(4)]; % Gives raw data
         matcounter = matcounter + 1;
-
-        timeGlobal = toc(startTime);
 
 
         sim(matcounter,:)=[timeGlobal,yd(1),yd(2),yd(3),simz1(1),simz1(2),simz1(3)];
@@ -278,10 +281,10 @@ while(timeGlobal <= max_operation)
 end % end of while loop, everything before this runs until the end of the script
 
 figure
-plot(sim(:,2),sim(:,3),sim(:,5),sim(:,6))
-legend('desired path','real path')
-xlabel('x position (m)')
-ylabel('y position (m)')
+plot(sim(:,2),sim(:,3),sim(:,5),sim(:,6),Sheet1Mat(:,2),Sheet1Mat(:,3))
+legend('desired path','simulated path','real path')
+xlabel('x position (mm)')
+ylabel('y position (mm)')
 
 fprintf(serialPortObj, '0,0,0,0*');
 pause(0.2)
