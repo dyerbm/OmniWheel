@@ -206,7 +206,7 @@ while(matcounter <= matrixsize)
             u = [0,0,0,0];
             fprintf(serialPortObj, volts_to_send);
         else
-            circletime=5
+            circletime=10
             speed=160
             %u = [int16(sin(pi/20*timeglobal)*200),int16(sin(pi/20*timeglobal)*200),int16(sin(pi/20*timeglobal)*200),int16(sin(pi/20*timeglobal)*200)];
             u = [int16(sin(2*pi/circletime*timeglobal)*speed),int16(cos(2*pi/circletime*timeglobal)*speed),int16(-sin(2*pi/circletime*timeglobal)*speed),int16(-cos(2*pi/circletime*timeglobal)*speed)];
