@@ -67,29 +67,42 @@ void loop()
       v4 = "";
       endflag = 0;
       
-      Serial.println(String(v1int)+ "," + String(v2int)+ "," +String(v3int)+ "," +String(v4int));
-
+      //Serial.println(String(v1int)+ "," + String(v2int)+ "," +String(v3int)+ "," +String(v4int));
+      
       controlString="";
     }
 
     else {
       controlString += c; //makes the string controlString
     }
-    //Serial.println(controlString);
+    //Serial.println("i" + controlString);
   }
 
 
-  if ((abs(v1int) > 0 || abs(v2int) > 0 || abs(v3int) > 0 || abs(v4int) > 0) && endflag==0)
+  //This is going to be for directly controlling the bot
+  /*int circleTime=8;
+  int speedd=250;
+  int v1int=(sin(2*M_PI/circleTime*millis()/1000)*speedd);
+  int v3int=(-sin(2*M_PI/circleTime*millis()/1000)*speedd);
+  int v2int=(cos(2*M_PI/circleTime*millis()/1000)*speedd);
+  //int v4int=(-cos(2*M_PI/circleTime*millis()/1000)*speedd);
+  int v4int=(-cos(2*M_PI/circleTime*millis()/1000)*speedd);;
+
+  endflag=0;*/
+
+
+  //if ((abs(v1int) > 0 || abs(v2int) > 0 || abs(v3int) > 0 || abs(v4int) > 0) && endflag==0)
+  if (endflag==0)
   {
 
     //Set direction pins
-    if (v1int>0) digitalWrite(M1dir, HIGH);
+    if (v1int>=0) digitalWrite(M1dir, HIGH);
     if (v1int<0) digitalWrite(M1dir, LOW);
-    if (v2int>0) digitalWrite(M2dir, HIGH);
+    if (v2int>=0) digitalWrite(M2dir, HIGH);
     if (v2int<0) digitalWrite(M2dir, LOW);
-    if (v3int>0) digitalWrite(M3dir, HIGH);
+    if (v3int>=0) digitalWrite(M3dir, HIGH);
     if (v3int<0) digitalWrite(M3dir, LOW);
-    if (v4int>0) digitalWrite(M4dir, HIGH);
+    if (v4int>=0) digitalWrite(M4dir, HIGH);
     if (v4int<0) digitalWrite(M4dir, LOW);
 
     analogWrite(M1pwm,abs(v1int));
@@ -97,12 +110,16 @@ void loop()
     analogWrite(M3pwm,abs(v3int));
     analogWrite(M4pwm,abs(v4int));
 
+    endflag=1;
+
+    Serial.println(v4int);
+
   }
 
-  if ((v1int == 0 && v2int == 0 && v3int == 0 && v4int == 0) && endflag==0)
+/*  if ((v1int == 0 && v2int == 0 && v3int == 0 && v4int == 0) && endflag==0)
   {
     stopbot();
-  }
+  }*/
   
 }
 
@@ -113,48 +130,3 @@ void stopbot(){
   analogWrite(M4pwm, 0);
   endflag=1;
 }
-
-
-
-/*int E1 = 5;
-int M1 = 4;
-int E2 = 6;
-int M2 = 7;
-int E3 = 9;
-int M3 = 8;
-int E4 = 10;
-int M4 = 11;
-
-void setup()
-{
-    pinMode(M1, OUTPUT);
-    pinMode(M2, OUTPUT);
-    pinMode(M3, OUTPUT);
-    pinMode(M4, OUTPUT);
-    pinMode(E1, OUTPUT);
-    pinMode(E2, OUTPUT);
-    pinMode(E3, OUTPUT);
-    pinMode(E4, OUTPUT);
-
-    analogWrite(E1, 0);   //PWM Speed Control
-    analogWrite(E2, 0);   //PWM Speed Control
-    analogWrite(E3, 0);   //PWM Speed Control
-    analogWrite(E4, 0);   //PWM Speed Control
-}
-
-void loop()
-{
-  int value;
-  for(value = 0 ; value <= 255; value+=1)
-  {
-    digitalWrite(M1,HIGH);
-    digitalWrite(M2, HIGH);
-    digitalWrite(M3,HIGH);
-    digitalWrite(M4, HIGH);
-    analogWrite(E1, 0);   //PWM Speed Control
-    analogWrite(E2, 0);   //PWM Speed Control
-    analogWrite(E3, 0);   //PWM Speed Control
-    analogWrite(E4, 100);   //PWM Speed Control
-    delay(30);
-  }
-}*/

@@ -1,3 +1,5 @@
+clc
+
 timenow=0.01;
 timeglobal=0;
 tglobal=tic;
@@ -22,7 +24,7 @@ rb5=[0,0,0];
 
 
 delete(instrfind);
-port = 'COM7'; % Replace with whatever the USB serial bus from the XBee module is on (was 7)
+port = 'COM17'; % Replace with whatever the USB serial bus from the XBee module is on (was 7)
 serialPortObj = serial(port, 'BaudRate', 9600);
 fopen(serialPortObj);
 
@@ -42,7 +44,7 @@ while(timeglobal <= max_operation)
     
     
     circleTime=8;
-    speed=100
+    speed=250;
     v1=int16(sin(2*pi/circleTime*timeglobal)*speed);
     v3=int16(-sin(2*pi/circleTime*timeglobal)*speed);
     v2=int16(cos(2*pi/circleTime*timeglobal)*speed);
@@ -51,13 +53,13 @@ while(timeglobal <= max_operation)
     volts_to_send=strcat(int2str(v1),',',int2str(v2),',',int2str(v3),',',int2str(v4),'*')
     
     fprintf(serialPortObj, volts_to_send);
-    
+    pause(0.05);
     timeglobal=toc(tglobal)
-    pause(0.01);
+    fscanf(serialPortObj)
 end
     
 
-volts_to_send="0,0,0,0*";
+volts_to_send='0,0,0,0*';
 fprintf(serialPortObj,volts_to_send);
 pause(0.2);
 fprintf(serialPortObj,volts_to_send);
