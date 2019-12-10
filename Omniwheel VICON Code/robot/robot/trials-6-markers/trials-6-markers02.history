@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<Trial name="trials-6-markers02" notes="">
+
+  <Parameters>
+    <Param header="0" name="Capture Date" value="2019-Dec-10 15:15:40"/>
+    <Param header="0" name="x2d" value="trials-6-markers02.x2d"/>
+    <Param header="0" name="x1d" value="trials-6-markers02.x1d"/>
+  </Parameters>
+
+</Trial>

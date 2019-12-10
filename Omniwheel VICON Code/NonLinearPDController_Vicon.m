@@ -6,7 +6,7 @@ timeGlobal=0;
 startTime=tic;
 
 matcounter = 1; % Starting row for output matrix
-max_operation = 10; % Maximum time robot will move
+max_operation = 40; % Maximum time robot will move
 matrixsize = uint64((max_operation)/dt); % Based on the time for operation, will wait 1 second after robot stops to end recording
 firstLine=0;
 
@@ -50,8 +50,8 @@ Nstar=Iw/rw*(S+I)*R*Tdot;
 Mstar=rw*Q\M+Iw/rw*(S+I)*R*T;
 
 %define control matrices
-k1=[-4.1,0,0;0,-4.1,0;0,0,-4.1]; % THESE BETTER HAVE NEGATIVE EIGSSSS
-k2=[-5,0,0;0,-5,0;0,0,-5];
+k1=[-4.1,0,0;0,-4.1,0;0,0,-4.1/100]*1000; % THESE BETTER HAVE NEGATIVE EIGSSSS
+k2=[-5,0,0;0,-5,0;0,0,-5/100]*1000;
 
 %define controller and torque
 u=-k1*(dyd-z2)-k2*(yd-z1);
@@ -205,7 +205,7 @@ while(timeGlobal <= max_operation)
     % Getting angle relative to x axis.
     vector_ca = [(rb4(1) - rb5(1))/1000, (rb4(2) - rb5(2))/1000];
 
-    theta = atan(vector_ca(2)/vector_ca(1))+7*pi/8;
+    theta = atan(vector_ca(2)/vector_ca(1))-5*pi/4;
     
     xR = rb5(1);
     yR = rb5(2);
@@ -250,10 +250,11 @@ while(timeGlobal <= max_operation)
         
         %calculate u and assign the observables
         y=z1;
-        u=-k1*(dyd-z2)-k2*(yd-z1);
+        u=-k1*(dyd/1000-z2)-k2*(yd/1000-z1);
+        yd-z1
         
         %calculate torque
-        tau=Mstar*(ddyd+u)+Nstar*z1;
+        tau=Mstar*(ddyd/1000+u)+Nstar*z1;
 
         %normalize the torques
         if max(abs(tau))>23.144 %max torque of 23.144 Nm
@@ -265,8 +266,8 @@ while(timeGlobal <= max_operation)
         simz2=Mstar\(tau-Nstar*simz2)*dt+simz2;
         
         %create  and send PWM values based on torques
-        PWM = int16(tau./23.144*255);
-        PWMString = sprintf('%.0f,%.0f,%.0f,%.0f*', PWM(1),PWM(2),PWM(3),PWM(4))
+        PWM = int16(tau./23.144*160);
+        PWMString = sprintf('%.0f,%.0f,%.0f,%.0f*', PWM(1),PWM(4),PWM(3),PWM(2))
         %PWMString = "182,255,-182,-255*"
         fprintf(serialPortObj, PWMString)
         matcounter
@@ -274,7 +275,7 @@ while(timeGlobal <= max_operation)
         
 
         %save it all to a sheet
-        Sheet1Mat(matcounter,:) = [timeGlobal, xR,yR,thetaR, yd(1),yd(2),yd(3), PWM(1), PWM(2), PWM(3), PWM(4),simz1(1),simz1(2),simz1(3)]; % Gives raw data
+        Sheet1Mat(matcounter,:) = [timeGlobal, xR,yR,thetaR, yd(1),yd(2),yd(3), PWM(1), PWM(4), PWM(3), PWM(2),simz1(1),simz1(2),simz1(3)]; % Gives raw data
         matcounter = matcounter + 1;
 
 
@@ -285,6 +286,12 @@ end % end of while loop, everything before this runs until the end of the script
 figure
 plot(sim(:,2),sim(:,3),sim(:,5),sim(:,6),Sheet1Mat(:,2),Sheet1Mat(:,3))
 legend('desired path','simulated path','real path')
+xlabel('x position (mm)')
+ylabel('y position (mm)')
+
+figure
+plot(sim(:,2),sim(:,3),Sheet1Mat(:,2),Sheet1Mat(:,3))
+legend('desired path','real path')
 xlabel('x position (mm)')
 ylabel('y position (mm)')
 

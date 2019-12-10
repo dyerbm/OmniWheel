@@ -209,7 +209,7 @@ while(matcounter <= matrixsize)
             circletime=10
             speed=160
             %u = [int16(sin(pi/20*timeglobal)*200),int16(sin(pi/20*timeglobal)*200),int16(sin(pi/20*timeglobal)*200),int16(sin(pi/20*timeglobal)*200)];
-            u = [int16(sin(2*pi/circletime*timeglobal)*speed),int16(cos(2*pi/circletime*timeglobal)*speed),int16(-sin(2*pi/circletime*timeglobal)*speed),int16(-cos(2*pi/circletime*timeglobal)*speed)];
+            u = [int16(-sin(2*pi/circletime*timeglobal)*speed),int16(cos(2*pi/circletime*timeglobal)*speed),int16(sin(2*pi/circletime*timeglobal)*speed),int16(-cos(2*pi/circletime*timeglobal)*speed)];
             volts_to_send = strcat(int2str(u(1)),',',int2str(u(2)),',',int2str(u(3)),',',int2str(u(4)),'*')
             timeglobal
             fprintf(serialPortObj, volts_to_send);
@@ -229,4 +229,4 @@ end % end of while loop, everything before this runs until the end of the script
 volts_to_send = '0,0,0,0*';
 u = [0,0,0,0];
 fprintf(serialPortObj, volts_to_send);
-xlswrite("./Raw Data/" + notebook_name_raw, Sheet1Mat);
+xlswrite("C:\Users\Vicon\Desktop\Git\Omniwheel VICON Code\Raw Data\"+notebook_name_raw, Sheet1Mat);

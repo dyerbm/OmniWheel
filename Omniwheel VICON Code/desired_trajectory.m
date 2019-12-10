@@ -1,18 +1,19 @@
 function [yd, dyd, ddyd] = desired_trajectory(t)
     
     %% move in a line
-    %yd=[0;-1500;0];
-    %dyd=[0;0;0];
-    %ddyd=[0;0;0];
+%     yd=[0;-1500;0];
+%     dyd=[0;0;0];
+%     ddyd=[0;0;0];
 
     %% square
     
     
     %% Do a circle
-    r=0.4*1000;
-    yd = [r*cos(t);r*sin(t);0];
-    dyd = [-r*sin(t);r*cos(t);0];
-    ddyd = [-r*cos(t);-r*sin(t);0];
+    r=1*1000;
+    circtime=10;
+    yd = [r*cos(2*pi/circtime*t);r*sin(2*pi/circtime*t);0];
+    dyd = [-r*2*pi/circtime*sin(2*pi/circtime*t);r*2*pi/circtime*cos(2*pi/circtime*t);0];
+    ddyd = [-r*2*pi/circtime*2*pi/circtime*cos(2*pi/circtime*t);-r*2*pi/circtime*2*pi/circtime*sin(2*pi/circtime*t);0];
 
 
     %% Rose Curve Path
