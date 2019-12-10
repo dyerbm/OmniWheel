@@ -38,8 +38,8 @@ IR=0.05; %robot moment of inertia
 I=eye(4);
 S=[0,0,0,0;0,0,0,0;0,0,0,0;0,0,0,0];
 M=[m,0,0;0,m,0;0,0,IR];
-Q=[-sin(z1(3)+1*pi/4), -sin(z1(3)+pi/2+1*pi/4), -sin(z1(3)+pi+1*pi/4), -sin(z1(3)+3*pi/2+1*pi/4);
-    cos(z1(3)+1*pi/4), cos(z1(3)+pi/2+1*pi/4), cos(z1(3)+pi+1*pi/4), cos(z1(3)+3*pi/2+1*pi/4);
+Q=[-sin(z1(3)), -sin(z1(3)+pi/2), -sin(z1(3)+pi), -sin(z1(3)+3*pi/2);
+    cos(z1(3)), cos(z1(3)+pi/2), cos(z1(3)+pi), cos(z1(3)+3*pi/2);
     rR,rR,rR,rR];
 R=[0,1,rw;-1,0,rw;0,-1,rw;1,0,rw];
 T=[cos(z1(3)),sin(z1(3)),0;-sin(z1(3)),cos(z1(3)),0;0,0,1];
@@ -205,7 +205,7 @@ while(timeGlobal <= max_operation)
     % Getting angle relative to x axis.
     vector_ca = [(rb4(1) - rb5(1))/1000, (rb4(2) - rb5(2))/1000];
 
-    theta = atan(vector_ca(2)/vector_ca(1));
+    theta = atan(vector_ca(2)/vector_ca(1))+7*pi/8;
     
     xR = rb5(1);
     yR = rb5(2);
@@ -239,8 +239,8 @@ while(timeGlobal <= max_operation)
 
         % Recalculate dynamics dependancies
 
-        Q=[-sin(z1(3)+1*pi/4), -sin(z1(3)+pi/2+1*pi/4), -sin(z1(3)+pi+1*pi/4), -sin(z1(3)+3*pi/2+1*pi/4);
-        cos(z1(3)+1*pi/4), cos(z1(3)+pi/2+1*pi/4), cos(z1(3)+pi+1*pi/4), cos(z1(3)+3*pi/2+1*pi/4);
+        Q=[-sin(z1(3)), -sin(z1(3)+pi/2), -sin(z1(3)+pi), -sin(z1(3)+3*pi/2);
+        cos(z1(3)), cos(z1(3)+pi/2), cos(z1(3)+pi), cos(z1(3)+3*pi/2);
         rR,rR,rR,rR];
         T=[cos(z1(3)),sin(z1(3)),0;-sin(z1(3)),cos(z1(3)),0;0,0,1];
         Tdot=z2(3)*[-sin(z1(3)),cos(z1(3)),0;-cos(z1(3)),-sin(z1(3)),0;0,0,0];
