@@ -43,14 +43,21 @@ while(timeglobal <= max_operation)
     
     
     
-    circleTime=8;
-    speed=250;
-    v1=int16(sin(2*pi/circleTime*timeglobal)*speed);
-    v3=int16(-sin(2*pi/circleTime*timeglobal)*speed);
-    v2=int16(cos(2*pi/circleTime*timeglobal)*speed);
-    v4=int16(-cos(2*pi/circleTime*timeglobal)*speed);
+%     circleTime=8;
+%     speed=250;
+%     v1=int16(sin(2*pi/circleTime*timeglobal)*speed);
+%     v3=int16(-sin(2*pi/circleTime*timeglobal)*speed);
+%     v2=int16(cos(2*pi/circleTime*timeglobal)*speed);
+%     v4=int16(-cos(2*pi/circleTime*timeglobal)*speed);
+
+    v1=150;
+    v4=150;
+    v3=150;
+    v2=150;
+    
     
     volts_to_send=strcat(int2str(v1),',',int2str(v2),',',int2str(v3),',',int2str(v4),'*')
+    
     
     fprintf(serialPortObj, volts_to_send);
     pause(0.05);

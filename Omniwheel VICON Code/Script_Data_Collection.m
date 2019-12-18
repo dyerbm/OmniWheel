@@ -10,7 +10,7 @@ marker_4_lost = false;
 marker_5_lost = false;
 
 matcounter = 1; % Starting row for output matrix
-max_operation = 40; % Maximum time robot will move
+max_operation = 20; % Maximum time robot will move
 matrixsize = max_operation * 100 + 100; % Based on the time for operation, will wait 1 second after robot stops to end recording
  
 Sheet1Mat = zeros(matrixsize,21);
@@ -209,7 +209,8 @@ while(matcounter <= matrixsize)
             circletime=10
             speed=160
             %u = [int16(sin(pi/20*timeglobal)*200),int16(sin(pi/20*timeglobal)*200),int16(sin(pi/20*timeglobal)*200),int16(sin(pi/20*timeglobal)*200)];
-            u = [int16(-sin(2*pi/circletime*timeglobal)*speed),int16(cos(2*pi/circletime*timeglobal)*speed),int16(sin(2*pi/circletime*timeglobal)*speed),int16(-cos(2*pi/circletime*timeglobal)*speed)];
+%             u = [int16(-sin(2*pi/circletime*timeglobal)*speed),int16(cos(2*pi/circletime*timeglobal)*speed),int16(sin(2*pi/circletime*timeglobal)*speed),int16(-cos(2*pi/circletime*timeglobal)*speed)];
+            u=[150,150,150,150];
             volts_to_send = strcat(int2str(u(1)),',',int2str(u(2)),',',int2str(u(3)),',',int2str(u(4)),'*')
             timeglobal
             fprintf(serialPortObj, volts_to_send);
