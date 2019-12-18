@@ -40,14 +40,14 @@ opts = spreadsheetImportOptions("NumVariables", 21);
 
 % Specify sheet and range
 opts.Sheet = "Sheet1";
-opts.DataRange = "A2:U1000";
+opts.DataRange = "A2:U2000";
 
 % Specify column names and types
 opts.VariableNames = ["globalTime", "timeNow", "rb1x", "rb1y", "rb1z", "rb2x", "rb2y", "rb2z", "rb3x", "rb3y", "rb3z", "rb4x", "rb4y", "rb4z", "rb5x", "rb5y", "rb5z", "u1", "u2", "u3", "u4"];
 opts.VariableTypes = ["double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double"];
 
 % Import the data
-data = [data; readtable("C:\Users\jdiro\Desktop\Git\Omniwheel VICON Code\Raw Data\spin150_raw.xlsx", opts, "UseExcel", false)];
+data = [data; readtable("C:\Users\jdiro\Desktop\Git\Omniwheel VICON Code\Raw Data\spin150_raw.xlsx", opts, "UseExcel", false)[:,:size()]];
 
 
 %% Clear temporary variables
@@ -55,10 +55,13 @@ clear opts
 
 %% Create matrices using every other variable
 
+
+
+
 Input=[];
 Output=[];
 
-for i=20:100:size(data,1)-100
+for i=21:5:size(data,1)-100
     
     vector_ca1 = [(data.rb4x(i) - data.rb5x(i))/1000, (data.rb4y(i) - data.rb5y(i))/1000];
     theta1 = atan(vector_ca1(2)/vector_ca1(1));
@@ -75,12 +78,12 @@ for i=20:100:size(data,1)-100
 end
 
 format long
-P=lsqminnorm(Input,Output,'warn')
+P=lsqminnorm(Input,Output,1e-6,'warn')
 PP=Input\Output;
 
  norm(Input*P-Output)
  
- for i=21:2:size(data,1)-100
+ for i=21:1:size(data,1)-100
     
     vector_ca1 = [(data.rb4x(i) - data.rb5x(i))/1000, (data.rb4y(i) - data.rb5y(i))/1000];
     theta1 = atan(vector_ca1(2)/vector_ca1(1));
