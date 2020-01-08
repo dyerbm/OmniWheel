@@ -88,13 +88,13 @@ lambda = 100*ones(nVars,1); % Penalize each element by the same amount
 R = chol(Input'*Input + diag(lambda));
 wRR = R\(R'\(Input'*Output));
 % 
-% % LASSO
-% 
-% lambda = 100*ones(nVars,1); % Penalize the absolute value of each element by the same amount
-% funObj = @(w)SquaredError(w,Input,Output); % Loss function that L1 regularization is applied to
-% w_init = wRR; % Initial value for iterative optimizer
-% fprintf('\nComputing LASSO Coefficients...\n');
-% wLASSO = L1General2_PSSgb(funObj,w_init,lambda);
+% LASSO
+
+lambda = 100*ones(nVars,1); % Penalize the absolute value of each element by the same amount
+funObj = @(w)SquaredError(w,Input,Output); % Loss function that L1 regularization is applied to
+w_init = wRR; % Initial value for iterative optimizer
+fprintf('\nComputing LASSO Coefficients...\n');
+wLASSO = L1General2_PSSgb(funObj,w_init,lambda);
 
 
 
@@ -102,7 +102,7 @@ fprintf('Number of non-zero variables in Ridge Regression solution: %d\n',nnz(wR
 fprintf('Number of non-zero variables in LASSO solution: %d\n',nnz(wLASSO));
 
 
- norm(Input*P-Output)
+ norm(Input*wRR-Output)
  
  for i=21:2:size(data,1)-100
     
@@ -120,4 +120,4 @@ fprintf('Number of non-zero variables in LASSO solution: %d\n',nnz(wLASSO));
    Output = [Output;data.rb5x(i+1)/1000;data.rb5y(i+1)/1000;theta2];
  end
 
- check = norm(Input*P-Output)
+ check = norm(Input*wRR-Output)
