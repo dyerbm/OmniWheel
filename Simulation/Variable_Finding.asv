@@ -28,7 +28,8 @@ opts.VariableNames = ["globalTime", "timeNow", "rb1x", "rb1y", "rb1z", "rb2x", "
 opts.VariableTypes = ["double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double"];
 
 % Import the data
-%data = [data; readtable("C:\Users\jdiro\Desktop\Git\Omniwheel VICON Code\Raw Data\2019-12-10_circ10s_neg160pwm_raw.xlsx", opts, "UseExcel", false)];
+data = [data; readtable("C:\Users\jdiro\Desktop\Git\Omniwheel VICON Code\Raw Data\2019-12-10_circ10s_neg160pwm_raw.xlsx", opts, "UseExcel", false)];
+%data = [readtable("C:\Users\jdiro\Desktop\Git\Omniwheel VICON Code\Raw Data\2019-12-10_circ10s_neg160pwm_raw.xlsx", opts, "UseExcel", false)];
 
 
 %% Clear temporary variables
@@ -87,21 +88,52 @@ lambda = 100*ones(nVars,1); % Penalize each element by the same amount
 R = chol(Input'*Input + diag(lambda));
 wRR = R\(R'\(Input'*Output));
 % 
-% % LASSO
-% 
-% lambda = 100*ones(nVars,1); % Penalize the absolute value of each element by the same amount
-% funObj = @(w)SquaredError(w,Input,Output); % Loss function that L1 regularization is applied to
-% w_init = wRR; % Initial value for iterative optimizer
-% fprintf('\nComputing LASSO Coefficients...\n');
-% wLASSO = L1General2_PSSgb(funObj,w_init,lambda);
+% LASSO
 
+lambda = 100*ones(nVars,1); % Penalize the absolute value of each element by the same amount
+funObj = @(w)LogisticLoss(w,Input,Output); % Loss function that L1 regularization is applied to
+w_init = wRR; % Initial value for iterative optimizer
+fprintf('\nComputing LASSO Coefficients...\n');
+wLASSO = L1General2_PSSgb(funObj,w_init,lambda);
+
+
+% %Logistic Regression
+% 
+% funObj = @(w)LogisticLoss(w,Input,Output);
+% w_init = zeros(nVars+1,1);
+% 
+% % Maximum Likelihood
+% fprintf('\nComputing Maximum Likelihood Logistic Regression Coefficients\n');
+% mfOptions.Method = 'newton';
+% %wLogML = minFunc(funObj,w_init,mfOptions);
+% 
+% fprintf('\nComputing L2-Regularized Logistic Regression Coefficients...\n');
+% lambda = 15*ones(nVars+1,1);
+% lambda(1) = 0; % Do not penalize bias variable
+% funObjL2 = @(w)penalizedL2(w,funObj,lambda);
+% wLogL2 = minFunc(funObjL2,w_init,mfOptions);
+
+w_init = zeros(nVars,1);
+
+lambda = 1;
+lambdaVect = lambda*[0;ones(nVars-1,1)];
+
+funObj = @(w)LogisticLoss(w,X,y);
+
+gOptions.maxIter = 2000;
+gOptions.verbose = 1; % Set to 0 to turn off output
+options.corrections = 10; % Number of corrections to store for L-BFGS methods
+
+fprintf('Spectral Projected Gradient\n');
+options = gOptions;
+wSPG = L1General2_SPG(funObj,w_init,lambdaVect,options);
 
 
 fprintf('Number of non-zero variables in Ridge Regression solution: %d\n',nnz(wRR));
 fprintf('Number of non-zero variables in LASSO solution: %d\n',nnz(wLASSO));
 
 
- norm(Input*P-Output)
+ norm(Input*wLASSO-Output)
  
  for i=21:2:size(data,1)-100
     
@@ -119,4 +151,4 @@ fprintf('Number of non-zero variables in LASSO solution: %d\n',nnz(wLASSO));
    Output = [Output;data.rb5x(i+1)/1000;data.rb5y(i+1)/1000;theta2];
  end
 
- check = norm(Input*P-Output)
+ check = norm(Input*wLASSO-Output)
