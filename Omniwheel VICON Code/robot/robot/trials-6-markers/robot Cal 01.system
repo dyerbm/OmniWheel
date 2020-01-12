@@ -4,10 +4,10 @@
   <ParamDefinitionList name="Capture">
     <ParamListGroup name="">
       <ParamList name="default">
-        <Param name="BufferRangeInSeconds" value="134.34999999999999"/>
+        <Param name="BufferRangeInSeconds" value="56.269999999999996"/>
         <Param name="BufferLatencyInSeconds" value="0"/>
         <Param name="MeasuredFrameRate" value="100"/>
-        <Param name="FramesCaptured" value="341"/>
+        <Param name="FramesCaptured" value="705"/>
         <Param name="FramesDropped" value="0"/>
         <Param name="ErrorString" value=""/>
         <Param name="ArmedStatus" value="true"/>
@@ -17,117 +17,11 @@
     </ParamListGroup>
   </ParamDefinitionList>
 
-  <ParamDefinitionList name="Device::Delsys Trigno Accelerometers 2.0">
-    <ParamListGroup name="">
-      <ParamList name="Device::Delsys:Trigno Accelerometers:2.0:Trigno_1">
-        <Param name="UserID" value="2"/>
-        <Param name="DeviceName" value=""/>
-        <Param name="Connected" value="false"/>
-        <Param name="DelayCompensation" value="0"/>
-        <Param name="DeviceReady" value="true"/>
-        <Param name="SourceName" value="Delsys:Trigno Accelerometers:2.0:Trigno_1"/>
-        <Param name="Connectivity" value="Digital"/>
-        <Param name="SourceID" value="4"/>
-        <Param name="SourceStatus" value="NotContributing"/>
-        <Param name="DeviceFamily" value="Delsys Trigno Accelerometers 2.0"/>
-        <Param name="DeviceTag" value="Delsys:Trigno Accelerometers:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="4"/>
-        <Param name="DeviceCategory" value="Other Devices"/>
-        <Param name="FramePeriod" value="1822500"/>
-        <Param name="SamplePeriod" value="911250"/>
-        <Param name="Visible" value="true"/>
-        <Param name="AlwaysShow" value="false"/>
-        <Param name="Enabled" value="true"/>
-        <Param hidden="0" name="ServerAddress" value="localhost"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="Device::Delsys Trigno EMG 2.0">
-    <ParamListGroup name="">
-      <ParamList name="Device::Delsys:Trigno EMG:2.0:Trigno_1">
-        <Param name="UserID" value="1"/>
-        <Param name="DeviceName" value=""/>
-        <Param name="Connected" value="false"/>
-        <Param name="DelayCompensation" value="0"/>
-        <Param name="DeviceReady" value="true"/>
-        <Param name="SourceName" value="Delsys:Trigno EMG:2.0:Trigno_1"/>
-        <Param name="Connectivity" value="Digital"/>
-        <Param name="SourceID" value="3"/>
-        <Param name="SourceStatus" value="NotContributing"/>
-        <Param name="DeviceFamily" value="Delsys Trigno EMG 2.0"/>
-        <Param name="DeviceTag" value="Delsys:Trigno EMG:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="3"/>
-        <Param name="DeviceCategory" value="Other Devices"/>
-        <Param name="FramePeriod" value="1822500"/>
-        <Param name="SamplePeriod" value="67500"/>
-        <Param name="Visible" value="true"/>
-        <Param name="AlwaysShow" value="true"/>
-        <Param name="Enabled" value="true"/>
-        <Param hidden="0" name="ServerAddress" value="localhost"/>
-        <Param hidden="0" name="ServerBasePort" value="50040"/>
-        <Param hidden="0" name="TriggerMode" value="Not Triggered"/>
-        <Param name="SyncInput_Start"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="Device::Delsys Trigno IMU AUX 2.0">
-    <ParamListGroup name="">
-      <ParamList name="Device::Delsys:Trigno IMU AUX:2.0:Trigno_1">
-        <Param name="UserID" value="4"/>
-        <Param name="DeviceName" value=""/>
-        <Param name="Connected" value="false"/>
-        <Param name="DelayCompensation" value="0"/>
-        <Param name="DeviceReady" value="true"/>
-        <Param name="SourceName" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="Connectivity" value="Digital"/>
-        <Param name="SourceID" value="6"/>
-        <Param name="SourceStatus" value="NotContributing"/>
-        <Param name="DeviceFamily" value="Delsys Trigno IMU AUX 2.0"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceCategory" value="Other Devices"/>
-        <Param name="FramePeriod" value="1822500"/>
-        <Param name="SamplePeriod" value="911250"/>
-        <Param name="Visible" value="true"/>
-        <Param name="AlwaysShow" value="false"/>
-        <Param name="Enabled" value="true"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="Device::Delsys Trigno IMU EMG 2.0">
-    <ParamListGroup name="">
-      <ParamList name="Device::Delsys:Trigno IMU EMG:2.0:Trigno_1">
-        <Param name="UserID" value="3"/>
-        <Param name="DeviceName" value=""/>
-        <Param name="Connected" value="false"/>
-        <Param name="DelayCompensation" value="0"/>
-        <Param name="DeviceReady" value="true"/>
-        <Param name="SourceName" value="Delsys:Trigno IMU EMG:2.0:Trigno_1"/>
-        <Param name="Connectivity" value="Digital"/>
-        <Param name="SourceID" value="5"/>
-        <Param name="SourceStatus" value="NotContributing"/>
-        <Param name="DeviceFamily" value="Delsys Trigno IMU EMG 2.0"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU EMG:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="5"/>
-        <Param name="DeviceCategory" value="Other Devices"/>
-        <Param name="FramePeriod" value="1822500"/>
-        <Param name="SamplePeriod" value="121500"/>
-        <Param name="Visible" value="true"/>
-        <Param name="AlwaysShow" value="false"/>
-        <Param name="Enabled" value="true"/>
-        <Param hidden="0" name="ServerAddress" value="localhost"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
   <ParamDefinitionList name="Device::Generic Analog">
     <ParamListGroup name="">
-      <ParamList name="Device::d015f453a5b2f295f24040c9f01fd077">
-        <Param name="UserID" value="0"/>
-        <Param name="DeviceName" value="S700"/>
+      <ParamList name="Device::6fcbf1a59e70990aa2e1be63437065d9">
+        <Param name="UserID" value="1"/>
+        <Param name="DeviceName" value=""/>
         <Param name="Connected" value="true"/>
         <Param name="DelayCompensation" value="0"/>
         <Param name="DeviceReady" value="true"/>
@@ -136,8 +30,8 @@
         <Param name="SourceID" value="2"/>
         <Param name="SourceStatus" value="Ok"/>
         <Param name="DeviceFamily" value="Generic Analog"/>
-        <Param name="DeviceTag" value="d015f453a5b2f295f24040c9f01fd077"/>
-        <Param name="DeviceID" value="1"/>
+        <Param name="DeviceTag" value="6fcbf1a59e70990aa2e1be63437065d9"/>
+        <Param name="DeviceID" value="3"/>
         <Param name="DeviceCategory" value="Other Devices"/>
         <Param name="FramePeriod" value="1350000"/>
         <Param name="SamplePeriod" value="135000"/>
@@ -179,7 +73,7 @@
         <Param name="SourcePin6" value="5"/>
         <Param name="SourcePin7" value="7"/>
         <Param name="ForceThreshold" value="5"/>
-        <Param name="ZeroLevel" value="0.376731 0.438255 0.417934 0.506897 0.556538 0.797352 1.21159 1.19232 &#xA;"/>
+        <Param name="ZeroLevel" value="-0.00667023 -0.00591705 0.0144032 -0.00375107 -0.0210962 0.125678 0.00187271 -0.0204205 &#xA;"/>
         <Param name="CalibrationVector" value="3.748 3.812 3.743 3.769 1.935 1.938 1.946 1.932 &#xA;"/>
         <Param name="XLength" value="0.400000006"/>
         <Param name="YLength" value="0.600000024"/>
@@ -189,1112 +83,35 @@
         <Param name="XRotation" value="0"/>
         <Param name="YRotation" value="0"/>
         <Param name="ZRotation" value="3.1415925"/>
-        <Param name="ParameterA" value="0.119999997"/>
+        <Param name="ParameterA" value="0.120999999"/>
         <Param name="ParameterB" value="0.200000003"/>
-        <Param name="ParameterAZ0" value="0.0480000004"/>
+        <Param name="ParameterAZ0" value="0.257999986"/>
         <Param name="RawVisible" value="false"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutput::Delsys Trigno Accelerometers 2.0::Sensor 1">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutput::Delsys:Trigno Accelerometers:2.0:Trigno_1,1">
-        <Param name="DeviceOutputName" value="Sensor 1"/>
-        <Param name="DeviceOutputReady" value="true"/>
-        <Param name="Connected" value="true"/>
-        <Param name="Visible" value="true"/>
-        <Param name="DeviceTag" value="Delsys:Trigno Accelerometers:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="4"/>
-        <Param name="DeviceOutputID" value="1"/>
-        <Param name="DeviceOutputType" value="Sensor 1"/>
-        <Param name="DeviceOutputQuantity" value="1 0 -2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"/>
-        <Param name="Enabled" value="true"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutput::Delsys Trigno Accelerometers 2.0::Sensor 10">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutput::Delsys:Trigno Accelerometers:2.0:Trigno_1,10">
-        <Param name="DeviceOutputName" value="Sensor 10"/>
-        <Param name="DeviceOutputReady" value="true"/>
-        <Param name="Connected" value="true"/>
-        <Param name="Visible" value="true"/>
-        <Param name="DeviceTag" value="Delsys:Trigno Accelerometers:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="4"/>
-        <Param name="DeviceOutputID" value="10"/>
-        <Param name="DeviceOutputType" value="Sensor 10"/>
-        <Param name="DeviceOutputQuantity" value="1 0 -2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"/>
-        <Param name="Enabled" value="true"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutput::Delsys Trigno Accelerometers 2.0::Sensor 11">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutput::Delsys:Trigno Accelerometers:2.0:Trigno_1,11">
-        <Param name="DeviceOutputName" value="Sensor 11"/>
-        <Param name="DeviceOutputReady" value="true"/>
-        <Param name="Connected" value="true"/>
-        <Param name="Visible" value="true"/>
-        <Param name="DeviceTag" value="Delsys:Trigno Accelerometers:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="4"/>
-        <Param name="DeviceOutputID" value="11"/>
-        <Param name="DeviceOutputType" value="Sensor 11"/>
-        <Param name="DeviceOutputQuantity" value="1 0 -2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"/>
-        <Param name="Enabled" value="true"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutput::Delsys Trigno Accelerometers 2.0::Sensor 12">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutput::Delsys:Trigno Accelerometers:2.0:Trigno_1,12">
-        <Param name="DeviceOutputName" value="Sensor 12"/>
-        <Param name="DeviceOutputReady" value="true"/>
-        <Param name="Connected" value="true"/>
-        <Param name="Visible" value="true"/>
-        <Param name="DeviceTag" value="Delsys:Trigno Accelerometers:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="4"/>
-        <Param name="DeviceOutputID" value="12"/>
-        <Param name="DeviceOutputType" value="Sensor 12"/>
-        <Param name="DeviceOutputQuantity" value="1 0 -2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"/>
-        <Param name="Enabled" value="true"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutput::Delsys Trigno Accelerometers 2.0::Sensor 13">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutput::Delsys:Trigno Accelerometers:2.0:Trigno_1,13">
-        <Param name="DeviceOutputName" value="Sensor 13"/>
-        <Param name="DeviceOutputReady" value="true"/>
-        <Param name="Connected" value="true"/>
-        <Param name="Visible" value="true"/>
-        <Param name="DeviceTag" value="Delsys:Trigno Accelerometers:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="4"/>
-        <Param name="DeviceOutputID" value="13"/>
-        <Param name="DeviceOutputType" value="Sensor 13"/>
-        <Param name="DeviceOutputQuantity" value="1 0 -2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"/>
-        <Param name="Enabled" value="true"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutput::Delsys Trigno Accelerometers 2.0::Sensor 14">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutput::Delsys:Trigno Accelerometers:2.0:Trigno_1,14">
-        <Param name="DeviceOutputName" value="Sensor 14"/>
-        <Param name="DeviceOutputReady" value="true"/>
-        <Param name="Connected" value="true"/>
-        <Param name="Visible" value="true"/>
-        <Param name="DeviceTag" value="Delsys:Trigno Accelerometers:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="4"/>
-        <Param name="DeviceOutputID" value="14"/>
-        <Param name="DeviceOutputType" value="Sensor 14"/>
-        <Param name="DeviceOutputQuantity" value="1 0 -2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"/>
-        <Param name="Enabled" value="true"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutput::Delsys Trigno Accelerometers 2.0::Sensor 15">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutput::Delsys:Trigno Accelerometers:2.0:Trigno_1,15">
-        <Param name="DeviceOutputName" value="Sensor 15"/>
-        <Param name="DeviceOutputReady" value="true"/>
-        <Param name="Connected" value="true"/>
-        <Param name="Visible" value="true"/>
-        <Param name="DeviceTag" value="Delsys:Trigno Accelerometers:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="4"/>
-        <Param name="DeviceOutputID" value="15"/>
-        <Param name="DeviceOutputType" value="Sensor 15"/>
-        <Param name="DeviceOutputQuantity" value="1 0 -2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"/>
-        <Param name="Enabled" value="true"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutput::Delsys Trigno Accelerometers 2.0::Sensor 16">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutput::Delsys:Trigno Accelerometers:2.0:Trigno_1,16">
-        <Param name="DeviceOutputName" value="Sensor 16"/>
-        <Param name="DeviceOutputReady" value="true"/>
-        <Param name="Connected" value="true"/>
-        <Param name="Visible" value="true"/>
-        <Param name="DeviceTag" value="Delsys:Trigno Accelerometers:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="4"/>
-        <Param name="DeviceOutputID" value="16"/>
-        <Param name="DeviceOutputType" value="Sensor 16"/>
-        <Param name="DeviceOutputQuantity" value="1 0 -2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"/>
-        <Param name="Enabled" value="true"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutput::Delsys Trigno Accelerometers 2.0::Sensor 2">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutput::Delsys:Trigno Accelerometers:2.0:Trigno_1,2">
-        <Param name="DeviceOutputName" value="Sensor 2"/>
-        <Param name="DeviceOutputReady" value="true"/>
-        <Param name="Connected" value="true"/>
-        <Param name="Visible" value="true"/>
-        <Param name="DeviceTag" value="Delsys:Trigno Accelerometers:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="4"/>
-        <Param name="DeviceOutputID" value="2"/>
-        <Param name="DeviceOutputType" value="Sensor 2"/>
-        <Param name="DeviceOutputQuantity" value="1 0 -2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"/>
-        <Param name="Enabled" value="true"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutput::Delsys Trigno Accelerometers 2.0::Sensor 3">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutput::Delsys:Trigno Accelerometers:2.0:Trigno_1,3">
-        <Param name="DeviceOutputName" value="Sensor 3"/>
-        <Param name="DeviceOutputReady" value="true"/>
-        <Param name="Connected" value="true"/>
-        <Param name="Visible" value="true"/>
-        <Param name="DeviceTag" value="Delsys:Trigno Accelerometers:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="4"/>
-        <Param name="DeviceOutputID" value="3"/>
-        <Param name="DeviceOutputType" value="Sensor 3"/>
-        <Param name="DeviceOutputQuantity" value="1 0 -2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"/>
-        <Param name="Enabled" value="true"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutput::Delsys Trigno Accelerometers 2.0::Sensor 4">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutput::Delsys:Trigno Accelerometers:2.0:Trigno_1,4">
-        <Param name="DeviceOutputName" value="Sensor 4"/>
-        <Param name="DeviceOutputReady" value="true"/>
-        <Param name="Connected" value="true"/>
-        <Param name="Visible" value="true"/>
-        <Param name="DeviceTag" value="Delsys:Trigno Accelerometers:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="4"/>
-        <Param name="DeviceOutputID" value="4"/>
-        <Param name="DeviceOutputType" value="Sensor 4"/>
-        <Param name="DeviceOutputQuantity" value="1 0 -2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"/>
-        <Param name="Enabled" value="true"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutput::Delsys Trigno Accelerometers 2.0::Sensor 5">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutput::Delsys:Trigno Accelerometers:2.0:Trigno_1,5">
-        <Param name="DeviceOutputName" value="Sensor 5"/>
-        <Param name="DeviceOutputReady" value="true"/>
-        <Param name="Connected" value="true"/>
-        <Param name="Visible" value="true"/>
-        <Param name="DeviceTag" value="Delsys:Trigno Accelerometers:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="4"/>
-        <Param name="DeviceOutputID" value="5"/>
-        <Param name="DeviceOutputType" value="Sensor 5"/>
-        <Param name="DeviceOutputQuantity" value="1 0 -2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"/>
-        <Param name="Enabled" value="true"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutput::Delsys Trigno Accelerometers 2.0::Sensor 6">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutput::Delsys:Trigno Accelerometers:2.0:Trigno_1,6">
-        <Param name="DeviceOutputName" value="Sensor 6"/>
-        <Param name="DeviceOutputReady" value="true"/>
-        <Param name="Connected" value="true"/>
-        <Param name="Visible" value="true"/>
-        <Param name="DeviceTag" value="Delsys:Trigno Accelerometers:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="4"/>
-        <Param name="DeviceOutputID" value="6"/>
-        <Param name="DeviceOutputType" value="Sensor 6"/>
-        <Param name="DeviceOutputQuantity" value="1 0 -2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"/>
-        <Param name="Enabled" value="true"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutput::Delsys Trigno Accelerometers 2.0::Sensor 7">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutput::Delsys:Trigno Accelerometers:2.0:Trigno_1,7">
-        <Param name="DeviceOutputName" value="Sensor 7"/>
-        <Param name="DeviceOutputReady" value="true"/>
-        <Param name="Connected" value="true"/>
-        <Param name="Visible" value="true"/>
-        <Param name="DeviceTag" value="Delsys:Trigno Accelerometers:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="4"/>
-        <Param name="DeviceOutputID" value="7"/>
-        <Param name="DeviceOutputType" value="Sensor 7"/>
-        <Param name="DeviceOutputQuantity" value="1 0 -2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"/>
-        <Param name="Enabled" value="true"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutput::Delsys Trigno Accelerometers 2.0::Sensor 8">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutput::Delsys:Trigno Accelerometers:2.0:Trigno_1,8">
-        <Param name="DeviceOutputName" value="Sensor 8"/>
-        <Param name="DeviceOutputReady" value="true"/>
-        <Param name="Connected" value="true"/>
-        <Param name="Visible" value="true"/>
-        <Param name="DeviceTag" value="Delsys:Trigno Accelerometers:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="4"/>
-        <Param name="DeviceOutputID" value="8"/>
-        <Param name="DeviceOutputType" value="Sensor 8"/>
-        <Param name="DeviceOutputQuantity" value="1 0 -2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"/>
-        <Param name="Enabled" value="true"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutput::Delsys Trigno Accelerometers 2.0::Sensor 9">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutput::Delsys:Trigno Accelerometers:2.0:Trigno_1,9">
-        <Param name="DeviceOutputName" value="Sensor 9"/>
-        <Param name="DeviceOutputReady" value="true"/>
-        <Param name="Connected" value="true"/>
-        <Param name="Visible" value="true"/>
-        <Param name="DeviceTag" value="Delsys:Trigno Accelerometers:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="4"/>
-        <Param name="DeviceOutputID" value="9"/>
-        <Param name="DeviceOutputType" value="Sensor 9"/>
-        <Param name="DeviceOutputQuantity" value="1 0 -2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"/>
-        <Param name="Enabled" value="true"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutput::Delsys Trigno EMG 2.0::Sensor 1">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutput::Delsys:Trigno EMG:2.0:Trigno_1,1">
-        <Param name="DeviceOutputName" value="Sensor 1"/>
-        <Param name="DeviceOutputReady" value="true"/>
-        <Param name="Connected" value="true"/>
-        <Param name="Visible" value="true"/>
-        <Param name="DeviceTag" value="Delsys:Trigno EMG:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="3"/>
-        <Param name="DeviceOutputID" value="1"/>
-        <Param name="DeviceOutputType" value="Sensor 1"/>
-        <Param name="DeviceOutputQuantity" value="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0"/>
-        <Param name="Enabled" value="true"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutput::Delsys Trigno EMG 2.0::Sensor 10">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutput::Delsys:Trigno EMG:2.0:Trigno_1,10">
-        <Param name="DeviceOutputName" value="Sensor 10"/>
-        <Param name="DeviceOutputReady" value="true"/>
-        <Param name="Connected" value="true"/>
-        <Param name="Visible" value="true"/>
-        <Param name="DeviceTag" value="Delsys:Trigno EMG:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="3"/>
-        <Param name="DeviceOutputID" value="10"/>
-        <Param name="DeviceOutputType" value="Sensor 10"/>
-        <Param name="DeviceOutputQuantity" value="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0"/>
-        <Param name="Enabled" value="true"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutput::Delsys Trigno EMG 2.0::Sensor 11">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutput::Delsys:Trigno EMG:2.0:Trigno_1,11">
-        <Param name="DeviceOutputName" value="Sensor 11"/>
-        <Param name="DeviceOutputReady" value="true"/>
-        <Param name="Connected" value="true"/>
-        <Param name="Visible" value="true"/>
-        <Param name="DeviceTag" value="Delsys:Trigno EMG:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="3"/>
-        <Param name="DeviceOutputID" value="11"/>
-        <Param name="DeviceOutputType" value="Sensor 11"/>
-        <Param name="DeviceOutputQuantity" value="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0"/>
-        <Param name="Enabled" value="true"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutput::Delsys Trigno EMG 2.0::Sensor 12">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutput::Delsys:Trigno EMG:2.0:Trigno_1,12">
-        <Param name="DeviceOutputName" value="Sensor 12"/>
-        <Param name="DeviceOutputReady" value="true"/>
-        <Param name="Connected" value="true"/>
-        <Param name="Visible" value="true"/>
-        <Param name="DeviceTag" value="Delsys:Trigno EMG:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="3"/>
-        <Param name="DeviceOutputID" value="12"/>
-        <Param name="DeviceOutputType" value="Sensor 12"/>
-        <Param name="DeviceOutputQuantity" value="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0"/>
-        <Param name="Enabled" value="true"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutput::Delsys Trigno EMG 2.0::Sensor 13">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutput::Delsys:Trigno EMG:2.0:Trigno_1,13">
-        <Param name="DeviceOutputName" value="Sensor 13"/>
-        <Param name="DeviceOutputReady" value="true"/>
-        <Param name="Connected" value="true"/>
-        <Param name="Visible" value="true"/>
-        <Param name="DeviceTag" value="Delsys:Trigno EMG:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="3"/>
-        <Param name="DeviceOutputID" value="13"/>
-        <Param name="DeviceOutputType" value="Sensor 13"/>
-        <Param name="DeviceOutputQuantity" value="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0"/>
-        <Param name="Enabled" value="true"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutput::Delsys Trigno EMG 2.0::Sensor 14">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutput::Delsys:Trigno EMG:2.0:Trigno_1,14">
-        <Param name="DeviceOutputName" value="Sensor 14"/>
-        <Param name="DeviceOutputReady" value="true"/>
-        <Param name="Connected" value="true"/>
-        <Param name="Visible" value="true"/>
-        <Param name="DeviceTag" value="Delsys:Trigno EMG:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="3"/>
-        <Param name="DeviceOutputID" value="14"/>
-        <Param name="DeviceOutputType" value="Sensor 14"/>
-        <Param name="DeviceOutputQuantity" value="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0"/>
-        <Param name="Enabled" value="true"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutput::Delsys Trigno EMG 2.0::Sensor 15">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutput::Delsys:Trigno EMG:2.0:Trigno_1,15">
-        <Param name="DeviceOutputName" value="Sensor 15"/>
-        <Param name="DeviceOutputReady" value="true"/>
-        <Param name="Connected" value="true"/>
-        <Param name="Visible" value="true"/>
-        <Param name="DeviceTag" value="Delsys:Trigno EMG:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="3"/>
-        <Param name="DeviceOutputID" value="15"/>
-        <Param name="DeviceOutputType" value="Sensor 15"/>
-        <Param name="DeviceOutputQuantity" value="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0"/>
-        <Param name="Enabled" value="true"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutput::Delsys Trigno EMG 2.0::Sensor 16">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutput::Delsys:Trigno EMG:2.0:Trigno_1,16">
-        <Param name="DeviceOutputName" value="Sensor 16"/>
-        <Param name="DeviceOutputReady" value="true"/>
-        <Param name="Connected" value="true"/>
-        <Param name="Visible" value="true"/>
-        <Param name="DeviceTag" value="Delsys:Trigno EMG:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="3"/>
-        <Param name="DeviceOutputID" value="16"/>
-        <Param name="DeviceOutputType" value="Sensor 16"/>
-        <Param name="DeviceOutputQuantity" value="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0"/>
-        <Param name="Enabled" value="true"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutput::Delsys Trigno EMG 2.0::Sensor 2">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutput::Delsys:Trigno EMG:2.0:Trigno_1,2">
-        <Param name="DeviceOutputName" value="Sensor 2"/>
-        <Param name="DeviceOutputReady" value="true"/>
-        <Param name="Connected" value="true"/>
-        <Param name="Visible" value="true"/>
-        <Param name="DeviceTag" value="Delsys:Trigno EMG:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="3"/>
-        <Param name="DeviceOutputID" value="2"/>
-        <Param name="DeviceOutputType" value="Sensor 2"/>
-        <Param name="DeviceOutputQuantity" value="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0"/>
-        <Param name="Enabled" value="true"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutput::Delsys Trigno EMG 2.0::Sensor 3">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutput::Delsys:Trigno EMG:2.0:Trigno_1,3">
-        <Param name="DeviceOutputName" value="Sensor 3"/>
-        <Param name="DeviceOutputReady" value="true"/>
-        <Param name="Connected" value="true"/>
-        <Param name="Visible" value="true"/>
-        <Param name="DeviceTag" value="Delsys:Trigno EMG:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="3"/>
-        <Param name="DeviceOutputID" value="3"/>
-        <Param name="DeviceOutputType" value="Sensor 3"/>
-        <Param name="DeviceOutputQuantity" value="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0"/>
-        <Param name="Enabled" value="true"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutput::Delsys Trigno EMG 2.0::Sensor 4">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutput::Delsys:Trigno EMG:2.0:Trigno_1,4">
-        <Param name="DeviceOutputName" value="Sensor 4"/>
-        <Param name="DeviceOutputReady" value="true"/>
-        <Param name="Connected" value="true"/>
-        <Param name="Visible" value="true"/>
-        <Param name="DeviceTag" value="Delsys:Trigno EMG:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="3"/>
-        <Param name="DeviceOutputID" value="4"/>
-        <Param name="DeviceOutputType" value="Sensor 4"/>
-        <Param name="DeviceOutputQuantity" value="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0"/>
-        <Param name="Enabled" value="true"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutput::Delsys Trigno EMG 2.0::Sensor 5">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutput::Delsys:Trigno EMG:2.0:Trigno_1,5">
-        <Param name="DeviceOutputName" value="Sensor 5"/>
-        <Param name="DeviceOutputReady" value="true"/>
-        <Param name="Connected" value="true"/>
-        <Param name="Visible" value="true"/>
-        <Param name="DeviceTag" value="Delsys:Trigno EMG:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="3"/>
-        <Param name="DeviceOutputID" value="5"/>
-        <Param name="DeviceOutputType" value="Sensor 5"/>
-        <Param name="DeviceOutputQuantity" value="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0"/>
-        <Param name="Enabled" value="true"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutput::Delsys Trigno EMG 2.0::Sensor 6">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutput::Delsys:Trigno EMG:2.0:Trigno_1,6">
-        <Param name="DeviceOutputName" value="Sensor 6"/>
-        <Param name="DeviceOutputReady" value="true"/>
-        <Param name="Connected" value="true"/>
-        <Param name="Visible" value="true"/>
-        <Param name="DeviceTag" value="Delsys:Trigno EMG:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="3"/>
-        <Param name="DeviceOutputID" value="6"/>
-        <Param name="DeviceOutputType" value="Sensor 6"/>
-        <Param name="DeviceOutputQuantity" value="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0"/>
-        <Param name="Enabled" value="true"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutput::Delsys Trigno EMG 2.0::Sensor 7">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutput::Delsys:Trigno EMG:2.0:Trigno_1,7">
-        <Param name="DeviceOutputName" value="Sensor 7"/>
-        <Param name="DeviceOutputReady" value="true"/>
-        <Param name="Connected" value="true"/>
-        <Param name="Visible" value="true"/>
-        <Param name="DeviceTag" value="Delsys:Trigno EMG:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="3"/>
-        <Param name="DeviceOutputID" value="7"/>
-        <Param name="DeviceOutputType" value="Sensor 7"/>
-        <Param name="DeviceOutputQuantity" value="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0"/>
-        <Param name="Enabled" value="true"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutput::Delsys Trigno EMG 2.0::Sensor 8">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutput::Delsys:Trigno EMG:2.0:Trigno_1,8">
-        <Param name="DeviceOutputName" value="Sensor 8"/>
-        <Param name="DeviceOutputReady" value="true"/>
-        <Param name="Connected" value="true"/>
-        <Param name="Visible" value="true"/>
-        <Param name="DeviceTag" value="Delsys:Trigno EMG:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="3"/>
-        <Param name="DeviceOutputID" value="8"/>
-        <Param name="DeviceOutputType" value="Sensor 8"/>
-        <Param name="DeviceOutputQuantity" value="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0"/>
-        <Param name="Enabled" value="true"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutput::Delsys Trigno EMG 2.0::Sensor 9">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutput::Delsys:Trigno EMG:2.0:Trigno_1,9">
-        <Param name="DeviceOutputName" value="Sensor 9"/>
-        <Param name="DeviceOutputReady" value="true"/>
-        <Param name="Connected" value="true"/>
-        <Param name="Visible" value="true"/>
-        <Param name="DeviceTag" value="Delsys:Trigno EMG:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="3"/>
-        <Param name="DeviceOutputID" value="9"/>
-        <Param name="DeviceOutputType" value="Sensor 9"/>
-        <Param name="DeviceOutputQuantity" value="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0"/>
-        <Param name="Enabled" value="true"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutput::Delsys Trigno IMU AUX 2.0::Sensor 1">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutput::Delsys:Trigno IMU AUX:2.0:Trigno_1,1">
-        <Param name="DeviceOutputName" value="Sensor 1"/>
-        <Param name="DeviceOutputReady" value="true"/>
-        <Param name="Connected" value="true"/>
-        <Param name="Visible" value="true"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="1"/>
-        <Param name="DeviceOutputType" value="Sensor 1"/>
-        <Param name="DeviceOutputQuantity" value="1 0 -2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"/>
-        <Param name="Enabled" value="true"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutput::Delsys Trigno IMU AUX 2.0::Sensor 10">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutput::Delsys:Trigno IMU AUX:2.0:Trigno_1,10">
-        <Param name="DeviceOutputName" value="Sensor 10"/>
-        <Param name="DeviceOutputReady" value="true"/>
-        <Param name="Connected" value="true"/>
-        <Param name="Visible" value="true"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="10"/>
-        <Param name="DeviceOutputType" value="Sensor 10"/>
-        <Param name="DeviceOutputQuantity" value="1 0 -2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"/>
-        <Param name="Enabled" value="true"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutput::Delsys Trigno IMU AUX 2.0::Sensor 11">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutput::Delsys:Trigno IMU AUX:2.0:Trigno_1,11">
-        <Param name="DeviceOutputName" value="Sensor 11"/>
-        <Param name="DeviceOutputReady" value="true"/>
-        <Param name="Connected" value="true"/>
-        <Param name="Visible" value="true"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="11"/>
-        <Param name="DeviceOutputType" value="Sensor 11"/>
-        <Param name="DeviceOutputQuantity" value="1 0 -2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"/>
-        <Param name="Enabled" value="true"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutput::Delsys Trigno IMU AUX 2.0::Sensor 12">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutput::Delsys:Trigno IMU AUX:2.0:Trigno_1,12">
-        <Param name="DeviceOutputName" value="Sensor 12"/>
-        <Param name="DeviceOutputReady" value="true"/>
-        <Param name="Connected" value="true"/>
-        <Param name="Visible" value="true"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="12"/>
-        <Param name="DeviceOutputType" value="Sensor 12"/>
-        <Param name="DeviceOutputQuantity" value="1 0 -2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"/>
-        <Param name="Enabled" value="true"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutput::Delsys Trigno IMU AUX 2.0::Sensor 13">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutput::Delsys:Trigno IMU AUX:2.0:Trigno_1,13">
-        <Param name="DeviceOutputName" value="Sensor 13"/>
-        <Param name="DeviceOutputReady" value="true"/>
-        <Param name="Connected" value="true"/>
-        <Param name="Visible" value="true"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="13"/>
-        <Param name="DeviceOutputType" value="Sensor 13"/>
-        <Param name="DeviceOutputQuantity" value="1 0 -2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"/>
-        <Param name="Enabled" value="true"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutput::Delsys Trigno IMU AUX 2.0::Sensor 14">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutput::Delsys:Trigno IMU AUX:2.0:Trigno_1,14">
-        <Param name="DeviceOutputName" value="Sensor 14"/>
-        <Param name="DeviceOutputReady" value="true"/>
-        <Param name="Connected" value="true"/>
-        <Param name="Visible" value="true"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="14"/>
-        <Param name="DeviceOutputType" value="Sensor 14"/>
-        <Param name="DeviceOutputQuantity" value="1 0 -2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"/>
-        <Param name="Enabled" value="true"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutput::Delsys Trigno IMU AUX 2.0::Sensor 15">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutput::Delsys:Trigno IMU AUX:2.0:Trigno_1,15">
-        <Param name="DeviceOutputName" value="Sensor 15"/>
-        <Param name="DeviceOutputReady" value="true"/>
-        <Param name="Connected" value="true"/>
-        <Param name="Visible" value="true"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="15"/>
-        <Param name="DeviceOutputType" value="Sensor 15"/>
-        <Param name="DeviceOutputQuantity" value="1 0 -2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"/>
-        <Param name="Enabled" value="true"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutput::Delsys Trigno IMU AUX 2.0::Sensor 16">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutput::Delsys:Trigno IMU AUX:2.0:Trigno_1,16">
-        <Param name="DeviceOutputName" value="Sensor 16"/>
-        <Param name="DeviceOutputReady" value="true"/>
-        <Param name="Connected" value="true"/>
-        <Param name="Visible" value="true"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="16"/>
-        <Param name="DeviceOutputType" value="Sensor 16"/>
-        <Param name="DeviceOutputQuantity" value="1 0 -2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"/>
-        <Param name="Enabled" value="true"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutput::Delsys Trigno IMU AUX 2.0::Sensor 2">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutput::Delsys:Trigno IMU AUX:2.0:Trigno_1,2">
-        <Param name="DeviceOutputName" value="Sensor 2"/>
-        <Param name="DeviceOutputReady" value="true"/>
-        <Param name="Connected" value="true"/>
-        <Param name="Visible" value="true"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="2"/>
-        <Param name="DeviceOutputType" value="Sensor 2"/>
-        <Param name="DeviceOutputQuantity" value="1 0 -2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"/>
-        <Param name="Enabled" value="true"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutput::Delsys Trigno IMU AUX 2.0::Sensor 3">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutput::Delsys:Trigno IMU AUX:2.0:Trigno_1,3">
-        <Param name="DeviceOutputName" value="Sensor 3"/>
-        <Param name="DeviceOutputReady" value="true"/>
-        <Param name="Connected" value="true"/>
-        <Param name="Visible" value="true"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="3"/>
-        <Param name="DeviceOutputType" value="Sensor 3"/>
-        <Param name="DeviceOutputQuantity" value="1 0 -2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"/>
-        <Param name="Enabled" value="true"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutput::Delsys Trigno IMU AUX 2.0::Sensor 4">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutput::Delsys:Trigno IMU AUX:2.0:Trigno_1,4">
-        <Param name="DeviceOutputName" value="Sensor 4"/>
-        <Param name="DeviceOutputReady" value="true"/>
-        <Param name="Connected" value="true"/>
-        <Param name="Visible" value="true"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="4"/>
-        <Param name="DeviceOutputType" value="Sensor 4"/>
-        <Param name="DeviceOutputQuantity" value="1 0 -2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"/>
-        <Param name="Enabled" value="true"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutput::Delsys Trigno IMU AUX 2.0::Sensor 5">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutput::Delsys:Trigno IMU AUX:2.0:Trigno_1,5">
-        <Param name="DeviceOutputName" value="Sensor 5"/>
-        <Param name="DeviceOutputReady" value="true"/>
-        <Param name="Connected" value="true"/>
-        <Param name="Visible" value="true"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="5"/>
-        <Param name="DeviceOutputType" value="Sensor 5"/>
-        <Param name="DeviceOutputQuantity" value="1 0 -2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"/>
-        <Param name="Enabled" value="true"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutput::Delsys Trigno IMU AUX 2.0::Sensor 6">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutput::Delsys:Trigno IMU AUX:2.0:Trigno_1,6">
-        <Param name="DeviceOutputName" value="Sensor 6"/>
-        <Param name="DeviceOutputReady" value="true"/>
-        <Param name="Connected" value="true"/>
-        <Param name="Visible" value="true"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="6"/>
-        <Param name="DeviceOutputType" value="Sensor 6"/>
-        <Param name="DeviceOutputQuantity" value="1 0 -2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"/>
-        <Param name="Enabled" value="true"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutput::Delsys Trigno IMU AUX 2.0::Sensor 7">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutput::Delsys:Trigno IMU AUX:2.0:Trigno_1,7">
-        <Param name="DeviceOutputName" value="Sensor 7"/>
-        <Param name="DeviceOutputReady" value="true"/>
-        <Param name="Connected" value="true"/>
-        <Param name="Visible" value="true"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="7"/>
-        <Param name="DeviceOutputType" value="Sensor 7"/>
-        <Param name="DeviceOutputQuantity" value="1 0 -2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"/>
-        <Param name="Enabled" value="true"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutput::Delsys Trigno IMU AUX 2.0::Sensor 8">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutput::Delsys:Trigno IMU AUX:2.0:Trigno_1,8">
-        <Param name="DeviceOutputName" value="Sensor 8"/>
-        <Param name="DeviceOutputReady" value="true"/>
-        <Param name="Connected" value="true"/>
-        <Param name="Visible" value="true"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="8"/>
-        <Param name="DeviceOutputType" value="Sensor 8"/>
-        <Param name="DeviceOutputQuantity" value="1 0 -2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"/>
-        <Param name="Enabled" value="true"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutput::Delsys Trigno IMU AUX 2.0::Sensor 9">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutput::Delsys:Trigno IMU AUX:2.0:Trigno_1,9">
-        <Param name="DeviceOutputName" value="Sensor 9"/>
-        <Param name="DeviceOutputReady" value="true"/>
-        <Param name="Connected" value="true"/>
-        <Param name="Visible" value="true"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="9"/>
-        <Param name="DeviceOutputType" value="Sensor 9"/>
-        <Param name="DeviceOutputQuantity" value="1 0 -2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"/>
-        <Param name="Enabled" value="true"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutput::Delsys Trigno IMU EMG 2.0::Sensor 1">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutput::Delsys:Trigno IMU EMG:2.0:Trigno_1,1">
-        <Param name="DeviceOutputName" value="Sensor 1"/>
-        <Param name="DeviceOutputReady" value="true"/>
-        <Param name="Connected" value="true"/>
-        <Param name="Visible" value="true"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU EMG:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="5"/>
-        <Param name="DeviceOutputID" value="1"/>
-        <Param name="DeviceOutputType" value="Sensor 1"/>
-        <Param name="DeviceOutputQuantity" value="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0"/>
-        <Param name="Enabled" value="true"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutput::Delsys Trigno IMU EMG 2.0::Sensor 10">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutput::Delsys:Trigno IMU EMG:2.0:Trigno_1,10">
-        <Param name="DeviceOutputName" value="Sensor 10"/>
-        <Param name="DeviceOutputReady" value="true"/>
-        <Param name="Connected" value="true"/>
-        <Param name="Visible" value="true"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU EMG:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="5"/>
-        <Param name="DeviceOutputID" value="10"/>
-        <Param name="DeviceOutputType" value="Sensor 10"/>
-        <Param name="DeviceOutputQuantity" value="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0"/>
-        <Param name="Enabled" value="true"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutput::Delsys Trigno IMU EMG 2.0::Sensor 11">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutput::Delsys:Trigno IMU EMG:2.0:Trigno_1,11">
-        <Param name="DeviceOutputName" value="Sensor 11"/>
-        <Param name="DeviceOutputReady" value="true"/>
-        <Param name="Connected" value="true"/>
-        <Param name="Visible" value="true"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU EMG:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="5"/>
-        <Param name="DeviceOutputID" value="11"/>
-        <Param name="DeviceOutputType" value="Sensor 11"/>
-        <Param name="DeviceOutputQuantity" value="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0"/>
-        <Param name="Enabled" value="true"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutput::Delsys Trigno IMU EMG 2.0::Sensor 12">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutput::Delsys:Trigno IMU EMG:2.0:Trigno_1,12">
-        <Param name="DeviceOutputName" value="Sensor 12"/>
-        <Param name="DeviceOutputReady" value="true"/>
-        <Param name="Connected" value="true"/>
-        <Param name="Visible" value="true"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU EMG:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="5"/>
-        <Param name="DeviceOutputID" value="12"/>
-        <Param name="DeviceOutputType" value="Sensor 12"/>
-        <Param name="DeviceOutputQuantity" value="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0"/>
-        <Param name="Enabled" value="true"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutput::Delsys Trigno IMU EMG 2.0::Sensor 13">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutput::Delsys:Trigno IMU EMG:2.0:Trigno_1,13">
-        <Param name="DeviceOutputName" value="Sensor 13"/>
-        <Param name="DeviceOutputReady" value="true"/>
-        <Param name="Connected" value="true"/>
-        <Param name="Visible" value="true"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU EMG:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="5"/>
-        <Param name="DeviceOutputID" value="13"/>
-        <Param name="DeviceOutputType" value="Sensor 13"/>
-        <Param name="DeviceOutputQuantity" value="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0"/>
-        <Param name="Enabled" value="true"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutput::Delsys Trigno IMU EMG 2.0::Sensor 14">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutput::Delsys:Trigno IMU EMG:2.0:Trigno_1,14">
-        <Param name="DeviceOutputName" value="Sensor 14"/>
-        <Param name="DeviceOutputReady" value="true"/>
-        <Param name="Connected" value="true"/>
-        <Param name="Visible" value="true"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU EMG:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="5"/>
-        <Param name="DeviceOutputID" value="14"/>
-        <Param name="DeviceOutputType" value="Sensor 14"/>
-        <Param name="DeviceOutputQuantity" value="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0"/>
-        <Param name="Enabled" value="true"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutput::Delsys Trigno IMU EMG 2.0::Sensor 15">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutput::Delsys:Trigno IMU EMG:2.0:Trigno_1,15">
-        <Param name="DeviceOutputName" value="Sensor 15"/>
-        <Param name="DeviceOutputReady" value="true"/>
-        <Param name="Connected" value="true"/>
-        <Param name="Visible" value="true"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU EMG:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="5"/>
-        <Param name="DeviceOutputID" value="15"/>
-        <Param name="DeviceOutputType" value="Sensor 15"/>
-        <Param name="DeviceOutputQuantity" value="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0"/>
-        <Param name="Enabled" value="true"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutput::Delsys Trigno IMU EMG 2.0::Sensor 16">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutput::Delsys:Trigno IMU EMG:2.0:Trigno_1,16">
-        <Param name="DeviceOutputName" value="Sensor 16"/>
-        <Param name="DeviceOutputReady" value="true"/>
-        <Param name="Connected" value="true"/>
-        <Param name="Visible" value="true"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU EMG:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="5"/>
-        <Param name="DeviceOutputID" value="16"/>
-        <Param name="DeviceOutputType" value="Sensor 16"/>
-        <Param name="DeviceOutputQuantity" value="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0"/>
-        <Param name="Enabled" value="true"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutput::Delsys Trigno IMU EMG 2.0::Sensor 2">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutput::Delsys:Trigno IMU EMG:2.0:Trigno_1,2">
-        <Param name="DeviceOutputName" value="Sensor 2"/>
-        <Param name="DeviceOutputReady" value="true"/>
-        <Param name="Connected" value="true"/>
-        <Param name="Visible" value="true"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU EMG:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="5"/>
-        <Param name="DeviceOutputID" value="2"/>
-        <Param name="DeviceOutputType" value="Sensor 2"/>
-        <Param name="DeviceOutputQuantity" value="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0"/>
-        <Param name="Enabled" value="true"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutput::Delsys Trigno IMU EMG 2.0::Sensor 3">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutput::Delsys:Trigno IMU EMG:2.0:Trigno_1,3">
-        <Param name="DeviceOutputName" value="Sensor 3"/>
-        <Param name="DeviceOutputReady" value="true"/>
-        <Param name="Connected" value="true"/>
-        <Param name="Visible" value="true"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU EMG:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="5"/>
-        <Param name="DeviceOutputID" value="3"/>
-        <Param name="DeviceOutputType" value="Sensor 3"/>
-        <Param name="DeviceOutputQuantity" value="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0"/>
-        <Param name="Enabled" value="true"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutput::Delsys Trigno IMU EMG 2.0::Sensor 4">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutput::Delsys:Trigno IMU EMG:2.0:Trigno_1,4">
-        <Param name="DeviceOutputName" value="Sensor 4"/>
-        <Param name="DeviceOutputReady" value="true"/>
-        <Param name="Connected" value="true"/>
-        <Param name="Visible" value="true"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU EMG:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="5"/>
-        <Param name="DeviceOutputID" value="4"/>
-        <Param name="DeviceOutputType" value="Sensor 4"/>
-        <Param name="DeviceOutputQuantity" value="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0"/>
-        <Param name="Enabled" value="true"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutput::Delsys Trigno IMU EMG 2.0::Sensor 5">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutput::Delsys:Trigno IMU EMG:2.0:Trigno_1,5">
-        <Param name="DeviceOutputName" value="Sensor 5"/>
-        <Param name="DeviceOutputReady" value="true"/>
-        <Param name="Connected" value="true"/>
-        <Param name="Visible" value="true"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU EMG:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="5"/>
-        <Param name="DeviceOutputID" value="5"/>
-        <Param name="DeviceOutputType" value="Sensor 5"/>
-        <Param name="DeviceOutputQuantity" value="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0"/>
-        <Param name="Enabled" value="true"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutput::Delsys Trigno IMU EMG 2.0::Sensor 6">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutput::Delsys:Trigno IMU EMG:2.0:Trigno_1,6">
-        <Param name="DeviceOutputName" value="Sensor 6"/>
-        <Param name="DeviceOutputReady" value="true"/>
-        <Param name="Connected" value="true"/>
-        <Param name="Visible" value="true"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU EMG:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="5"/>
-        <Param name="DeviceOutputID" value="6"/>
-        <Param name="DeviceOutputType" value="Sensor 6"/>
-        <Param name="DeviceOutputQuantity" value="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0"/>
-        <Param name="Enabled" value="true"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutput::Delsys Trigno IMU EMG 2.0::Sensor 7">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutput::Delsys:Trigno IMU EMG:2.0:Trigno_1,7">
-        <Param name="DeviceOutputName" value="Sensor 7"/>
-        <Param name="DeviceOutputReady" value="true"/>
-        <Param name="Connected" value="true"/>
-        <Param name="Visible" value="true"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU EMG:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="5"/>
-        <Param name="DeviceOutputID" value="7"/>
-        <Param name="DeviceOutputType" value="Sensor 7"/>
-        <Param name="DeviceOutputQuantity" value="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0"/>
-        <Param name="Enabled" value="true"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutput::Delsys Trigno IMU EMG 2.0::Sensor 8">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutput::Delsys:Trigno IMU EMG:2.0:Trigno_1,8">
-        <Param name="DeviceOutputName" value="Sensor 8"/>
-        <Param name="DeviceOutputReady" value="true"/>
-        <Param name="Connected" value="true"/>
-        <Param name="Visible" value="true"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU EMG:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="5"/>
-        <Param name="DeviceOutputID" value="8"/>
-        <Param name="DeviceOutputType" value="Sensor 8"/>
-        <Param name="DeviceOutputQuantity" value="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0"/>
-        <Param name="Enabled" value="true"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutput::Delsys Trigno IMU EMG 2.0::Sensor 9">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutput::Delsys:Trigno IMU EMG:2.0:Trigno_1,9">
-        <Param name="DeviceOutputName" value="Sensor 9"/>
-        <Param name="DeviceOutputReady" value="true"/>
-        <Param name="Connected" value="true"/>
-        <Param name="Visible" value="true"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU EMG:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="5"/>
-        <Param name="DeviceOutputID" value="9"/>
-        <Param name="DeviceOutputType" value="Sensor 9"/>
-        <Param name="DeviceOutputQuantity" value="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0"/>
-        <Param name="Enabled" value="true"/>
       </ParamList>
     </ParamListGroup>
   </ParamDefinitionList>
 
   <ParamDefinitionList name="DeviceOutput::Generic Analog::Electric Potential">
     <ParamListGroup name="">
-      <ParamList name="DeviceOutput::d015f453a5b2f295f24040c9f01fd077,1">
+      <ParamList name="DeviceOutput::6fcbf1a59e70990aa2e1be63437065d9,1">
         <Param name="DeviceOutputName" value="Electric Potential"/>
         <Param name="DeviceOutputReady" value="true"/>
         <Param name="Connected" value="true"/>
         <Param name="Visible" value="true"/>
-        <Param name="DeviceTag" value="d015f453a5b2f295f24040c9f01fd077"/>
-        <Param name="DeviceID" value="1"/>
+        <Param name="DeviceTag" value="6fcbf1a59e70990aa2e1be63437065d9"/>
+        <Param name="DeviceID" value="3"/>
         <Param name="DeviceOutputID" value="1"/>
+        <Param name="DeviceOutputType" value="Electric Potential"/>
+        <Param name="DeviceOutputQuantity" value="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0"/>
+      </ParamList>
+      <ParamList name="DeviceOutput::6fcbf1a59e70990aa2e1be63437065d9,2">
+        <Param name="DeviceOutputName" value="Electric Potential"/>
+        <Param name="DeviceOutputReady" value="true"/>
+        <Param name="Connected" value="true"/>
+        <Param name="Visible" value="true"/>
+        <Param name="DeviceTag" value="6fcbf1a59e70990aa2e1be63437065d9"/>
+        <Param name="DeviceID" value="3"/>
+        <Param name="DeviceOutputID" value="2"/>
         <Param name="DeviceOutputType" value="Electric Potential"/>
         <Param name="DeviceOutputQuantity" value="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0"/>
       </ParamList>
@@ -1365,1906 +182,29 @@
     </ParamListGroup>
   </ParamDefinitionList>
 
-  <ParamDefinitionList name="DeviceOutputComponent::Delsys Trigno Accelerometers 2.0::Sensor 1">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno Accelerometers:2.0:Trigno_1,1,1">
-        <Param name="DeviceOutputComponentName" value="ACCX1"/>
-        <Param name="DeviceTag" value="Delsys:Trigno Accelerometers:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="4"/>
-        <Param name="DeviceOutputID" value="1"/>
-        <Param name="DeviceOutputComponentID" value="1"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno Accelerometers:2.0:Trigno_1,1,2">
-        <Param name="DeviceOutputComponentName" value="ACCY1"/>
-        <Param name="DeviceTag" value="Delsys:Trigno Accelerometers:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="4"/>
-        <Param name="DeviceOutputID" value="1"/>
-        <Param name="DeviceOutputComponentID" value="2"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno Accelerometers:2.0:Trigno_1,1,3">
-        <Param name="DeviceOutputComponentName" value="ACCZ1"/>
-        <Param name="DeviceTag" value="Delsys:Trigno Accelerometers:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="4"/>
-        <Param name="DeviceOutputID" value="1"/>
-        <Param name="DeviceOutputComponentID" value="3"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutputComponent::Delsys Trigno Accelerometers 2.0::Sensor 10">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno Accelerometers:2.0:Trigno_1,10,1">
-        <Param name="DeviceOutputComponentName" value="ACCX10"/>
-        <Param name="DeviceTag" value="Delsys:Trigno Accelerometers:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="4"/>
-        <Param name="DeviceOutputID" value="10"/>
-        <Param name="DeviceOutputComponentID" value="1"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno Accelerometers:2.0:Trigno_1,10,2">
-        <Param name="DeviceOutputComponentName" value="ACCY10"/>
-        <Param name="DeviceTag" value="Delsys:Trigno Accelerometers:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="4"/>
-        <Param name="DeviceOutputID" value="10"/>
-        <Param name="DeviceOutputComponentID" value="2"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno Accelerometers:2.0:Trigno_1,10,3">
-        <Param name="DeviceOutputComponentName" value="ACCZ10"/>
-        <Param name="DeviceTag" value="Delsys:Trigno Accelerometers:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="4"/>
-        <Param name="DeviceOutputID" value="10"/>
-        <Param name="DeviceOutputComponentID" value="3"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutputComponent::Delsys Trigno Accelerometers 2.0::Sensor 11">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno Accelerometers:2.0:Trigno_1,11,1">
-        <Param name="DeviceOutputComponentName" value="ACCX11"/>
-        <Param name="DeviceTag" value="Delsys:Trigno Accelerometers:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="4"/>
-        <Param name="DeviceOutputID" value="11"/>
-        <Param name="DeviceOutputComponentID" value="1"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno Accelerometers:2.0:Trigno_1,11,2">
-        <Param name="DeviceOutputComponentName" value="ACCY11"/>
-        <Param name="DeviceTag" value="Delsys:Trigno Accelerometers:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="4"/>
-        <Param name="DeviceOutputID" value="11"/>
-        <Param name="DeviceOutputComponentID" value="2"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno Accelerometers:2.0:Trigno_1,11,3">
-        <Param name="DeviceOutputComponentName" value="ACCZ11"/>
-        <Param name="DeviceTag" value="Delsys:Trigno Accelerometers:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="4"/>
-        <Param name="DeviceOutputID" value="11"/>
-        <Param name="DeviceOutputComponentID" value="3"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutputComponent::Delsys Trigno Accelerometers 2.0::Sensor 12">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno Accelerometers:2.0:Trigno_1,12,1">
-        <Param name="DeviceOutputComponentName" value="ACCX12"/>
-        <Param name="DeviceTag" value="Delsys:Trigno Accelerometers:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="4"/>
-        <Param name="DeviceOutputID" value="12"/>
-        <Param name="DeviceOutputComponentID" value="1"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno Accelerometers:2.0:Trigno_1,12,2">
-        <Param name="DeviceOutputComponentName" value="ACCY12"/>
-        <Param name="DeviceTag" value="Delsys:Trigno Accelerometers:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="4"/>
-        <Param name="DeviceOutputID" value="12"/>
-        <Param name="DeviceOutputComponentID" value="2"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno Accelerometers:2.0:Trigno_1,12,3">
-        <Param name="DeviceOutputComponentName" value="ACCZ12"/>
-        <Param name="DeviceTag" value="Delsys:Trigno Accelerometers:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="4"/>
-        <Param name="DeviceOutputID" value="12"/>
-        <Param name="DeviceOutputComponentID" value="3"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutputComponent::Delsys Trigno Accelerometers 2.0::Sensor 13">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno Accelerometers:2.0:Trigno_1,13,1">
-        <Param name="DeviceOutputComponentName" value="ACCX13"/>
-        <Param name="DeviceTag" value="Delsys:Trigno Accelerometers:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="4"/>
-        <Param name="DeviceOutputID" value="13"/>
-        <Param name="DeviceOutputComponentID" value="1"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno Accelerometers:2.0:Trigno_1,13,2">
-        <Param name="DeviceOutputComponentName" value="ACCY13"/>
-        <Param name="DeviceTag" value="Delsys:Trigno Accelerometers:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="4"/>
-        <Param name="DeviceOutputID" value="13"/>
-        <Param name="DeviceOutputComponentID" value="2"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno Accelerometers:2.0:Trigno_1,13,3">
-        <Param name="DeviceOutputComponentName" value="ACCZ13"/>
-        <Param name="DeviceTag" value="Delsys:Trigno Accelerometers:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="4"/>
-        <Param name="DeviceOutputID" value="13"/>
-        <Param name="DeviceOutputComponentID" value="3"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutputComponent::Delsys Trigno Accelerometers 2.0::Sensor 14">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno Accelerometers:2.0:Trigno_1,14,1">
-        <Param name="DeviceOutputComponentName" value="ACCX14"/>
-        <Param name="DeviceTag" value="Delsys:Trigno Accelerometers:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="4"/>
-        <Param name="DeviceOutputID" value="14"/>
-        <Param name="DeviceOutputComponentID" value="1"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno Accelerometers:2.0:Trigno_1,14,2">
-        <Param name="DeviceOutputComponentName" value="ACCY14"/>
-        <Param name="DeviceTag" value="Delsys:Trigno Accelerometers:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="4"/>
-        <Param name="DeviceOutputID" value="14"/>
-        <Param name="DeviceOutputComponentID" value="2"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno Accelerometers:2.0:Trigno_1,14,3">
-        <Param name="DeviceOutputComponentName" value="ACCZ14"/>
-        <Param name="DeviceTag" value="Delsys:Trigno Accelerometers:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="4"/>
-        <Param name="DeviceOutputID" value="14"/>
-        <Param name="DeviceOutputComponentID" value="3"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutputComponent::Delsys Trigno Accelerometers 2.0::Sensor 15">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno Accelerometers:2.0:Trigno_1,15,1">
-        <Param name="DeviceOutputComponentName" value="ACCX15"/>
-        <Param name="DeviceTag" value="Delsys:Trigno Accelerometers:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="4"/>
-        <Param name="DeviceOutputID" value="15"/>
-        <Param name="DeviceOutputComponentID" value="1"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno Accelerometers:2.0:Trigno_1,15,2">
-        <Param name="DeviceOutputComponentName" value="ACCY15"/>
-        <Param name="DeviceTag" value="Delsys:Trigno Accelerometers:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="4"/>
-        <Param name="DeviceOutputID" value="15"/>
-        <Param name="DeviceOutputComponentID" value="2"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno Accelerometers:2.0:Trigno_1,15,3">
-        <Param name="DeviceOutputComponentName" value="ACCZ15"/>
-        <Param name="DeviceTag" value="Delsys:Trigno Accelerometers:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="4"/>
-        <Param name="DeviceOutputID" value="15"/>
-        <Param name="DeviceOutputComponentID" value="3"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutputComponent::Delsys Trigno Accelerometers 2.0::Sensor 16">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno Accelerometers:2.0:Trigno_1,16,1">
-        <Param name="DeviceOutputComponentName" value="ACCX16"/>
-        <Param name="DeviceTag" value="Delsys:Trigno Accelerometers:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="4"/>
-        <Param name="DeviceOutputID" value="16"/>
-        <Param name="DeviceOutputComponentID" value="1"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno Accelerometers:2.0:Trigno_1,16,2">
-        <Param name="DeviceOutputComponentName" value="ACCY16"/>
-        <Param name="DeviceTag" value="Delsys:Trigno Accelerometers:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="4"/>
-        <Param name="DeviceOutputID" value="16"/>
-        <Param name="DeviceOutputComponentID" value="2"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno Accelerometers:2.0:Trigno_1,16,3">
-        <Param name="DeviceOutputComponentName" value="ACCZ16"/>
-        <Param name="DeviceTag" value="Delsys:Trigno Accelerometers:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="4"/>
-        <Param name="DeviceOutputID" value="16"/>
-        <Param name="DeviceOutputComponentID" value="3"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutputComponent::Delsys Trigno Accelerometers 2.0::Sensor 2">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno Accelerometers:2.0:Trigno_1,2,1">
-        <Param name="DeviceOutputComponentName" value="ACCX2"/>
-        <Param name="DeviceTag" value="Delsys:Trigno Accelerometers:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="4"/>
-        <Param name="DeviceOutputID" value="2"/>
-        <Param name="DeviceOutputComponentID" value="1"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno Accelerometers:2.0:Trigno_1,2,2">
-        <Param name="DeviceOutputComponentName" value="ACCY2"/>
-        <Param name="DeviceTag" value="Delsys:Trigno Accelerometers:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="4"/>
-        <Param name="DeviceOutputID" value="2"/>
-        <Param name="DeviceOutputComponentID" value="2"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno Accelerometers:2.0:Trigno_1,2,3">
-        <Param name="DeviceOutputComponentName" value="ACCZ2"/>
-        <Param name="DeviceTag" value="Delsys:Trigno Accelerometers:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="4"/>
-        <Param name="DeviceOutputID" value="2"/>
-        <Param name="DeviceOutputComponentID" value="3"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutputComponent::Delsys Trigno Accelerometers 2.0::Sensor 3">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno Accelerometers:2.0:Trigno_1,3,1">
-        <Param name="DeviceOutputComponentName" value="ACCX3"/>
-        <Param name="DeviceTag" value="Delsys:Trigno Accelerometers:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="4"/>
-        <Param name="DeviceOutputID" value="3"/>
-        <Param name="DeviceOutputComponentID" value="1"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno Accelerometers:2.0:Trigno_1,3,2">
-        <Param name="DeviceOutputComponentName" value="ACCY3"/>
-        <Param name="DeviceTag" value="Delsys:Trigno Accelerometers:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="4"/>
-        <Param name="DeviceOutputID" value="3"/>
-        <Param name="DeviceOutputComponentID" value="2"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno Accelerometers:2.0:Trigno_1,3,3">
-        <Param name="DeviceOutputComponentName" value="ACCZ3"/>
-        <Param name="DeviceTag" value="Delsys:Trigno Accelerometers:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="4"/>
-        <Param name="DeviceOutputID" value="3"/>
-        <Param name="DeviceOutputComponentID" value="3"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutputComponent::Delsys Trigno Accelerometers 2.0::Sensor 4">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno Accelerometers:2.0:Trigno_1,4,1">
-        <Param name="DeviceOutputComponentName" value="ACCX4"/>
-        <Param name="DeviceTag" value="Delsys:Trigno Accelerometers:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="4"/>
-        <Param name="DeviceOutputID" value="4"/>
-        <Param name="DeviceOutputComponentID" value="1"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno Accelerometers:2.0:Trigno_1,4,2">
-        <Param name="DeviceOutputComponentName" value="ACCY4"/>
-        <Param name="DeviceTag" value="Delsys:Trigno Accelerometers:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="4"/>
-        <Param name="DeviceOutputID" value="4"/>
-        <Param name="DeviceOutputComponentID" value="2"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno Accelerometers:2.0:Trigno_1,4,3">
-        <Param name="DeviceOutputComponentName" value="ACCZ4"/>
-        <Param name="DeviceTag" value="Delsys:Trigno Accelerometers:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="4"/>
-        <Param name="DeviceOutputID" value="4"/>
-        <Param name="DeviceOutputComponentID" value="3"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutputComponent::Delsys Trigno Accelerometers 2.0::Sensor 5">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno Accelerometers:2.0:Trigno_1,5,1">
-        <Param name="DeviceOutputComponentName" value="ACCX5"/>
-        <Param name="DeviceTag" value="Delsys:Trigno Accelerometers:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="4"/>
-        <Param name="DeviceOutputID" value="5"/>
-        <Param name="DeviceOutputComponentID" value="1"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno Accelerometers:2.0:Trigno_1,5,2">
-        <Param name="DeviceOutputComponentName" value="ACCY5"/>
-        <Param name="DeviceTag" value="Delsys:Trigno Accelerometers:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="4"/>
-        <Param name="DeviceOutputID" value="5"/>
-        <Param name="DeviceOutputComponentID" value="2"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno Accelerometers:2.0:Trigno_1,5,3">
-        <Param name="DeviceOutputComponentName" value="ACCZ5"/>
-        <Param name="DeviceTag" value="Delsys:Trigno Accelerometers:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="4"/>
-        <Param name="DeviceOutputID" value="5"/>
-        <Param name="DeviceOutputComponentID" value="3"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutputComponent::Delsys Trigno Accelerometers 2.0::Sensor 6">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno Accelerometers:2.0:Trigno_1,6,1">
-        <Param name="DeviceOutputComponentName" value="ACCX6"/>
-        <Param name="DeviceTag" value="Delsys:Trigno Accelerometers:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="4"/>
-        <Param name="DeviceOutputID" value="6"/>
-        <Param name="DeviceOutputComponentID" value="1"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno Accelerometers:2.0:Trigno_1,6,2">
-        <Param name="DeviceOutputComponentName" value="ACCY6"/>
-        <Param name="DeviceTag" value="Delsys:Trigno Accelerometers:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="4"/>
-        <Param name="DeviceOutputID" value="6"/>
-        <Param name="DeviceOutputComponentID" value="2"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno Accelerometers:2.0:Trigno_1,6,3">
-        <Param name="DeviceOutputComponentName" value="ACCZ6"/>
-        <Param name="DeviceTag" value="Delsys:Trigno Accelerometers:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="4"/>
-        <Param name="DeviceOutputID" value="6"/>
-        <Param name="DeviceOutputComponentID" value="3"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutputComponent::Delsys Trigno Accelerometers 2.0::Sensor 7">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno Accelerometers:2.0:Trigno_1,7,1">
-        <Param name="DeviceOutputComponentName" value="ACCX7"/>
-        <Param name="DeviceTag" value="Delsys:Trigno Accelerometers:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="4"/>
-        <Param name="DeviceOutputID" value="7"/>
-        <Param name="DeviceOutputComponentID" value="1"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno Accelerometers:2.0:Trigno_1,7,2">
-        <Param name="DeviceOutputComponentName" value="ACCY7"/>
-        <Param name="DeviceTag" value="Delsys:Trigno Accelerometers:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="4"/>
-        <Param name="DeviceOutputID" value="7"/>
-        <Param name="DeviceOutputComponentID" value="2"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno Accelerometers:2.0:Trigno_1,7,3">
-        <Param name="DeviceOutputComponentName" value="ACCZ7"/>
-        <Param name="DeviceTag" value="Delsys:Trigno Accelerometers:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="4"/>
-        <Param name="DeviceOutputID" value="7"/>
-        <Param name="DeviceOutputComponentID" value="3"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutputComponent::Delsys Trigno Accelerometers 2.0::Sensor 8">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno Accelerometers:2.0:Trigno_1,8,1">
-        <Param name="DeviceOutputComponentName" value="ACCX8"/>
-        <Param name="DeviceTag" value="Delsys:Trigno Accelerometers:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="4"/>
-        <Param name="DeviceOutputID" value="8"/>
-        <Param name="DeviceOutputComponentID" value="1"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno Accelerometers:2.0:Trigno_1,8,2">
-        <Param name="DeviceOutputComponentName" value="ACCY8"/>
-        <Param name="DeviceTag" value="Delsys:Trigno Accelerometers:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="4"/>
-        <Param name="DeviceOutputID" value="8"/>
-        <Param name="DeviceOutputComponentID" value="2"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno Accelerometers:2.0:Trigno_1,8,3">
-        <Param name="DeviceOutputComponentName" value="ACCZ8"/>
-        <Param name="DeviceTag" value="Delsys:Trigno Accelerometers:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="4"/>
-        <Param name="DeviceOutputID" value="8"/>
-        <Param name="DeviceOutputComponentID" value="3"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutputComponent::Delsys Trigno Accelerometers 2.0::Sensor 9">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno Accelerometers:2.0:Trigno_1,9,1">
-        <Param name="DeviceOutputComponentName" value="ACCX9"/>
-        <Param name="DeviceTag" value="Delsys:Trigno Accelerometers:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="4"/>
-        <Param name="DeviceOutputID" value="9"/>
-        <Param name="DeviceOutputComponentID" value="1"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno Accelerometers:2.0:Trigno_1,9,2">
-        <Param name="DeviceOutputComponentName" value="ACCY9"/>
-        <Param name="DeviceTag" value="Delsys:Trigno Accelerometers:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="4"/>
-        <Param name="DeviceOutputID" value="9"/>
-        <Param name="DeviceOutputComponentID" value="2"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno Accelerometers:2.0:Trigno_1,9,3">
-        <Param name="DeviceOutputComponentName" value="ACCZ9"/>
-        <Param name="DeviceTag" value="Delsys:Trigno Accelerometers:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="4"/>
-        <Param name="DeviceOutputID" value="9"/>
-        <Param name="DeviceOutputComponentID" value="3"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutputComponent::Delsys Trigno EMG 2.0::Sensor 1">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno EMG:2.0:Trigno_1,1,1">
-        <Param name="DeviceOutputComponentName" value="EMG1"/>
-        <Param name="DeviceTag" value="Delsys:Trigno EMG:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="3"/>
-        <Param name="DeviceOutputID" value="1"/>
-        <Param name="DeviceOutputComponentID" value="1"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutputComponent::Delsys Trigno EMG 2.0::Sensor 10">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno EMG:2.0:Trigno_1,10,1">
-        <Param name="DeviceOutputComponentName" value="EMG10"/>
-        <Param name="DeviceTag" value="Delsys:Trigno EMG:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="3"/>
-        <Param name="DeviceOutputID" value="10"/>
-        <Param name="DeviceOutputComponentID" value="1"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutputComponent::Delsys Trigno EMG 2.0::Sensor 11">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno EMG:2.0:Trigno_1,11,1">
-        <Param name="DeviceOutputComponentName" value="EMG11"/>
-        <Param name="DeviceTag" value="Delsys:Trigno EMG:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="3"/>
-        <Param name="DeviceOutputID" value="11"/>
-        <Param name="DeviceOutputComponentID" value="1"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutputComponent::Delsys Trigno EMG 2.0::Sensor 12">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno EMG:2.0:Trigno_1,12,1">
-        <Param name="DeviceOutputComponentName" value="EMG12"/>
-        <Param name="DeviceTag" value="Delsys:Trigno EMG:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="3"/>
-        <Param name="DeviceOutputID" value="12"/>
-        <Param name="DeviceOutputComponentID" value="1"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutputComponent::Delsys Trigno EMG 2.0::Sensor 13">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno EMG:2.0:Trigno_1,13,1">
-        <Param name="DeviceOutputComponentName" value="EMG13"/>
-        <Param name="DeviceTag" value="Delsys:Trigno EMG:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="3"/>
-        <Param name="DeviceOutputID" value="13"/>
-        <Param name="DeviceOutputComponentID" value="1"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutputComponent::Delsys Trigno EMG 2.0::Sensor 14">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno EMG:2.0:Trigno_1,14,1">
-        <Param name="DeviceOutputComponentName" value="EMG14"/>
-        <Param name="DeviceTag" value="Delsys:Trigno EMG:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="3"/>
-        <Param name="DeviceOutputID" value="14"/>
-        <Param name="DeviceOutputComponentID" value="1"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutputComponent::Delsys Trigno EMG 2.0::Sensor 15">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno EMG:2.0:Trigno_1,15,1">
-        <Param name="DeviceOutputComponentName" value="EMG15"/>
-        <Param name="DeviceTag" value="Delsys:Trigno EMG:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="3"/>
-        <Param name="DeviceOutputID" value="15"/>
-        <Param name="DeviceOutputComponentID" value="1"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutputComponent::Delsys Trigno EMG 2.0::Sensor 16">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno EMG:2.0:Trigno_1,16,1">
-        <Param name="DeviceOutputComponentName" value="EMG16"/>
-        <Param name="DeviceTag" value="Delsys:Trigno EMG:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="3"/>
-        <Param name="DeviceOutputID" value="16"/>
-        <Param name="DeviceOutputComponentID" value="1"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutputComponent::Delsys Trigno EMG 2.0::Sensor 2">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno EMG:2.0:Trigno_1,2,1">
-        <Param name="DeviceOutputComponentName" value="EMG2"/>
-        <Param name="DeviceTag" value="Delsys:Trigno EMG:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="3"/>
-        <Param name="DeviceOutputID" value="2"/>
-        <Param name="DeviceOutputComponentID" value="1"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutputComponent::Delsys Trigno EMG 2.0::Sensor 3">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno EMG:2.0:Trigno_1,3,1">
-        <Param name="DeviceOutputComponentName" value="EMG3"/>
-        <Param name="DeviceTag" value="Delsys:Trigno EMG:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="3"/>
-        <Param name="DeviceOutputID" value="3"/>
-        <Param name="DeviceOutputComponentID" value="1"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutputComponent::Delsys Trigno EMG 2.0::Sensor 4">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno EMG:2.0:Trigno_1,4,1">
-        <Param name="DeviceOutputComponentName" value="EMG4"/>
-        <Param name="DeviceTag" value="Delsys:Trigno EMG:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="3"/>
-        <Param name="DeviceOutputID" value="4"/>
-        <Param name="DeviceOutputComponentID" value="1"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutputComponent::Delsys Trigno EMG 2.0::Sensor 5">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno EMG:2.0:Trigno_1,5,1">
-        <Param name="DeviceOutputComponentName" value="EMG5"/>
-        <Param name="DeviceTag" value="Delsys:Trigno EMG:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="3"/>
-        <Param name="DeviceOutputID" value="5"/>
-        <Param name="DeviceOutputComponentID" value="1"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutputComponent::Delsys Trigno EMG 2.0::Sensor 6">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno EMG:2.0:Trigno_1,6,1">
-        <Param name="DeviceOutputComponentName" value="EMG6"/>
-        <Param name="DeviceTag" value="Delsys:Trigno EMG:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="3"/>
-        <Param name="DeviceOutputID" value="6"/>
-        <Param name="DeviceOutputComponentID" value="1"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutputComponent::Delsys Trigno EMG 2.0::Sensor 7">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno EMG:2.0:Trigno_1,7,1">
-        <Param name="DeviceOutputComponentName" value="EMG7"/>
-        <Param name="DeviceTag" value="Delsys:Trigno EMG:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="3"/>
-        <Param name="DeviceOutputID" value="7"/>
-        <Param name="DeviceOutputComponentID" value="1"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutputComponent::Delsys Trigno EMG 2.0::Sensor 8">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno EMG:2.0:Trigno_1,8,1">
-        <Param name="DeviceOutputComponentName" value="EMG8"/>
-        <Param name="DeviceTag" value="Delsys:Trigno EMG:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="3"/>
-        <Param name="DeviceOutputID" value="8"/>
-        <Param name="DeviceOutputComponentID" value="1"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutputComponent::Delsys Trigno EMG 2.0::Sensor 9">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno EMG:2.0:Trigno_1,9,1">
-        <Param name="DeviceOutputComponentName" value="EMG9"/>
-        <Param name="DeviceTag" value="Delsys:Trigno EMG:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="3"/>
-        <Param name="DeviceOutputID" value="9"/>
-        <Param name="DeviceOutputComponentID" value="1"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutputComponent::Delsys Trigno IMU AUX 2.0::Sensor 1">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,1,1">
-        <Param name="DeviceOutputComponentName" value="ACCX1"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="1"/>
-        <Param name="DeviceOutputComponentID" value="1"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,1,2">
-        <Param name="DeviceOutputComponentName" value="ACCY1"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="1"/>
-        <Param name="DeviceOutputComponentID" value="2"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,1,3">
-        <Param name="DeviceOutputComponentName" value="ACCZ1"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="1"/>
-        <Param name="DeviceOutputComponentID" value="3"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,1,4">
-        <Param name="DeviceOutputComponentName" value="GYROX1"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="1"/>
-        <Param name="DeviceOutputComponentID" value="4"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,1,5">
-        <Param name="DeviceOutputComponentName" value="GYROY1"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="1"/>
-        <Param name="DeviceOutputComponentID" value="5"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,1,6">
-        <Param name="DeviceOutputComponentName" value="GYROZ1"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="1"/>
-        <Param name="DeviceOutputComponentID" value="6"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,1,7">
-        <Param name="DeviceOutputComponentName" value="MAGX1"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="1"/>
-        <Param name="DeviceOutputComponentID" value="7"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,1,8">
-        <Param name="DeviceOutputComponentName" value="MAGY1"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="1"/>
-        <Param name="DeviceOutputComponentID" value="8"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,1,9">
-        <Param name="DeviceOutputComponentName" value="MAGZ1"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="1"/>
-        <Param name="DeviceOutputComponentID" value="9"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutputComponent::Delsys Trigno IMU AUX 2.0::Sensor 10">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,10,1">
-        <Param name="DeviceOutputComponentName" value="ACCX10"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="10"/>
-        <Param name="DeviceOutputComponentID" value="1"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,10,2">
-        <Param name="DeviceOutputComponentName" value="ACCY10"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="10"/>
-        <Param name="DeviceOutputComponentID" value="2"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,10,3">
-        <Param name="DeviceOutputComponentName" value="ACCZ10"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="10"/>
-        <Param name="DeviceOutputComponentID" value="3"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,10,4">
-        <Param name="DeviceOutputComponentName" value="GYROX10"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="10"/>
-        <Param name="DeviceOutputComponentID" value="4"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,10,5">
-        <Param name="DeviceOutputComponentName" value="GYROY10"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="10"/>
-        <Param name="DeviceOutputComponentID" value="5"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,10,6">
-        <Param name="DeviceOutputComponentName" value="GYROZ10"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="10"/>
-        <Param name="DeviceOutputComponentID" value="6"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,10,7">
-        <Param name="DeviceOutputComponentName" value="MAGX10"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="10"/>
-        <Param name="DeviceOutputComponentID" value="7"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,10,8">
-        <Param name="DeviceOutputComponentName" value="MAGY10"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="10"/>
-        <Param name="DeviceOutputComponentID" value="8"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,10,9">
-        <Param name="DeviceOutputComponentName" value="MAGZ10"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="10"/>
-        <Param name="DeviceOutputComponentID" value="9"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutputComponent::Delsys Trigno IMU AUX 2.0::Sensor 11">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,11,1">
-        <Param name="DeviceOutputComponentName" value="ACCX11"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="11"/>
-        <Param name="DeviceOutputComponentID" value="1"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,11,2">
-        <Param name="DeviceOutputComponentName" value="ACCY11"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="11"/>
-        <Param name="DeviceOutputComponentID" value="2"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,11,3">
-        <Param name="DeviceOutputComponentName" value="ACCZ11"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="11"/>
-        <Param name="DeviceOutputComponentID" value="3"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,11,4">
-        <Param name="DeviceOutputComponentName" value="GYROX11"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="11"/>
-        <Param name="DeviceOutputComponentID" value="4"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,11,5">
-        <Param name="DeviceOutputComponentName" value="GYROY11"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="11"/>
-        <Param name="DeviceOutputComponentID" value="5"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,11,6">
-        <Param name="DeviceOutputComponentName" value="GYROZ11"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="11"/>
-        <Param name="DeviceOutputComponentID" value="6"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,11,7">
-        <Param name="DeviceOutputComponentName" value="MAGX11"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="11"/>
-        <Param name="DeviceOutputComponentID" value="7"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,11,8">
-        <Param name="DeviceOutputComponentName" value="MAGY11"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="11"/>
-        <Param name="DeviceOutputComponentID" value="8"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,11,9">
-        <Param name="DeviceOutputComponentName" value="MAGZ11"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="11"/>
-        <Param name="DeviceOutputComponentID" value="9"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutputComponent::Delsys Trigno IMU AUX 2.0::Sensor 12">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,12,1">
-        <Param name="DeviceOutputComponentName" value="ACCX12"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="12"/>
-        <Param name="DeviceOutputComponentID" value="1"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,12,2">
-        <Param name="DeviceOutputComponentName" value="ACCY12"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="12"/>
-        <Param name="DeviceOutputComponentID" value="2"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,12,3">
-        <Param name="DeviceOutputComponentName" value="ACCZ12"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="12"/>
-        <Param name="DeviceOutputComponentID" value="3"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,12,4">
-        <Param name="DeviceOutputComponentName" value="GYROX12"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="12"/>
-        <Param name="DeviceOutputComponentID" value="4"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,12,5">
-        <Param name="DeviceOutputComponentName" value="GYROY12"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="12"/>
-        <Param name="DeviceOutputComponentID" value="5"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,12,6">
-        <Param name="DeviceOutputComponentName" value="GYROZ12"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="12"/>
-        <Param name="DeviceOutputComponentID" value="6"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,12,7">
-        <Param name="DeviceOutputComponentName" value="MAGX12"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="12"/>
-        <Param name="DeviceOutputComponentID" value="7"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,12,8">
-        <Param name="DeviceOutputComponentName" value="MAGY12"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="12"/>
-        <Param name="DeviceOutputComponentID" value="8"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,12,9">
-        <Param name="DeviceOutputComponentName" value="MAGZ12"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="12"/>
-        <Param name="DeviceOutputComponentID" value="9"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutputComponent::Delsys Trigno IMU AUX 2.0::Sensor 13">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,13,1">
-        <Param name="DeviceOutputComponentName" value="ACCX13"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="13"/>
-        <Param name="DeviceOutputComponentID" value="1"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,13,2">
-        <Param name="DeviceOutputComponentName" value="ACCY13"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="13"/>
-        <Param name="DeviceOutputComponentID" value="2"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,13,3">
-        <Param name="DeviceOutputComponentName" value="ACCZ13"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="13"/>
-        <Param name="DeviceOutputComponentID" value="3"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,13,4">
-        <Param name="DeviceOutputComponentName" value="GYROX13"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="13"/>
-        <Param name="DeviceOutputComponentID" value="4"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,13,5">
-        <Param name="DeviceOutputComponentName" value="GYROY13"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="13"/>
-        <Param name="DeviceOutputComponentID" value="5"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,13,6">
-        <Param name="DeviceOutputComponentName" value="GYROZ13"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="13"/>
-        <Param name="DeviceOutputComponentID" value="6"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,13,7">
-        <Param name="DeviceOutputComponentName" value="MAGX13"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="13"/>
-        <Param name="DeviceOutputComponentID" value="7"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,13,8">
-        <Param name="DeviceOutputComponentName" value="MAGY13"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="13"/>
-        <Param name="DeviceOutputComponentID" value="8"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,13,9">
-        <Param name="DeviceOutputComponentName" value="MAGZ13"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="13"/>
-        <Param name="DeviceOutputComponentID" value="9"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutputComponent::Delsys Trigno IMU AUX 2.0::Sensor 14">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,14,1">
-        <Param name="DeviceOutputComponentName" value="ACCX14"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="14"/>
-        <Param name="DeviceOutputComponentID" value="1"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,14,2">
-        <Param name="DeviceOutputComponentName" value="ACCY14"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="14"/>
-        <Param name="DeviceOutputComponentID" value="2"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,14,3">
-        <Param name="DeviceOutputComponentName" value="ACCZ14"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="14"/>
-        <Param name="DeviceOutputComponentID" value="3"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,14,4">
-        <Param name="DeviceOutputComponentName" value="GYROX14"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="14"/>
-        <Param name="DeviceOutputComponentID" value="4"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,14,5">
-        <Param name="DeviceOutputComponentName" value="GYROY14"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="14"/>
-        <Param name="DeviceOutputComponentID" value="5"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,14,6">
-        <Param name="DeviceOutputComponentName" value="GYROZ14"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="14"/>
-        <Param name="DeviceOutputComponentID" value="6"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,14,7">
-        <Param name="DeviceOutputComponentName" value="MAGX14"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="14"/>
-        <Param name="DeviceOutputComponentID" value="7"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,14,8">
-        <Param name="DeviceOutputComponentName" value="MAGY14"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="14"/>
-        <Param name="DeviceOutputComponentID" value="8"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,14,9">
-        <Param name="DeviceOutputComponentName" value="MAGZ14"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="14"/>
-        <Param name="DeviceOutputComponentID" value="9"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutputComponent::Delsys Trigno IMU AUX 2.0::Sensor 15">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,15,1">
-        <Param name="DeviceOutputComponentName" value="ACCX15"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="15"/>
-        <Param name="DeviceOutputComponentID" value="1"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,15,2">
-        <Param name="DeviceOutputComponentName" value="ACCY15"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="15"/>
-        <Param name="DeviceOutputComponentID" value="2"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,15,3">
-        <Param name="DeviceOutputComponentName" value="ACCZ15"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="15"/>
-        <Param name="DeviceOutputComponentID" value="3"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,15,4">
-        <Param name="DeviceOutputComponentName" value="GYROX15"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="15"/>
-        <Param name="DeviceOutputComponentID" value="4"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,15,5">
-        <Param name="DeviceOutputComponentName" value="GYROY15"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="15"/>
-        <Param name="DeviceOutputComponentID" value="5"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,15,6">
-        <Param name="DeviceOutputComponentName" value="GYROZ15"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="15"/>
-        <Param name="DeviceOutputComponentID" value="6"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,15,7">
-        <Param name="DeviceOutputComponentName" value="MAGX15"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="15"/>
-        <Param name="DeviceOutputComponentID" value="7"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,15,8">
-        <Param name="DeviceOutputComponentName" value="MAGY15"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="15"/>
-        <Param name="DeviceOutputComponentID" value="8"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,15,9">
-        <Param name="DeviceOutputComponentName" value="MAGZ15"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="15"/>
-        <Param name="DeviceOutputComponentID" value="9"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutputComponent::Delsys Trigno IMU AUX 2.0::Sensor 16">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,16,1">
-        <Param name="DeviceOutputComponentName" value="ACCX16"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="16"/>
-        <Param name="DeviceOutputComponentID" value="1"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,16,2">
-        <Param name="DeviceOutputComponentName" value="ACCY16"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="16"/>
-        <Param name="DeviceOutputComponentID" value="2"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,16,3">
-        <Param name="DeviceOutputComponentName" value="ACCZ16"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="16"/>
-        <Param name="DeviceOutputComponentID" value="3"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,16,4">
-        <Param name="DeviceOutputComponentName" value="GYROX16"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="16"/>
-        <Param name="DeviceOutputComponentID" value="4"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,16,5">
-        <Param name="DeviceOutputComponentName" value="GYROY16"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="16"/>
-        <Param name="DeviceOutputComponentID" value="5"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,16,6">
-        <Param name="DeviceOutputComponentName" value="GYROZ16"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="16"/>
-        <Param name="DeviceOutputComponentID" value="6"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,16,7">
-        <Param name="DeviceOutputComponentName" value="MAGX16"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="16"/>
-        <Param name="DeviceOutputComponentID" value="7"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,16,8">
-        <Param name="DeviceOutputComponentName" value="MAGY16"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="16"/>
-        <Param name="DeviceOutputComponentID" value="8"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,16,9">
-        <Param name="DeviceOutputComponentName" value="MAGZ16"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="16"/>
-        <Param name="DeviceOutputComponentID" value="9"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutputComponent::Delsys Trigno IMU AUX 2.0::Sensor 2">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,2,1">
-        <Param name="DeviceOutputComponentName" value="ACCX2"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="2"/>
-        <Param name="DeviceOutputComponentID" value="1"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,2,2">
-        <Param name="DeviceOutputComponentName" value="ACCY2"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="2"/>
-        <Param name="DeviceOutputComponentID" value="2"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,2,3">
-        <Param name="DeviceOutputComponentName" value="ACCZ2"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="2"/>
-        <Param name="DeviceOutputComponentID" value="3"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,2,4">
-        <Param name="DeviceOutputComponentName" value="GYROX2"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="2"/>
-        <Param name="DeviceOutputComponentID" value="4"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,2,5">
-        <Param name="DeviceOutputComponentName" value="GYROY2"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="2"/>
-        <Param name="DeviceOutputComponentID" value="5"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,2,6">
-        <Param name="DeviceOutputComponentName" value="GYROZ2"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="2"/>
-        <Param name="DeviceOutputComponentID" value="6"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,2,7">
-        <Param name="DeviceOutputComponentName" value="MAGX2"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="2"/>
-        <Param name="DeviceOutputComponentID" value="7"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,2,8">
-        <Param name="DeviceOutputComponentName" value="MAGY2"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="2"/>
-        <Param name="DeviceOutputComponentID" value="8"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,2,9">
-        <Param name="DeviceOutputComponentName" value="MAGZ2"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="2"/>
-        <Param name="DeviceOutputComponentID" value="9"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutputComponent::Delsys Trigno IMU AUX 2.0::Sensor 3">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,3,1">
-        <Param name="DeviceOutputComponentName" value="ACCX3"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="3"/>
-        <Param name="DeviceOutputComponentID" value="1"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,3,2">
-        <Param name="DeviceOutputComponentName" value="ACCY3"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="3"/>
-        <Param name="DeviceOutputComponentID" value="2"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,3,3">
-        <Param name="DeviceOutputComponentName" value="ACCZ3"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="3"/>
-        <Param name="DeviceOutputComponentID" value="3"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,3,4">
-        <Param name="DeviceOutputComponentName" value="GYROX3"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="3"/>
-        <Param name="DeviceOutputComponentID" value="4"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,3,5">
-        <Param name="DeviceOutputComponentName" value="GYROY3"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="3"/>
-        <Param name="DeviceOutputComponentID" value="5"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,3,6">
-        <Param name="DeviceOutputComponentName" value="GYROZ3"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="3"/>
-        <Param name="DeviceOutputComponentID" value="6"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,3,7">
-        <Param name="DeviceOutputComponentName" value="MAGX3"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="3"/>
-        <Param name="DeviceOutputComponentID" value="7"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,3,8">
-        <Param name="DeviceOutputComponentName" value="MAGY3"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="3"/>
-        <Param name="DeviceOutputComponentID" value="8"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,3,9">
-        <Param name="DeviceOutputComponentName" value="MAGZ3"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="3"/>
-        <Param name="DeviceOutputComponentID" value="9"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutputComponent::Delsys Trigno IMU AUX 2.0::Sensor 4">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,4,1">
-        <Param name="DeviceOutputComponentName" value="ACCX4"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="4"/>
-        <Param name="DeviceOutputComponentID" value="1"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,4,2">
-        <Param name="DeviceOutputComponentName" value="ACCY4"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="4"/>
-        <Param name="DeviceOutputComponentID" value="2"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,4,3">
-        <Param name="DeviceOutputComponentName" value="ACCZ4"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="4"/>
-        <Param name="DeviceOutputComponentID" value="3"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,4,4">
-        <Param name="DeviceOutputComponentName" value="GYROX4"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="4"/>
-        <Param name="DeviceOutputComponentID" value="4"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,4,5">
-        <Param name="DeviceOutputComponentName" value="GYROY4"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="4"/>
-        <Param name="DeviceOutputComponentID" value="5"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,4,6">
-        <Param name="DeviceOutputComponentName" value="GYROZ4"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="4"/>
-        <Param name="DeviceOutputComponentID" value="6"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,4,7">
-        <Param name="DeviceOutputComponentName" value="MAGX4"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="4"/>
-        <Param name="DeviceOutputComponentID" value="7"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,4,8">
-        <Param name="DeviceOutputComponentName" value="MAGY4"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="4"/>
-        <Param name="DeviceOutputComponentID" value="8"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,4,9">
-        <Param name="DeviceOutputComponentName" value="MAGZ4"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="4"/>
-        <Param name="DeviceOutputComponentID" value="9"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutputComponent::Delsys Trigno IMU AUX 2.0::Sensor 5">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,5,1">
-        <Param name="DeviceOutputComponentName" value="ACCX5"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="5"/>
-        <Param name="DeviceOutputComponentID" value="1"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,5,2">
-        <Param name="DeviceOutputComponentName" value="ACCY5"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="5"/>
-        <Param name="DeviceOutputComponentID" value="2"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,5,3">
-        <Param name="DeviceOutputComponentName" value="ACCZ5"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="5"/>
-        <Param name="DeviceOutputComponentID" value="3"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,5,4">
-        <Param name="DeviceOutputComponentName" value="GYROX5"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="5"/>
-        <Param name="DeviceOutputComponentID" value="4"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,5,5">
-        <Param name="DeviceOutputComponentName" value="GYROY5"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="5"/>
-        <Param name="DeviceOutputComponentID" value="5"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,5,6">
-        <Param name="DeviceOutputComponentName" value="GYROZ5"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="5"/>
-        <Param name="DeviceOutputComponentID" value="6"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,5,7">
-        <Param name="DeviceOutputComponentName" value="MAGX5"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="5"/>
-        <Param name="DeviceOutputComponentID" value="7"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,5,8">
-        <Param name="DeviceOutputComponentName" value="MAGY5"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="5"/>
-        <Param name="DeviceOutputComponentID" value="8"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,5,9">
-        <Param name="DeviceOutputComponentName" value="MAGZ5"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="5"/>
-        <Param name="DeviceOutputComponentID" value="9"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutputComponent::Delsys Trigno IMU AUX 2.0::Sensor 6">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,6,1">
-        <Param name="DeviceOutputComponentName" value="ACCX6"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="6"/>
-        <Param name="DeviceOutputComponentID" value="1"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,6,2">
-        <Param name="DeviceOutputComponentName" value="ACCY6"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="6"/>
-        <Param name="DeviceOutputComponentID" value="2"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,6,3">
-        <Param name="DeviceOutputComponentName" value="ACCZ6"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="6"/>
-        <Param name="DeviceOutputComponentID" value="3"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,6,4">
-        <Param name="DeviceOutputComponentName" value="GYROX6"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="6"/>
-        <Param name="DeviceOutputComponentID" value="4"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,6,5">
-        <Param name="DeviceOutputComponentName" value="GYROY6"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="6"/>
-        <Param name="DeviceOutputComponentID" value="5"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,6,6">
-        <Param name="DeviceOutputComponentName" value="GYROZ6"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="6"/>
-        <Param name="DeviceOutputComponentID" value="6"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,6,7">
-        <Param name="DeviceOutputComponentName" value="MAGX6"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="6"/>
-        <Param name="DeviceOutputComponentID" value="7"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,6,8">
-        <Param name="DeviceOutputComponentName" value="MAGY6"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="6"/>
-        <Param name="DeviceOutputComponentID" value="8"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,6,9">
-        <Param name="DeviceOutputComponentName" value="MAGZ6"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="6"/>
-        <Param name="DeviceOutputComponentID" value="9"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutputComponent::Delsys Trigno IMU AUX 2.0::Sensor 7">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,7,1">
-        <Param name="DeviceOutputComponentName" value="ACCX7"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="7"/>
-        <Param name="DeviceOutputComponentID" value="1"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,7,2">
-        <Param name="DeviceOutputComponentName" value="ACCY7"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="7"/>
-        <Param name="DeviceOutputComponentID" value="2"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,7,3">
-        <Param name="DeviceOutputComponentName" value="ACCZ7"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="7"/>
-        <Param name="DeviceOutputComponentID" value="3"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,7,4">
-        <Param name="DeviceOutputComponentName" value="GYROX7"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="7"/>
-        <Param name="DeviceOutputComponentID" value="4"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,7,5">
-        <Param name="DeviceOutputComponentName" value="GYROY7"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="7"/>
-        <Param name="DeviceOutputComponentID" value="5"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,7,6">
-        <Param name="DeviceOutputComponentName" value="GYROZ7"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="7"/>
-        <Param name="DeviceOutputComponentID" value="6"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,7,7">
-        <Param name="DeviceOutputComponentName" value="MAGX7"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="7"/>
-        <Param name="DeviceOutputComponentID" value="7"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,7,8">
-        <Param name="DeviceOutputComponentName" value="MAGY7"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="7"/>
-        <Param name="DeviceOutputComponentID" value="8"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,7,9">
-        <Param name="DeviceOutputComponentName" value="MAGZ7"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="7"/>
-        <Param name="DeviceOutputComponentID" value="9"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutputComponent::Delsys Trigno IMU AUX 2.0::Sensor 8">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,8,1">
-        <Param name="DeviceOutputComponentName" value="ACCX8"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="8"/>
-        <Param name="DeviceOutputComponentID" value="1"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,8,2">
-        <Param name="DeviceOutputComponentName" value="ACCY8"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="8"/>
-        <Param name="DeviceOutputComponentID" value="2"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,8,3">
-        <Param name="DeviceOutputComponentName" value="ACCZ8"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="8"/>
-        <Param name="DeviceOutputComponentID" value="3"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,8,4">
-        <Param name="DeviceOutputComponentName" value="GYROX8"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="8"/>
-        <Param name="DeviceOutputComponentID" value="4"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,8,5">
-        <Param name="DeviceOutputComponentName" value="GYROY8"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="8"/>
-        <Param name="DeviceOutputComponentID" value="5"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,8,6">
-        <Param name="DeviceOutputComponentName" value="GYROZ8"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="8"/>
-        <Param name="DeviceOutputComponentID" value="6"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,8,7">
-        <Param name="DeviceOutputComponentName" value="MAGX8"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="8"/>
-        <Param name="DeviceOutputComponentID" value="7"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,8,8">
-        <Param name="DeviceOutputComponentName" value="MAGY8"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="8"/>
-        <Param name="DeviceOutputComponentID" value="8"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,8,9">
-        <Param name="DeviceOutputComponentName" value="MAGZ8"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="8"/>
-        <Param name="DeviceOutputComponentID" value="9"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutputComponent::Delsys Trigno IMU AUX 2.0::Sensor 9">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,9,1">
-        <Param name="DeviceOutputComponentName" value="ACCX9"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="9"/>
-        <Param name="DeviceOutputComponentID" value="1"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,9,2">
-        <Param name="DeviceOutputComponentName" value="ACCY9"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="9"/>
-        <Param name="DeviceOutputComponentID" value="2"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,9,3">
-        <Param name="DeviceOutputComponentName" value="ACCZ9"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="9"/>
-        <Param name="DeviceOutputComponentID" value="3"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,9,4">
-        <Param name="DeviceOutputComponentName" value="GYROX9"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="9"/>
-        <Param name="DeviceOutputComponentID" value="4"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,9,5">
-        <Param name="DeviceOutputComponentName" value="GYROY9"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="9"/>
-        <Param name="DeviceOutputComponentID" value="5"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,9,6">
-        <Param name="DeviceOutputComponentName" value="GYROZ9"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="9"/>
-        <Param name="DeviceOutputComponentID" value="6"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,9,7">
-        <Param name="DeviceOutputComponentName" value="MAGX9"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="9"/>
-        <Param name="DeviceOutputComponentID" value="7"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,9,8">
-        <Param name="DeviceOutputComponentName" value="MAGY9"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="9"/>
-        <Param name="DeviceOutputComponentID" value="8"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU AUX:2.0:Trigno_1,9,9">
-        <Param name="DeviceOutputComponentName" value="MAGZ9"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU AUX:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="6"/>
-        <Param name="DeviceOutputID" value="9"/>
-        <Param name="DeviceOutputComponentID" value="9"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutputComponent::Delsys Trigno IMU EMG 2.0::Sensor 1">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU EMG:2.0:Trigno_1,1,1">
-        <Param name="DeviceOutputComponentName" value="IM EMG1"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU EMG:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="5"/>
-        <Param name="DeviceOutputID" value="1"/>
-        <Param name="DeviceOutputComponentID" value="1"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutputComponent::Delsys Trigno IMU EMG 2.0::Sensor 10">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU EMG:2.0:Trigno_1,10,1">
-        <Param name="DeviceOutputComponentName" value="IM EMG10"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU EMG:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="5"/>
-        <Param name="DeviceOutputID" value="10"/>
-        <Param name="DeviceOutputComponentID" value="1"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutputComponent::Delsys Trigno IMU EMG 2.0::Sensor 11">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU EMG:2.0:Trigno_1,11,1">
-        <Param name="DeviceOutputComponentName" value="IM EMG11"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU EMG:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="5"/>
-        <Param name="DeviceOutputID" value="11"/>
-        <Param name="DeviceOutputComponentID" value="1"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutputComponent::Delsys Trigno IMU EMG 2.0::Sensor 12">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU EMG:2.0:Trigno_1,12,1">
-        <Param name="DeviceOutputComponentName" value="IM EMG12"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU EMG:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="5"/>
-        <Param name="DeviceOutputID" value="12"/>
-        <Param name="DeviceOutputComponentID" value="1"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutputComponent::Delsys Trigno IMU EMG 2.0::Sensor 13">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU EMG:2.0:Trigno_1,13,1">
-        <Param name="DeviceOutputComponentName" value="IM EMG13"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU EMG:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="5"/>
-        <Param name="DeviceOutputID" value="13"/>
-        <Param name="DeviceOutputComponentID" value="1"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutputComponent::Delsys Trigno IMU EMG 2.0::Sensor 14">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU EMG:2.0:Trigno_1,14,1">
-        <Param name="DeviceOutputComponentName" value="IM EMG14"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU EMG:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="5"/>
-        <Param name="DeviceOutputID" value="14"/>
-        <Param name="DeviceOutputComponentID" value="1"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutputComponent::Delsys Trigno IMU EMG 2.0::Sensor 15">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU EMG:2.0:Trigno_1,15,1">
-        <Param name="DeviceOutputComponentName" value="IM EMG15"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU EMG:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="5"/>
-        <Param name="DeviceOutputID" value="15"/>
-        <Param name="DeviceOutputComponentID" value="1"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutputComponent::Delsys Trigno IMU EMG 2.0::Sensor 16">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU EMG:2.0:Trigno_1,16,1">
-        <Param name="DeviceOutputComponentName" value="IM EMG16"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU EMG:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="5"/>
-        <Param name="DeviceOutputID" value="16"/>
-        <Param name="DeviceOutputComponentID" value="1"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutputComponent::Delsys Trigno IMU EMG 2.0::Sensor 2">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU EMG:2.0:Trigno_1,2,1">
-        <Param name="DeviceOutputComponentName" value="IM EMG2"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU EMG:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="5"/>
-        <Param name="DeviceOutputID" value="2"/>
-        <Param name="DeviceOutputComponentID" value="1"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutputComponent::Delsys Trigno IMU EMG 2.0::Sensor 3">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU EMG:2.0:Trigno_1,3,1">
-        <Param name="DeviceOutputComponentName" value="IM EMG3"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU EMG:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="5"/>
-        <Param name="DeviceOutputID" value="3"/>
-        <Param name="DeviceOutputComponentID" value="1"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutputComponent::Delsys Trigno IMU EMG 2.0::Sensor 4">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU EMG:2.0:Trigno_1,4,1">
-        <Param name="DeviceOutputComponentName" value="IM EMG4"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU EMG:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="5"/>
-        <Param name="DeviceOutputID" value="4"/>
-        <Param name="DeviceOutputComponentID" value="1"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutputComponent::Delsys Trigno IMU EMG 2.0::Sensor 5">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU EMG:2.0:Trigno_1,5,1">
-        <Param name="DeviceOutputComponentName" value="IM EMG5"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU EMG:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="5"/>
-        <Param name="DeviceOutputID" value="5"/>
-        <Param name="DeviceOutputComponentID" value="1"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutputComponent::Delsys Trigno IMU EMG 2.0::Sensor 6">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU EMG:2.0:Trigno_1,6,1">
-        <Param name="DeviceOutputComponentName" value="IM EMG6"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU EMG:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="5"/>
-        <Param name="DeviceOutputID" value="6"/>
-        <Param name="DeviceOutputComponentID" value="1"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutputComponent::Delsys Trigno IMU EMG 2.0::Sensor 7">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU EMG:2.0:Trigno_1,7,1">
-        <Param name="DeviceOutputComponentName" value="IM EMG7"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU EMG:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="5"/>
-        <Param name="DeviceOutputID" value="7"/>
-        <Param name="DeviceOutputComponentID" value="1"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutputComponent::Delsys Trigno IMU EMG 2.0::Sensor 8">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU EMG:2.0:Trigno_1,8,1">
-        <Param name="DeviceOutputComponentName" value="IM EMG8"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU EMG:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="5"/>
-        <Param name="DeviceOutputID" value="8"/>
-        <Param name="DeviceOutputComponentID" value="1"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutputComponent::Delsys Trigno IMU EMG 2.0::Sensor 9">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutputComponent::Delsys:Trigno IMU EMG:2.0:Trigno_1,9,1">
-        <Param name="DeviceOutputComponentName" value="IM EMG9"/>
-        <Param name="DeviceTag" value="Delsys:Trigno IMU EMG:2.0:Trigno_1"/>
-        <Param name="DeviceID" value="5"/>
-        <Param name="DeviceOutputID" value="9"/>
-        <Param name="DeviceOutputComponentID" value="1"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
   <ParamDefinitionList name="DeviceOutputComponent::Generic Analog::Electric Potential">
     <ParamListGroup name="">
-      <ParamList name="DeviceOutputComponent::d015f453a5b2f295f24040c9f01fd077,1,1">
-        <Param name="DeviceOutputComponentName" value="voltage"/>
-        <Param name="DeviceTag" value="d015f453a5b2f295f24040c9f01fd077"/>
-        <Param name="DeviceID" value="1"/>
+      <ParamList name="DeviceOutputComponent::6fcbf1a59e70990aa2e1be63437065d9,1,1">
+        <Param name="DeviceOutputComponentName" value="Voltage"/>
+        <Param name="DeviceTag" value="6fcbf1a59e70990aa2e1be63437065d9"/>
+        <Param name="DeviceID" value="3"/>
         <Param name="DeviceOutputID" value="1"/>
         <Param name="DeviceOutputComponentID" value="1"/>
-        <Param name="SourcePin" value="63"/>
-        <Param name="SourceGain" value="5"/>
+        <Param name="SourcePin" value="61"/>
+        <Param name="SourceGain" value="10"/>
         <Param name="ScalingFactor" value="1"/>
-        <Param name="ZeroLevel" value="2.46008182"/>
+        <Param name="ZeroLevel" value="0"/>
+      </ParamList>
+      <ParamList name="DeviceOutputComponent::6fcbf1a59e70990aa2e1be63437065d9,2,1">
+        <Param name="DeviceOutputComponentName" value="1"/>
+        <Param name="DeviceTag" value="6fcbf1a59e70990aa2e1be63437065d9"/>
+        <Param name="DeviceID" value="3"/>
+        <Param name="DeviceOutputID" value="2"/>
+        <Param name="DeviceOutputComponentID" value="1"/>
+        <Param name="SourcePin" value="55"/>
+        <Param name="SourceGain" value="10"/>
+        <Param name="ScalingFactor" value="1"/>
+        <Param name="ZeroLevel" value="0"/>
       </ParamList>
     </ParamListGroup>
   </ParamDefinitionList>
@@ -3343,75 +283,6 @@
         <Param name="DeviceID" value="2"/>
         <Param name="DeviceOutputID" value="2"/>
         <Param name="DeviceOutputComponentID" value="3"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="DeviceOutputComponent::Kistler Force Plate (Internal Amplifier)::Raw">
-    <ParamListGroup name="">
-      <ParamList name="DeviceOutputComponent::2f7c0d41ff82f56fed3870b21a32b5a2,4,1">
-        <Param name="DeviceOutputComponentName" value="Pin 1"/>
-        <Param name="DeviceTag" value="2f7c0d41ff82f56fed3870b21a32b5a2"/>
-        <Param name="DeviceID" value="2"/>
-        <Param name="DeviceOutputID" value="4"/>
-        <Param name="DeviceOutputComponentID" value="1"/>
-        <Param name="SourcePin" value="1"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::2f7c0d41ff82f56fed3870b21a32b5a2,4,2">
-        <Param name="DeviceOutputComponentName" value="Pin 3"/>
-        <Param name="DeviceTag" value="2f7c0d41ff82f56fed3870b21a32b5a2"/>
-        <Param name="DeviceID" value="2"/>
-        <Param name="DeviceOutputID" value="4"/>
-        <Param name="DeviceOutputComponentID" value="2"/>
-        <Param name="SourcePin" value="3"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::2f7c0d41ff82f56fed3870b21a32b5a2,4,3">
-        <Param name="DeviceOutputComponentName" value="Pin 5"/>
-        <Param name="DeviceTag" value="2f7c0d41ff82f56fed3870b21a32b5a2"/>
-        <Param name="DeviceID" value="2"/>
-        <Param name="DeviceOutputID" value="4"/>
-        <Param name="DeviceOutputComponentID" value="3"/>
-        <Param name="SourcePin" value="5"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::2f7c0d41ff82f56fed3870b21a32b5a2,4,4">
-        <Param name="DeviceOutputComponentName" value="Pin 7"/>
-        <Param name="DeviceTag" value="2f7c0d41ff82f56fed3870b21a32b5a2"/>
-        <Param name="DeviceID" value="2"/>
-        <Param name="DeviceOutputID" value="4"/>
-        <Param name="DeviceOutputComponentID" value="4"/>
-        <Param name="SourcePin" value="7"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::2f7c0d41ff82f56fed3870b21a32b5a2,4,5">
-        <Param name="DeviceOutputComponentName" value="Pin 11"/>
-        <Param name="DeviceTag" value="2f7c0d41ff82f56fed3870b21a32b5a2"/>
-        <Param name="DeviceID" value="2"/>
-        <Param name="DeviceOutputID" value="4"/>
-        <Param name="DeviceOutputComponentID" value="5"/>
-        <Param name="SourcePin" value="11"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::2f7c0d41ff82f56fed3870b21a32b5a2,4,6">
-        <Param name="DeviceOutputComponentName" value="Pin 13"/>
-        <Param name="DeviceTag" value="2f7c0d41ff82f56fed3870b21a32b5a2"/>
-        <Param name="DeviceID" value="2"/>
-        <Param name="DeviceOutputID" value="4"/>
-        <Param name="DeviceOutputComponentID" value="6"/>
-        <Param name="SourcePin" value="13"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::2f7c0d41ff82f56fed3870b21a32b5a2,4,7">
-        <Param name="DeviceOutputComponentName" value="Pin 15"/>
-        <Param name="DeviceTag" value="2f7c0d41ff82f56fed3870b21a32b5a2"/>
-        <Param name="DeviceID" value="2"/>
-        <Param name="DeviceOutputID" value="4"/>
-        <Param name="DeviceOutputComponentID" value="7"/>
-        <Param name="SourcePin" value="15"/>
-      </ParamList>
-      <ParamList name="DeviceOutputComponent::2f7c0d41ff82f56fed3870b21a32b5a2,4,8">
-        <Param name="DeviceOutputComponentName" value="Pin 17"/>
-        <Param name="DeviceTag" value="2f7c0d41ff82f56fed3870b21a32b5a2"/>
-        <Param name="DeviceID" value="2"/>
-        <Param name="DeviceOutputID" value="4"/>
-        <Param name="DeviceOutputComponentID" value="8"/>
-        <Param name="SourcePin" value="17"/>
       </ParamList>
     </ParamListGroup>
   </ParamDefinitionList>
@@ -3592,6 +463,113 @@
     </ParamListGroup>
   </ParamDefinitionList>
 
+  <ParamDefinitionList name="Mk6System">
+    <ParamListGroup name="">
+      <ParamList name="">
+        <Param name="FrameRate" value="1200"/>
+        <Param name="ActualFrameRate" value="1200"/>
+        <Param name="MasterSelect" value="0"/>
+        <Param name="GenlockStandard" value="0"/>
+        <Param name="GenlockEnabled" value="false"/>
+        <Param name="DetectedGenlockStandard" value="0"/>
+        <Param name="AutoGenlock" value="false"/>
+        <Param name="GenlockStatus" value="None"/>
+        <Param name="GenlockOffset" value="0"/>
+        <Param name="VESAOffset" value="0"/>
+        <Param name="TimecodeSource" value="8"/>
+        <Param name="TimecodeDropFrame"/>
+        <Param name="TimecodeEnabled" value="false"/>
+        <Param name="TimecodeStandard" value="2"/>
+        <Param name="TimecodeStatus" value="Ready To Use"/>
+        <Param name="Warning" value=""/>
+        <Param name="BufferSize" value="250"/>
+        <Param name="BufferSizeRatio" value="0.5"/>
+        <Param name="Rewind" value="0"/>
+        <Param name="RebootAll" value="false"/>
+        <Param name="RealTimeBufferSize" value="20"/>
+        <Param name="MinimizeLatency" value="false"/>
+        <Param name="MinimizeJitter" value="false"/>
+      </ParamList>
+    </ParamListGroup>
+  </ParamDefinitionList>
+
+  <ParamDefinitionList name="Vicon">
+    <ParamListGroup name="">
+      <ParamList name="">
+        <Param name="SOURCE" value="Nexus 2.9.2.118349h"/>
+      </ParamList>
+    </ParamListGroup>
+  </ParamDefinitionList>
+
+  <ParamDefinitionList name="DeviceOutputComponent::Kistler Force Plate (Internal Amplifier)::Raw">
+    <ParamListGroup name="">
+      <ParamList name="DeviceOutputComponent::2f7c0d41ff82f56fed3870b21a32b5a2,4,1">
+        <Param name="DeviceOutputComponentName" value="Pin 1"/>
+        <Param name="DeviceTag" value="2f7c0d41ff82f56fed3870b21a32b5a2"/>
+        <Param name="DeviceID" value="2"/>
+        <Param name="DeviceOutputID" value="4"/>
+        <Param name="DeviceOutputComponentID" value="1"/>
+        <Param name="SourcePin" value="1"/>
+      </ParamList>
+      <ParamList name="DeviceOutputComponent::2f7c0d41ff82f56fed3870b21a32b5a2,4,2">
+        <Param name="DeviceOutputComponentName" value="Pin 3"/>
+        <Param name="DeviceTag" value="2f7c0d41ff82f56fed3870b21a32b5a2"/>
+        <Param name="DeviceID" value="2"/>
+        <Param name="DeviceOutputID" value="4"/>
+        <Param name="DeviceOutputComponentID" value="2"/>
+        <Param name="SourcePin" value="3"/>
+      </ParamList>
+      <ParamList name="DeviceOutputComponent::2f7c0d41ff82f56fed3870b21a32b5a2,4,3">
+        <Param name="DeviceOutputComponentName" value="Pin 5"/>
+        <Param name="DeviceTag" value="2f7c0d41ff82f56fed3870b21a32b5a2"/>
+        <Param name="DeviceID" value="2"/>
+        <Param name="DeviceOutputID" value="4"/>
+        <Param name="DeviceOutputComponentID" value="3"/>
+        <Param name="SourcePin" value="5"/>
+      </ParamList>
+      <ParamList name="DeviceOutputComponent::2f7c0d41ff82f56fed3870b21a32b5a2,4,4">
+        <Param name="DeviceOutputComponentName" value="Pin 7"/>
+        <Param name="DeviceTag" value="2f7c0d41ff82f56fed3870b21a32b5a2"/>
+        <Param name="DeviceID" value="2"/>
+        <Param name="DeviceOutputID" value="4"/>
+        <Param name="DeviceOutputComponentID" value="4"/>
+        <Param name="SourcePin" value="7"/>
+      </ParamList>
+      <ParamList name="DeviceOutputComponent::2f7c0d41ff82f56fed3870b21a32b5a2,4,5">
+        <Param name="DeviceOutputComponentName" value="Pin 11"/>
+        <Param name="DeviceTag" value="2f7c0d41ff82f56fed3870b21a32b5a2"/>
+        <Param name="DeviceID" value="2"/>
+        <Param name="DeviceOutputID" value="4"/>
+        <Param name="DeviceOutputComponentID" value="5"/>
+        <Param name="SourcePin" value="11"/>
+      </ParamList>
+      <ParamList name="DeviceOutputComponent::2f7c0d41ff82f56fed3870b21a32b5a2,4,6">
+        <Param name="DeviceOutputComponentName" value="Pin 13"/>
+        <Param name="DeviceTag" value="2f7c0d41ff82f56fed3870b21a32b5a2"/>
+        <Param name="DeviceID" value="2"/>
+        <Param name="DeviceOutputID" value="4"/>
+        <Param name="DeviceOutputComponentID" value="6"/>
+        <Param name="SourcePin" value="13"/>
+      </ParamList>
+      <ParamList name="DeviceOutputComponent::2f7c0d41ff82f56fed3870b21a32b5a2,4,7">
+        <Param name="DeviceOutputComponentName" value="Pin 15"/>
+        <Param name="DeviceTag" value="2f7c0d41ff82f56fed3870b21a32b5a2"/>
+        <Param name="DeviceID" value="2"/>
+        <Param name="DeviceOutputID" value="4"/>
+        <Param name="DeviceOutputComponentID" value="7"/>
+        <Param name="SourcePin" value="15"/>
+      </ParamList>
+      <ParamList name="DeviceOutputComponent::2f7c0d41ff82f56fed3870b21a32b5a2,4,8">
+        <Param name="DeviceOutputComponentName" value="Pin 17"/>
+        <Param name="DeviceTag" value="2f7c0d41ff82f56fed3870b21a32b5a2"/>
+        <Param name="DeviceID" value="2"/>
+        <Param name="DeviceOutputID" value="4"/>
+        <Param name="DeviceOutputComponentID" value="8"/>
+        <Param name="SourcePin" value="17"/>
+      </ParamList>
+    </ParamListGroup>
+  </ParamDefinitionList>
+
   <ParamDefinitionList name="MXCamera">
     <ParamListGroup name="">
       <ParamList name="2100273">
@@ -3636,7 +614,7 @@
         <Param name="MACAddress" value="00:00:37:20:0c:31"/>
         <Param name="SerialNumber" value=""/>
         <Param name="HeadSerialNumber" value=""/>
-        <Param name="IPAddress" value="192.168.10.17"/>
+        <Param name="IPAddress" value="192.168.10.19"/>
         <Param name="StreamDestinationAddress" value="Default"/>
         <Param name="StreamDestinationAddressWarning" value=""/>
         <Param name="FirmwareVersion" value="707"/>
@@ -3652,9 +630,9 @@
         <Param name="EnableTap" value="true"/>
         <Param name="EnableAccel" value="true"/>
         <Param name="ResetCalibration" value="false"/>
-        <Param name="FocalLength" value="0.0041761242887429434"/>
-        <Param name="RadialParam1" value="0.4139167800415367"/>
-        <Param name="RadialParam2" value="0.1627515711774391"/>
+        <Param name="FocalLength" value="0.0041670315095767652"/>
+        <Param name="RadialParam1" value="0.41257467514827972"/>
+        <Param name="RadialParam2" value="0.20408976150768365"/>
         <Param name="Reboot" value="false"/>
         <Param name="Bumped" value="false"/>
         <Param name="BumpTolerance" value="0.0700000003"/>
@@ -3718,9 +696,9 @@
         <Param name="EnableTap" value="true"/>
         <Param name="EnableAccel" value="true"/>
         <Param name="ResetCalibration" value="false"/>
-        <Param name="FocalLength" value="0.0061141578785521358"/>
-        <Param name="RadialParam1" value="0.39247121157087239"/>
-        <Param name="RadialParam2" value="0.11934094974838874"/>
+        <Param name="FocalLength" value="0.0061632149031990895"/>
+        <Param name="RadialParam1" value="0.37923080506192064"/>
+        <Param name="RadialParam2" value="0.10788811007098424"/>
         <Param name="Reboot" value="false"/>
         <Param name="Bumped" value="false"/>
         <Param name="BumpTolerance" value="0.0700000003"/>
@@ -3729,7 +707,7 @@
       <ParamList name="2100275">
         <Param name="Name" value=""/>
         <Param name="Id" value="2100275"/>
-        <Param name="UserId" value="11"/>
+        <Param name="UserId" value="12"/>
         <Param name="Enabled" value="true"/>
         <Param name="EnableStrobe" value="true"/>
         <Param name="Strobe" value="1"/>
@@ -3768,7 +746,7 @@
         <Param name="MACAddress" value="00:00:37:20:0c:33"/>
         <Param name="SerialNumber" value=""/>
         <Param name="HeadSerialNumber" value=""/>
-        <Param name="IPAddress" value="192.168.10.14"/>
+        <Param name="IPAddress" value="192.168.10.15"/>
         <Param name="StreamDestinationAddress" value="Default"/>
         <Param name="StreamDestinationAddressWarning" value=""/>
         <Param name="FirmwareVersion" value="707"/>
@@ -3784,9 +762,9 @@
         <Param name="EnableTap" value="true"/>
         <Param name="EnableAccel" value="true"/>
         <Param name="ResetCalibration" value="false"/>
-        <Param name="FocalLength" value="0.0049722712528403228"/>
-        <Param name="RadialParam1" value="0.39128751933870148"/>
-        <Param name="RadialParam2" value="0.23544557117785947"/>
+        <Param name="FocalLength" value="0.0048342757864837374"/>
+        <Param name="RadialParam1" value="0.4134965468577026"/>
+        <Param name="RadialParam2" value="0.14296522068186515"/>
         <Param name="Reboot" value="false"/>
         <Param name="Bumped" value="false"/>
         <Param name="BumpTolerance" value="0.0700000003"/>
@@ -3795,7 +773,7 @@
       <ParamList name="2100277">
         <Param name="Name" value=""/>
         <Param name="Id" value="2100277"/>
-        <Param name="UserId" value="4"/>
+        <Param name="UserId" value="13"/>
         <Param name="Enabled" value="true"/>
         <Param name="EnableStrobe" value="true"/>
         <Param name="Strobe" value="1"/>
@@ -3850,9 +828,9 @@
         <Param name="EnableTap" value="true"/>
         <Param name="EnableAccel" value="true"/>
         <Param name="ResetCalibration" value="false"/>
-        <Param name="FocalLength" value="0.0065729803886567855"/>
-        <Param name="RadialParam1" value="0.34361239552176043"/>
-        <Param name="RadialParam2" value="0.39227114794199908"/>
+        <Param name="FocalLength" value="0.0065560475250722094"/>
+        <Param name="RadialParam1" value="0.40747290295180411"/>
+        <Param name="RadialParam2" value="-0.0053147711957885852"/>
         <Param name="Reboot" value="false"/>
         <Param name="Bumped" value="false"/>
         <Param name="BumpTolerance" value="0.0700000003"/>
@@ -3900,7 +878,7 @@
         <Param name="MACAddress" value="00:00:37:20:0c:36"/>
         <Param name="SerialNumber" value=""/>
         <Param name="HeadSerialNumber" value=""/>
-        <Param name="IPAddress" value="192.168.10.19"/>
+        <Param name="IPAddress" value="192.168.10.17"/>
         <Param name="StreamDestinationAddress" value="Default"/>
         <Param name="StreamDestinationAddressWarning" value=""/>
         <Param name="FirmwareVersion" value="707"/>
@@ -3916,9 +894,9 @@
         <Param name="EnableTap" value="true"/>
         <Param name="EnableAccel" value="true"/>
         <Param name="ResetCalibration" value="false"/>
-        <Param name="FocalLength" value="0.0039117661599833197"/>
-        <Param name="RadialParam1" value="0.4224479043644091"/>
-        <Param name="RadialParam2" value="0.16488502745378322"/>
+        <Param name="FocalLength" value="0.0039204990749973287"/>
+        <Param name="RadialParam1" value="0.43146882167564521"/>
+        <Param name="RadialParam2" value="0.12788918609336333"/>
         <Param name="Reboot" value="false"/>
         <Param name="Bumped" value="false"/>
         <Param name="BumpTolerance" value="0.0700000003"/>
@@ -3966,7 +944,7 @@
         <Param name="MACAddress" value="00:00:37:20:0c:37"/>
         <Param name="SerialNumber" value=""/>
         <Param name="HeadSerialNumber" value=""/>
-        <Param name="IPAddress" value="192.168.10.10"/>
+        <Param name="IPAddress" value="192.168.10.12"/>
         <Param name="StreamDestinationAddress" value="Default"/>
         <Param name="StreamDestinationAddressWarning" value=""/>
         <Param name="FirmwareVersion" value="707"/>
@@ -3982,9 +960,9 @@
         <Param name="EnableTap" value="true"/>
         <Param name="EnableAccel" value="true"/>
         <Param name="ResetCalibration" value="false"/>
-        <Param name="FocalLength" value="0.004773380875028598"/>
-        <Param name="RadialParam1" value="0.40768280323610917"/>
-        <Param name="RadialParam2" value="0.17274352654536215"/>
+        <Param name="FocalLength" value="0.0047329695555895675"/>
+        <Param name="RadialParam1" value="0.38991438419609592"/>
+        <Param name="RadialParam2" value="0.25107342845638958"/>
         <Param name="Reboot" value="false"/>
         <Param name="Bumped" value="false"/>
         <Param name="BumpTolerance" value="0.0700000003"/>
@@ -3993,7 +971,7 @@
       <ParamList name="2108859">
         <Param name="Name" value=""/>
         <Param name="Id" value="2108859"/>
-        <Param name="UserId" value="7"/>
+        <Param name="UserId" value="8"/>
         <Param name="Enabled" value="true"/>
         <Param name="EnableStrobe" value="true"/>
         <Param name="Strobe" value="1"/>
@@ -4032,7 +1010,7 @@
         <Param name="MACAddress" value="00:00:37:20:2d:bb"/>
         <Param name="SerialNumber" value=""/>
         <Param name="HeadSerialNumber" value=""/>
-        <Param name="IPAddress" value="192.168.10.15"/>
+        <Param name="IPAddress" value="192.168.10.16"/>
         <Param name="StreamDestinationAddress" value="Default"/>
         <Param name="StreamDestinationAddressWarning" value=""/>
         <Param name="FirmwareVersion" value="502"/>
@@ -4048,9 +1026,9 @@
         <Param name="EnableTap" value="true"/>
         <Param name="EnableAccel" value="true"/>
         <Param name="ResetCalibration" value="false"/>
-        <Param name="FocalLength" value="0.0054145807246234181"/>
-        <Param name="RadialParam1" value="0.38384288111668496"/>
-        <Param name="RadialParam2" value="0.25378056733575488"/>
+        <Param name="FocalLength" value="0.0048007311625516431"/>
+        <Param name="RadialParam1" value="0.3823967371201813"/>
+        <Param name="RadialParam2" value="0.27821068813628214"/>
         <Param name="Reboot" value="false"/>
         <Param name="Bumped" value="false"/>
         <Param name="BumpTolerance" value="0.0700000003"/>
@@ -4085,8 +1063,8 @@
         <Param name="DisplayType" value="Vero v1.3"/>
         <Param name="StrobeType" value=""/>
         <Param name="StrobeTemperature" value="0"/>
-        <Param name="CameraPoETemperature" value="41"/>
-        <Param name="CameraDSPTemperature" value="41"/>
+        <Param name="CameraPoETemperature" value="54"/>
+        <Param name="CameraDSPTemperature" value="54"/>
         <Param name="CameraSensorTemperature" value="0"/>
         <Param name="SensorWidth" value="1280"/>
         <Param name="SensorHeight" value="1024"/>
@@ -4098,7 +1076,7 @@
         <Param name="MACAddress" value="00:00:37:20:51:66"/>
         <Param name="SerialNumber" value="VE13-N-0074"/>
         <Param name="HeadSerialNumber" value=""/>
-        <Param name="IPAddress" value="192.168.10.12"/>
+        <Param name="IPAddress" value="192.168.10.11"/>
         <Param name="StreamDestinationAddress" value="Default"/>
         <Param name="StreamDestinationAddressWarning" value=""/>
         <Param name="FirmwareVersion" value="707"/>
@@ -4114,9 +1092,9 @@
         <Param name="EnableTap" value="true"/>
         <Param name="EnableAccel" value="true"/>
         <Param name="ResetCalibration" value="false"/>
-        <Param name="FocalLength" value="0.0067869607126524968"/>
-        <Param name="RadialParam1" value="0.44227243226478841"/>
-        <Param name="RadialParam2" value="0.24572928105676778"/>
+        <Param name="FocalLength" value="0.0068685328567336251"/>
+        <Param name="RadialParam1" value="0.44052761446502603"/>
+        <Param name="RadialParam2" value="0.26646804116980155"/>
         <Param name="Reboot" value="false"/>
         <Param name="Bumped" value="false"/>
         <Param name="BumpTolerance" value="0.0700000003"/>
@@ -4125,7 +1103,7 @@
       <ParamList name="2117992">
         <Param name="Name" value=""/>
         <Param name="Id" value="2117992"/>
-        <Param name="UserId" value="2"/>
+        <Param name="UserId" value="0"/>
         <Param name="Enabled" value="true"/>
         <Param name="EnableStrobe" value="true"/>
         <Param name="Strobe" value="1"/>
@@ -4151,8 +1129,8 @@
         <Param name="DisplayType" value="Vero v1.3"/>
         <Param name="StrobeType" value=""/>
         <Param name="StrobeTemperature" value="0"/>
-        <Param name="CameraPoETemperature" value="41"/>
-        <Param name="CameraDSPTemperature" value="41"/>
+        <Param name="CameraPoETemperature" value="54"/>
+        <Param name="CameraDSPTemperature" value="57"/>
         <Param name="CameraSensorTemperature" value="0"/>
         <Param name="SensorWidth" value="1280"/>
         <Param name="SensorHeight" value="1024"/>
@@ -4164,7 +1142,7 @@
         <Param name="MACAddress" value="00:00:37:20:51:68"/>
         <Param name="SerialNumber" value="VE13-N-0073"/>
         <Param name="HeadSerialNumber" value=""/>
-        <Param name="IPAddress" value="192.168.10.11"/>
+        <Param name="IPAddress" value="192.168.10.10"/>
         <Param name="StreamDestinationAddress" value="Default"/>
         <Param name="StreamDestinationAddressWarning" value=""/>
         <Param name="FirmwareVersion" value="707"/>
@@ -4180,9 +1158,9 @@
         <Param name="EnableTap" value="true"/>
         <Param name="EnableAccel" value="true"/>
         <Param name="ResetCalibration" value="false"/>
-        <Param name="FocalLength" value="0.0069692152442820633"/>
-        <Param name="RadialParam1" value="0.43769059418451656"/>
-        <Param name="RadialParam2" value="0.23312165394269407"/>
+        <Param name="FocalLength" value="0.0072461048128230846"/>
+        <Param name="RadialParam1" value="0.42059128794544015"/>
+        <Param name="RadialParam2" value="0.28142586249577262"/>
         <Param name="Reboot" value="false"/>
         <Param name="Bumped" value="false"/>
         <Param name="BumpTolerance" value="0.0700000003"/>
@@ -4219,59 +1197,21 @@
         <Param name="WirelessSyncEnabled" value="false"/>
         <Param name="SyncMaster" value="true"/>
         <Param name="MaxGPO" value="8"/>
-        <Param name="GPOPin1" value=""/>
-        <Param name="GPOPin2" value=""/>
-        <Param name="GPOPin3" value=""/>
-        <Param name="GPOPin4" value=""/>
-        <Param name="GPOPin5" value=""/>
-        <Param name="GPOPin6" value=""/>
-        <Param name="GPOPin7" value=""/>
-        <Param name="GPOPin8" value=""/>
+        <Param name="GPOPin1"/>
+        <Param name="GPOPin2"/>
+        <Param name="GPOPin3"/>
+        <Param name="GPOPin4"/>
+        <Param name="GPOPin5"/>
+        <Param name="GPOPin6"/>
+        <Param name="GPOPin7"/>
+        <Param name="GPOPin8"/>
         <Param name="MACAddress" value="00:00:37:10:04:1c"/>
         <Param name="SerialNumber" value=""/>
-        <Param name="IPAddress" value="192.168.10.16"/>
+        <Param name="IPAddress" value="192.168.10.14"/>
         <Param name="FirmwareVersion" value="707"/>
         <Param name="FirmwareComplete" value="true"/>
         <Param name="Reboot" value="false"/>
         <Param name="Selected" value="false"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="Mk6System">
-    <ParamListGroup name="">
-      <ParamList name="">
-        <Param name="FrameRate" value="1200"/>
-        <Param name="ActualFrameRate" value="1200"/>
-        <Param name="MasterSelect" value="0"/>
-        <Param name="GenlockStandard" value="0"/>
-        <Param name="GenlockEnabled" value="false"/>
-        <Param name="DetectedGenlockStandard" value="0"/>
-        <Param name="AutoGenlock" value="false"/>
-        <Param name="GenlockStatus" value="None"/>
-        <Param name="GenlockOffset" value="0"/>
-        <Param name="VESAOffset" value="0"/>
-        <Param name="TimecodeSource" value="8"/>
-        <Param name="TimecodeDropFrame"/>
-        <Param name="TimecodeEnabled" value="false"/>
-        <Param name="TimecodeStandard" value="2"/>
-        <Param name="TimecodeStatus" value="Ready To Use"/>
-        <Param name="Warning" value=""/>
-        <Param name="BufferSize" value="250"/>
-        <Param name="BufferSizeRatio" value="0.5"/>
-        <Param name="Rewind" value="0"/>
-        <Param name="RebootAll" value="false"/>
-        <Param name="RealTimeBufferSize" value="20"/>
-        <Param name="MinimizeLatency" value="false"/>
-        <Param name="MinimizeJitter" value="false"/>
-      </ParamList>
-    </ParamListGroup>
-  </ParamDefinitionList>
-
-  <ParamDefinitionList name="Vicon">
-    <ParamListGroup name="">
-      <ParamList name="">
-        <Param name="SOURCE" value="Nexus 2.9.2.118349h"/>
       </ParamList>
     </ParamListGroup>
   </ParamDefinitionList>
