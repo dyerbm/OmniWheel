@@ -1,58 +1,67 @@
 %% Setup the Import Options
-opts = spreadsheetImportOptions("NumVariables", 21);
+% opts = spreadsheetImportOptions("NumVariables", 21);
+% 
+% % Specify sheet and range
+% opts.Sheet = "Sheet1";
+% opts.DataRange = "A500:U1000";
+% 
+% % Specify column names and types
+% opts.VariableNames = ["globalTime", "timeNow", "rb1x", "rb1y", "rb1z", "rb2x", "rb2y", "rb2z", "rb3x", "rb3y", "rb3z", "rb4x", "rb4y", "rb4z", "rb5x", "rb5y", "rb5z", "u1", "u2", "u3", "u4"];
+% opts.VariableTypes = ["double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double"];
+% 
+% % Import the data
+% data = readtable("C:\Users\jdiro\Desktop\Git\Omniwheel VICON Code\Raw Data\2019-12-10_circ10s_160pwm_raw.xlsx", opts, "UseExcel", false);
+% 
+% 
+% %% Clear temporary variables
+% clear opts
+% 
+% %% Setup the Import Options
+% opts = spreadsheetImportOptions("NumVariables", 21);
+% 
+% % Specify sheet and range
+% opts.Sheet = "Sheet1";
+% opts.DataRange = "A500:U1000";
+% 
+% % Specify column names and types
+% opts.VariableNames = ["globalTime", "timeNow", "rb1x", "rb1y", "rb1z", "rb2x", "rb2y", "rb2z", "rb3x", "rb3y", "rb3z", "rb4x", "rb4y", "rb4z", "rb5x", "rb5y", "rb5z", "u1", "u2", "u3", "u4"];
+% opts.VariableTypes = ["double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double"];
+% 
+% % Import the data
+% data = [data; readtable("C:\Users\jdiro\Desktop\Git\Omniwheel VICON Code\Raw Data\2019-12-10_circ10s_neg160pwm_raw.xlsx", opts, "UseExcel", false)];
+% %data = [readtable("C:\Users\jdiro\Desktop\Git\Omniwheel VICON Code\Raw Data\2019-12-10_circ10s_neg160pwm_raw.xlsx", opts, "UseExcel", false)];
+% 
+% 
+% %% Clear temporary variables
+% clear opts
+% 
+% 
+% %% Setup the Import Options
+% opts = spreadsheetImportOptions("NumVariables", 21);
+% 
+% % Specify sheet and range
+% opts.Sheet = "Sheet1";
+% opts.DataRange = "A500:U1000";
+% 
+% % Specify column names and types
+% opts.VariableNames = ["globalTime", "timeNow", "rb1x", "rb1y", "rb1z", "rb2x", "rb2y", "rb2z", "rb3x", "rb3y", "rb3z", "rb4x", "rb4y", "rb4z", "rb5x", "rb5y", "rb5z", "u1", "u2", "u3", "u4"];
+% opts.VariableTypes = ["double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double"];
+% 
+% % Import the data
+% data = [data; readtable("C:\Users\jdiro\Desktop\Git\Omniwheel VICON Code\Raw Data\spin150_raw.xlsx", opts, "UseExcel", false)];
+% 
+% 
+% %% Clear temporary variables
 
-% Specify sheet and range
-opts.Sheet = "Sheet1";
-opts.DataRange = "A500:U1000";
-
-% Specify column names and types
-opts.VariableNames = ["globalTime", "timeNow", "rb1x", "rb1y", "rb1z", "rb2x", "rb2y", "rb2z", "rb3x", "rb3y", "rb3z", "rb4x", "rb4y", "rb4z", "rb5x", "rb5y", "rb5z", "u1", "u2", "u3", "u4"];
-opts.VariableTypes = ["double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double"];
-
-% Import the data
-data = readtable("C:\Users\jdiro\Desktop\Git\Omniwheel VICON Code\Raw Data\2019-12-10_circ10s_160pwm_raw.xlsx", opts, "UseExcel", false);
-
-
-%% Clear temporary variables
-clear opts
-
-%% Setup the Import Options
-opts = spreadsheetImportOptions("NumVariables", 21);
-
-% Specify sheet and range
-opts.Sheet = "Sheet1";
-opts.DataRange = "A500:U1000";
-
-% Specify column names and types
-opts.VariableNames = ["globalTime", "timeNow", "rb1x", "rb1y", "rb1z", "rb2x", "rb2y", "rb2z", "rb3x", "rb3y", "rb3z", "rb4x", "rb4y", "rb4z", "rb5x", "rb5y", "rb5z", "u1", "u2", "u3", "u4"];
-opts.VariableTypes = ["double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double"];
-
-% Import the data
-data = [data; readtable("C:\Users\jdiro\Desktop\Git\Omniwheel VICON Code\Raw Data\2019-12-10_circ10s_neg160pwm_raw.xlsx", opts, "UseExcel", false)];
-%data = [readtable("C:\Users\jdiro\Desktop\Git\Omniwheel VICON Code\Raw Data\2019-12-10_circ10s_neg160pwm_raw.xlsx", opts, "UseExcel", false)];
-
-
-%% Clear temporary variables
-clear opts
-
-
-%% Setup the Import Options
-opts = spreadsheetImportOptions("NumVariables", 21);
-
-% Specify sheet and range
-opts.Sheet = "Sheet1";
-opts.DataRange = "A500:U1000";
-
-% Specify column names and types
-opts.VariableNames = ["globalTime", "timeNow", "rb1x", "rb1y", "rb1z", "rb2x", "rb2y", "rb2z", "rb3x", "rb3y", "rb3z", "rb4x", "rb4y", "rb4z", "rb5x", "rb5y", "rb5z", "u1", "u2", "u3", "u4"];
-opts.VariableTypes = ["double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double"];
-
-% Import the data
-data = [data; readtable("C:\Users\jdiro\Desktop\Git\Omniwheel VICON Code\Raw Data\spin150_raw.xlsx", opts, "UseExcel", false)];
-
-
-%% Clear temporary variables
-clear opts
+%% Read in data
+data=[];
+rawDataPath = "C:\Users\jdiro\Desktop\Git\Omniwheel VICON Code\Raw Data\"
+data=getData(data,rawDataPath+"spin150_raw.xlsx","A500:U1000");
+data=getData(data,rawDataPath+"spinNeg150_raw.xlsx","A500:U1000");
+data=getData(data,rawDataPath+"2019-12-10_circ10s_neg160pwm_raw.xlsx","A100:U1700");
+data=getData(data,rawDataPath+"2019-12-10_circ10s_160pwm_raw.xlsx","A100:U1700");
+%data=getData(data,rawDataPath+"zero_raw.xlsx","A50:U400");
+%data=getData(data,rawDataPath+"test2_raw.xlsx","A50:U100");
 
 %% Create matrices using every other variable
 
