@@ -1,4 +1,4 @@
-timenow=0.01;
+timenow=0.02;
 timeglobal=0;
 tglobal=tic;
 u=[0,0,0,0];
@@ -10,8 +10,8 @@ marker_4_lost = false;
 marker_5_lost = false;
 
 matcounter = 1; % Starting row for output matrix
-max_operation = 20; % Maximum time robot will move
-matrixsize = max_operation * 100 + 100; % Based on the time for operation, will wait 1 second after robot stops to end recording
+max_operation = 2; % Maximum time robot will move
+matrixsize = max_operation * 50 + 50; % Based on the time for operation, will wait 1 second after robot stops to end recording
  
 Sheet1Mat = zeros(matrixsize,21);
 
@@ -208,7 +208,7 @@ while(matcounter <= matrixsize)
         else
             circletime=10
             speed=160
-            spinSpeed = 255-speed
+            spinSpeed = 40
             u = [int16(-sin(2*pi/circletime*timeglobal)*speed),int16(cos(2*pi/circletime*timeglobal)*speed),int16(sin(2*pi/circletime*timeglobal)*speed),int16(-cos(2*pi/circletime*timeglobal)*speed)];
             u=u+int16(sin(2*pi/(circletime/2+1)));
             %u=[150,150,150,150];
