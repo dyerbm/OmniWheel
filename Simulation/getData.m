@@ -3,7 +3,7 @@ function newdata = getData(data, filePath, range)
 
     % Specify sheet and range
     opts.Sheet = "Sheet1";
-    opts.DataRange = "A500:U1000";
+    opts.DataRange = range;
 
     % Specify column names and types
     opts.VariableNames = ["globalTime", "timeNow", "rb1x", "rb1y", "rb1z", "rb2x", "rb2y", "rb2z", "rb3x", "rb3y", "rb3z", "rb4x", "rb4y", "rb4z", "rb5x", "rb5y", "rb5z", "u1", "u2", "u3", "u4"];

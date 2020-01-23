@@ -5,14 +5,15 @@ Velocity = []
 data=[];
 %rawDataPath = "C:\Users\jdiro\Desktop\Git\Omniwheel VICON Code\Raw Data\spinData\";
 %data=getData(data,rawDataPath+int2str(i)+"spin_raw.xlsx","A1400:U4000");
-%data=getData(data,rawDataPath+"spinNeg150_raw.xlsx","A500:U1000");
-data=getData(data,"C:\Users\jdiro\Desktop\Git\Omniwheel VICON Code\Raw Data\"+"2019-12-10_circ10s_neg160pwm_raw.xlsx","A100:U1700");
-data=getData(data,"C:\Users\jdiro\Desktop\Git\Omniwheel VICON Code\Raw Data\"+"2019-12-10_circ10s_160pwm_raw.xlsx","A100:U1700");
-%data=getData(data,"C:\Users\jdiro\Desktop\Git\Omniwheel VICON Code\Raw Data\"+"250circ2_raw.xlsx","A1400:U3700");
+data=getData(data,"C:\Users\jdiro\Desktop\Git\Omniwheel VICON Code\Raw Data\"+"spinNeg150_raw.xlsx","A500:U1000");
+data=getData(data,"C:\Users\jdiro\Desktop\Git\Omniwheel VICON Code\Raw Data\"+"spin150_raw.xlsx","A500:U1000");
+data=getData(data,"C:\Users\jdiro\Desktop\Git\Omniwheel VICON Code\Raw Data\"+"2019-12-10_circ10s_neg160pwm_raw.xlsx","A500:U1700");
+data=getData(data,"C:\Users\jdiro\Desktop\Git\Omniwheel VICON Code\Raw Data\"+"2019-12-10_circ10s_160pwm_raw.xlsx","A500:U1700");
+data=getData(data,"C:\Users\jdiro\Desktop\Git\Omniwheel VICON Code\Raw Data\"+"250circ2_raw.xlsx","A200:U3700");
 
 %Find Friction
 maxVel = 0.5;
-binSize=0.05;
+binSize=0.1;
 numBins = (maxVel*2/binSize)+1;
 vels=linspace(-1*maxVel,maxVel,numBins);
 
@@ -83,7 +84,6 @@ end
 %results=[results; P(9)];
 %Velocity = [Velocity; mean(vels)];
 
-results
-Velocity
+
 
 
