@@ -56,13 +56,16 @@
 
 %% Read in data
 data=[];
-rawDataPath = "C:\Users\jdiro\Desktop\Git\Omniwheel VICON Code\Raw Data\"
-data=getData(data,rawDataPath+"spin150_raw.xlsx","A500:U1000");
-data=getData(data,rawDataPath+"spinNeg150_raw.xlsx","A500:U1000");
-data=getData(data,rawDataPath+"2019-12-10_circ10s_neg160pwm_raw.xlsx","A100:U2100");
-data=getData(data,rawDataPath+"2019-12-10_circ10s_160pwm_raw.xlsx","A100:U2100");
+rawDataPath = "C:\Users\jdiro\Desktop\Git\Omniwheel VICON Code\Raw Data\50Hz"
+%data=getData(data,rawDataPath+"spin150_raw.xlsx","A500:U1000");
+%data=getData(data,rawDataPath+"spinNeg150_raw.xlsx","A500:U1000");
+%data=getData(data,rawDataPath+"2019-12-10_circ10s_neg160pwm_raw.xlsx","A100:U2100");
+%data=getData(data,rawDataPath+"2019-12-10_circ10s_160pwm_raw.xlsx","A100:U2100");
 %data=getData(data,rawDataPath+"zero_raw.xlsx","A50:U400");
 %data=getData(data,rawDataPath+"test2_raw.xlsx","A50:U100");
+data=getData(data,rawDataPath+"200negCirc.xlsx","A50:U2500");
+data=getData(data,rawDataPath+"200Circ.xlsx","A50:U2500");
+data=getData(data,rawDataPath+"200varspin.xlsx","A50:U5000");
 
 %% Create matrices using every other variable
 
