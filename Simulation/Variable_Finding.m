@@ -63,9 +63,13 @@ rawDataPath = "C:\Users\jdiro\Desktop\Git\Omniwheel VICON Code\Raw Data\50Hz\";
 %data=getData(data,rawDataPath+"2019-12-10_circ10s_160pwm_raw.xlsx","A100:U2100");
 %data=getData(data,rawDataPath+"zero_raw.xlsx","A50:U400");
 %data=getData(data,rawDataPath+"test2_raw.xlsx","A50:U100");
-data=getData(data,rawDataPath+"200negCirc.xlsx","A50:U2500");
-data=getData(data,rawDataPath+"200Circ.xlsx","A50:U2500");
-data=getData(data,rawDataPath+"200varspin.xlsx","A50:U5000");
+% data=getData(data,rawDataPath+"200negCirc.xlsx","A50:U2500");
+% data=getData(data,rawDataPath+"200Circ.xlsx","A50:U2500");
+% data=getData(data,rawDataPath+"200varspin.xlsx","A50:U5000");
+
+data=getData2(data,rawDataPath+"200negCirc.xlsx",50,2500);
+data=getData2(data,rawDataPath+"200Circ.xlsx",50,2500);
+data=getData2(data,rawDataPath+"200varspin.xlsx",50,2500);
 
 %% Create matrices using every other variable
 
@@ -132,4 +136,4 @@ PP=Input\Output;
    Output = [Output;data.rb5x(i+1)/1000;data.rb5y(i+1)/1000;theta2];
  end
 
- check = norm(Input*wRR-Output)
+ check = norm(Input*P-Output)
