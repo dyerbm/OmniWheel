@@ -56,7 +56,7 @@
 
 %% Read in data
 data=[];
-rawDataPath = "C:\Users\jdiro\Desktop\Git\Omniwheel VICON Code\Raw Data\50Hz\"
+rawDataPath = "C:\Users\jdiro\Desktop\Git\Omniwheel VICON Code\Raw Data\50Hz\";
 %data=getData(data,rawDataPath+"spin150_raw.xlsx","A500:U1000");
 %data=getData(data,rawDataPath+"spinNeg150_raw.xlsx","A500:U1000");
 %data=getData(data,rawDataPath+"2019-12-10_circ10s_neg160pwm_raw.xlsx","A100:U2100");
@@ -91,30 +91,30 @@ end
 format long
 P=lsqminnorm(Input,Output,'warn');
 PP=Input\Output;
-lasso(Input,Output);
-
-
-nVars=9;
-% Ridge Regression
-
-lambda = 100*ones(nVars,1); % Penalize each element by the same amount
-R = chol(Input'*Input + diag(lambda));
-wRR = R\(R'\(Input'*Output));
+% lasso(Input,Output);
 % 
-% LASSO
+% 
+% nVars=9;
+% % Ridge Regression
+% 
+% lambda = 100*ones(nVars,1); % Penalize each element by the same amount
+% R = chol(Input'*Input + diag(lambda));
+% wRR = R\(R'\(Input'*Output));
+% % 
+% % LASSO
+% 
+% lambda = 100*ones(nVars,1); % Penalize the absolute value of each element by the same amount
+% funObj = @(w)LogisticLoss(w,Input,Output); % Loss function that L1 regularization is applied to
+% w_init = wRR; % Initial value for iterative optimizer
+% fprintf('\nComputing LASSO Coefficients...\n');
+% wLASSO = L1General2_PSSgb(funObj,w_init,lambda);
+% 
+% 
+% fprintf('Number of non-zero variables in Ridge Regression solution: %d\n',nnz(wRR));
+% fprintf('Number of non-zero variables in LASSO solution: %d\n',nnz(wLASSO));
 
-lambda = 100*ones(nVars,1); % Penalize the absolute value of each element by the same amount
-funObj = @(w)LogisticLoss(w,Input,Output); % Loss function that L1 regularization is applied to
-w_init = wRR; % Initial value for iterative optimizer
-fprintf('\nComputing LASSO Coefficients...\n');
-wLASSO = L1General2_PSSgb(funObj,w_init,lambda);
 
-
-fprintf('Number of non-zero variables in Ridge Regression solution: %d\n',nnz(wRR));
-fprintf('Number of non-zero variables in LASSO solution: %d\n',nnz(wLASSO));
-
-
- norm(Input*wRR-Output)
+ norm(Input*P-Output)
  
  for i=21:2:size(data,1)-100
     
