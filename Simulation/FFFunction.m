@@ -42,11 +42,12 @@ function [vels, xFrictions, yFrictions, tFrictions]=FFFunction(data, start, inte
         robotYOrientation = [cos(3*pi/4) sin(3*pi/4)]*RotationMatrix;
         robotxvel = dot(robotvel,robotXOrientation)/norm(robotXOrientation);
         robotyvel = dot(robotvel,robotYOrientation)/norm(robotYOrientation);
-        
+        robottvel = (theta2-theta1)/(data.globalTime(i+1)-data.globalTime(i));
 
         %check which x and y velocity bins the values should be in
         xbin=int16(round(robotxvel/binSize))+(numBins+1)/2;
         ybin=int16(round(robotyvel/binSize))+(numBins+1)/2;
+        tbin=int16(round(robottvel/binSize))+(numBins+1)/2;
 
         %append matrices to input and outputs
 
@@ -57,6 +58,10 @@ function [vels, xFrictions, yFrictions, tFrictions]=FFFunction(data, start, inte
         if 0<ybin && ybin<=numBins
             yInput{ybin}=[yInput{ybin};Ei];
             yOutput{ybin}=[yOutput{ybin};data.rb5x(i+1)/1000;data.rb5y(i+1)/1000;theta2];
+        end
+        if (0<tbin && tbin<=numBins) && (theta1<theta2
+            tInput{tbin}=[tInput{tbin};Ei];
+            tOutput{tbin}=[tOutput{tbin};data.rb5x(i+1)/1000;data.rb5y(i+1)/1000;theta2];
         end
     end
 
@@ -70,6 +75,10 @@ function [vels, xFrictions, yFrictions, tFrictions]=FFFunction(data, start, inte
         if length(yInput{i})~= 0
             P=lsqminnorm(yInput{i},yOutput{i},'warn');
             yFrictions(i)=P(8);
+        end
+        if length(tInput{i})~= 0
+            P=lsqminnorm(tInput{i},tOutput{i},'warn');
+            tFrictions(i)=P(9);
         end
     end
 

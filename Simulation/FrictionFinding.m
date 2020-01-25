@@ -24,8 +24,8 @@ data=getData2(data,rawDataPath+"200Circ.xlsx",50,2500);
 data=getData2(data,rawDataPath+"200varspin.xlsx",50,5000);
 
 %Find Friction
-maxVel = 0.7;
-binSize=0.01;
+maxVel = 4;
+binSize=0.1;
 numBins = int16(maxVel*2/binSize)+1;
 
 %calculate frictions based on 3 different data sets
@@ -54,6 +54,14 @@ scatter(vels3(1:numBins),xFrictions3(1:numBins)); hold off;
 ylabel("f_1^d");xlabel("velocity (m/s)");
 legend("dataset 1", "dataset 2", "dataset 3");
 
+%repeatability of theta friction
+figure;
+scatter(vels1(1:numBins),tFrictions1(1:numBins)); hold on;
+scatter(vels2(1:numBins),tFrictions2(1:numBins)); hold on;
+scatter(vels3(1:numBins),tFrictions3(1:numBins)); hold off;
+ylabel("f_3^d");xlabel("velocity (rad/s)");
+legend("dataset 1", "dataset 2", "dataset 3");
+
 
 %curve fitting for x friction
 figure;
@@ -68,7 +76,34 @@ ylabel("f_1^d");xlabel("velocity (m/s)");
 %ylim([-0.05,0.05]);
 %legend("Full dataset",h);
 
-%figure;scatter((vels(1:numBins)),log(xFrictions(1:numBins)))
+
+%curve fitting for y friction
+figure;
+scatter(vels4(1:numBins),yFrictions4(1:numBins)); hold on;
+ft = fittype( 'poly7' );
+opts = fitoptions( 'Method', 'LinearLeastSquares' );
+opts.Normalize = 'on';
+opts.Robust = 'Bisquare';
+[fitresult, gof] = fit( vels4(1:numBins)',yFrictions4(1:numBins), ft );
+h = plot(fitresult, vels4(1:numBins)',yFrictions4(1:numBins));
+ylabel("f_2^d");xlabel("velocity (m/s)");
+%ylim([-0.05,0.05]);
+%legend("Full dataset",h);
+
+
+%curve fitting for theta friction
+figure;
+scatter(vels4(1:numBins),tFrictions4(1:numBins)); hold on;
+ft = fittype( 'poly1' );
+opts = fitoptions( 'Method', 'LinearLeastSquares' );
+opts.Normalize = 'on';
+opts.Robust = 'Bisquare';
+[fitresult, gof] = fit( vels4(1:numBins)',tFrictions4(1:numBins), ft );
+h = plot(fitresult, vels4(1:numBins)',tFrictions4(1:numBins));
+ylabel("f_1^d");xlabel("velocity (m/s)");
+%ylim([-0.05,0.05]);
+%legend("Full dataset",h);
+
 
 
 
