@@ -35,15 +35,14 @@ function [vels, xFrictions, yFrictions, tFrictions]=FFFunction(data, start, inte
         Ei=[diag(xk),pwm,eye(3)];
 
         %calculate velocity FIX TIMESTEP
-        %robotvel = [(data.rb5x(i+1)-data.rb5x(i))/1000,(data.rb5y(i+1)-data.rb5y(i))/1000]/(data.globalTime(i+1)-data.globalTime(i));
-        robotvel = [(data.rb5x(i+1)-data.rb5x(i))/1000,(data.rb5y(i+1)-data.rb5y(i))/1000]/0.02;
+        robotvel = [(data.rb5x(i+1)-data.rb5x(i))/1000,(data.rb5y(i+1)-data.rb5y(i))/1000]/(data.globalTime(i+1)-data.globalTime(i));
+        %robotvel = [(data.rb5x(i+1)-data.rb5x(i))/1000,(data.rb5y(i+1)-data.rb5y(i))/1000]/0.02;
         RotationMatrix = [cos(theta1) -sin(theta1); sin(theta1) cos(theta1)];
         robotXOrientation = [cos(pi/4) sin(pi/4)]*RotationMatrix;
         robotYOrientation = [cos(3*pi/4) sin(3*pi/4)]*RotationMatrix;
-        %robotXOrientation = [1 0]*RotationMatrix;
-        %robotYOrientation = [0 1]*RotationMatrix;
         robotxvel = dot(robotvel,robotXOrientation)/norm(robotXOrientation);
         robotyvel = dot(robotvel,robotYOrientation)/norm(robotYOrientation);
+        
 
         %check which x and y velocity bins the values should be in
         xbin=int16(round(robotxvel/binSize))+(numBins+1)/2;

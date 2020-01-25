@@ -14,95 +14,57 @@ rawDataPath = "C:\Users\jdiro\Desktop\Git\Omniwheel VICON Code\Raw Data\50Hz\";
 %data=getData(data,"C:\Users\jdiro\Desktop\Git\Omniwheel VICON Code\Raw Data\"+"2019-12-10_circ10s_160pwm_raw.xlsx","A500:U1000");
 %data=getData(data,"C:\Users\jdiro\Desktop\Git\Omniwheel VICON Code\Raw Data\"+"250circ2_raw.xlsx","A200:U3700");
 %data=getData(data,"C:\Users\jdiro\Desktop\Git\Omniwheel VICON Code\Raw Data\circspinData\"+"90spin160circle10seconds.xlsx","A100:U400");
+% 
+% data=getData(data,rawDataPath+"200negCirc.xlsx","A50:U2500");
+% data=getData(data,rawDataPath+"200Circ.xlsx","A50:U2500");
+% data=getData(data,rawDataPath+"200varspin.xlsx","A50:U5000");
 
-data=getData(data,rawDataPath+"200negCirc.xlsx","A50:U2500");
-data=getData(data,rawDataPath+"200Circ.xlsx","A50:U2500");
-data=getData(data,rawDataPath+"200varspin.xlsx","A50:U5000");
+data=getData2(data,rawDataPath+"200negCirc.xlsx",50,2500);
+data=getData2(data,rawDataPath+"200Circ.xlsx",50,2500);
+data=getData2(data,rawDataPath+"200varspin.xlsx",50,5000);
 
 %Find Friction
-maxVel = 0.5;
-binSize=0.01;
+maxVel = 0.7;
+binSize=0.02;
 numBins = int16(maxVel*2/binSize)+1;
-vels=linspace(-1*maxVel,maxVel,numBins);
 
-xInput={};
-xOutput={};
-yInput={};
-yOutput={};
-thetaOutput={}
-thetaInput={}
+%calculate frictions based on 3 different data sets
+[vels1,xFrictions1,yFrictions1,tFrictions1]=FFFunction(data,1,3,maxVel,binSize);
+[vels2,xFrictions2,yFrictions2,tFrictions2]=FFFunction(data,2,3,maxVel,binSize);
+[vels3,xFrictions3,yFrictions3,tFrictions3]=FFFunction(data,3,3,maxVel,binSize);
 
-xInput{numBins+1}=0; %initialize a cell just out of the range
-xOutput{numBins+1}=0;
-yInput{numBins+1}=0;
-yOutput{numBins+1}=0;
-thetaInput{numBins+1}=0;
-thetaOutput{numBins+1}=0;
-
-xFrictions = zeros(numBins,1);
-yFrictions = zeros(numBins,1);
-
-for i=20:1:size(data,1)-1
-    
-    %calculate current position
-    vector_ca1 = [(data.rb4x(i) - data.rb5x(i))/1000, (data.rb4y(i) - data.rb5y(i))/1000];
-    theta1 = atan(vector_ca1(2)/vector_ca1(1));
-    %calculate next position
-    vector_ca2 = [(data.rb4x(i+1) - data.rb5x(i+1))/1000, (data.rb4y(i+1) - data.rb5y(i+1))/1000];
-    theta2 = atan(vector_ca2(2)/vector_ca2(1));
-    %set up matrices
-    pwm=[data.u2(i)-data.u4(i),0,0;0,data.u1(i)-data.u3(i),0;0,0,data.u1(i)+data.u2(i)+data.u3(i)+data.u4(i)];
-    xk=[data.rb5x(i)/1000,data.rb5y(i)/1000,theta1];
-    Ei=[diag(xk),pwm,eye(3)];
-    
-    %calculate velocity FIX TIMESTEP
-    %robotvel = [(data.rb5x(i+1)-data.rb5x(i))/1000,(data.rb5y(i+1)-data.rb5y(i))/1000]/(data.globalTime(i+1)-data.globalTime(i));
-    robotvel = [(data.rb5x(i+1)-data.rb5x(i))/1000,(data.rb5y(i+1)-data.rb5y(i))/1000]/0.02;
-    RotationMatrix = [cos(theta1) -sin(theta1); sin(theta1) cos(theta1)];
-    robotXOrientation = [cos(pi/4) sin(pi/4)]*RotationMatrix;
-    robotYOrientation = [cos(3*pi/4) sin(3*pi/4)]*RotationMatrix;
-    %robotXOrientation = [1 0]*RotationMatrix;
-    %robotYOrientation = [0 1]*RotationMatrix;
-    robotxvel = dot(robotvel,robotXOrientation)/norm(robotXOrientation);
-    robotyvel = dot(robotvel,robotYOrientation)/norm(robotYOrientation);
-    
-    %check which x and y velocity bins the values should be in
-    xbin=int16(round(robotxvel/binSize))+(numBins+1)/2;
-    ybin=int16(round(robotyvel/binSize))+(numBins+1)/2;
-    
-    %append matrices to input and outputs
-    
-    if 0<xbin && xbin<=numBins
-        xInput{xbin}=[xInput{xbin}; Ei];
-        xOutput{xbin}=[xOutput{xbin};data.rb5x(i+1)/1000;data.rb5y(i+1)/1000;theta2];
-    end
-    if 0<ybin && ybin<=numBins
-        yInput{ybin}=[yInput{ybin};Ei];
-        yOutput{ybin}=[yOutput{ybin};data.rb5x(i+1)/1000;data.rb5y(i+1)/1000;theta2];
-    end
-end
-
-format long
-
-for i=1:numBins
-    if length(xInput{i})~= 0
-        P=lsqminnorm(xInput{i},xOutput{i},'warn');
-        xFrictions(i)=P(7);
-    end
-    if length(yInput{i})~= 0
-        P=lsqminnorm(yInput{i},yOutput{i},'warn');
-        yFrictions(i)=P(8);
-    end
-end
-
-%results=[results; P(9)];
-%Velocity = [Velocity; mean(vels)];
+%calculate frictions for curve fitting
+[vels4,xFrictions4,yFrictions4,tFrictions4]=FFFunction(data,1,1,maxVel,binSize);
 
 
-figure;scatter(vels(1:numBins),yFrictions(1:numBins));ylabel("$f_2^d");xlabel("normal velocity (m/s)")
+%% Create Figures
+%repeatability of y frictions
+figure;
+scatter(vels1(1:numBins),yFrictions1(1:numBins)); hold on;
+scatter(vels2(1:numBins),yFrictions2(1:numBins)); hold on;
+scatter(vels3(1:numBins),yFrictions3(1:numBins)); hold off;
+ylabel("f_2^d");xlabel("normal velocity (m/s)");
+legend("dataset 1", "dataset 2", "dataset 3");
+
+%repeatability of x friction
+figure;
+scatter(vels1(1:numBins),xFrictions1(1:numBins)); hold on;
+scatter(vels2(1:numBins),xFrictions2(1:numBins)); hold on;
+scatter(vels3(1:numBins),xFrictions3(1:numBins)); hold off;
+ylabel("f_1^d");xlabel("velocity (m/s)");
+legend("dataset 1", "dataset 2", "dataset 3");
 
 
-figure;scatter(vels(1:numBins),xFrictions(1:numBins));ylabel("$f_1^d");xlabel("velocity (m/s)")
+%curve fitting for x friction
+figure;
+scatter(vels4(1:numBins),xFrictions4(1:numBins)); hold on;
+ft = fittype( {'(sin(x-pi))', '((x-10)^2)', '1'}, 'independent', 'x', 'dependent', 'y', 'coefficients', {'a', 'b', 'c'} );
+[fitresult, gof] = fit( vels4(1:numBins)',xFrictions4(1:numBins), ft );
+h = plot( fitresult, vels4(1:numBins)',xFrictions4(1:numBins));
+ylabel("f_1^d");xlabel("velocity (m/s)");
+legend("Full dataset",h);
+
+%figure;scatter((vels(1:numBins)),log(xFrictions(1:numBins)))
 
 
 
