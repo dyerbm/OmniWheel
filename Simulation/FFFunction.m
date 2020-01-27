@@ -59,7 +59,7 @@ function [vels, xFrictions, yFrictions, tFrictions]=FFFunction(data, start, inte
             yInput{ybin}=[yInput{ybin};Ei];
             yOutput{ybin}=[yOutput{ybin};data.rb5x(i+1)/1000;data.rb5y(i+1)/1000;theta2];
         end
-        if (0<tbin && tbin<=numBins) && (theta1<theta2
+        if (0<tbin && tbin<=numBins)
             tInput{tbin}=[tInput{tbin};Ei];
             tOutput{tbin}=[tOutput{tbin};data.rb5x(i+1)/1000;data.rb5y(i+1)/1000;theta2];
         end

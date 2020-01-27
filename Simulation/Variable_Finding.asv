@@ -87,8 +87,7 @@ for i=20:2:size(data,1)-100
     pwm=[data.u2(i)-data.u4(i),0,0;0,data.u1(i)-data.u3(i),0;0,0,data.u1(i)+data.u2(i)+data.u3(i)+data.u4(i)];
     xk=[data.rb5x(i)/1000,data.rb5y(i)/1000,theta1];
     Ei=[diag(xk),pwm,eye(3)];
-    
-    if abs(theta2-theta1)<pi/3
+    if abs(theta2-theta1)<pi
         Input = [Input;Ei];
         Output = [Output;data.rb5x(i+1)/1000;data.rb5y(i+1)/1000;theta2];
     end
@@ -97,6 +96,27 @@ end
 format long
 P=lsqminnorm(Input,Output,'warn');
 PP=Input\Output;
+% lasso(Input,Output);
+% 
+% 
+% nVars=9;
+% % Ridge Regression
+% 
+% lambda = 100*ones(nVars,1); % Penalize each element by the same amount
+% R = chol(Input'*Input + diag(lambda));
+% wRR = R\(R'\(Input'*Output));
+% % 
+% % LASSO
+% 
+% lambda = 100*ones(nVars,1); % Penalize the absolute value of each element by the same amount
+% funObj = @(w)LogisticLoss(w,Input,Output); % Loss function that L1 regularization is applied to
+% w_init = wRR; % Initial value for iterative optimizer
+% fprintf('\nComputing LASSO Coefficients...\n');
+% wLASSO = L1General2_PSSgb(funObj,w_init,lambda);
+% 
+% 
+% fprintf('Number of non-zero variables in Ridge Regression solution: %d\n',nnz(wRR));
+% fprintf('Number of non-zero variables in LASSO solution: %d\n',nnz(wLASSO));
 
 
  norm(Input*P-Output)
@@ -112,9 +132,12 @@ PP=Input\Output;
     pwm=[data.u2(i)-data.u4(i),0,0;0,data.u1(i)-data.u3(i),0;0,0,data.u1(i)+data.u2(i)+data.u3(i)+data.u4(i)];
     xk=[data.rb5x(i)/1000,data.rb5y(i)/1000,theta1];
     Ei=[diag(xk),pwm,eye(3)];
-   
     
-   if abs(theta2-theta1)<pi/2
+    if abs(theta2-theta1)>pi
+        theta2-theta1
+     
+    
+   if abs(theta2-theta1)<pi
         Input = [Input;Ei];
         Output = [Output;data.rb5x(i+1)/1000;data.rb5y(i+1)/1000;theta2];
     end
@@ -127,8 +150,8 @@ PP=Input\Output;
  a22=log(P(2))/0.02;
  a33=log(P(3))/0.02;
  
- b11=-P(4)*3.4*a11/P(1);
- b12=P(5)*3.4*a22/P(2);
+ b11=-P(4)*3.4*a11/P(1)*255;
+ b12=P(5)*3.4*a22/P(2)*255;
  
  b21=P(6)*a33/(b11*(P(3)-1));
  b22=P(6)*a33/(b12*(P(3)-1));
