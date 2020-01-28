@@ -29,10 +29,6 @@ function [vels, xFrictions, yFrictions, tFrictions]=FFFunction(data, start, inte
         %calculate next position
         vector_ca2 = [(data.rb4x(i+1) - data.rb5x(i+1))/1000, (data.rb4y(i+1) - data.rb5y(i+1))/1000];
         theta2 = atan(vector_ca2(2)/vector_ca2(1));
-        %set up matrices
-        pwm=[data.u2(i)-data.u4(i),0,0;0,data.u1(i)-data.u3(i),0;0,0,data.u1(i)+data.u2(i)+data.u3(i)+data.u4(i)];
-        xk=[data.rb5x(i)/1000,data.rb5y(i)/1000,theta1];
-        Ei=[diag(xk),pwm,eye(3)];
 
         %calculate velocity FIX TIMESTEP
         robotvel = [(data.rb5x(i+1)-data.rb5x(i))/1000,(data.rb5y(i+1)-data.rb5y(i))/1000]/(data.globalTime(i+1)-data.globalTime(i));
@@ -43,6 +39,11 @@ function [vels, xFrictions, yFrictions, tFrictions]=FFFunction(data, start, inte
         robotxvel = dot(robotvel,robotXOrientation)/norm(robotXOrientation);
         robotyvel = dot(robotvel,robotYOrientation)/norm(robotYOrientation);
         robottvel = (theta2-theta1)/(data.globalTime(i+1)-data.globalTime(i));
+        
+        %set up matrices
+        pwm=[data.u2(i)-data.u4(i),0,0;0,data.u1(i)-data.u3(i),0;0,0,data.u1(i)+data.u2(i)+data.u3(i)+data.u4(i)];
+        xk=[robotxvel,robotyvel,robottvel];
+        Ei=[diag(xk),pwm,eye(3)];
 
         %check which x and y velocity bins the values should be in
         xbin=int16(round(robotxvel/binSize))+(numBins+1)/2;
