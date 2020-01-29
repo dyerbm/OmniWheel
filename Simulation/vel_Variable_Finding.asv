@@ -73,7 +73,8 @@ data=getData2(data,rawDataPath+"200varspin.xlsx",50,5900);
 
 %% Create velocity data in robot frame of reference
 
-vData = zeros(size(data,1));
+data = [data, array2table(zeros(size(data,1),3), 'VariableNames',{'xVel','yVel','tVel'})];
+
 for i=1:size(data,1)-1
    %calculate current position
         vector_ca1 = [(data.rb4x(i) - data.rb5x(i))/1000, (data.rb4y(i) - data.rb5y(i))/1000];
@@ -96,7 +97,9 @@ for i=1:size(data,1)-1
         robotyvel = dot(robotvel,robotYOrientation)/norm(robotYOrientation);
         robottvel = (theta2-theta1)/(data.globalTime(i+1)-data.globalTime(i));
         
-        vData(i)
+        data.xVel(i)=robotxvel;
+        data.yVel(i)=robotyvel;
+        data.tVel(i)=robottvel;
 end
 
 %% Create matrices using every other variable
@@ -106,19 +109,13 @@ Output=[];
 
 for i=20:2:size(data,1)-100
     
-    vector_ca1 = [(data.rb4x(i) - data.rb5x(i))/1000, (data.rb4y(i) - data.rb5y(i))/1000];
-    theta1 = atan(vector_ca1(2)/vector_ca1(1));
-    
-    vector_ca2 = [(data.rb4x(i+1) - data.rb5x(i+1))/1000, (data.rb4y(i+1) - data.rb5y(i+1))/1000];
-    theta2 = atan(vector_ca2(2)/vector_ca2(1));
-    
-    pwm=[data.u2(i)-data.u4(i),0,0;0,data.u1(i)-data.u3(i),0;0,0,data.u1(i)+data.u2(i)+data.u3(i)+data.u4(i)];
-    xk=[data.rb5x(i)/1000,data.rb5y(i)/1000,theta1];
+    pwm=[-data.u2(i)+data.u4(i),0,0;0,data.u1(i)-data.u3(i),0;0,0,data.u1(i)+data.u2(i)+data.u3(i)+data.u4(i)];
+    xk=[data.xVel(i),data.yVel(i),data.tVel(i)];
     Ei=[diag(xk),pwm,eye(3)];
     
-    if abs(theta2-theta1)<pi/3
+    if data.tVel(i)<pi/3 && data.tVel(i+1)<pi/3 && abs(data.xVel(i)-data.xVel(i+1))<3 && abs(data.yVel(i)+data.yVel(i+1))<3
         Input = [Input;Ei];
-        Output = [Output;data.rb5x(i+1)/1000;data.rb5y(i+1)/1000;theta2];
+        Output = [Output;data.xVel(i+1);data.yVel(i+1);data.tVel(i+1)];
     end
 end
 
@@ -126,42 +123,47 @@ format long
 P=lsqminnorm(Input,Output,'warn');
 PP=Input\Output;
 
+sum=0;
+for i=1:size(Input,1)
+    if Input(:,i)*P-Output(i)<4;
+        sum=sum+(Input(:,i)*P-Output(i))^2;
+    end
+end
 
- norm(Input*P-Output)
+RMSE = sqrt(sum/lenght(Output));
+ check = norm(Input*P-Output)/length(Output)
+ 
+ %reset input and output
+ Input=[]
+ Output=[]
  
  for i=21:2:size(data,1)-100
     
-    vector_ca1 = [(data.rb4x(i) - data.rb5x(i))/1000, (data.rb4y(i) - data.rb5y(i))/1000];
-    theta1 = atan(vector_ca1(2)/vector_ca1(1));
-    
-    vector_ca2 = [(data.rb4x(i+1) - data.rb5x(i+1))/1000, (data.rb4y(i+1) - data.rb5y(i+1))/1000];
-    theta2 = atan(vector_ca2(2)/vector_ca2(1));
-    
-    pwm=[data.u2(i)-data.u4(i),0,0;0,data.u1(i)-data.u3(i),0;0,0,data.u1(i)+data.u2(i)+data.u3(i)+data.u4(i)];
-    xk=[data.rb5x(i)/1000,data.rb5y(i)/1000,theta1];
+    pwm=[-data.u2(i)+data.u4(i),0,0;0,data.u1(i)-data.u3(i),0;0,0,data.u1(i)+data.u2(i)+data.u3(i)+data.u4(i)];
+    xk=[data.xVel(i),data.yVel(i),data.tVel(i)];
     Ei=[diag(xk),pwm,eye(3)];
    
     
-   if abs(theta2-theta1)<pi/2
+   if data.tVel(i)<pi/3 && data.tVel(i+1)<pi/3 && abs(data.xVel(i)-data.xVel(i+1))<3 && abs(data.yVel(i)+data.yVel(i+1))<3
         Input = [Input;Ei];
-        Output = [Output;data.rb5x(i+1)/1000;data.rb5y(i+1)/1000;theta2];
+        Output = [Output;data.xVel(i+1);data.yVel(i+1);data.tVel(i+1)];
     end
  end
 
- check = norm(Input*P-Output)
+ check = norm(Input*P-Output)/length(Output)
  
  
  a11=log(P(1))/0.02;
  a22=log(P(2))/0.02;
  a33=log(P(3))/0.02;
  
- b11=-P(4)*3.4*a11/P(1);
+ b11=P(4)*3.4*a11/P(1);
  b12=P(5)*3.4*a22/P(2);
  
  b21=P(6)*a33/(b11*(P(3)-1));
  b22=P(6)*a33/(b12*(P(3)-1));
  
- J=0.195/b21
+ J=0.195/b22*255
  
  [a11 a22 a33 b11 b12 b21 b22 J];
  

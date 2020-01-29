@@ -109,11 +109,11 @@ Output=[];
 
 for i=20:2:size(data,1)-100
     
-    pwm=[data.u2(i)-data.u4(i),0,0;0,data.u1(i)-data.u3(i),0;0,0,data.u1(i)+data.u2(i)+data.u3(i)+data.u4(i)];
+    pwm=[-data.u2(i)+data.u4(i),0,0;0,data.u1(i)-data.u3(i),0;0,0,data.u1(i)+data.u2(i)+data.u3(i)+data.u4(i)];
     xk=[data.xVel(i),data.yVel(i),data.tVel(i)];
     Ei=[diag(xk),pwm,eye(3)];
     
-    if data.tVel(i)<pi/3 && data.tVel(i+1)<pi/3
+    if data.tVel(i)<pi/3 && data.tVel(i+1)<pi/3 && abs(data.xVel(i)-data.xVel(i+1))<3 && abs(data.yVel(i)+data.yVel(i+1))<3
         Input = [Input;Ei];
         Output = [Output;data.xVel(i+1);data.yVel(i+1);data.tVel(i+1)];
     end
@@ -123,36 +123,47 @@ format long
 P=lsqminnorm(Input,Output,'warn');
 PP=Input\Output;
 
+sum=0;
+for i=1:size(Input,1)
+    if Input(i,:)*P-Output(i)<4;
+        sum=sum+(Input(i,:)*P-Output(i))^2;
+    end
+end
 
- norm(Input*P-Output)
+RMSE = sqrt(sum/length(Output))
+ check = norm(Input*P-Output)/length(Output)
+ 
+ %reset input and output
+ Input=[]
+ Output=[]
  
  for i=21:2:size(data,1)-100
     
-    pwm=[data.u2(i)-data.u4(i),0,0;0,data.u1(i)-data.u3(i),0;0,0,data.u1(i)+data.u2(i)+data.u3(i)+data.u4(i)];
+    pwm=[-data.u2(i)+data.u4(i),0,0;0,data.u1(i)-data.u3(i),0;0,0,data.u1(i)+data.u2(i)+data.u3(i)+data.u4(i)];
     xk=[data.xVel(i),data.yVel(i),data.tVel(i)];
     Ei=[diag(xk),pwm,eye(3)];
    
     
-   if data.tVel(i)<pi/3 && data.tVel(i+1)<pi/3
+   if data.tVel(i)<pi/3 && data.tVel(i+1)<pi/3 && abs(data.xVel(i)-data.xVel(i+1))<3 && abs(data.yVel(i)+data.yVel(i+1))<3
         Input = [Input;Ei];
         Output = [Output;data.xVel(i+1);data.yVel(i+1);data.tVel(i+1)];
     end
  end
 
- check = norm(Input*P-Output)
+ check = norm(Input*P-Output)/length(Output)
  
  
  a11=log(P(1))/0.02;
  a22=log(P(2))/0.02;
  a33=log(P(3))/0.02;
  
- b11=-P(4)*3.4*a11/P(1);
+ b11=P(4)*3.4*a11/P(1);
  b12=P(5)*3.4*a22/P(2);
  
  b21=P(6)*a33/(b11*(P(3)-1));
  b22=P(6)*a33/(b12*(P(3)-1));
  
- J=0.195/b22
+ J=0.195/b22*255
  
  [a11 a22 a33 b11 b12 b21 b22 J];
  

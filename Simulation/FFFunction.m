@@ -71,6 +71,7 @@ function [vels, xFrictions, yFrictions, tFrictions]=FFFunction(data, start, inte
     for i=1:numBins
         if length(xInput{i})~= 0
             P=lsqminnorm(xInput{i},xOutput{i},'warn');
+            length(xOutput{i})
             xFrictions(i)=P(7);
         end
         if length(yInput{i})~= 0
