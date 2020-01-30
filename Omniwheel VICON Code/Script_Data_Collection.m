@@ -10,7 +10,7 @@ marker_4_lost = false;
 marker_5_lost = false;
 
 matcounter = 1; % Starting row for output matrix
-max_operation = 2; % Maximum time robot will move
+max_operation = 300; % Maximum time robot will move
 matrixsize = max_operation * 50 + 50; % Based on the time for operation, will wait 1 second after robot stops to end recording
  
 Sheet1Mat = zeros(matrixsize,21);
@@ -74,6 +74,7 @@ while(matcounter <= matrixsize)
     % 1 - Get a frame
     while MyClient.GetFrame().Result.Value ~= Result.Success
     end
+    timeglobal = toc(tglobal);
     
     % Print the frame number
     Output_GetFrameNumber = MyClient.GetFrameNumber();
@@ -199,26 +200,27 @@ while(matcounter <= matrixsize)
         % At 100HZ, this value should be fixed at 10ms between each
         % iteration
         timenow = 0.020;
-        timeglobal = toc(tglobal);
         
         if (timeglobal > max_operation)
             volts_to_send = '0,0,0,0*';
             u = [0,0,0,0];
             fprintf(serialPortObj, volts_to_send);
         else
-            circletime=10
-            speed=160
-            spinSpeed = 40
-            u = [int16(-sin(2*pi/circletime*timeglobal)*speed),int16(cos(2*pi/circletime*timeglobal)*speed),int16(sin(2*pi/circletime*timeglobal)*speed),int16(-cos(2*pi/circletime*timeglobal)*speed)];
-            u=u+int16(sin(2*pi/(circletime/2+1)));
-            %u=[150,150,150,150];
-            volts_to_send = strcat(int2str(u(1)),',',int2str(u(2)),',',int2str(u(3)),',',int2str(u(4)),'*')
+            circletime=15;
+            speed=240;
+            spinspeed = 90;
+            %u = [int16(sin(2*pi/circletime*timeglobal)*speed),int16(cos(2*pi/circletime*timeglobal)*speed),int16(-sin(2*pi/circletime*timeglobal)*speed),int16(-cos(2*pi/circletime*timeglobal)*speed)];
+            %u=u+int16(spinspeed*sin(2*pi/(circletime+2)*timeglobal));
+            u=[int16(speed*sin(2*pi/circletime*timeglobal)), int16(speed*sin(2*pi/circletime*timeglobal)), int16(speed*sin(2*pi/circletime*timeglobal)), int16(speed*sin(2*pi/circletime*timeglobal))]; %spin in place at a variety of speed
+            volts_to_send = strcat(int2str(u(1)),',',int2str(u(2)),',',int2str(u(3)),',',int2str(u(4)),'*');
             timeglobal
             fprintf(serialPortObj, volts_to_send);
         end
 
-        
+
         % Save Sheet1 Data
+        format long
+        u=[double(u(1)) double(u(2)) double(u(3)) double(u(4))]
         Sheet1Mat(matcounter,:) = [timeglobal, timenow, rb1, rb2, rb3, rb4, rb5, u]; % Gives raw data
         
         matcounter = matcounter + 1;
@@ -231,4 +233,5 @@ end % end of while loop, everything before this runs until the end of the script
 volts_to_send = '0,0,0,0*';
 u = [0,0,0,0];
 fprintf(serialPortObj, volts_to_send);
-xlswrite("C:\Users\Vicon\Desktop\Git\Omniwheel VICON Code\Raw Data\"+notebook_name_raw, Sheet1Mat);
+%xlswrite("./Raw Data/test_r.xlsx", Sheet1Mat);
+xlswrite(notebook_name_raw, Sheet1Mat);
