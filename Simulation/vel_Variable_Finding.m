@@ -73,9 +73,9 @@ data=getData2(data,rawDataPath+"200varspin.xlsx",50,5900);
 data=getData2(data,rawDataPath+"240negCirc_1.xlsx",50,6000);
 data=getData2(data,rawDataPath+"240Circ_1.xlsx",50,6000);
 data=getData2(data,rawDataPath+"240varspin_1.xlsx",50,12000);
-data=getData2(data,rawDataPath+"240negCirc_2.xlsx",50,6000);
-data=getData2(data,rawDataPath+"240Circ_2.xlsx",50,6000);
-data=getData2(data,rawDataPath+"240varspin_2.xlsx",50,6500);
+%data=getData2(data,rawDataPath+"240negCirc_2.xlsx",50,6000);
+%data=getData2(data,rawDataPath+"240Circ_2.xlsx",50,6000);
+%data=getData2(data,rawDataPath+"240varspin_2.xlsx",50,6500);
 
 %% Smooth Data
 data.rb4x = MAF(data.rb4x,3);
