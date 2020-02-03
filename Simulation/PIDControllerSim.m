@@ -25,7 +25,7 @@ xdot=zeros(n,length(t));
 xddot=zeros(n,length(t));
 z=zeros(n,length(t));
 
-Kp=[1000,0,-30;0,1000,30;-1000,0,30;0,-1000,-30]; % THESE BETTER HAVE NEGATIVE EIGSSSS
+Kp=[1000,0,2;0,1000,2;-1000,0,2;0,-1000,2]; % THESE BETTER HAVE NEGATIVE EIGSSSS
 Kd=[500,0,0;0,500,0;-500,0,0;0,-500,0];
 
 %create some random points
@@ -34,7 +34,7 @@ randominput = rand(3,20)*6-3;
 for k=1:length(t)-1
     %simulate system
     %xd = randominput(:,int8(k*dt/5)+1);
-    dx = [1;1;3];
+    dx = [2;2;3];
     dxdot=[0;0;0];
     dxddot=[0;0;0];
     
@@ -56,8 +56,8 @@ for k=1:length(t)-1
 end
 
 figure
-plot(t,x(1,:),t,x(2,:));
-legend('x','y')
+plot(t,x(1,:),t,x(2,:),t,x(3,:));
+legend('x','y','\theta')
 xlabel('time (s)')
 ylabel('position (m,rad)')
 
