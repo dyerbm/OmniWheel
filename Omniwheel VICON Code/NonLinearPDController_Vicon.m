@@ -6,7 +6,7 @@ timeGlobal=0;
 startTime=tic;
 
 matcounter = 1; % Starting row for output matrix
-max_operation = 40; % Maximum time robot will move
+max_operation = 5; % Maximum time robot will move
 matrixsize = uint64((max_operation)/dt); % Based on the time for operation, will wait 1 second after robot stops to end recording
 firstLine=0;
 
@@ -50,8 +50,8 @@ Nstar=Iw/rw*(S+I)*R*Tdot;
 Mstar=rw*Q\M+Iw/rw*(S+I)*R*T;
 
 %define control matrices
-k1=[-4.1,0,0;0,-4.1,0;0,0,-4.1/100]*1000; % THESE BETTER HAVE NEGATIVE EIGSSSS
-k2=[-5,0,0;0,-5,0;0,0,-5/100]*1000;
+k1=[-4.1,0,0;0,-4.1,0;0,0,-4.1/100]*120; % THESE BETTER HAVE NEGATIVE EIGSSSS
+k2=[-5,0,0;0,-5,0;0,0,-5/100]*70;
 
 %define controller and torque
 u=-k1*(dyd-z2)-k2*(yd-z1);
@@ -205,17 +205,17 @@ while(timeGlobal <= max_operation)
     % Getting angle relative to x axis.
     vector_ca = [(rb4(1) - rb5(1))/1000, (rb4(2) - rb5(2))/1000];
 
-    theta = atan(vector_ca(2)/vector_ca(1))-5*pi/4;
+    theta = (atan(vector_ca(2)/vector_ca(1))-5*pi/4)-pi/2;
     
     xR = rb5(1);
     yR = rb5(2);
     thetaR = theta;
 
     %determine starting position of the robot
-    if (firstLine == 0 )
+    if (firstLine < 5)
         xRi = xR;
         yRi = yR;
-        firstLine=1;
+        firstLine=firstLine+1;
     
     else
     
@@ -251,7 +251,7 @@ while(timeGlobal <= max_operation)
         %calculate u and assign the observables
         y=z1;
         u=-k1*(dyd/1000-z2)-k2*(yd/1000-z1);
-        yd-z1
+        yd/1000-z1
         
         %calculate torque
         tau=Mstar*(ddyd/1000+u)+Nstar*z1;
@@ -266,7 +266,7 @@ while(timeGlobal <= max_operation)
         simz2=Mstar\(tau-Nstar*simz2)*dt+simz2;
         
         %create  and send PWM values based on torques
-        PWM = int16(tau./23.144*160);
+        PWM = int16(tau./23.144*250);
         PWMString = sprintf('%.0f,%.0f,%.0f,%.0f*', PWM(1),PWM(4),PWM(3),PWM(2))
         %PWMString = "182,255,-182,-255*"
         fprintf(serialPortObj, PWMString)

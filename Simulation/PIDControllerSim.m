@@ -3,12 +3,13 @@
 clc
 clear all
 
-dt=0.001;
-t_final=100;
+dt=0.02;
+t_final=10;
 t=0:dt:t_final;
 
 n=3; %num states
 m=3;%num measurements
+p=4;%num inputs
 
 rR=0.195; %COM to wheel distance
 M=3.4; %mass of the robot
@@ -17,7 +18,10 @@ IR=0.056282655290730/255; %robot moment of inertia
 A=[-1.391610614393775 0 0; 0 -1.238717062996583 0; 0 0 -12.0207583];
 B=[0 -2.3884e-5/M 0 2.3884e-5/M;
      1.7482765e-5/M 0 -1.7482765e-5/M 0;
-    2e-5*8.835e2 2e-5*8.835e2 2e-5*8.835e2 2e-5*8.835e2]*1000;
+    2e-5*8.835e2 2e-5*8.835e2 2e-5*8.835e2 2e-5*8.835e2]*1e5;
+%B=[0 -2e-5/M 0 2e-5/M;
+%      2e-5/M 0 -2e-5/M 0;
+%     2e-5*8.835e2 2e-5*8.835e2 2e-5*8.835e2 2e-5*8.835e2]*1000
 C=eye(3);
 
 x=zeros(n,length(t));
@@ -25,26 +29,36 @@ xdot=zeros(n,length(t));
 xddot=zeros(n,length(t));
 z=zeros(n,length(t));
 
-scale=1
-Kp=[600,0,20;
-    0,600,20;
-    -600,0,20;
-    0,-600,20]*scale; % THESE BETTER HAVE NEGATIVE EIGSSSS
-Kd=[600,0,2;
-    0,600,2;
-    -600,0,2;
-    0,-600,2]*scale*3;
+u=zeros(p,length(t));
+
+scale=0.8;
+% Kp=[600,0,20;
+%     0,600,20;
+%     -600,0,20;
+%     0,-600,20]*scale; % THESE BETTER HAVE NEGATIVE EIGSSSS
+% Kd=[500,0,2;
+%     0,500,2;
+%     -500,0,2;
+%     0,-500,2]*scale*2;
+Kp=[6,0,0;
+    0,6,0;
+    -6,0,0;
+    0,-6,0]*scale; % THESE BETTER HAVE NEGATIVE EIGSSSS
+Kd=[5,0,0;
+    0,5,0;
+    -5,0,0;
+    0,-5,0]*scale*0;
 
 
 %create some random points
 randominput = rand(3,20)*6-3;
 
 
-x(:,1)=[0; 0; -3];
+x(:,1)=[0; 0; 0];
 for k=1:length(t)-1
     %simulate system
     %xd = randominput(:,int8(k*dt/5)+1);
-    dx = [-1;1;-3];
+    dx = [1;0;0];
     dxdot=[0;0;0];
     dxddot=[0;0;0];
     
@@ -71,16 +85,17 @@ for k=1:length(t)-1
         dot(xdot(:,k),robotTOrientation)/norm(robotTOrientation)];
     
     
-    u=(Kd*(dxdotr-xdotr)+Kp*(dxr-xr)); %calculate controller based on position/velocity
+    u(:,k)=(Kd*(dxdotr-xdotr)+Kp*(dxr-xr)); %calculate controller based on position/velocity
     %u=(Kd*(dxdot-xdot(:,k))+Kp*(dx-x(:,k)));
-    if(max(abs(u))>255) %normalize controller
-        u=u/max(abs(u))*255
-        k;
+    if(max(abs(u(:,k)))>255) %normalize controller
+        u(:,k)=u(:,k)/max(abs(u(:,k)))*255;
+        u(:,k)
+        k
     end
     %u=[-255;255;255;-255];
     
 
-    xddot(:,k+1)=A*xdot(:,k)+B*u; %calculate new acceleration
+    xddot(:,k+1)=A*xdot(:,k)+B*u(:,k); %calculate new acceleration
     xdot(:,k+1) = xdot(:,k)+xddot(:,k)*dt; %calculate new velocity
     x(:,k+1) = x(:,k)+xdot(:,k+1)*dt; %calculate new position
     

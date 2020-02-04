@@ -6,11 +6,14 @@ timeGlobal=0;
 startTime=tic;
 
 matcounter = 1; % Starting row for output matrix
-max_operation = 40; % Maximum time robot will move
+max_operation = 5; % Maximum time robot will move
 matrixsize = uint64((max_operation)/dt); % Based on the time for operation, will wait 1 second after robot stops to end recording
 firstLine=0;
 
-Sheet1Mat = zeros(matrixsize,11);
+Sheet1Mat = zeros(matrixsize,14);
+sim = zeros(matrixsize,7);
+simz1=[0;0;0];
+simz2=[0;0;0];
 
 %marker positions
 rb1=[0,0,0];
@@ -20,29 +23,39 @@ rb4=[0,0,0];
 rb5=[0,0,0];
 
 %info needed for controller
+y=[0;0;0];yd=[0;0;0];dyd=[0;0;0];ddyd=[0;0;0]; %will redefine these
 
-n=3; %num states
-m=3;%num measurements
-C=eye(m);
+z2=[0;0;0]; %velocities
+z1=[0;0;0]; %position
 
+Iw=0.0000427; %wheel moment of inertia - FIX THIS VALUE
+rw=0.034925; %wheel radius
 rR=0.195; %COM to wheel distance
-M=3.4; %mass of the robot
-IR=0.069/255; %robot moment of inertia
+m=3.5; %mass of the robot
+IR=0.05; %robot moment of inertia
 
-dx=[0;0;0]; %initialize desired values
-dxdot=[0;0;0];
-dxddot=[0;0;0];
+%define M/N dependancies
+I=eye(4);
+S=[0,0,0,0;0,0,0,0;0,0,0,0;0,0,0,0];
+M=[m,0,0;0,m,0;0,0,IR];
+Q=[-sin(z1(3)), -sin(z1(3)+pi/2), -sin(z1(3)+pi), -sin(z1(3)+3*pi/2);
+    cos(z1(3)), cos(z1(3)+pi/2), cos(z1(3)+pi), cos(z1(3)+3*pi/2);
+    rR,rR,rR,rR];
+R=[0,1,rw;-1,0,rw;0,-1,rw;1,0,rw];
+T=[cos(z1(3)),sin(z1(3)),0;-sin(z1(3)),cos(z1(3)),0;0,0,1];
+Tdot=z2(3)*[-sin(z1(3)),cos(z1(3)),0;-cos(z1(3)),-sin(z1(3)),0;0,0,0];
 
-x=[0;0;0];%initialize position vector
-z=x;
+%define M and N
+Nstar=Iw/rw*(S+I)*R*Tdot;
+Mstar=rw*Q\M+Iw/rw*(S+I)*R*T;
 
-Kp=[-200,0,50;0,200,50;200,0,50;0,-200,50]; % THESE BETTER HAVE NEGATIVE EIGSSSS
-Kd=[0,0,0;0,0,0;0,0,0;0,0,0];
+%define control matrices
+k1=[-4.1,0,0;0,-4.1,0;0,0,-4.1/100]*120; % THESE BETTER HAVE NEGATIVE EIGSSSS
+k2=[-5,0,0;0,-5,0;0,0,-5/100]*70;
 
-u=Kd*(dxdot-xdot)+Kp*(dx-x); %calculate controller based on position/velocity
-if(max(abs(u))>255) %normalize controller
-    u=u/max(abs(u))*255
-end
+%define controller and torque
+u=-k1*(dyd-z2)-k2*(yd-z1);
+tau=Mstar*(ddyd+u)+Nstar*z1;
 
 
 %% select serial port.
@@ -192,17 +205,17 @@ while(timeGlobal <= max_operation)
     % Getting angle relative to x axis.
     vector_ca = [(rb4(1) - rb5(1))/1000, (rb4(2) - rb5(2))/1000];
 
-    theta = atan(vector_ca(2)/vector_ca(1))-5*pi/4;
+    theta = (atan(vector_ca(2)/vector_ca(1))-5*pi/4)-pi/2;
     
     xR = rb5(1);
     yR = rb5(2);
     thetaR = theta;
 
     %determine starting position of the robot
-    if (firstLine == 0 )
+    if (firstLine < 5)
         xRi = xR;
         yRi = yR;
-        firstLine=1;
+        firstLine=firstLine+1;
     
     else
     
@@ -212,33 +225,57 @@ while(timeGlobal <= max_operation)
         yR = (yR-yRi); 
         thetaR = theta;
 
-        xold=x; %old position vector
-        x=[xR/1000;yR/1000;thetaR]; %position vector in meters
+        z1old=z1; %old position vector
+        z1=[xR/1000;yR/1000;thetaR]; %position vector in meters
         timeNow=toc(startTime);
-        xdot=(x-xold)*(timeNow-timeGlobal); %velocity vector
+        z2=(z1-z1old)*(timeNow-timeGlobal); %velocity vector
         
         timeGlobal = timeNow;
 
         % Find xD, yD, thetaD - Desired values
 
-        [dx, dxdot, dxddot] = desired_trajectory(timeGlobal);
+        [yd, dyd, ddyd] = desired_trajectory(timeGlobal);
+        
 
+        % Recalculate dynamics dependancies
+
+        Q=[-sin(z1(3)), -sin(z1(3)+pi/2), -sin(z1(3)+pi), -sin(z1(3)+3*pi/2);
+        cos(z1(3)), cos(z1(3)+pi/2), cos(z1(3)+pi), cos(z1(3)+3*pi/2);
+        rR,rR,rR,rR];
+        T=[cos(z1(3)),sin(z1(3)),0;-sin(z1(3)),cos(z1(3)),0;0,0,1];
+        Tdot=z2(3)*[-sin(z1(3)),cos(z1(3)),0;-cos(z1(3)),-sin(z1(3)),0;0,0,0];
+
+        Nstar=Iw/rw*(S+I)*R*Tdot;
+        Mstar=rw*pinv(Q)*M+Iw/rw*(S+I)*R*T;
         
         %calculate u and assign the observables
-        y=C*x;
-        u=Kd*(dxdot-xdot(:,k))+Kp*(dx-x(:,k)); %calculate controller based on position/velocity
-        if(max(abs(u))>255) %normalize controller
-            u=u/max(abs(u))*255
+        y=z1;
+        u=-k1*(dyd/1000-z2)-k2*(yd/1000-z1);
+        yd/1000-z1
+        
+        %calculate torque
+        tau=Mstar*(ddyd/1000+u)+Nstar*z1;
+
+        %normalize the torques
+        if max(abs(tau))>23.144 %max torque of 23.144 Nm
+            tau = tau./max(abs(tau))*23.144;
         end
         
-        PWMString = sprintf('%.0f,%.0f,%.0f,%.0f*', u(1),u(2),u(3),u(4));
-        fprintf(serialPortObj, PWMString);
-        matcounter;
+        %find the simulation position
+        simz1=simz2*dt+simz1;
+        simz2=Mstar\(tau-Nstar*simz2)*dt+simz2;
+        
+        %create  and send PWM values based on torques
+        PWM = int16(tau./23.144*250);
+        PWMString = sprintf('%.0f,%.0f,%.0f,%.0f*', PWM(1),PWM(4),PWM(3),PWM(2))
+        %PWMString = "182,255,-182,-255*"
+        fprintf(serialPortObj, PWMString)
+        matcounter
         
         
 
         %save it all to a sheet
-        Sheet1Mat(matcounter,:) = [timeGlobal, xR,yR,thetaR, dx(1), dx(2), dx(3), PWM(1), PWM(4), PWM(3), PWM(2)]; % Gives raw data
+        Sheet1Mat(matcounter,:) = [timeGlobal, xR,yR,thetaR, yd(1),yd(2),yd(3), PWM(1), PWM(4), PWM(3), PWM(2),simz1(1),simz1(2),simz1(3)]; % Gives raw data
         matcounter = matcounter + 1;
 
 
