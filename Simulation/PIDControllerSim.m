@@ -4,7 +4,7 @@ clc
 clear all
 
 dt=0.02;
-t_final=10;
+t_final=10000;
 t=0:dt:t_final;
 
 n=3; %num states
@@ -18,10 +18,10 @@ IR=0.056282655290730/255; %robot moment of inertia
 A=[-1.391610614393775 0 0; 0 -1.238717062996583 0; 0 0 -12.0207583];
 B=[0 -2.3884e-5/M 0 2.3884e-5/M;
      1.7482765e-5/M 0 -1.7482765e-5/M 0;
-    2e-5*8.835e2 2e-5*8.835e2 2e-5*8.835e2 2e-5*8.835e2]*1e5;
-%B=[0 -2e-5/M 0 2e-5/M;
+    2e-5*8.835e2 2e-5*8.835e2 2e-5*8.835e2 2e-5*8.835e2];
+% B=[0 -2e-5/M 0 2e-5/M;
 %      2e-5/M 0 -2e-5/M 0;
-%     2e-5*8.835e2 2e-5*8.835e2 2e-5*8.835e2 2e-5*8.835e2]*1000
+%     2e-5*8.835e2 2e-5*8.835e2 2e-5*8.835e2 2e-5*8.835e2]*10000
 C=eye(3);
 
 x=zeros(n,length(t));
@@ -40,14 +40,15 @@ scale=0.8;
 %     0,500,2;
 %     -500,0,2;
 %     0,-500,2]*scale*2;
-Kp=[6,0,0;
-    0,6,0;
-    -6,0,0;
-    0,-6,0]*scale; % THESE BETTER HAVE NEGATIVE EIGSSSS
-Kd=[5,0,0;
-    0,5,0;
-    -5,0,0;
-    0,-5,0]*scale*0;
+scale=1000;
+Kp=[6,0,1e-1;
+    0,6,1e-1;
+    -6,0,1e-1;
+    0,-6,1e-1]*scale; % THESE BETTER HAVE NEGATIVE EIGSSSS
+Kd=[5,0,-1e-3;
+    0,5,-1e-3;
+    -5,0,-1e-3;
+    0,-5,-1e-3]*scale*2;
 
 
 %create some random points
@@ -57,7 +58,8 @@ randominput = rand(3,20)*6-3;
 x(:,1)=[0; 0; 0];
 for k=1:length(t)-1
     %simulate system
-    %xd = randominput(:,int8(k*dt/5)+1);
+%     dx = randominput(:,int8(k*dt/5)+1);
+%     dx(3)=0;
     dx = [1;0;0];
     dxdot=[0;0;0];
     dxddot=[0;0;0];
@@ -84,7 +86,7 @@ for k=1:length(t)-1
         dot(xdot(:,k),robotYOrientation)/norm(robotYOrientation)
         dot(xdot(:,k),robotTOrientation)/norm(robotTOrientation)];
     
-    
+    dxr-xr;
     u(:,k)=(Kd*(dxdotr-xdotr)+Kp*(dxr-xr)); %calculate controller based on position/velocity
     %u=(Kd*(dxdot-xdot(:,k))+Kp*(dx-x(:,k)));
     if(max(abs(u(:,k)))>255) %normalize controller

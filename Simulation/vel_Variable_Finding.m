@@ -67,10 +67,10 @@ rawDataPath = "C:\Users\jdiro\Desktop\Git\Omniwheel VICON Code\Raw Data\50Hz\";
 % data=getData(data,rawDataPath+"200Circ.xlsx","A50:U2500");
 % data=getData(data,rawDataPath+"200varspin.xlsx","A50:U5000");
 
-data=getData2(data,rawDataPath+"200negCirc.xlsx",50,2900);
-data=getData2(data,rawDataPath+"200Circ.xlsx",50,2900);
-data=getData2(data,rawDataPath+"200varspin.xlsx",50,5900);
-data=getData2(data,rawDataPath+"240negCirc_1.xlsx",50,6000);
+% data=getData2(data,rawDataPath+"200negCirc.xlsx",50,2900);
+% data=getData2(data,rawDataPath+"200Circ.xlsx",50,2900);
+% data=getData2(data,rawDataPath+"200varspin.xlsx",50,5900);
+% data=getData2(data,rawDataPath+"240negCirc_1.xlsx",50,6000);
 data=getData2(data,rawDataPath+"240Circ_1.xlsx",50,6000);
 data=getData2(data,rawDataPath+"240varspin_1.xlsx",50,12000);
 %data=getData2(data,rawDataPath+"240negCirc_2.xlsx",50,6000);
