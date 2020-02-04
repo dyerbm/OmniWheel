@@ -3,8 +3,8 @@
 clc
 clear all
 
-dt=0.001;
-t_final=100;
+dt=0.02;
+t_final=10;
 t=0:dt:t_final;
 
 n=3; %num states
@@ -25,33 +25,31 @@ xdot=zeros(n,length(t));
 xddot=zeros(n,length(t));
 z=zeros(n,length(t));
 
-scale=1
 Kp=[600,0,20;
     0,600,20;
     -600,0,20;
-    0,-600,20]*scale; % THESE BETTER HAVE NEGATIVE EIGSSSS
-Kd=[600,0,2;
-    0,600,2;
-    -600,0,2;
-    0,-600,2]*scale*3;
-
+    0,-600,20]/10; % THESE BETTER HAVE NEGATIVE EIGSSSS
+Kd=[0,0,0;
+    0,0,0;
+    0,0,0;
+    0,0,0];
 
 %create some random points
 randominput = rand(3,20)*6-3;
 
 
-x(:,1)=[0; 0; -3];
+
 for k=1:length(t)-1
     %simulate system
     %xd = randominput(:,int8(k*dt/5)+1);
-    dx = [-1;1;-3];
+    dx = [1;1;0];
     dxdot=[0;0;0];
     dxddot=[0;0;0];
     
     
     RotationMatrix = [cos(x(3,k)) -sin(x(3,k)) 0; sin(x(3,k)) cos(x(3,k)) 0; 0 0 1];
-    robotXOrientation = RotationMatrix*[cos(0); sin(0); 1];
-    robotYOrientation = RotationMatrix*[cos(2*pi/4); sin(2*pi/4); 1];
+    robotXOrientation = RotationMatrix*[cos(pi/4); sin(pi/4); 1];
+    robotYOrientation = RotationMatrix*[cos(3*pi/4); sin(3*pi/4); 1];
     robotTOrientation = [0;0;1];
     dxr = [dot(dx,robotXOrientation)/norm(robotXOrientation)
         dot(dx,robotYOrientation)/norm(robotYOrientation)
@@ -71,8 +69,8 @@ for k=1:length(t)-1
         dot(xdot(:,k),robotTOrientation)/norm(robotTOrientation)];
     
     
-    u=(Kd*(dxdotr-xdotr)+Kp*(dxr-xr)); %calculate controller based on position/velocity
-    %u=(Kd*(dxdot-xdot(:,k))+Kp*(dx-x(:,k)));
+    %u=(Kd*(dxdotr-xdotr)+Kp*(dxr-xr)); %calculate controller based on position/velocity
+    u=(Kd*(dxdot-xdot(:,k))+Kp*(dx-x(:,k)));
     if(max(abs(u))>255) %normalize controller
         u=u/max(abs(u))*255
         k;
