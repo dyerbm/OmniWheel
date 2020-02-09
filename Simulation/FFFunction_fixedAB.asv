@@ -44,7 +44,7 @@ function [vels, xFrictions, yFrictions, tFrictions]=FFFunction(data, start, inte
         pwm=[-data.u2(i)+data.u4(i),0,0;0,data.u1(i)-data.u3(i),0;0,0,data.u1(i)+data.u2(i)+data.u3(i)+data.u4(i)];
         xk=[robotxvel,robotyvel,robottvel];
         %Ei=[diag(xk),pwm,eye(3)];
-        Ei = diag(xk)*[0.96788;0.9661;0.6693]+pwm*[8.1846e-6;-10.803e-6;3.3585e-4];
+        Ei = [diag(xk)*[0.9725;0.9755;0.78630]+pwm*[4.9095e-6;-4.049e-6;2.74587e-4]];
 
         %check which x and y velocity bins the values should be in
         xbin=int16(round(robotxvel/binSize))+(numBins+1)/2;
@@ -73,28 +73,16 @@ function [vels, xFrictions, yFrictions, tFrictions]=FFFunction(data, start, inte
 
     for i=1:numBins
         if length(xInput{i})~= 0
-            I=eye(3);
-            for j=2:(size(xInput{i},1)/3)
-                I=[I;eye(3)];
-            end
-            P=I\(xOutput{i}-xInput{i});
-            xFrictions(i)=P(1);
+            P=lsqminnorm(xInput{i},xOutput{i},'warn');
+            xFrictions(i)=P(7);
         end
         if length(yInput{i})~= 0
-            I=eye(3);
-            for j=2:(size(yInput{i},1)/3)
-                I=[I;eye(3)];
-            end
-            P=I\(yOutput{i}-yInput{i});
-            yFrictions(i)=P(2);
+            P=lsqminnorm(yInput{i},yOutput{i},'warn');
+            yFrictions(i)=P(8);
         end
         if length(tInput{i})~= 0
-            I=eye(3);
-            for j=2:(size(tInput{i},1)/3)
-                I=[I;eye(3)];
-            end
-            P=I\(tOutput{i}-tInput{i});
-            tFrictions(i)=P(3);
+            P=lsqminnorm(tInput{i},tOutput{i},'warn');
+            tFrictions(i)=P(9);
         end
     end
 

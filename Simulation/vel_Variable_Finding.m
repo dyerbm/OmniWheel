@@ -67,15 +67,15 @@ rawDataPath = "C:\Users\jdiro\Desktop\Git\Omniwheel VICON Code\Raw Data\50Hz\";
 % data=getData(data,rawDataPath+"200Circ.xlsx","A50:U2500");
 % data=getData(data,rawDataPath+"200varspin.xlsx","A50:U5000");
 
-% data=getData2(data,rawDataPath+"200negCirc.xlsx",50,2900);
-% data=getData2(data,rawDataPath+"200Circ.xlsx",50,2900);
-% data=getData2(data,rawDataPath+"200varspin.xlsx",50,5900);
-% data=getData2(data,rawDataPath+"240negCirc_1.xlsx",50,6000);
+data=getData2(data,rawDataPath+"200negCirc.xlsx",50,2900);
+data=getData2(data,rawDataPath+"200Circ.xlsx",50,2900);
+data=getData2(data,rawDataPath+"200varspin.xlsx",50,5900);
+data=getData2(data,rawDataPath+"240negCirc_1.xlsx",50,6000);
 data=getData2(data,rawDataPath+"240Circ_1.xlsx",50,6000);
 data=getData2(data,rawDataPath+"240varspin_1.xlsx",50,12000);
-%data=getData2(data,rawDataPath+"240negCirc_2.xlsx",50,6000);
-%data=getData2(data,rawDataPath+"240Circ_2.xlsx",50,6000);
-%data=getData2(data,rawDataPath+"240varspin_2.xlsx",50,6500);
+data=getData2(data,rawDataPath+"240negCirc_2.xlsx",50,6000);
+data=getData2(data,rawDataPath+"240Circ_2.xlsx",50,6000);
+data=getData2(data,rawDataPath+"240varspin_2.xlsx",50,6500);
 
 %% Smooth Data
 data.rb4x = MAF(data.rb4x,3);
@@ -94,11 +94,6 @@ for i=1:size(data,1)-1
         %calculate next position
         vector_ca2 = [(data.rb4x(i+1) - data.rb5x(i+1))/1000, (data.rb4y(i+1) - data.rb5y(i+1))/1000];
         theta2 = atan(vector_ca2(2)/vector_ca2(1));
-        %set up matrices
-        pwm=[data.u2(i)-data.u4(i),0,0;0,data.u1(i)-data.u3(i),0;0,0,data.u1(i)+data.u2(i)+data.u3(i)+data.u4(i)];
-        xk=[data.rb5x(i)/1000,data.rb5y(i)/1000,theta1];
-        Ei=[diag(xk),pwm,eye(3)];
-
         %calculate velocity FIX TIMESTEP
         robotvel = [(data.rb5x(i+1)-data.rb5x(i))/1000,(data.rb5y(i+1)-data.rb5y(i))/1000]/(data.globalTime(i+1)-data.globalTime(i));
         %robotvel = [(data.rb5x(i+1)-data.rb5x(i))/1000,(data.rb5y(i+1)-data.rb5y(i))/1000]/0.02;
