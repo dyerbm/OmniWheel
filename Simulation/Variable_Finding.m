@@ -73,7 +73,7 @@ rawDataPath = "C:\Users\jdiro\Desktop\Git\Omniwheel VICON Code\Raw Data\50Hz\";
 % data=getData2(data,rawDataPath+"200varspin.xlsx",50,5000);
 % data=getData2(data,rawDataPath+"240negCirc_1.xlsx",50,6000);
  data=getData2(data,rawDataPath+"240Circ_1.xlsx",50,6000);
-%data=getData2(data,rawDataPath+"240varspin_1.xlsx",50,12000);
+ data=getData2(data,rawDataPath+"240varspin_1.xlsx",50,12000);
 % data=getData2(data,rawDataPath+"240negCirc_2.xlsx",50,6000);
 % data=getData2(data,rawDataPath+"240Circ_2.xlsx",50,6000);
 % data=getData2(data,rawDataPath+"240varspin_2.xlsx",50,6500);
@@ -119,7 +119,8 @@ for i=20:2:size(data,1)-100
     vector_ca2 = [(data.rb4x(i+1) - data.rb5x(i+1))/1000, (data.rb4y(i+1) - data.rb5y(i+1))/1000];
     theta2 = atan(vector_ca2(2)/vector_ca2(1));
     
-    dvector = vector_ca2-vector_ca1;
+    %dvector = vector_ca2-vector_ca1;
+    dvector = [(data.rb5x(i+1)-data.rb5x(i))/1000,(data.rb5y(i+1)-data.rb5y(i))/1000];
     
     RotationMatrix = [cos(theta1) -sin(theta1); sin(theta1) cos(theta1)];
     robotXOrientation = [cos(pi/4) sin(pi/4)]*RotationMatrix;
@@ -137,6 +138,7 @@ for i=20:2:size(data,1)-100
 %         0 0 0 0 data.u1(i) data.u2(i) data.u3(i) data.u4(i) 0 0 0 0;
 %         0 0 0 0 0 0 0 0 data.u1(i) data.u2(i) data.u3(i) data.u4(i)];
     xk=[data.rb5x(i)/1000,data.rb5y(i)/1000,theta1];
+    %xk=[x_diff,y_diff,theta1]
     Ei=[diag(xk),pwm,eye(3)];
     
     if abs(data.step(i)-0.02)<0.0001 && abs(data.tVel(i))<pi/6 && abs(data.tVel(i+1))<pi/6 && abs(data.xVel(i)-data.xVel(i+1))<3 && abs(data.yVel(i)+data.yVel(i+1))<3
@@ -144,7 +146,8 @@ for i=20:2:size(data,1)-100
         xk(1)-data.rb5x(i+1)/1000
         y_diff
         Input = [Input;Ei];
-        Output = [Output; data.rb5x(i+1)/1000;data.rb5y(i+1)/1000;theta2];
+        %Output = [Output; data.rb5x(i+1)/1000+xk(;data.rb5y(i+1)/1000;theta2];
+        Output = [Output; xk(1)+x_diff;xk(2)+y_diff;theta2];
     end
 end
 
