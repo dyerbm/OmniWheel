@@ -25,9 +25,9 @@ data=getData2(data,rawDataPath+"200varspin.xlsx",50,5000);
 data=getData2(data,rawDataPath+"240negCirc_1.xlsx",50,6000);
 data=getData2(data,rawDataPath+"240Circ_1.xlsx",50,6000);
 data=getData2(data,rawDataPath+"240varspin_1.xlsx",50,12000);
-data=getData2(data,rawDataPath+"240negCirc_2.xlsx",50,6000);
-data=getData2(data,rawDataPath+"240Circ_2.xlsx",50,6000);
-data=getData2(data,rawDataPath+"240varspin_2.xlsx",50,6500);
+% data=getData2(data,rawDataPath+"240negCirc_2.xlsx",50,6000);
+% data=getData2(data,rawDataPath+"240Circ_2.xlsx",50,6000);
+% data=getData2(data,rawDataPath+"240varspin_2.xlsx",50,6500);
 
 % data.rb4y=MAF(data.rb4y,7)
 % data.rb4x=MAF(data.rb4x,7)
@@ -35,8 +35,8 @@ data=getData2(data,rawDataPath+"240varspin_2.xlsx",50,6500);
 % data.rb5x=MAF(data.rb5x,7)
 
 %Find Friction
-maxVel = 3;
-binSize=0.1;
+maxVel = 1;
+binSize=0.01;
 numBins = int16(maxVel*2/binSize)+1;
 
 %calculate frictions based on 3 different data sets
