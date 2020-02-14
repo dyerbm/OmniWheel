@@ -43,8 +43,7 @@ function [vels, xFrictions, yFrictions, tFrictions]=FFFunction(data, start, inte
         %set up matrices
         pwm=[-data.u2(i)+data.u4(i),0,0;0,data.u1(i)-data.u3(i),0;0,0,data.u1(i)+data.u2(i)+data.u3(i)+data.u4(i)];
         xk=[robotxvel,robotyvel,robottvel];
-        %Ei=[diag(xk),pwm,eye(3)];
-        Ei = []
+        Ei=[diag(xk),pwm,eye(3)];
 
         %check which x and y velocity bins the values should be in
         xbin=int16(round(robotxvel/binSize))+(numBins+1)/2;

@@ -68,15 +68,15 @@ rawDataPath = "C:\Users\jdiro\Desktop\Git\Omniwheel VICON Code\Raw Data\50Hz\";
 % data=getData(data,rawDataPath+"200varspin.xlsx","A50:U5000");
 
 
-% data=getData2(data,rawDataPath+"200negCirc.xlsx",50,2500);
-% data=getData2(data,rawDataPath+"200Circ.xlsx",50,2500);
-% data=getData2(data,rawDataPath+"200varspin.xlsx",50,5000);
+data=getData2(data,rawDataPath+"200negCirc.xlsx",50,2500);
+data=getData2(data,rawDataPath+"200Circ.xlsx",50,2500);
+data=getData2(data,rawDataPath+"200varspin.xlsx",50,5000);
 data=getData2(data,rawDataPath+"240negCirc_1.xlsx",50,6000);
 data=getData2(data,rawDataPath+"240Circ_1.xlsx",50,6000);
 data=getData2(data,rawDataPath+"240varspin_1.xlsx",50,12000);
-% data=getData2(data,rawDataPath+"240negCirc_2.xlsx",50,6000);
-% data=getData2(data,rawDataPath+"240Circ_2.xlsx",50,6000);
-%data=getData2(data,rawDataPath+"240varspin_2.xlsx",50,6500);
+data=getData2(data,rawDataPath+"240negCirc_2.xlsx",50,6000);
+data=getData2(data,rawDataPath+"240Circ_2.xlsx",50,6000);
+data=getData2(data,rawDataPath+"240varspin_2.xlsx",50,6500);
 
 %data.rb4y=MAF(data.rb4y,7)
 %data.rb4x=MAF(data.rb4x,7)
@@ -133,9 +133,7 @@ for i=20:2:size(data,1)-100
     x_diff = dot(dvector,robotXOrientation)/norm(robotXOrientation);
     y_diff = dot(dvector,robotYOrientation)/norm(robotYOrientation);
     
-    pwm=[data.u2(i)-data.u4(i),0,0;
-        0,data.u1(i)-data.u3(i),0;
-        0,0,data.u1(i)+data.u2(i)+data.u3(i)+data.u4(i)];
+    pwm=[data.u2(i)-data.u4(i),0,0;0,data.u1(i)-data.u3(i),0;0,0,data.u1(i)+data.u2(i)+data.u3(i)+data.u4(i)];
 %     pwm = [data.u1(i) data.u2(i) data.u3(i) data.u4(i) 0 0 0 0 0 0 0 0;
 %         0 0 0 0 data.u1(i) data.u2(i) data.u3(i) data.u4(i) 0 0 0 0;
 %         0 0 0 0 0 0 0 0 data.u1(i) data.u2(i) data.u3(i) data.u4(i)];
@@ -151,7 +149,7 @@ for i=20:2:size(data,1)-100
         Input = [Input;Ei];
         %Output = [Output; data.rb5x(i+1)/1000+xk(;data.rb5y(i+1)/1000;theta2];
         %Output = [Output; xk(1)+x_diff;xk(2)+y_diff;theta2];
-        Output = [Output; x_diff;y_diff;theta2-theta1];
+        Output = [Output; x_diff;y_diff;theta2];
     end
 end
 
