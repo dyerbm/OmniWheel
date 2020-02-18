@@ -46,10 +46,11 @@ function [vels, xFrictions, yFrictions, tFrictions]=FFFunction(data, start, inte
         
         %set up matrices
         pwm=[-data.u2(i)+data.u4(i),0,0;0,data.u1(i)-data.u3(i),0;0,0,data.u1(i)+data.u2(i)+data.u3(i)+data.u4(i)];
-        xk=[robotxvel,robotyvel,robottvel];
+        %xk=[robotxvel,robotyvel,robottvel];
+        xk=[data.rb5x(i)/1000,data.rb5y(i)/1000,theta1];
         %Ei=[diag(xk),pwm,eye(3)];
         %Ei = diag(xk)*[0.96788;0.9661;0.6693]+pwm*[8.1846e-6;-10.803e-6;3.3585e-4];%based on velocity
-        Ei = diag(xk)*[1;1;1]+pwm*[10e-2;10e-2;3.3585e-4];%based on position
+        Ei = diag(xk)*[1;1;1]+pwm*[2.0e-6;7e-5;3.3585e-4];%based on position
 
         %check which x and y velocity bins the values should be in
         xbin=int16(round(robotxvel/binSize))+(numBins+1)/2;
@@ -60,15 +61,18 @@ function [vels, xFrictions, yFrictions, tFrictions]=FFFunction(data, start, inte
         if abs(data.globalTime(i+1)-data.globalTime(i)-0.02)<0.0001
             if 0<xbin && xbin<=numBins
                 xInput{xbin}=[xInput{xbin}; Ei];
-                xOutput{xbin}=[xOutput{xbin};data.rb5x(i+1)/1000;data.rb5y(i+1)/1000;theta2];
+                %xOutput{xbin}=[xOutput{xbin};data.rb5x(i+1)/1000;data.rb5y(i+1)/1000;theta2];
+                xOutput{xbin}=[xOutput{xbin};data.rb5x(i)/1000+x_diff;data.rb5y(i)/1000+y_diff;theta2];
             end
             if 0<ybin && ybin<=numBins
                 yInput{ybin}=[yInput{ybin};Ei];
-                yOutput{ybin}=[yOutput{ybin};data.rb5x(i+1)/1000;data.rb5y(i+1)/1000;theta2];
+                %yOutput{ybin}=[yOutput{ybin};data.rb5x(i+1)/1000;data.rb5y(i+1)/1000;theta2];
+                yOutput{ybin}=[yOutput{ybin};data.rb5x(i)/1000+x_diff;data.rb5y(i)/1000+y_diff;theta2];
             end
             if (0<tbin && tbin<=numBins)
                 tInput{tbin}=[tInput{tbin};Ei];
-                tOutput{tbin}=[tOutput{tbin};data.rb5x(i+1)/1000;data.rb5y(i+1)/1000;theta2];
+                %tOutput{tbin}=[tOutput{tbin};data.rb5x(i+1)/1000;data.rb5y(i+1)/1000;theta2];
+                tOutput{tbin}=[tOutput{tbin};data.rb5x(i)/1000+x_diff;data.rb5y(i)/1000+y_diff;theta2];
             end
         end
     end
