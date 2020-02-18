@@ -54,6 +54,7 @@ end
 
 Input=[];
 Output=[];
+F=[];
 
 for i=20:2:size(data,1)-1000
     
@@ -92,6 +93,7 @@ for i=20:2:size(data,1)-1000
         data.xVel(i);
         xk(1)-data.rb5x(i+1)/1000;
         y_diff;
+        F = [F;0.0197*data.xVel(i)+8.12e-6;0.02047*data.yVel(i)-3.946e-6;data.tVel(i)*0.0177-1.515e-4];
         Input = [Input;Ei];
         %Output = [Output; data.rb5x(i+1)/1000+xk(;data.rb5y(i+1)/1000;theta2];
         Output = [Output; xk(1)+x_diff;xk(2)+y_diff;theta2];
@@ -101,7 +103,7 @@ end
 
 format long
 P=lsqminnorm(Input,Output,'warn');
-PP=Input\Output;
+PP=lsqminnorm(Input,Output-F,'warn');
 
 
 norm(Input*P-Output)

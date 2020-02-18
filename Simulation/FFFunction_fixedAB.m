@@ -50,8 +50,8 @@ function [vels, xFrictions, yFrictions, tFrictions]=FFFunction(data, start, inte
         xk=[data.rb5x(i)/1000,data.rb5y(i)/1000,theta1];
         %Ei=[diag(xk),pwm,eye(3)];
         %Ei = diag(xk)*[0.96788;0.9661;0.6693]+pwm*[8.1846e-6;-10.803e-6;3.3585e-4];%based on velocity
-        %Ei = diag(xk)*[1;1;1]+pwm*[2.0e-6;2.7e-6;3.99e-6];%based on position
-        Ei = diag(xk)*[1;1;1]+pwm*[4.3e-5;4.3e-5;3.99e-6];%based on position
+        Ei = diag(xk)*[1;1;1]+pwm*[2.0e-6;2.7e-6;3.99e-6];%based on position
+        %Ei = diag(xk)*[1;1;1]+pwm*[4.3e-5;4.3e-5;3.99e-6];%based on position
 
         %check which x and y velocity bins the values should be in
         xbin=int16(round(robotxvel/binSize))+(numBins+1)/2;
