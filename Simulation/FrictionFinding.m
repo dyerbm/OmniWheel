@@ -35,8 +35,8 @@ data=getData2(data,rawDataPath+"240varspin_1.xlsx",50,12000);
 % data.rb5x=MAF(data.rb5x,7)
 
 %Find Friction
-maxVel = 3;
-binSize=0.1;
+maxVel = 0.8;
+binSize=0.01;
 numBins = int16(maxVel*2/binSize)+1;
 
 %calculate frictions based on 3 different data sets
