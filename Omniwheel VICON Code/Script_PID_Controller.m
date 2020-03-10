@@ -200,7 +200,7 @@ while(timeglobal <= max_operation)
     yR = rb5(2)/1000; %get y position
     thetaR = theta; %get theta position
     
-    x(:,k)=[xR;yR;thetaR]
+    z(:,k)=[xR;yR;thetaR]
 
     %u(:,k+1) = [sin(pi*k*T);cos(pi*k*T);-sin(pi*k*T);-cos(pi*k*T)];% calculate controller
     e = z(:,k)-x_d(:,k); %calculate the error
@@ -214,18 +214,16 @@ while(timeglobal <= max_operation)
     v(:,k+1) = Kp*e+Kd*edot;%calculate linear controller
     u(:,k+1)=Binv(z(:,k))*v(:,k+1);%calculate non linear controller
     
-    %limit maximum velocity
-    if max(abs(B(x(:,k))*u(:,k+1)/T))>1
+    %make max velocity 1
+    if max(abs(B(z(:,k))*u(:,k+1)/T))>1
        u(:,k+1)=u(:,k+1)/max(abs(B(x(:,k))*u(:,k+1)));
-       k
     end
+    u(:,k+1)=u(:,k+1)*255; %convert to PWM values
     
-    
-    x(:,k+1) = x(:,k) + B(x(:,k))*u(:,k+1)*T; % Linear state space equation
     z(:,k+1) = C*x(:,k+1); % Linear measurement equation
 
-    [u', err', integrator_error']
-    volts_to_send = sprintf('%d.5,%d.5,%d.5,%d.5*', u(1), u(2), u(3), u(4));
+    [u', err']
+    volts_to_send = sprintf('%d.5,%d.5,%d.5,%d.5*', int16(u(1)), int16(u(2)), int16(u(3)), int16(u(4)));
     fprintf(serialPortObj, volts_to_send);
 
     Sheet1Mat(k,:) = [timeglobal, xR, yR, thetaR, xD, yD, thetaD, xE, yE, thetaE, u(1), u(2), u(3), u(4)]; % Gives raw data
