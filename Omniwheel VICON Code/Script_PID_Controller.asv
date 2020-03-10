@@ -200,15 +200,15 @@ while(timeglobal <= max_operation)
     yR = rb5(2)/1000; %get y position
     thetaR = theta; %get theta position
     
-    z(:,k)=[xR;yR;thetaR]
+    z(:,k+1)=[xR;yR;thetaR];
 
-    %u(:,k+1) = [sin(pi*k*T);cos(pi*k*T);-sin(pi*k*T);-cos(pi*k*T)];% calculate controller
+    %CALCULATE CONTROLLER
     e = z(:,k)-x_d(:,k); %calculate the error
     edot=[0;0;0]; %set edot
     %eint = ;%calculate the integral error term
     
     if k~=1 %calculate edot if no on first time step
-        edot = (z(:,k-1)-z(:,k))/T; %calculate the derivative error term
+        edot = (z(:,k)-z(:,k+1))/T; %calculate the derivative error term
     end
     
     v(:,k+1) = Kp*e+Kd*edot;%calculate linear controller
@@ -219,16 +219,11 @@ while(timeglobal <= max_operation)
        u(:,k+1)=u(:,k+1)/max(abs(B(x(:,k))*u(:,k+1)));
     end
     u(:,k+1)=u(:,k+1)*255; %convert to PWM values
-    
-    z(:,k+1) = C*x(:,k+1); % Linear measurement equation
 
-    [u', err']
-    volts_to_send = sprintf('%d.5,%d.5,%d.5,%d.5*', int16(u(1)), int16(u(2), int16(u(3), int16(u(4)));
+    volts_to_send = sprintf('%d,%d,%d,%d*', int16(u(1)), int16(u(2)), int16(u(3)), int16(u(4)));
     fprintf(serialPortObj, volts_to_send);
 
-    Sheet1Mat(k,:) = [timeglobal, xR, yR, thetaR, xD, yD, thetaD, xE, yE, thetaE, u(1), u(2), u(3), u(4)]; % Gives raw data
-
-    k = k + 1;
+    k = k + 1; %update step
 
     timeglobal = toc(tglobal);
 
@@ -236,4 +231,4 @@ end % end of while loop, everything before this runs until the end of the script
 
 fprintf(serialPortObj, '0,0,0,0*');
 
-xlswrite("C:\Users\Vicon\Desktop\Biglar Begian VICON\" + strcat('Controller_Output', '.xlsx'), Sheet1Mat);
+xlswrite("C:\Users\Vicon\Desktop\Biglar Begian VICON\" + strcat('Controller_Output', '.xlsx'), [u',z']);
