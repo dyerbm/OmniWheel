@@ -14,11 +14,13 @@ t = 0:T:tf; % Time vector
 n = 3; % Number of states
 m = 3; % Number of measurements
 p = 4; % Number of Inputs
-x = zeros(n, length(t)); % Initializes states to zero
+x = zeros(n, length(t)+10); % Initializes states to zero
 x_d = x; %Initializes desired x states
-z = zeros(m, length(t)); % Initializes measurements to zero
-u = zeros(p, length(t)); % Initializes controller
-v = zeros(3,length(t)); %initialize linearized controller
+z = zeros(m, length(t)+10); % Initializes measurements to zero
+u = zeros(p, length(t)+10); % Initializes controller
+v = zeros(3,length(t)+10); %initialize linearized controller
+
+rr=0.195;
 
 %A = [-cos(z(3:1)]; % System matrix
 B = @(y)[(-cos(y(3))-sin(y(3)))/(2*sqrt(2)), (-cos(y(3))+sin(y(3)))/(2*sqrt(2)), (cos(y(3))+sin(y(3)))/(2*sqrt(2)), (cos(y(3))-sin(y(3)))/(2*sqrt(2));
@@ -31,9 +33,9 @@ Binv = @(y)[-((cos(y(3))+sin(y(3)))*sqrt(2))/(2*(cos(y(3))^2+sin(y(3))^2)),((cos
 
 C = eye(m); % Measurement matrix
 
-Kp=-[5,0,0; %Proportional Gain
-    0,5,0;
-    0,0,2]*0.1;
+Kp=-[20,0,0; %Proportional Gain
+    0,20,0;
+    0,0,10]*10;
 Kd=-[1,0,0; %Derivative Gain
     0,1,0;
     0,0,0.5]*0.1;
@@ -41,8 +43,8 @@ Ki=-[1,0,0; %Integral Gain
     0,1,0;
     0,0,1];
 
-for k=1:length(t) %Fill in desired path
-    x_d(:,k)=[0;0;0];
+for i=1:length(t)+10 %Fill in desired path
+    x_d(:,i)=[0;0;0];
 end
 
 %% select serial port.
@@ -190,8 +192,7 @@ while(timeglobal <= max_operation)
 %% Processing the data in real time
 
     % Getting angle relative to x axis.
-    vector_ca = [(rb4(1) - rb5(1))/1000, (rb4(2) - rb5(2))/1000]; %get position vector
-
+    vector_ca = [cos(pi/2) sin(pi/2); -sin(pi/2) cos(pi/2)]*[(rb4(1) - rb5(1))/1000; (rb4(2) - rb5(2))/1000]; %get position vector
     theta = atan(vector_ca(2)/vector_ca(1)); %calculate angle
 
     % Find xR, yR, thetaR - Real values
@@ -203,7 +204,7 @@ while(timeglobal <= max_operation)
     z(:,k+1)=[xR;yR;thetaR];
 
     %CALCULATE CONTROLLER
-    e = z(:,k)-x_d(:,k); %calculate the error
+    e = z(:,k)-x_d(:,k) %calculate the error
     edot=[0;0;0]; %set edot
     %eint = ;%calculate the integral error term
     
@@ -211,24 +212,26 @@ while(timeglobal <= max_operation)
         edot = (z(:,k)-z(:,k+1))/T; %calculate the derivative error term
     end
     
+    v(:,k+1)= Kp*e;
     v(:,k+1) = Kp*e+Kd*edot;%calculate linear controller
     u(:,k+1)=Binv(z(:,k))*v(:,k+1);%calculate non linear controller
     
     %make max velocity 1
-    if max(abs(B(z(:,k))*u(:,k+1)/T))>1
-       u(:,k+1)=u(:,k+1)/max(abs(B(x(:,k))*u(:,k+1)));
+    if max(abs(u(:,k+1)))>255
+       u(:,k+1)=u(:,k+1)/max(abs(u(:,k+1)))*255;
     end
-    u(:,k+1)=u(:,k+1)*255; %convert to PWM values
+    u(:,k+1);
 
-    volts_to_send = sprintf('%d,%d,%d,%d*', int16(u(1)), int16(u(2)), int16(u(3)), int16(u(4)));
+    volts_to_send = sprintf('%d,%d,%d,%d*', int16(u(4,k+1)), int16(u(1,k+1)), int16(u(2,k+1)), int16(u(3,k+1)));
+    volts_to_send
     fprintf(serialPortObj, volts_to_send);
 
-    k = k + 1; %update step
-
     timeglobal = toc(tglobal);
+    
+    k = k + 1; %update step
 
 end % end of while loop, everything before this runs until the end of the script
 
 fprintf(serialPortObj, '0,0,0,0*');
 
-xlswrite("C:\Users\Vicon\Desktop\Biglar Begian VICON\" + strcat('Controller_Output', '.xlsx'), [u',z']);
+%xlswrite("C:\Users\Vicon\Desktop\Biglar Begian VICON\" + strcat('Controller_Output', '.xlsx'), [u',z']);
