@@ -19,6 +19,7 @@ x_d = x; %Initializes desired x states
 z = zeros(m, length(t)+10); % Initializes measurements to zero
 u = zeros(p, length(t)+10); % Initializes controller
 v = zeros(3,length(t)+10); %initialize linearized controller
+e=x;edot=x;eint=x; %initialize error terms
 
 rr=0.195;
 
@@ -34,14 +35,14 @@ Binv = @(y)[-((cos(y(3))+sin(y(3)))*sqrt(2))/(2*(cos(y(3))^2+sin(y(3))^2)),((cos
 C = eye(m); % Measurement matrix
 
 Kp=-[20,0,0; %Proportional Gain
-    0,-20,0;
-    0,0,6]*30;
+    0,20,0;
+    0,0,6]*50;
 Kd=-[1,0,0; %Derivative Gain
-    0,-1,0;
-    0,0,0.5]*0.1;
-Ki=-[1,0,0; %Integral Gain
-    0,-1,0;
-    0,0,1];
+    0,1,0;
+    0,0,0.5]*50;
+Ki=-[5,0,0; %Integral Gain
+    0,5,0;
+    0,0,1]*0.5;
 
 for i=1:length(t)+10 %Fill in desired path
     x_d(:,i)=[0;0;0];
@@ -204,29 +205,34 @@ while(timeglobal <= max_operation)
     z(:,k+1)=[xR;yR;thetaR];
 
     %CALCULATE CONTROLLER
-    e = z(:,k)-x_d(:,k); %calculate the error
-    e(3)=0; %force theta
-    %e(1)=0;
-    e
-    edot=[0;0;0]; %set edot
-    %eint = ;%calculate the integral error term
+    e(:,k) = z(:,k)-x_d(:,k); %calculate the error
+    e(3,k)=0; %force theta
+    %e(2,k)=0;
+    e(:,k)
     
     if k~=1 %calculate edot if no on first time step
-        edot = (z(:,k)-z(:,k+1))/T; %calculate the derivative error term
+        edot(:,k) = (z(:,k)-z(:,k+1))/T; %calculate the derivative error term
+    end
+    numterms=100;
+    if k>numterms %calculate integral error term once enough time has passed
+        for i=k-numterms:k
+            eint(:,k) = eint(:,k)+e(:,i);
+        end
     end
     
-    v(:,k+1)= Kp*e;
-    %v(:,k+1) = Kp*e+Kd*edot;%calculate linear controller
+    v(:,k+1)= Kp*e(:,k); %calculate linear P controller
+    v(:,k+1) = Kp*e(:,k)+Kd*edot(:,k);%calculate linear PD controller
+    v(:,k+1) = Kp*e(:,k)+Kd*edot(:,k)+Ki*eint(:,k);%calculate linear PID controller
     u(:,k+1)=Binv(z(:,k))*v(:,k+1);%calculate non linear controller
     
     %make max velocity 1
-    if max(abs(u(:,k+1)))>70
-       u(:,k+1)=u(:,k+1)/max(abs(u(:,k+1)))*70;
+    if max(abs(u(:,k+1)))>100
+       u(:,k+1)=u(:,k+1)/max(abs(u(:,k+1)))*100;
        k
     end
-    u(:,k+1)=u(:,k+1)+30;
+    u(:,k+1)=u(:,k+1);
 
-    volts_to_send = sprintf('%d,%d,%d,%d*', int16(u(1,k+1)), int16(u(2,k+1)), int16(u(3,k+1)), int16(u(4,k+1)));
+    volts_to_send = sprintf('%d,%d,%d,%d*', int16(u(1,k+1)), int16(-u(2,k+1)), int16(u(3,k+1)), int16(-u(4,k+1)));
     volts_to_send
     fprintf(serialPortObj, volts_to_send);
 
