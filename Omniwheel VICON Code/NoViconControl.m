@@ -5,7 +5,7 @@ timeglobal=0;
 tglobal=tic;
 
 matcounter = 1; % Starting row for output matrix
-max_operation = 2; % Maximum time robot will move
+max_operation = 5; % Maximum time robot will move
 matrixsize = max_operation * 100 + 100; % Based on the time for operation, will wait 1 second after robot stops to end recording
  
 Sheet1Mat = zeros(matrixsize,14);
@@ -24,7 +24,7 @@ rb5=[0,0,0];
 
 
 delete(instrfind);
-port = 'COM7'; % Replace with whatever the USB serial bus from the XBee module is on (was 7)
+port = 'COM3'; % Replace with whatever the USB serial bus from the XBee module is on (was 7)
 serialPortObj = serial(port, 'BaudRate', 9600);
 fopen(serialPortObj);
 
