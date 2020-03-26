@@ -1,6 +1,10 @@
 clc
 
 %% Initializes Parameters
+timenow=0.01;
+timeglobal=0;
+tglobal=tic;
+
 k = 1; % Starting row for output matrix
 max_operation = 10; % Maximum time robot will move
 matrixsize = max_operation * 50 + 50; % Based on the time for operation, will wait 1 second after robot stops to end recording
@@ -63,7 +67,7 @@ while(timeglobal <= max_operation)
 
     % Getting angle relative to x axis.
     %vector_ca = [cos(pi/2) sin(pi/2); -sin(pi/2) cos(pi/2)]*[(rb4(1) - rb5(1))/1000; (rb4(2) - rb5(2))/1000]; %get position vector
-    theta = 0; %calculate angle
+    theta = 7*pi/4; %calculate angle
 
     % Find xR, yR, thetaR - Real values
 
@@ -102,7 +106,7 @@ while(timeglobal <= max_operation)
     end
     u(:,k+1)=u(:,k+1);
 
-    volts_to_send = sprintf('%d,%d,%d,%d*', int16(u(1,k+1)), int16(-u(2,k+1)), int16(u(3,k+1)), int16(-u(4,k+1)));
+    volts_to_send = sprintf('%d,%d,%d,%d*', int16(u(4,k+1)), int16(u(3,k+1)), int16(u(2,k+1)), int16(u(1,k+1)));
     volts_to_send
     fprintf(serialPortObj, volts_to_send);
 
