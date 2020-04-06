@@ -11,6 +11,7 @@ m = 3; % Number of measurements
 p = 4; % Number of Inputs
 x = zeros(n, length(t)); % Initializes states to zero
 x_d = x; %Initializes desired x states
+xdot_d = x; %initialises desired xdot states
 z = zeros(m, length(t)); % Initializes measurements to zero
 e = x; %set up error term
 u = zeros(p, length(t)); % Initializes controller
@@ -44,17 +45,26 @@ K= [1 0 0;
 
 lambda = [5 0 0;
           0 5 0;
-          0 0 3]*1e1;
+          0 0 4]*1e1;
 % lambda=5
 
 %% Set initial conditions
-x(:,1)=[1;1;1];
 
 for k=1:length(t) %Fill in desired path
 %     x_d(:,k)=[0;0;0];
      %x_d(:,k)=[k*T*0.5;k*T*0.5;k*T*0.5];
+     
+     rose = 4; %parameter to create number of rose pedals
+     x_d(:,k)=0.5*[cos(rose*k*T*2*pi/30)*cos(k*T*2*pi/30); cos(rose*k*T*2*pi/30)*sin(k*T*2*pi/30); k*T*0.2]; %create rose path
+     if k~=1 
+         xdot_d(:,k)=(x_d(:,k)-x_d(:,k-1))/T; 
+     end
 end
 
+x(:,1)=[1;1;pi]; %any initial condition
+x(:,1)=x_d(:,1); %start at the proper position
+
+z(:,1)=x(:,1); %set first measurement
 
 
 %% Simulate dynamics (for loop)
@@ -62,16 +72,20 @@ for k = 1:length(t)-1 % For loop that simulates 1 second
     %u(:,k+1) = [sin(pi*k*T);cos(pi*k*T);-sin(pi*k*T);-cos(pi*k*T)];% calculate controller
     e(:,k) = z(:,k)-x_d(:,k); %calculate the error
     e(:,k)
-    if k>2
-        edot = (e(:,k-1)-e(:,k))/T; %calculate the derivative error term
-    else
-        edot = [0;0;0];
-    end
+%     if k>2
+%         edot = (e(:,k-1)-e(:,k))/T; %calculate the derivative error term
+%     else
+%         edot = [0;0;0];
+%     end
     eint = sum(e,2)*T; %calculate the integral error term
+    if k>2/T %calculate integral error term over previous 2 seconds
+        eint=sum(e(:,k-2/T:k),2);
+    end
+    
     s=e(:,k)+lambda*eint; %calculate 
     
     %u(:,k+1) = 1/wr*(B(x(:,k))*edot-vs(:,k))-B(x(:,k))*K*sign(e);
-    u(:,k+1) = -1/wr*(B(x(:,k))*lambda*e(:,k)+vs(:,k))-B(x(:,k))*K*sign(s);
+    u(:,k+1) = 1/wr*(B(x(:,k))*(-lambda*e(:,k)+xdot_d(:,k))-vs(:,k))-B(x(:,k))*K*sign(s);
     
     %limit maximum velocity
     if max(abs(u(:,k+1)))>40
@@ -84,8 +98,8 @@ for k = 1:length(t)-1 % For loop that simulates 1 second
     z(:,k+1) = C*x(:,k+1); % Linear measurement equation
 end
 %% Results
-figure; plot(t, x(1,:));hold on;plot(t, x_d(1,:)); xlabel('Time (sec)');hold off; % Plots position with time
-figure; plot(t, x(2,:));hold on;plot(t, x_d(2,:)); xlabel('Time (sec)');hold off; % Plots velocity with time
-figure; plot(t, x(3,:));hold on;plot(t, x_d(3,:)); xlabel('Time (sec)');hold off; % Plots acceleration with time
+figure; plot(t, x(1,:));hold on;plot(t, x_d(1,:)); xlabel('Time (sec)');hold off;legend('real','desired') % Plots position with time
+figure; plot(t, x(2,:));hold on;plot(t, x_d(2,:)); xlabel('Time (sec)');hold off;legend('real','desired') % Plots velocity with time
+figure; plot(t, x(3,:));hold on;plot(t, x_d(3,:)); xlabel('Time (sec)');hold off;legend('real','desired') % Plots acceleration with time
 figure; plot(t, u); xlabel('Time (sec)'); ylabel('Input'); % Plots input with time
-figure; plot(x(1,:), x(2,:)); xlabel('Time (sec)'); % Plots acceleration with time
+figure; plot(x(1,:), x(2,:)); hold on; plot(x_d(1,:), x_d(2,:)); xlabel('x position (m)');ylabel('y poisition(m)'); hold off; legend('real','desired') % x-y plot of position vs real
