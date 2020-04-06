@@ -16,6 +16,7 @@ z = zeros(m, length(t)); % Initializes measurements to zero
 e = x; %set up error term
 u = zeros(p, length(t)); % Initializes controller
 vs = zeros(p,length(t)); %initialize slip values
+vshat = vs; %intialized measured slip values
 
 rr=0.195; %define robot radius
 wr = 0.03175; %define wheel radius
@@ -43,9 +44,9 @@ K= [1 0 0;
    0 1 0;
    0 0 1]*1e0;
 
-lambda = [5 0 0;
-          0 5 0;
-          0 0 4]*1e1;
+lambda = [7 0 0;
+          0 7 0;
+          0 0 6]*1e1;
 % lambda=5
 
 %% Set initial conditions
@@ -55,14 +56,14 @@ for k=1:length(t) %Fill in desired path
      %x_d(:,k)=[k*T*0.5;k*T*0.5;k*T*0.5];
      
      rose = 4; %parameter to create number of rose pedals
-     x_d(:,k)=0.5*[cos(rose*k*T*2*pi/30)*cos(k*T*2*pi/30); cos(rose*k*T*2*pi/30)*sin(k*T*2*pi/30); k*T*0.2]; %create rose path
+     x_d(:,k)=0.5*[cos(rose*k*T*2*pi/30)*cos(k*T*2*pi/30); cos(rose*k*T*2*pi/30)*sin(k*T*2*pi/30);7*pi]; %create rose path
      if k~=1 
          xdot_d(:,k)=(x_d(:,k)-x_d(:,k-1))/T; 
      end
 end
 
-x(:,1)=[1;1;pi]; %any initial condition
-x(:,1)=x_d(:,1); %start at the proper position
+x(:,1)=[0;0;pi]; %any initial condition
+% x(:,1)=x_d(:,1); %start at the proper position
 
 z(:,1)=x(:,1); %set first measurement
 
@@ -85,16 +86,16 @@ for k = 1:length(t)-1 % For loop that simulates 1 second
     s=e(:,k)+lambda*eint; %calculate 
     
     %u(:,k+1) = 1/wr*(B(x(:,k))*edot-vs(:,k))-B(x(:,k))*K*sign(e);
-    u(:,k+1) = 1/wr*(B(x(:,k))*(-lambda*e(:,k)+xdot_d(:,k))-vs(:,k))-B(x(:,k))*K*sign(s);
+    u(:,k+1) = 1/wr*(B(x(:,k))*(-lambda*e(:,k)+xdot_d(:,k))-vshat(:,k))-B(x(:,k))*K*sign(s);
     
-    %limit maximum velocity
-    if max(abs(u(:,k+1)))>40
-       u(:,k+1)=u(:,k+1)/max(abs(u(:,k+1)))*40;
-       u(:,k+1)
-    end
+%     %limit maximum velocity
+%     if max(abs(u(:,k+1)))>40
+%        u(:,k+1)=u(:,k+1)/max(abs(u(:,k+1)))*40;
+%        u(:,k+1)
+%     end
     
     
-    x(:,k+1) = x(:,k) + Binv(x(:,k))*wr*u(:,k+1)*T; % Linear state space equation
+    x(:,k+1) = x(:,k) + Binv(x(:,k))*(wr*u(:,k+1)+vs(:,k))*T; % Linear state space equation
     z(:,k+1) = C*x(:,k+1); % Linear measurement equation
 end
 %% Results
