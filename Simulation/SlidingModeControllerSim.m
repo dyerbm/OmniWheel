@@ -56,14 +56,14 @@ for k=1:length(t) %Fill in desired path
      %x_d(:,k)=[k*T*0.5;k*T*0.5;k*T*0.5];
      
      rose = 4; %parameter to create number of rose pedals
-     x_d(:,k)=0.5*[cos(rose*k*T*2*pi/30)*cos(k*T*2*pi/30); cos(rose*k*T*2*pi/30)*sin(k*T*2*pi/30);7*pi]; %create rose path
+     x_d(:,k)=0.5*[cos(rose*k*T*2*pi/30)*cos(k*T*2*pi/30); cos(rose*k*T*2*pi/30)*sin(k*T*2*pi/30);sin(k*T*2*pi)]; %create rose path
      if k~=1 
          xdot_d(:,k)=(x_d(:,k)-x_d(:,k-1))/T; 
      end
 end
 
 x(:,1)=[0;0;pi]; %any initial condition
-% x(:,1)=x_d(:,1); %start at the proper position
+x(:,1)=x_d(:,1); %start at the proper position
 
 z(:,1)=x(:,1); %set first measurement
 
@@ -88,17 +88,22 @@ for k = 1:length(t)-1 % For loop that simulates 1 second
     %u(:,k+1) = 1/wr*(B(x(:,k))*edot-vs(:,k))-B(x(:,k))*K*sign(e);
     u(:,k+1) = 1/wr*(B(x(:,k))*(-lambda*e(:,k)+xdot_d(:,k))-vshat(:,k))-B(x(:,k))*K*sign(s);
     
-%     %limit maximum velocity
-%     if max(abs(u(:,k+1)))>40
-%        u(:,k+1)=u(:,k+1)/max(abs(u(:,k+1)))*40;
-%        u(:,k+1)
-%     end
+    %limit maximum velocity
+    if max(abs(u(:,k+1)))>40
+       u(:,k+1)=u(:,k+1)/max(abs(u(:,k+1)))*40;
+       u(:,k+1)
+    end
     
     
     x(:,k+1) = x(:,k) + Binv(x(:,k))*(wr*u(:,k+1)+vs(:,k))*T; % Linear state space equation
     z(:,k+1) = C*x(:,k+1); % Linear measurement equation
 end
 %% Results
+for k = 1:n %calculate RSME
+    RMSE(k) = (sum(e(k,:).^2)/length(t))^0.5; % Calculates the RMSE for EKF using square error values calculated in the for loop
+end
+
+
 figure; plot(t, x(1,:));hold on;plot(t, x_d(1,:)); xlabel('Time (sec)');hold off;legend('real','desired') % Plots position with time
 figure; plot(t, x(2,:));hold on;plot(t, x_d(2,:)); xlabel('Time (sec)');hold off;legend('real','desired') % Plots velocity with time
 figure; plot(t, x(3,:));hold on;plot(t, x_d(3,:)); xlabel('Time (sec)');hold off;legend('real','desired') % Plots acceleration with time
