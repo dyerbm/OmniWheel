@@ -52,18 +52,30 @@ lambda = [7 0 0;
 %% Set initial conditions
 
 for k=1:length(t) %Fill in desired path
-%     x_d(:,k)=[0;0;0];
-     %x_d(:,k)=[k*T*0.5;k*T*0.5;k*T*0.5];
+%     x_d(:,k)=[0;0;0]; %stabilize to the origin
+%     x_d(:,k)=[k*T*0.5;k*T*0.5;k*T*0.5]; %follow linear trajectory
      
-     rose = 4; %parameter to create number of rose pedals
-     x_d(:,k)=0.5*[cos(rose*k*T*2*pi/30)*cos(k*T*2*pi/30); cos(rose*k*T*2*pi/30)*sin(k*T*2*pi/30);sin(k*T*2*pi)]; %create rose path
-     if k~=1 
-         xdot_d(:,k)=(x_d(:,k)-x_d(:,k-1))/T; 
-     end
+%      if rem(((k)*T),3)==0 %random locations generator
+%          x_d(:,k)=-0.5+1*rand(3,1);
+%      elseif k~=1
+%          x_d(:,k)=x_d(:,k-1);
+%      end
+        
+        
+     
+%      rose = 4; %parameter to create number of rose pedals
+%      x_d(:,k)=0.5*[cos(rose*k*T*2*pi/30)*cos(k*T*2*pi/30); cos(rose*k*T*2*pi/30)*sin(k*T*2*pi/30);sin(k*T*2*pi)]; %create rose path
+%      if k~=1 
+%          xdot_d(:,k)=(x_d(:,k)-x_d(:,k-1))/T; 
+%      end
+
+      x_d(:,k)=0.5*[sin(k*T*2*pi/12)+cos(k*T*2*pi/14);sin(k*T*2*pi/5)+cos(k*T*2*pi/4);0]; %follow linear trajectory
+
+      vs(:,k)=-0.5+1*rand(4,1); %set the amount of real slip
 end
 
 x(:,1)=[0;0;pi]; %any initial condition
-x(:,1)=x_d(:,1); %start at the proper position
+%x(:,1)=x_d(:,1); %start at the proper position
 
 z(:,1)=x(:,1); %set first measurement
 
@@ -102,6 +114,7 @@ end
 for k = 1:n %calculate RSME
     RMSE(k) = (sum(e(k,:).^2)/length(t))^0.5; % Calculates the RMSE for EKF using square error values calculated in the for loop
 end
+RMSE=RMSE
 
 
 figure; plot(t, x(1,:));hold on;plot(t, x_d(1,:)); xlabel('Time (sec)');hold off;legend('real','desired') % Plots position with time
