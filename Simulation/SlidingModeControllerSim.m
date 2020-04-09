@@ -71,7 +71,7 @@ for k=1:length(t) %Fill in desired path
 
       x_d(:,k)=0.5*[sin(k*T*2*pi/12)+cos(k*T*2*pi/14);sin(k*T*2*pi/5)+cos(k*T*2*pi/4);0]; %follow linear trajectory
 
-      vs(:,k)=-0.5+1*rand(4,1); %set the amount of real slip
+      %vs(:,k)=-0.5+1*rand(4,1); %set the amount of real slip
 end
 
 x(:,1)=[0;0;pi]; %any initial condition
