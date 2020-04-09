@@ -3,11 +3,11 @@ close all; % Close all figures and windows
 clear; % Clear workspace
 clc; % Clears screen
 %% Initializing parameters
-tf = 10; % Final time in simulation
+tf = 1; % Final time in simulation
 T = 2e-2; % Sample rate
 t = 0:T:tf; % Time vector
 
-%Definitions for the Wheels
+%% Definitions for the Wheels
 n_m = 2; % Number of states
 m_m = 1; % Number of measurements
 p_m = 1; % Number of inputs
@@ -36,33 +36,90 @@ P_kf_m = Q_m; % Initializes state error covariance
 RMSE_m = zeros(n_m*num_m,1); % Initializes RMSE vector
 error_m = (x_m(:,1) - x_kf_m(:,1)).^2;
 
-%Definitions for the Robot
+%% Definitions for the Robot
 n_r = 3; % Number of states
 m_r = 3; % Number of measurements
-C_r = eye(m); % Defines measurement matrix
-x_r = zeros(n,length(t)); % Initialize states
-z_r = zeros(m,length(t)); % Initialize measurements
-u_r = zeros(1,length(t)); % Initialize input
-
-Q_r = 1e-9*eye(n); % Defines system noise covariance
-R_r = 1e3*Q; % Defines measurement noise covariance
-P_ekf_r = 10*Q; % Iniitialize EKF state error covariance
-x_ekf_r = x; % Initialize EKF estimates
-w_r = mvnrnd(zeros(n,1), Q, length(t))'; % Defines system noise (zero mean and covariance Q)
-v_r = mvnrnd(zeros(m,1), R, length(t))'; % Defines measurement noise (zero mean and covariance R)
+p_r = 4; % Number of Inputs
+C_r = eye(m_r); % Defines measurement matrix
+x_r = zeros(n_r,length(t)); % Initialize states
+x_d_r = x_r; %Initializes desired x states
+xdot_d_r = x_r; %initialises desired xdot states
+e_r = x_r; %set up error term
+z_r = zeros(m_r,length(t)); % Initialize measurements
+u_r = zeros(p_r,length(t)); % Initialize input
+Q_r = 1e-6*eye(n_r); % Defines system noise covariance
+R_r = 1e3*Q_r; % Defines measurement noise covariance
+P_ekf_r = 10*Q_r; % Iniitialize EKF state error covariance
+x_ekf_r = x_r; % Initialize EKF estimates
+w_r = mvnrnd(zeros(n_r,1), Q_r, length(t))'; % Defines system noise (zero mean and covariance Q)
+v_r = mvnrnd(zeros(m_r,1), R_r, length(t))'; % Defines measurement noise (zero mean and covariance R)
+rr=0.195; %define robot radius
+wr = 0.03175; %define wheel radius
 xNon = @(y)[(-cos(y(3))-sin(y(3)))/(2*sqrt(2)), (-cos(y(3))+sin(y(3)))/(2*sqrt(2)), (cos(y(3))+sin(y(3)))/(2*sqrt(2)), (cos(y(3))-sin(y(3)))/(2*sqrt(2));
     (cos(y(3))-sin(y(3)))/(2*sqrt(2)), (-cos(y(3))-sin(y(3)))/(2*sqrt(2)), (-cos(y(3))+sin(y(3)))/(2*sqrt(2)), (cos(y(3))+sin(y(3)))/(2*sqrt(2));
     1/(4*rr), 1/(4*rr), 1/(4*rr), 1/(4*rr)]*(wr*[y(4);y(5);y(6);y(7)]+[y(8);y(9);y(10);y(11)])*T+[y(1);y(2);y(3)];
 Alin = @(y) [ 1, 0, -T*((2^(1/2)*(y(8) + y(4)*wr)*(cos(y(3)) - sin(y(3))))/4 - (2^(1/2)*(y(10) + y(6)*wr)*(cos(y(3)) - sin(y(3))))/4 - (2^(1/2)*(cos(y(3)) + sin(y(3)))*(y(9) + y(5)*wr))/4 + (2^(1/2)*(cos(y(3)) + sin(y(3)))*(y(11) + y(7)*wr))/4);
  0, 1, -T*((2^(1/2)*(y(9) + y(5)*wr)*(cos(y(3)) - sin(y(3))))/4 - (2^(1/2)*(y(11) + y(7)*wr)*(cos(y(3)) - sin(y(3))))/4 + (2^(1/2)*(cos(y(3)) + sin(y(3)))*(y(8) + y(4)*wr))/4 - (2^(1/2)*(cos(y(3)) + sin(y(3)))*(y(10) + y(6)*wr))/4);
  0, 0, 1];%linearized dynamics input at [x;u;vs]
-RMSE = zeros(n,1); % Initializes RMSE vector
-error = (x(:,1) - x_ekf(:,1)).^2; % Initializes squared error
+B_r = @(y)[-((cos(y(3))+sin(y(3)))*sqrt(2))/(2*(cos(y(3))^2+sin(y(3))^2)),((cos(y(3))-sin(y(3)))*sqrt(2))/(2*(cos(y(3))^2+sin(y(3))^2)), rr;
+    -((cos(y(3))-sin(y(3)))*sqrt(2))/(2*(cos(y(3))^2+sin(y(3))^2)),-((cos(y(3))+sin(y(3)))*sqrt(2))/(2*(cos(y(3))^2+sin(y(3))^2)), rr;
+    ((cos(y(3))+sin(y(3)))*sqrt(2))/(2*(cos(y(3))^2+sin(y(3))^2)),-((cos(y(3))-sin(y(3)))*sqrt(2))/(2*(cos(y(3))^2+sin(y(3))^2)), rr;
+    ((cos(y(3))+sin(y(3)))*sqrt(2))/(2*(cos(y(3))^2+sin(y(3))^2)),((cos(y(3))+sin(y(3)))*sqrt(2))/(2*(cos(y(3))^2+sin(y(3))^2)), rr];
+vs_r = zeros(p_r,length(t)); %initialize slip values
+vshat_r = vs_r; %intialized measured slip values
+RMSE = zeros(n_r,1); % Initializes RMSE vector
+error = (x_r(:,1) - x_ekf_r(:,1)).^2; % Initializes squared error
 
+%% set up for the controller
+K= [1 0 0;
+   0 1 0;
+   0 0 1]*1e0;
+
+lambda = [7 0 0;
+          0 7 0;
+          0 0 6]*1e1;
+for k=1:length(t) %Fill in desired path
+%    x_d_r(:,k)=[0;0;0]; %stabilize to the origin
+     x_d_r(:,k)=[k*T*0.5;k*T*0.5;k*T*0.5]; %follow linear trajectory
+     
+%      if rem(((k)*T),3)==0 %random locations generator
+%          x_d_r(:,k)=-0.5+1*rand(3,1);
+%      elseif k~=1
+%          x_d_r(:,k)=x_d(:,k-1);
+%      end
+       
+%      rose = 4; %parameter to create number of rose pedals
+%      x_d_r(:,k)=0.5*[cos(rose*k*T*2*pi/30)*cos(k*T*2*pi/30); cos(rose*k*T*2*pi/30)*sin(k*T*2*pi/30);sin(k*T*2*pi)]; %create rose path
+%      if k~=1 
+%          xdot_d(:,k)=(x_d(:,k)-x_d(:,k-1))/T; 
+%      end
+
+%      x_d_r(:,k)=0.5*[sin(k*T*2*pi/12)+cos(k*T*2*pi/14);sin(k*T*2*pi/5)+cos(k*T*2*pi/4);0]; %follow linear trajectory
+
+      %vs(:,k)=-0.5+1*rand(4,1); %set the amount of real slip
+end
+
+x_r(:,1)=[1;1;pi]; %any initial condition
+%x(:,1)=x_d(:,1); %start at the proper position
+
+z_r(:,1)=x_r(:,1); %set first measurement
 
 %% Simulate dynamics (for loop)
 for k = 1:length(t)-1 % For loop that simulates 1 second
     %calculate the controller
+    e_r(:,k) = z_r(:,k)-x_d_r(:,k); %calculate the error
+    eint = sum(e_r,2)*T; %calculate the integral error term
+    if k>2/T %calculate integral error term over previous 2 seconds
+        eint=sum(e_r(:,k-2/T:k),2);
+    end
+    
+    s=e_r(:,k)+lambda*eint; %calculate sliding surface
+    u_m(:,k+1) = 1/wr*(B_r(x_r(:,k))*(-lambda*e_r(:,k)+xdot_d_r(:,k))-vshat_r(:,k))-B_r(x_r(:,k))*K*sign(s);
+    
+    %limit maximum voltage
+    if max(abs(u_m(:,k+1)))>12
+       u_m(:,k+1)=u_m(:,k+1)/max(abs(u_m(:,k+1)))*12;
+    end
     
     %Filter the motors
     x_m(:,k+1) = A_m*x_m(:,k) + B_m*u_m(:,k) + w_m(:,k); % Linear state space equation
@@ -70,8 +127,9 @@ for k = 1:length(t)-1 % For loop that simulates 1 second
     [x_kf_m(:,k+1), P_kf_m(:,:,k+1)] = kf(x_kf_m(:,k), z_m(:,k+1), u_m(:,k), P_kf_m(:,:,k), A_m, B_m, C_m, Q_m, R_m); % Calls KF function to estimate states
     
     %Filter the robot
-    x_r(:,k+1) = x_r(:,k) + Binv(x(:,k))*(wr*u_r(:,k+1)+vs_r(:,k))*T; % Linear state space equation
-    z_r(:,k+1) = C_r*x_r(:,k+1); % Linear measurement equation
+    x_r(:,k+1) = xNon([x_r(:,k+1);x_kf_m(:,k);vshat_r(:,k+1)])+w_r(:,k); % Linear state space equation
+    z_r(:,k+1) = C_r*x_ekf_r(:,k+1)+v_r(:,k); % Linear measurement equation
+    [x_ekf_r(:,k+1), P_ekf_r(:,:,k+1)] = ekf(x_ekf_r(:,k), z_r(:,k+1), x_kf_m(:,k), vshat_r(:,k), P_ekf_r(:,:,k), xNon, Alin, C_r, Q_r, R_r); % Calls EKF function to estimate states  
 
     error_m(:,k+1) = (x_m(:,k+1) - x_kf_m(:,k+1)).^2;
 end
@@ -85,3 +143,5 @@ fprintf('RMSE (KF): %s\n', RMSE_m)
 figure; plot(t, x_m(3,:)); hold all; plot(t, x_kf_m(3,:)); xlabel('Time (sec)'); ylabel('Angular Velocity'); legend('True','KF');hold off; % Plots position and estimated position with time
 figure; plot(t, x_m(2,:)); hold all; plot(t, x_kf_m(2,:));xlabel('Time (sec)'); ylabel('Velocity'); legend('True','KF');hold off; % Plots velocity with time
 % figure; plot(t, u); xlabel('Time (sec)'); ylabel('Input'); % Plots input with time
+
+figure; plot(t, x_r(1,:)); hold all; plot(t, x_ekf_r(1,:)); xlabel('Time (sec)'); ylabel('x position (m)'); legend('True','KF');hold off; % Plots position and estimated position with time
