@@ -3,7 +3,7 @@ close all; % Close all figures and windows
 clear; % Clear workspace
 clc; % Clears screen
 %% Initializing parameters
-tf = 15; % Final time in simulation
+tf = 600; % Final time in simulation
 T = 2e-2; % Sample rate
 t = 0:T:tf; % Time vector
 
@@ -12,8 +12,8 @@ n_m = 2; % Number of states
 m_m = 1; % Number of measurements
 p_m = 1; % Number of inputs
 num_m=4; %Number of Motors
-A_c = [-0.1/0.001 , 0.01/0.001; -0.01/0.2 , -1/0.2]; % System matrix for single motor in continuous time
-B_c = [0;1/0.3]; % Input matrix for single motor in continuous time
+A_c = [-0.1/0.001 , 0.01/0.001; -0.01/0.1 , -1/0.1]; % System matrix for single motor in continuous time
+B_c = [0;1/0.1]; % Input matrix for single motor in continuous time
 C_c = [1,0]; % Measurement matrix for single motor in continuous time
 A_d=A_c*T+eye(n_m); %discrete system matrix
 B_d=B_c*T; %Discrete input matrix
@@ -89,13 +89,13 @@ for k=1:length(t) %Fill in desired path
 %          x_d_r(:,k)=x_d_r(:,k-1);
 %      end
        
-     rose = 3; %parameter to create number of rose pedals
-     x_d_r(:,k)=1*[cos(rose*k*T*2*pi/30)*cos(k*T*2*pi/30); cos(rose*k*T*2*pi/30)*sin(k*T*2*pi/30);sin(k*T*2*pi)]; %create rose path
-     if k~=1 
-         xdot_d_r(:,k)=(x_d_r(:,k)-x_d_r(:,k-1))/T; 
-     end
+%      rose = 3; %parameter to create number of rose pedals
+%      x_d_r(:,k)=1*[cos(rose*k*T*2*pi/30)*cos(k*T*2*pi/30); cos(rose*k*T*2*pi/30)*sin(k*T*2*pi/30);sin(k*T*2*pi)]; %create rose path
+%      if k~=1 
+%          xdot_d_r(:,k)=(x_d_r(:,k)-x_d_r(:,k-1))/T; 
+%      end
 
-%      x_d_r(:,k)=0.5*[sin(k*T*2*pi/12)+cos(k*T*2*pi/14);sin(k*T*2*pi/5)+cos(k*T*2*pi/4);0]; %follow linear trajectory
+     x_d_r(:,k)=0.5*[sin(k*T*2*pi/12)+cos(k*T*2*pi/14);sin(k*T*2*pi/5)+cos(k*T*2*pi/4);0]; %follow linear trajectory
 
       vs_r(:,k)=-0.1+0.2*rand(4,1); %set the amount of real slip
 end
