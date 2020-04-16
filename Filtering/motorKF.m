@@ -1,9 +1,9 @@
 %% Setting up workspace
 close all; % Close all figures and windows
-clear; % Clear workspace
-clc; % Clears screen
+% clear; % Clear workspace
+% clc; % Clears screen
 %% Initializing parameters
-tf = 600; % Final time in simulation
+tf = 30; % Final time in simulation
 T = 2e-2; % Sample rate
 t = 0:T:tf; % Time vector
 
@@ -21,8 +21,8 @@ C_d=C_c; %Discrete Measurement Matrix
 A_m=blkdiag(A_d,A_d,A_d,A_d);
 B_m=blkdiag(B_d,B_d,B_d,B_d);
 C_m=blkdiag(C_d,C_d,C_d,C_d); %Measurement Matrix
-Q_m = diag([0.009 0.08 0.009 0.08 0.009 0.08 0.009 0.08])*T*1e-3; % Defines Q
-R_m = diag([0.003,0.003,0.003,0.003]); % Defines R
+Q_m = diag([0.009 0.08 0.009 0.08 0.009 0.08 0.009 0.08])*T*1e4; % Defines Q
+R_m = diag([0.1,0.1,0.1,0.1]); % Defines R
 w_m = mvnrnd(zeros(length(t),n_m*num_m),Q_m)'*T; % Defines w
 v_m = mvnrnd(zeros(length(t),m_m*num_m),R_m)'; % Defines v
 x_m = zeros(n_m*num_m, length(t)); % Initializes states to zero
@@ -89,22 +89,36 @@ for k=1:length(t) %Fill in desired path
 %          x_d_r(:,k)=x_d_r(:,k-1);
 %      end
        
-%      rose = 3; %parameter to create number of rose pedals
-%      x_d_r(:,k)=1*[cos(rose*k*T*2*pi/30)*cos(k*T*2*pi/30); cos(rose*k*T*2*pi/30)*sin(k*T*2*pi/30);sin(k*T*2*pi)]; %create rose path
-%      if k~=1 
-%          xdot_d_r(:,k)=(x_d_r(:,k)-x_d_r(:,k-1))/T; 
-%      end
+     rose = 2; %parameter to create number of rose pedals
+     x_d_r(:,k)=1*[cos(rose*k*T*2*pi/30)*cos(k*T*2*pi/30); cos(rose*k*T*2*pi/30)*sin(k*T*2*pi/30);sin(k*T*2*pi)]; %create rose path
+     if k~=1 
+         xdot_d_r(:,k)=(x_d_r(:,k)-x_d_r(:,k-1))/T; 
+     end
 
-     x_d_r(:,k)=0.5*[sin(k*T*2*pi/12)+cos(k*T*2*pi/14);sin(k*T*2*pi/5)+cos(k*T*2*pi/4);0]; %follow linear trajectory
+%      x_d_r(:,k)=0.5*[sin(k*T*2*pi/12)+cos(k*T*2*pi/14);sin(k*T*2*pi/5)+cos(k*T*2*pi/4);sin(k*T*2*pi/16)+cos(k*T*2*pi/8)]; %follow linear trajectory
 
-      vs_r(:,k)=-0.1+0.2*rand(4,1); %set the amount of real slip
+%     vs_r(:,k)=-0.1+0.2*rand(4,1); %set the amount of real slip
 end
 
 x_r(:,1)=[1;0;0]; %any initial condition
-x_r(:,1)=x_d_r(:,1); %start at the proper position
+%x_r(:,1)=x_d_r(:,1); %start at the proper position
 
 z_r(:,1)=x_r(:,1); %set first measurement
-x_ekf_r=x_r(:,1); %correct starting point for ekf
+%x_ekf_r=x_r(:,1); %correct starting point for ekf
+
+x_m_unfiltered=x_m; %set up other cases
+x_nofilter=x_ekf_r;
+x_kfonly=x_ekf_r;
+x_ekfonly=x_ekf_r;
+P_ekfonly=P_ekf_r;
+
+error_nofilter = (x_r(:,1) - x_nofilter(:,1)).^2; % Initializes squared error
+error_ekfonly = (x_r(:,1) - x_ekfonly(:,1)).^2; % Initializes squared error
+error_kfonly = (x_r(:,1) - x_kfonly(:,1)).^2; % Initializes squared error
+
+RMSE_nofilter =RMSE_r;
+RMSE_ekfonly = RMSE_r;
+RMSE_kfonly = RMSE_r;
 
 %% Simulate dynamics (for loop)
 for k = 1:length(t)-1 % For loop that simulates 1 second
@@ -129,8 +143,10 @@ for k = 1:length(t)-1 % For loop that simulates 1 second
     x_m(:,k+1) = A_m*x_m(:,k) + B_m*u_m(:,k) + w_m(:,k); % Linear state space equation
     z_m(:,k+1) = C_m*x_m(:,k+1) + v_m(:,k+1); % Linear measurement equation
     [x_kf_m(:,k+1), P_kf_m(:,:,k+1)] = kf(x_kf_m(:,k), z_m(:,k+1), u_m(:,k), P_kf_m(:,:,k), A_m, B_m, C_m, Q_m, R_m); % Calls KF function to estimate states
+    x_m_unfiltered(:,k+1) = A_m*x_m_unfiltered(:,k)+ B_m*u_m(:,k);
     
     z_kf_m=C_m*x_kf_m(:,k);
+    z_m_unfiltered=C_m*x_m_unfiltered(:,k);
     
     %Filter the robot
     %x_r(:,k+1) = x_r(:,k) + pinv(B_r(x_r(:,k)))*(wr*u_m(:,k+1)+vs_r(:,k))*T;
@@ -138,9 +154,16 @@ for k = 1:length(t)-1 % For loop that simulates 1 second
     z_r(:,k+1) = C_r*x_r(:,k)+v_r(:,k); % Linear measurement equation
     [x_ekf_r(:,k+1), P_ekf_r(:,:,k+1)] = ekf(x_ekf_r(:,k), z_r(:,k+1), z_kf_m, vshat_r(:,k), P_ekf_r(:,:,k), xNon, Alin, C_r, Q_r, R_r); % Calls EKF function to estimate states  
     
+    x_kfonly(:,k+1)=xNon([x_kfonly(:,k);z_kf_m;vs_r(:,k)]);
+    [x_ekfonly(:,k+1), P_ekfonly(:,:,k+1)]=ekf(x_ekfonly(:,k), z_r(:,k+1), z_m_unfiltered, vshat_r(:,k), P_ekfonly(:,:,k), xNon, Alin, C_r, Q_r, R_r);
+    x_nofilter(:,k+1)=xNon([x_nofilter(:,k);z_m_unfiltered;vs_r(:,k)]);
+    
     
     error_r(:,k+1) = (x_r(:,k+1) - x_ekf_r(:,k+1)).^2;
     error_m(:,k+1) = (x_m(:,k+1) - x_kf_m(:,k+1)).^2;
+    error_nofilter(:,k+1) = (x_r(:,k+1) - x_nofilter(:,k+1)).^2; % Initializes squared error
+    error_ekfonly(:,k+1) = (x_r(:,k+1) - x_ekfonly(:,k+1)).^2; % Initializes squared error
+    error_kfonly(:,k+1) = (x_r(:,k+1) - x_kfonly(:,k+1)).^2; % Initializes squared error
 end
 
 for k = 1:n_m*num_m
@@ -148,14 +171,27 @@ for k = 1:n_m*num_m
 end
 for k = 1:n_r
     RMSE_r(k) = (sum(error_r(k,:))/length(t))^0.5; % Calculates the RMSE for EKF using square error values calculated in the for loop
+    RMSE_nofilter(k) = (sum(error_nofilter(k,:))/length(t))^0.5;
+    RMSE_ekfonly(k) = (sum(error_ekfonly(k,:))/length(t))^0.5;
+    RMSE_kfonly(k) = (sum(error_kfonly(k,:))/length(t))^0.5;
 end
 fprintf('RMSE (KF): %s\n', RMSE_m)
 fprintf('RMSE (EKF): %s\n', RMSE_r)
+fprintf('RMSE (nofilter): %s\n', RMSE_nofilter)
+fprintf('RMSE (EKFonly): %s\n', RMSE_ekfonly)
+fprintf('RMSE (KFonly): %s\n', RMSE_kfonly)
 %% Results
 figure; plot(t, x_m(3,:)); hold all; plot(t, x_kf_m(3,:)); xlabel('Time (sec)'); ylabel('Angular Velocity'); legend('True','KF');hold off; % Plots position and estimated position with time
 figure; plot(t, x_m(2,:)); hold all; plot(t, x_kf_m(2,:));xlabel('Time (sec)'); ylabel('Velocity'); legend('True','KF');hold off; % Plots velocity with time
 % figure; plot(t, u); xlabel('Time (sec)'); ylabel('Input'); % Plots input with time
 
 figure; plot(t, x_r(1,:)); hold all; plot(t, x_ekf_r(1,:));plot(t, x_d_r(1,:)); xlabel('Time (sec)'); ylabel('x position (m)'); legend('True','KF','desired');hold off; % Plots position and estimated position with time
-figure; plot(x_ekf_r(1,:), x_ekf_r(2,:)); hold all; plot(x_r(1,:), x_r(2,:));plot(x_d_r(1,:), x_d_r(2,:)); xlabel('x'); ylabel('y'); legend('EKF','True','Desired');hold off; % Plots position and estimated position with time
+% figure; plot(x_ekf_r(1,:), x_ekf_r(2,:)); hold all; plot(x_r(1,:), x_r(2,:));plot(x_d_r(1,:), x_d_r(2,:)); xlabel('x (m)'); ylabel('y (m)');xlim([-1.1,1.1]);ylim([-1.1,1.1]); legend('Filtered','True','Desired');hold off; % Plots position and estimated position with time
+% figure; plot(t, x_ekf_r(3,:)); hold all; plot(t, x_r(3,:));plot(t, x_d_r(3,:)); xlabel('time (s)'); ylabel('theta (rad)'); legend('Filtered','True','Desired');hold off;
+
+
+
+figure;  plot(x_r(1,:), x_r(2,:));hold all; plot(x_ekf_r(1,:), x_ekf_r(2,:));  plot(x_ekfonly(1,:), x_ekfonly(2,:));  plot(x_kfonly(1,:), x_kfonly(2,:));  plot(x_nofilter(1,:), x_nofilter(2,:));xlabel('x (m)'); ylabel('y (m)');xlim([-1.1,1.1]);ylim([-1.1,1.1]);legend('True','EKF+KF','EKF','KF','No Filter');hold off;
+figure;  plot(t, x_r(3,:));hold all; plot(t, x_ekf_r(3,:));  plot(t, x_ekfonly(3,:));  plot(t, x_kfonly(3,:));  plot(t, x_nofilter(3,:));xlabel('time (s)'); ylabel('theta (rad)');legend('True','EKF+KF','EKF','KF','No Filter');hold off;
+
 
