@@ -3,8 +3,8 @@ close all; % Close all figures and windows
 clear; % Clear workspace
 clc; % Clears screen
 %% Initializing parameters
-tf = 30; % Final time in simulation
-T = 2e-3; % Sample rate
+tf = 20; % Final time in simulation
+T = 2e-5; % Sample rate
 t = 0:T:tf; % Time vector
 n = 3; % Number of states
 m = 3; % Number of measurements
@@ -54,10 +54,10 @@ n_m = 2; % Number of states
 m_m = 1; % Number of measurements
 p_m = 1; % Number of inputs
 num_m=4; %Number of Motors
-J = 0.0001;
-b = 0.01;
-K_m = 105;
-R = 2.5;
+J = 0.001;
+b = 1;
+K_m = 1;
+R = 0.6;
 L = 0.01;
 A_c=[-b/J K_m/J;-K_m/L -R/L];
 B_c=[0; 1/L];
@@ -76,9 +76,9 @@ e_m= z_m;
 e_d_m=0;
 eint_m=0;
 
-K_p=-1e-20;
-K_d=0;
-K_i=0;
+K_p=-20;
+K_d=-2;
+K_i=-1;
 
 %% Set initial conditions
 
@@ -119,9 +119,9 @@ for k = 1:length(t)-1 % For loop that simulates 1 second
     s=e(:,k)+lambda*eint; %calculate 
     u(:,k+1) = 1/wr*(B(x(:,k))*(-lambda*e(:,k)+xdot_d(:,k))-vshat(:,k))-B(x(:,k))*K*sign(s);
     %limit maximum velocity
-%     if max(abs(u(:,k+1)))>40
-%        u(:,k+1)=u(:,k+1)/max(abs(u(:,k+1)))*40;
-%     end
+    if max(abs(u(:,k+1)))>40
+       u(:,k+1)=u(:,k+1)/max(abs(u(:,k+1)))*40;
+    end
 
     u(:,k+1)=[40;40;40;40];%force the controller
     
@@ -134,6 +134,9 @@ for k = 1:length(t)-1 % For loop that simulates 1 second
        e_d_m = (e_m(:,k)-e_m(:,k-1))/T;
     end
     u_m(:,k+1)=K_p*e_m(:,k)+K_d*e_d_m+K_i*eint_m;%calculate voltages for each motor
+    if max(abs(u_m(:,k+1)))>12
+       u_m(:,k+1)=u_m(:,k+1)/max(abs(u_m(:,k+1)))*12;
+    end
     
     %u_m(:,k+1)=u(:,k+1)/40*12;%force linear controller
     
@@ -141,10 +144,10 @@ for k = 1:length(t)-1 % For loop that simulates 1 second
     
     x_m(:,k+1)=A_m*x_m(:,k)+B_m*u_m(:,k+1);
     z_m(:,k+1)=C_m*x_m(:,k+1);
-    x_m(:,k+1)
+    x_m(:,k+1);
     
     
-    x(:,k+1) = x(:,k) + Binv(x(:,k))*(wr*u(:,k+1)+vs(:,k))*T; % Linear state space equation
+    x(:,k+1) = x(:,k) + Binv(x(:,k))*(wr*u_m(:,k+1)+vs(:,k))*T; % Linear state space equation
     z(:,k+1) = C*x(:,k+1); % Linear measurement equation
 end
 %% Results

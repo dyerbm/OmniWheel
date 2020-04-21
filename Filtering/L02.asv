@@ -8,13 +8,13 @@ T = 1e-3; % Sample rate
 t = 0:T:tf; % Time vector
 n = 2; % Number of states
 m = 2; % Number of measurements
-J = 0.001;
-b = 0.1;
-K_m = 0.01;
+J = 0.01;
+b = 0.01;
+K_m = 1;
 R = 1;
 L = 0.5;
 A=[-b/J K_m/J;-K_m/L -R/L];
-%A = [-0.1/0.001 , 0.01/0.001; -0.01/0.5 , -1/0.5]; % System matrix for single motor in continuous time
+A = [-0.1/0.001 , 0.01/0.001; -0.01/0.5 , -1/0.5]; % System matrix for single motor in continuous time
 B = [0;1/0.5]; % Input matrix for single motor in continuous time
 C_c = [1,0]; % Measurement matrix for single motor in continuous time
 

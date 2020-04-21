@@ -3,19 +3,19 @@ close all; % Close all figures and windows
 clear; % Clear workspace
 clc; % Clears screen
 %% Initializing parameters
-tf = 20; % Final time in simulation
-T = 2e-3; % Sample rate
+tf = 0.1; % Final time in simulation
+T = 2e-5; % Sample rate
 t = 0:T:tf; % Time vector
 
 n_m = 2; % Number of states
 m_m = 1; % Number of measurements
 p_m = 1; % Number of inputs
 num_m=4; %Number of Motors
-J = 0.01;
-b = 0.01;
+J = 0.001;
+b = 1;
 K_m = 1;
-R = 1;
-L = 0.5;
+R = 0.6;
+L = 0.01;
 A_c=[-b/J K_m/J;-K_m/L -R/L];
 B_c=[0; 1/L];
 C_c=[1 0];
@@ -40,7 +40,7 @@ K_i=0;
 %% Set initial conditions
 
 for k=1:length(t) %Fill in desired path
-     x_d(:,k)=[30;30;30;30]; %stabilize to the origin
+     x_d(:,k)=[1;1;1;1]; %stabilize to the origin
 end
 
 x(:,1)=[1;1;pi]; %any initial condition
