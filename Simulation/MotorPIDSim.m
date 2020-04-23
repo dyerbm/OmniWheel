@@ -11,11 +11,11 @@ n_m = 2; % Number of states
 m_m = 1; % Number of measurements
 p_m = 1; % Number of inputs
 num_m=4; %Number of Motors
-J = 0.01;
+J = 0.001;
 b = 1;
-K_m = 1;
-R = 0.6;
-L = 0.01;
+K_m = 1.05;
+R = 0.04;
+L = 0.001;
 A_c=[-b/J K_m/J;-K_m/L -R/L];
 B_c=[0; 1/L];
 C_c=[1 0];
@@ -67,7 +67,7 @@ for k = 1:length(t)-1 % For loop that simulates 1 second
        k
     end
     
-    %u_m(:,k+1)=[12;12;12;12];%force linear controller
+    u_m(:,k+1)=[12;12;12;12];%force linear controller
     
     u_m(:,k+1);
     
