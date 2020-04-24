@@ -4,7 +4,7 @@ clear; % Clear workspace
 clc; % Clears screen
 %% Initializing parameters
 tf = 20; % Final time in simulation
-T = 2e-5; % Sample rate
+T = 2e-3; % Sample rate
 t = 0:T:tf; % Time vector
 n = 3; % Number of states
 m = 3; % Number of measurements
@@ -19,7 +19,7 @@ vs = zeros(p,length(t)); %initialize slip values
 vshat = vs; %intialized measured slip values
 
 rr=0.195; %define robot radius
-wr = 0.03175; %define wheel radius
+wr = 0.2; %define wheel radius
 
 %A = [-cos(z(3:1)]; % System matrix
 % B = @(y)(sqrt(2)/2)*[cos(y(3))+sin(y(3)) -cos(y(3))+sin(y(3)) rr;
@@ -46,7 +46,7 @@ K= [1 0 0;
 
 lambda = [7 0 0;
           0 7 0;
-          0 0 6]*1e0;
+          0 0 6]*1e1;
 % lambda=5
 
 %% Motor parameters
@@ -54,11 +54,11 @@ n_m = 2; % Number of states
 m_m = 1; % Number of measurements
 p_m = 1; % Number of inputs
 num_m=4; %Number of Motors
-J = 0.001;
+J = 0.01;
 b = 1;
-K_m = 1;
-R = 0.6;
-L = 0.01;
+K_m = 1.05;
+R = 2.7;
+L = 0.0014;
 A_c=[-b/J K_m/J;-K_m/L -R/L];
 B_c=[0; 1/L];
 C_c=[1 0];
@@ -76,9 +76,9 @@ e_m= z_m;
 e_d_m=0;
 eint_m=0;
 
-K_p=-20;
-K_d=-2;
-K_i=-1;
+K_p=-10;
+K_d=-1;
+K_i=0;
 
 %% Set initial conditions
 
@@ -92,19 +92,19 @@ for k=1:length(t) %Fill in desired path
 %          x_d(:,k)=x_d(:,k-1);
 %      end
          
-%      rose = 4; %parameter to create number of rose pedals
-%      x_d(:,k)=0.5*[cos(rose*k*T*2*pi/30)*cos(k*T*2*pi/30); cos(rose*k*T*2*pi/30)*sin(k*T*2*pi/30);sin(k*T*2*pi)]; %create rose path
-%      if k~=1 
-%          xdot_d(:,k)=(x_d(:,k)-x_d(:,k-1))/T; 
-%      end
+     rose = 5; %parameter to create number of rose pedals
+     x_d(:,k)=0.5*[cos(rose*k*T*2*pi/30)*cos(k*T*2*pi/30); cos(rose*k*T*2*pi/30)*sin(k*T*2*pi/30);sin(k*T*2*pi)]; %create rose path
+     if k~=1 
+         xdot_d(:,k)=(x_d(:,k)-x_d(:,k-1))/T; 
+     end
 
 %      x_d(:,k)=0.5*[sin(k*T*2*pi/12)+cos(k*T*2*pi/14);sin(k*T*2*pi/5)+cos(k*T*2*pi/4);0]; %follow linear trajectory
 
-%      vs(:,k)=-0.5+1*rand(4,1); %set the amount of real slip
+%       vs(:,k)=-0.5+1*rand(4,1); %set the amount of real slip
 end
 
-x(:,1)=[1;1;pi]; %any initial condition
-%x(:,1)=x_d(:,1); %start at the proper position
+x(:,1)=[1;1;0]; %any initial condition
+x(:,1)=x_d(:,1); %start at the proper position
 
 z(:,1)=x(:,1); %set first measurement
 
@@ -119,35 +119,39 @@ for k = 1:length(t)-1 % For loop that simulates 1 second
     s=e(:,k)+lambda*eint; %calculate 
     u(:,k+1) = 1/wr*(B(x(:,k))*(-lambda*e(:,k)+xdot_d(:,k))-vshat(:,k))-B(x(:,k))*K*sign(s);
     %limit maximum velocity
-    if max(abs(u(:,k+1)))>40
-       u(:,k+1)=u(:,k+1)/max(abs(u(:,k+1)))*40;
+    if max(abs(u(:,k+1)))>6
+       u(:,k+1)=u(:,k+1)/max(abs(u(:,k+1)))*6;
     end
+    u(:,k+1)
 
-    u(:,k+1)=[40;40;40;40];%force the controller
+%    u(:,k+1)=[40;40;40;40];%force the controller
     
-    e_m(:,k)=z_m(:,k)-u(:,k)/40;
-    eint_m=sum(e_m,2)*T;
-    if k>2/T %calculate integral error term over previous 2 seconds
-        eint_m=sum(e_m(:,k-2/T:k),2);
-    end
-    if k~=1
-       e_d_m = (e_m(:,k)-e_m(:,k-1))/T;
-    end
-    u_m(:,k+1)=K_p*e_m(:,k)+K_d*e_d_m+K_i*eint_m;%calculate voltages for each motor
-    if max(abs(u_m(:,k+1)))>12
-       u_m(:,k+1)=u_m(:,k+1)/max(abs(u_m(:,k+1)))*12;
-    end
+%     e_m(:,k)=z_m(:,k)-u(:,k);
+%     eint_m=sum(e_m,2)*T;
+%     if k>2/T %calculate integral error term over previous 2 seconds
+%         eint_m=sum(e_m(:,k-2/T:k),2);
+%     end
+%     if k~=1
+%        e_d_m = (e_m(:,k)-e_m(:,k-1))/T;
+%     end
+%     u_m(:,k+1)=K_p*e_m(:,k)+K_d*e_d_m+K_i*eint_m;%calculate voltages for each motor
+%     if max(abs(u_m(:,k+1)))>100
+%        u_m(:,k+1)=u_m(:,k+1)/max(abs(u_m(:,k+1)))*100;
+%     end
+%     
+%     %u_m(:,k+1)=u(:,k+1)/40*12;%force linear controller
+%     
+%     u_m(:,k+1)
+%     
+%     x_m(:,k+1)=A_m*x_m(:,k)+B_m*u_m(:,k+1);
+%     z_m(:,k+1)=C_m*x_m(:,k+1);
+%     x_m(:,k+1);
     
-    %u_m(:,k+1)=u(:,k+1)/40*12;%force linear controller
+    [x_m(:,k+1), z_m(:,k+1)] = MotorPID(x_m(:,k), z_m(:,k), u(:,k+1), T, A_m, B_m, C_m);
+    z_m(:,k+1)
+    x_m(:,k+1)
     
-    u_m(:,k+1)
-    
-    x_m(:,k+1)=A_m*x_m(:,k)+B_m*u_m(:,k+1);
-    z_m(:,k+1)=C_m*x_m(:,k+1);
-    x_m(:,k+1);
-    
-    
-    x(:,k+1) = x(:,k) + Binv(x(:,k))*(wr*u_m(:,k+1)+vs(:,k))*T; % Linear state space equation
+    x(:,k+1) = x(:,k) + Binv(x(:,k))*(wr*z_m(:,k+1)+vs(:,k))*T; % Linear state space equation
     z(:,k+1) = C*x(:,k+1); % Linear measurement equation
 end
 %% Results
