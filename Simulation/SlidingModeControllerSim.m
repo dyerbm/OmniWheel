@@ -3,7 +3,7 @@ close all; % Close all figures and windows
 clear; % Clear workspace
 clc; % Clears screen
 %% Initializing parameters
-tf = 20; % Final time in simulation
+tf = 30; % Final time in simulation
 T = 2e-3; % Sample rate
 t = 0:T:tf; % Time vector
 n = 3; % Number of states
@@ -92,7 +92,7 @@ for k=1:length(t) %Fill in desired path
 %          x_d(:,k)=x_d(:,k-1);
 %      end
          
-     rose = 5; %parameter to create number of rose pedals
+     rose = 4; %parameter to create number of rose pedals
      x_d(:,k)=0.5*[cos(rose*k*T*2*pi/30)*cos(k*T*2*pi/30); cos(rose*k*T*2*pi/30)*sin(k*T*2*pi/30);sin(k*T*2*pi)]; %create rose path
      if k~=1 
          xdot_d(:,k)=(x_d(:,k)-x_d(:,k-1))/T; 
@@ -100,7 +100,7 @@ for k=1:length(t) %Fill in desired path
 
 %      x_d(:,k)=0.5*[sin(k*T*2*pi/12)+cos(k*T*2*pi/14);sin(k*T*2*pi/5)+cos(k*T*2*pi/4);0]; %follow linear trajectory
 
-%       vs(:,k)=-0.5+1*rand(4,1); %set the amount of real slip
+       vs(:,k)=-0.2+0.1*rand(4,1); %set the amount of real slip
 end
 
 x(:,1)=[1;1;0]; %any initial condition
