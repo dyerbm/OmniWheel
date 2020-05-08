@@ -4,7 +4,7 @@ clear; % Clear workspace
 clc; % Clears screen
 %% Initializing parameters
 tf = 30; % Final time in simulation
-T = 2e-3; % Sample rate
+T = 2e-2; % Sample rate
 t = 0:T:tf; % Time vector
 n = 3; % Number of states
 m = 3; % Number of measurements
