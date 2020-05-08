@@ -39,7 +39,7 @@ B = @(y)[-((cos(y(3))+sin(y(3)))*sqrt(2))/(2*(cos(y(3))^2+sin(y(3))^2)),((cos(y(
 
 C = eye(m); % Measurement matrix
 
-
+%% Initialize ISMC design matrices
 K= [1 0 0;
    0 1 0;
    0 0 1]*1e-1;
@@ -47,7 +47,6 @@ K= [1 0 0;
 lambda = [7 0 0;
           0 7 0;
           0 0 6]*1e1;
-% lambda=5
 
 %% Motor parameters
 n_m = 2; % Number of states
@@ -72,16 +71,15 @@ C_m=blkdiag(C_d,C_d,C_d,C_d); %Measurement Matrix
 x_m = zeros(n_m*num_m, length(t)); % Initializes states to zero
 z_m = zeros(m_m*num_m, length(t)); % Initializes measurements to zero
 u_m = randn(p_m*num_m, length(t)); % Random input
-e_m= z_m;
-e_d_m=0;
-eint_m=0;
+e_m= z_m; %initialize motor error
+e_d_m=0;%initialize derivative motor error
+eint_m=0;%initialize integral motor error
 
-K_p=-10;
+K_p=-10; %initialize PID controller variables
 K_d=-1;
 K_i=0;
 
 %% Set initial conditions
-
 for k=1:length(t) %Fill in desired path
      x_d(:,k)=[0;0;0]; %stabilize to the origin
 %     x_d(:,k)=[k*T*0.5;k*T*0.5;k*T*0.5]; %follow linear trajectory
@@ -105,7 +103,6 @@ end
 
 x(:,1)=[1;1;0]; %any initial condition
 x(:,1)=x_d(:,1); %start at the proper position
-
 z(:,1)=x(:,1); %set first measurement
 
 
@@ -116,40 +113,16 @@ for k = 1:length(t)-1 % For loop that simulates 1 second
     if k>2/T %calculate integral error term over previous 2 seconds
         eint=sum(e(:,k-2/T:k),2);
     end
-    s=e(:,k)+lambda*eint; %calculate 
-    u(:,k+1) = 1/wr*(B(x(:,k))*(-lambda*e(:,k)+xdot_d(:,k))-vshat(:,k))-B(x(:,k))*K*sign(s);
-    %limit maximum velocity
-    if max(abs(u(:,k+1)))>6
+    s=e(:,k)+lambda*eint; %calculate sliding surface
+    u(:,k+1) = 1/wr*(B(x(:,k))*(-lambda*e(:,k)+xdot_d(:,k))-vshat(:,k))-B(x(:,k))*K*sign(s); %calculate ISMC
+
+    if max(abs(u(:,k+1)))>6 %limit max angular velocity of each wheel
        u(:,k+1)=u(:,k+1)/max(abs(u(:,k+1)))*6;
     end
-    u(:,k+1)
-
-%    u(:,k+1)=[40;40;40;40];%force the controller
     
-%     e_m(:,k)=z_m(:,k)-u(:,k);
-%     eint_m=sum(e_m,2)*T;
-%     if k>2/T %calculate integral error term over previous 2 seconds
-%         eint_m=sum(e_m(:,k-2/T:k),2);
-%     end
-%     if k~=1
-%        e_d_m = (e_m(:,k)-e_m(:,k-1))/T;
-%     end
-%     u_m(:,k+1)=K_p*e_m(:,k)+K_d*e_d_m+K_i*eint_m;%calculate voltages for each motor
-%     if max(abs(u_m(:,k+1)))>100
-%        u_m(:,k+1)=u_m(:,k+1)/max(abs(u_m(:,k+1)))*100;
-%     end
-%     
-%     %u_m(:,k+1)=u(:,k+1)/40*12;%force linear controller
-%     
-%     u_m(:,k+1)
-%     
-%     x_m(:,k+1)=A_m*x_m(:,k)+B_m*u_m(:,k+1);
-%     z_m(:,k+1)=C_m*x_m(:,k+1);
-%     x_m(:,k+1);
-    
-    [x_m(:,k+1), z_m(:,k+1)] = MotorPID(x_m(:,k), z_m(:,k), u(:,k+1), T, A_m, B_m, C_m);
-    z_m(:,k+1)
-    x_m(:,k+1)
+    [x_m(:,k+1), z_m(:,k+1)] = MotorPID(x_m(:,k), z_m(:,k), u(:,k+1), T, A_m, B_m, C_m); %Calculate Motor PID
+    z_m(:,k+1) %check variables
+    x_m(:,k+1) %check variables
     
     x(:,k+1) = x(:,k) + Binv(x(:,k))*(wr*z_m(:,k+1)+vs(:,k))*T; % Linear state space equation
     z(:,k+1) = C*x(:,k+1); % Linear measurement equation
