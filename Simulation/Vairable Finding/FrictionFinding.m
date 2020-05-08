@@ -40,9 +40,12 @@ binSize=0.01;
 numBins = int16(maxVel*2/binSize)+1;
 
 %calculate frictions based on 3 different data sets
-[vels1,xFrictions1,yFrictions1,tFrictions1]=FFFunction_fixedAB(data,1,3,maxVel,binSize);
-[vels2,xFrictions2,yFrictions2,tFrictions2]=FFFunction_fixedAB(data,2,3,maxVel,binSize);
-[vels3,xFrictions3,yFrictions3,tFrictions3]=FFFunction_fixedAB(data,3,3,maxVel,binSize);
+% [vels1,xFrictions1,yFrictions1,tFrictions1]=FFFunction_fixedAB(data,1,3,maxVel,binSize);
+% [vels2,xFrictions2,yFrictions2,tFrictions2]=FFFunction_fixedAB(data,2,3,maxVel,binSize);
+% [vels3,xFrictions3,yFrictions3,tFrictions3]=FFFunction_fixedAB(data,3,3,maxVel,binSize);
+[vels1,xFrictions1,yFrictions1,tFrictions1]=FFFunction(data,1,3,maxVel,binSize);
+[vels2,xFrictions2,yFrictions2,tFrictions2]=FFFunction(data,2,3,maxVel,binSize);
+[vels3,xFrictions3,yFrictions3,tFrictions3]=FFFunction(data,3,3,maxVel,binSize);
 
 %calculate frictions for curve fitting
 [vels4,xFrictions4,yFrictions4,tFrictions4]=FFFunction_fixedAB(data,1,1,maxVel,binSize);
