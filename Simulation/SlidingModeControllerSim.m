@@ -1,4 +1,4 @@
-0%% Setting up workspace
+%% Setting up workspace
 close all; % Close all figures and windows
 clear; % Clear workspace
 clc; % Clears screen

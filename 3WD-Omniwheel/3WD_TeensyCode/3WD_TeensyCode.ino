@@ -9,28 +9,23 @@
 #include <Wire.h>
 #include <Adafruit_PWMServoDriver.h>
 
-Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver(); //
+#define MAX_PWM_FREQ 1600
+#define FULL_ON_VAL 4096
+
+Adafruit_PWMServoDriver pwm1 = Adafruit_PWMServoDriver(0x40);
 
 void setup() {
-  // put your setup code here, to run once:
-  Serial.begin(115200);
-  Serial.println("Connected"); //put this in a loop to confirm connection
+  Serial.begin(9600);
+  Serial.println("16 channel PWM test");
 
-  pwm.begin();
-  // In theory the internal oscillator is 25MHz but it really isn't
-  // that precise. You can 'calibrate' by tweaking this number till
-  // you get the frequency you're expecting!
-  pwm.setOscillatorFrequency(27000000);  // The int.osc. is closer to 27MHz  
-  pwm.setPWMFreq(1000);  // Set frequency to 1kHz
-
-  delay(10);
-  
+  pwm1.begin();
+  pwm1.setPWMFreq(MAX_PWM_FREQ);
+  pwm1.setPWM(2, FULL_ON_VAL, 0);
+  pwm1.setPWM(3, 0, FULL_ON_VAL);
+  delay(1000);
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-
-  pwm.setPWM(15,0,2000);
-  pwm.setPWM(16,0,4096);
-  
+  pwm1.setPWM(2, 0, FULL_ON_VAL);
+  pwm1.setPWM(3, 0, FULL_ON_VAL);
 }
