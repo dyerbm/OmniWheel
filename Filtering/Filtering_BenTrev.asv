@@ -1,7 +1,7 @@
 %% Setting up workspace
 close all; % Close all figures and windows
- clear; % Clear workspace
- clc; % Clears screen
+clear; % Clear workspace
+clc; % Clears screen
 %% Initializing parameters
 tf = 30; % Final time in simulation
 T = 2e-2; % Sample rate
@@ -72,13 +72,7 @@ RMSE = zeros(n_r,1); % Initializes RMSE vector
 error_r = (x_r(:,1) - x_ekf_r(:,1)).^2; % Initializes squared error
 
 %% set up for the controller
-K= [0.2 0 0;
-   0 0.2 0;
-   0 0 0.2]*5e0;
 
-lambda = [2 0 0;
-          0 2 0;
-          0 0 1]*1.4e1;
 for k=1:length(t) %Fill in desired path
 %    x_d_r(:,k)=[0;0;0]; %stabilize to the origin
 %     x_d_r(:,k)=[k*T*0.5;k*T*0.5;k*T*0.5]; %follow linear trajectory
@@ -94,6 +88,8 @@ for k=1:length(t) %Fill in desired path
      if k~=1 
          xdot_d_r(:,k)=(x_d_r(:,k)-x_d_r(:,k-1))/T; 
      end
+     
+     u_m(:,k)=40*[sin(k*T*2*pi/10);cos(k*T*2*pi/10);-sin(k*T*2*pi/10);-cos(k*T*2*pi/10)];
 
 %      x_d_r(:,k)=0.5*[sin(k*T*2*pi/12)+cos(k*T*2*pi/14);sin(k*T*2*pi/5)+cos(k*T*2*pi/4);sin(k*T*2*pi/16)+cos(k*T*2*pi/8)]; %follow linear trajectory
 
@@ -123,21 +119,7 @@ RMSE_kfonly = RMSE_r;
 %% Simulate dynamics (for loop)
 for k = 1:length(t)-1 % For loop that simulates 1 second
     %calculate the controller, (wheel voltage)
-    e_r(:,k) = x_ekf_r(:,k)-x_d_r(:,k); %calculate the error
-    eint = sum(e_r,2)*T; %calculate the integral error term
-%     if k>2/T %calculate integral error term over previous 2 seconds
-%         eint=sum(e_r(:,k-2/T:k),2);
-%     end
     
-    s=e_r(:,k)+lambda*eint; %calculate sliding surface
-    u_m(:,k+1) = 1/wr*(B_r(x_ekf_r(:,k))*(-lambda*e_r(:,k)+xdot_d_r(:,k))-vshat_r(:,k))-B_r(x_r(:,k))*K*sign(s);
-    
-%     %limit maximum voltage
-%     if max(abs(u_m(:,k+1)))>70
-%        u_m(:,k+1)=u_m(:,k+1)/max(abs(u_m(:,k+1)))*70;
-%     end
-    
-%    u_m(:,k+1)=120*[sin(k*T*2*pi/5);cos(k*T*2*pi/5);-sin(k*T*2*pi/5);-cos(k*T*2*pi/5)]; %force controller
     
     %Filter the motors
     x_m(:,k+1) = A_m*x_m(:,k) + B_m*u_m(:,k) + w_m(:,k); % Linear state space equation
