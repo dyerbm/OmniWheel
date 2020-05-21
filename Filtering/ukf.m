@@ -1,5 +1,5 @@
 %% Unscented Kalman Filter (UKF) Code [nonlinear system, linear measurement]
-function [x, P] = ukf(x, z, u, P, xNon, C, Q, R)
+function [x, P] = ukf(x, z, u, vs, P, xNon, C, Q, R)
 % a) Iniitalize stage
 n = size(x,1); % Defines number of states
 m = size(z,1); % Defines number of measurements
@@ -19,7 +19,7 @@ for i = 1:n
 end
 % b) Prediction stage
 for i = 1:2*n+1
-    X(:,i) = xNon([X(:,i); u]); % Calculates predicted sigma points
+    X(:,i) = xNon([X(:,i);vs; u]); % Calculates predicted sigma points
 end
 x = X*W'; % Predicted state estimates
 P = Q; % Starts predicted state error covariance calculation
