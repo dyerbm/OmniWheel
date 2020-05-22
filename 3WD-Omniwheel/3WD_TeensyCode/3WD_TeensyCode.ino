@@ -17,6 +17,13 @@ Adafruit_PWMServoDriver pwm1 = Adafruit_PWMServoDriver(0x40);
 const int interruptPin_a_MSB = 2;
 const int interruptPin_a_LSB = 3;
 
+const int motor_a_p = 9;
+const int motor_a_n = 8;
+const int motor_b_p = 3;
+const int motor_b_n = 2;
+const int motor_c_p = 13;
+const int motor_c_n = 14;
+
 String echoString;
 
 volatile int tics[4] = {0, 0, 0, 0};
@@ -39,8 +46,12 @@ void setup() {
   attachInterrupt(digitalPinToInterrupt(interruptPin_a_MSB), ENCODER_A, CHANGE);
   attachInterrupt(digitalPinToInterrupt(interruptPin_a_LSB), ENCODER_A, CHANGE);
   
-  pwm1.setPWM(2, 0, FULL_ON_VAL);
-  pwm1.setPWM(3, 0, FULL_ON_VAL);
+  pwm1.setPWM(motor_a_p, 0, FULL_ON_VAL);
+  pwm1.setPWM(motor_a_n, 0, FULL_ON_VAL);
+  pwm1.setPWM(motor_b_p, 0, FULL_ON_VAL);
+  pwm1.setPWM(motor_b_n, 0, FULL_ON_VAL);
+  pwm1.setPWM(motor_c_p, 0, FULL_ON_VAL);
+  pwm1.setPWM(motor_c_n, 0, FULL_ON_VAL);
   delay(1000);
   
 }
@@ -62,7 +73,9 @@ void loop() {
     else{
       int motor = echoString.toInt();
       Serial.println(echoString);
-      pwm1.setPWM(2, motor, 0);
+      pwm1.setPWM(motor_a_p, motor, 0);
+      pwm1.setPWM(motor_b_p, motor, 0);
+      pwm1.setPWM(motor_c_p, motor, 0);
     }
     echoString="";
   }

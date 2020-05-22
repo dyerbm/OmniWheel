@@ -19,8 +19,8 @@ R = 2.7;
 L = 0.0014;
 A_c=[-b/J K_m/J;-K_m/L -R/L];
 B_c=[0; 1/L];
-A_c = [-0.1/0.01 , 0.1/0.01; -0.1/0.1 , -1/0.1]; % System matrix for single motor in continuous time
-B_c = [0;1/0.1]; % Input matrix for single motor in continuous time
+A_c = [-0.1/0.01 , 0.1/0.01; -0.1/0.01 , -1/0.01]; % System matrix for single motor in continuous time
+B_c = [0;1/0.01]; % Input matrix for single motor in continuous time
 C_c = [1,0]; % Measurement matrix for single motor in continuous time
 A_d=A_c*T+eye(n_m); %discrete system matrix
 B_d=B_c*T; %Discrete input matrix
@@ -28,7 +28,7 @@ C_d=C_c; %Discrete Measurement Matrix
 A_m=blkdiag(A_d,A_d,A_d,A_d);
 B_m=blkdiag(B_d,B_d,B_d,B_d);
 C_m=blkdiag(C_d,C_d,C_d,C_d); %Measurement Matrix
-Q_m = diag([0.009 0.08 0.009 0.08 0.009 0.08 0.009 0.08])*T*1e4; % Defines Q
+Q_m = diag([2 0.1 2 0.1 2 0.1 2 0.1])*1e0; % Defines Q
 R_m = diag([0.1,0.1,0.1,0.1])*1e1; % Defines R
 w_m = mvnrnd(zeros(length(t),n_m*num_m),Q_m)'*T; % Defines w
 v_m = mvnrnd(zeros(length(t),m_m*num_m),R_m)'; % Defines v
@@ -54,11 +54,11 @@ xdot_d_r = x_r; %initialises desired xdot states
 e_r = x_r; %set up error term
 z_r = zeros(m_r,length(t)); % Initialize measurements
 u_r = zeros(p_r,length(t)); % Initialize input
-Q_r = 4e-4*eye(n_r)*T; % Defines system noise covariance
-R_r = 1e-2*eye(n_r); % Defines measurement noise covariance
+Q_r = 1e-2*eye(n_r); % Defines system noise covariance
+R_r = 1e-10*eye(n_r); % Defines measurement noise covariance
 P_ekf_r = 10*Q_r; % Iniitialize EKF state error covariance
 x_ekf_r = x_r; % Initialize EKF estimates
-w_r = mvnrnd(zeros(n_r,1), Q_r, length(t))'; % Defines system noise (zero mean and covariance Q)
+w_r = mvnrnd(zeros(n_r,1), Q_r, length(t))'*T; % Defines system noise (zero mean and covariance Q)
 v_r = mvnrnd(zeros(m_r,1), R_r, length(t))'; % Defines measurement noise (zero mean and covariance R)
 rr=0.195; %define robot radius
 wr = 0.03175; %define wheel radius
@@ -112,6 +112,7 @@ x_ekfonly=x_ekf_r;
 P_ekfonly=P_ekf_r;
 x_ukf_r=x_ekf_r;
 P_ukf_r=P_ekf_r*-1e0;
+z_m_real = z_m; %create measurement with no noise for motors
 
 error_nofilter = (x_r(:,1) - x_nofilter(:,1)).^2; % Initializes squared error
 error_ekfonly = (x_r(:,1) - x_ekfonly(:,1)).^2; % Initializes squared error
@@ -129,6 +130,7 @@ for k = 1:length(t)-1 % For loop that simulates 1 second
     %Filter the motors
     x_m(:,k+1) = A_m*x_m(:,k) + B_m*u_m(:,k) + w_m(:,k); % Linear state space equation
     z_m(:,k+1) = C_m*x_m(:,k+1) + v_m(:,k+1); % Linear measurement equation
+    z_m_real(:,k+1) = C_m*x_m(:,k+1);
     
     [x_kf_m(:,k+1), P_kf_m(:,:,k+1)] = kf(x_kf_m(:,k), z_m(:,k+1), u_m(:,k), P_kf_m(:,:,k), A_m, B_m, C_m, Q_m, R_m); % Calls KF function to estimate states
     x_m_unfiltered(:,k+1) = A_m*x_m_unfiltered(:,k)+ B_m*u_m(:,k); %calculate wheel without filter
@@ -136,14 +138,29 @@ for k = 1:length(t)-1 % For loop that simulates 1 second
     z_kf_m=C_m*x_kf_m(:,k+1); %get state with kf
     z_m_unfiltered=C_m*x_m_unfiltered(:,k+1); %get state without kf
     
-    %Filter the robot
+    %% Filter the robot
+%     %x_r(:,k+1) = x_r(:,k) + pinv(B_r(x_r(:,k)))*(wr*u_m(:,k+1)+vs_r(:,k))*T;
+%     x_r(:,k+1)= xNon([x_r(:,k);z_m(:,k+1);vs_r(:,k)])+w_r(:,k); % Linear state space equation
+%     z_r(:,k+1) = C_r*x_r(:,k)+v_r(:,k); % Linear measurement equation
+%     
+%     
+%     [x_ekf_r(:,k+1), P_ekf_r(:,:,k+1)] = ekf(x_ekf_r(:,k), z_r(:,k+1), z_kf_m, vshat_r(:,k), P_ekf_r(:,:,k), xNon, Alin, C_r, Q_r, R_r); % Calls EKF function to estimate states      
+%     x_kfonly(:,k+1)=xNon([x_kfonly(:,k);z_kf_m;vs_r(:,k)]);
+%     [x_ekfonly(:,k+1), P_ekfonly(:,:,k+1)]=ekf(x_ekfonly(:,k), z_r(:,k+1), z_m_unfiltered, vshat_r(:,k), P_ekfonly(:,:,k), xNon, Alin, C_r, Q_r, R_r);
+%     x_nofilter(:,k+1)=xNon([x_nofilter(:,k);z_m_unfiltered;vshat_r(:,k)]);
+% %    [x_ukf_r(:,k+1), P_ukf_r(:,:,k+1)] = ukf(x_ukf_r(:,k),z_r(:,k+1), z_kf_m, vshat_r(:,k), P_ukf_r(:,:,k), xNon, C_r, Q_r, R_r);
+
     %x_r(:,k+1) = x_r(:,k) + pinv(B_r(x_r(:,k)))*(wr*u_m(:,k+1)+vs_r(:,k))*T;
-    x_r(:,k+1)= xNon([x_r(:,k);z_m(:,k+1);vs_r(:,k)])+w_r(:,k); % Linear state space equation
+    x_r(:,k+1) = xNon([x_r(:,k);z_m_real(:,k+1);vs_r(:,k)])+w_r(:,k); % Linear state space equation, %%%%%%%%%%%%%check this
     z_r(:,k+1) = C_r*x_r(:,k)+v_r(:,k); % Linear measurement equation
     
-    [x_ekf_r(:,k+1), P_ekf_r(:,:,k+1)] = ekf(x_ekf_r(:,k), z_r(:,k+1), z_kf_m, vshat_r(:,k), P_ekf_r(:,:,k), xNon, Alin, C_r, Q_r, R_r); % Calls EKF function to estimate states      
+    
+    z_r_ekf=C_r*(xNon([x_ekf_r(:,k);z_kf_m;vs_r(:,k)])+w_r(:,k))+v_r(:,k); %calculate the position based on the filtered motors
+    z_r_onlyekf=C_r*(xNon([x_ekfonly(:,k);z_m_unfiltered;vs_r(:,k)])+w_r(:,k))+v_r(:,k); %calculate the position based on the unfiltered motors
+    
+    [x_ekf_r(:,k+1), P_ekf_r(:,:,k+1)] = ekf(x_ekf_r(:,k), z_r_ekf, z_kf_m, vshat_r(:,k), P_ekf_r(:,:,k), xNon, Alin, C_r, Q_r, R_r); % Calls EKF function to estimate states      
     x_kfonly(:,k+1)=xNon([x_kfonly(:,k);z_kf_m;vs_r(:,k)]);
-    [x_ekfonly(:,k+1), P_ekfonly(:,:,k+1)]=ekf(x_ekfonly(:,k), z_r(:,k+1), z_m_unfiltered, vshat_r(:,k), P_ekfonly(:,:,k), xNon, Alin, C_r, Q_r, R_r);
+    [x_ekfonly(:,k+1), P_ekfonly(:,:,k+1)]=ekf(x_ekfonly(:,k), z_r_onlyekf, z_m_unfiltered, vshat_r(:,k), P_ekfonly(:,:,k), xNon, Alin, C_r, Q_r, R_r);
     x_nofilter(:,k+1)=xNon([x_nofilter(:,k);z_m_unfiltered;vshat_r(:,k)]);
 %    [x_ukf_r(:,k+1), P_ukf_r(:,:,k+1)] = ukf(x_ukf_r(:,k),z_r(:,k+1), z_kf_m, vshat_r(:,k), P_ukf_r(:,:,k), xNon, C_r, Q_r, R_r);
     
@@ -171,7 +188,7 @@ fprintf('RMSE (EKFonly): %s\n', RMSE_ekfonly)
 fprintf('RMSE (KFonly): %s\n', RMSE_kfonly)
 %% Results
 figure; plot(t, x_m(3,:)); hold all; plot(t, x_kf_m(3,:)); xlabel('Time (sec)'); ylabel('Angular Velocity'); legend('True','KF');hold off; % Plots position and estimated position with time
-figure; plot(t, x_m(2,:)); hold all; plot(t, x_kf_m(2,:));xlabel('Time (sec)'); ylabel('Velocity'); legend('True','KF');hold off; % Plots velocity with time
+figure; plot(t, x_m(2,:)); hold all; plot(t, x_kf_m(2,:));xlabel('Time (sec)'); ylabel('Current (A)'); legend('True','KF');hold off; % Plots velocity with time
 % figure; plot(t, u); xlabel('Time (sec)'); ylabel('Input'); % Plots input with time
 
 figure; plot(t, x_r(1,:)); hold all; plot(t, x_ekf_r(1,:));plot(t, x_d_r(1,:)); xlabel('Time (sec)'); ylabel('x position (m)'); legend('True','KF','desired');hold off; % Plots position and estimated position with time
