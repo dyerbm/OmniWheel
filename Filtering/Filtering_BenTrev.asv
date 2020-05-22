@@ -28,8 +28,8 @@ C_d=C_c; %Discrete Measurement Matrix
 A_m=blkdiag(A_d,A_d,A_d,A_d);
 B_m=blkdiag(B_d,B_d,B_d,B_d);
 C_m=blkdiag(C_d,C_d,C_d,C_d); %Measurement Matrix
-Q_m = diag([2 0.1 2 0.1 2 0.1 2 0.1])*1e0; % Defines Q
-R_m = diag([0.1,0.1,0.1,0.1])*1e1; % Defines R
+Q_m = diag([2 0.1 2 0.1 2 0.1 2 0.1])*5e-0; % Defines Q
+R_m = diag([0.5,0.1,0.1,0.1])*1e0; % Defines R
 w_m = mvnrnd(zeros(length(t),n_m*num_m),Q_m)'*T; % Defines w
 v_m = mvnrnd(zeros(length(t),m_m*num_m),R_m)'; % Defines v
 x_m = zeros(n_m*num_m, length(t)); % Initializes states to zero
@@ -151,19 +151,27 @@ for k = 1:length(t)-1 % For loop that simulates 1 second
 % %    [x_ukf_r(:,k+1), P_ukf_r(:,:,k+1)] = ukf(x_ukf_r(:,k),z_r(:,k+1), z_kf_m, vshat_r(:,k), P_ukf_r(:,:,k), xNon, C_r, Q_r, R_r);
 
     %x_r(:,k+1) = x_r(:,k) + pinv(B_r(x_r(:,k)))*(wr*u_m(:,k+1)+vs_r(:,k))*T;
-    x_r(:,k+1) = xNon([x_r(:,k);z_m_real(:,k+1);vs_r(:,k)])+w_r(:,k); % Linear state space equation, %%%%%%%%%%%%%check this
-    z_r(:,k+1) = C_r*x_r(:,k)+v_r(:,k); % Linear measurement equation
+    x_r(:,k+1) = xNon([x_r(:,k);z_m_real(:,k+1);vshat_r(:,k)])+w_r(:,k); % Linear state space equation, %%%%%%%%%%%%%check this
+    z_r(:,k+1) = C_r*x_r(:,k+1)+v_r(:,k+1); % Linear measurement equation
     
     
-    z_r_ekf=C_r*(xNon([x_ekf_r(:,k);z_kf_m;vs_r(:,k)])+w_r(:,k))+v_r(:,k); %calculate the position based on the filtered motors
-    z_r_onlyekf=C_r*(xNon([x_ekfonly(:,k);z_m_unfiltered;vs_r(:,k)])+w_r(:,k))+v_r(:,k); %calculate the position based on the unfiltered motors
+    z_r_ekf=C_r*(xNon([x_ekf_r(:,k);z_kf_m;vs_r(:,k)])+w_r(:,k))+v_r(:,k+1); %calculate the position based on the filtered motors
+    z_r_onlyekf=C_r*(xNon([x_ekfonly(:,k);z_m_unfiltered;vs_r(:,k)])+w_r(:,k))+v_r(:,k+1); %calculate the position based on the unfiltered motors
+    %z_r_ekf=C_r*x_ekf_r(:,k)+v_r(:,k); %calculate the position based on the filtered motors
+    %z_r_onlyekf=C_r*x_ekfonly(:,k)+v_r(:,k); %calculate the position based on the unfiltered motors
+%     if k>0
+%         z_r_ekf=z_r(:,k+1)
+%         z_r_onlyekf=z_r(:,k+1)
+%     end 
     
     [x_ekf_r(:,k+1), P_ekf_r(:,:,k+1)] = ekf(x_ekf_r(:,k), z_r_ekf, z_kf_m, vshat_r(:,k), P_ekf_r(:,:,k), xNon, Alin, C_r, Q_r, R_r); % Calls EKF function to estimate states      
     x_kfonly(:,k+1)=xNon([x_kfonly(:,k);z_kf_m;vs_r(:,k)]);
-    [x_ekfonly(:,k+1), P_ekfonly(:,:,k+1)]=ekf(x_ekfonly(:,k), z_r_onlyekf, z_m_unfiltered, vshat_r(:,k), P_ekfonly(:,:,k), xNon, Alin, C_r, Q_r, R_r);
+    [x_ekfonly(:,k+1), P_ekfonly(:,:,k+1)]=ekf(x_ekfonly(:,k), z_r_onlyekf, z_m_unfiltered, vshat_r(:,k), P_ekfonly(:,:,k), xNon, Alin, C_r, 1e-20*eye(3), 1e-20*eye(3));
     x_nofilter(:,k+1)=xNon([x_nofilter(:,k);z_m_unfiltered;vshat_r(:,k)]);
 %    [x_ukf_r(:,k+1), P_ukf_r(:,:,k+1)] = ukf(x_ukf_r(:,k),z_r(:,k+1), z_kf_m, vshat_r(:,k), P_ukf_r(:,:,k), xNon, C_r, Q_r, R_r);
     
+%     z_r_ekf=C_r*x_ekf_r(:,k+1)+v_r(:,k+1) %calculate the position based on the filtered motors
+%     z_r_onlyekf=C_r*x_ekfonly(:,k+1)+v_r(:,k+1) %calculate the position based on the unfiltered motors
     
     error_r(:,k+1) = (x_r(:,k+1) - x_ekf_r(:,k+1)).^2;
     error_m(:,k+1) = (x_m(:,k+1) - x_kf_m(:,k+1)).^2;
