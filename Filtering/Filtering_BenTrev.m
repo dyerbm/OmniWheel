@@ -3,7 +3,7 @@ close all; % Close all figures and windows
 %clear; % Clear workspace
 %clc; % Clears screen
 %% Initializing parameters
-tf = 30; % Final time in simulation
+tf = 300; % Final time in simulation
 T = 2e-2; % Sample rate
 t = 0:T:tf; % Time vector
 
@@ -110,17 +110,23 @@ x_nofilter=x_ekf_r;
 x_kfonly=x_ekf_r;
 x_ekfonly=x_ekf_r;
 P_ekfonly=P_ekf_r;
-x_ukf_r=x_ekf_r;
-P_ukf_r=P_ekf_r*-1e0;
+x_ukf_r=real(x_ekf_r);
+x_ukfonly=real(x_ekf_r);
+P_ukf_r=P_ekf_r;
+P_ukfonly=P_ekf_r;
 z_m_real = z_m; %create measurement with no noise for motors
 
 error_nofilter = (x_r(:,1) - x_nofilter(:,1)).^2; % Initializes squared error
 error_ekfonly = (x_r(:,1) - x_ekfonly(:,1)).^2; % Initializes squared error
 error_kfonly = (x_r(:,1) - x_kfonly(:,1)).^2; % Initializes squared error
+error_ukf = (x_r(:,1) - x_ukf_r(:,1)).^2; %initialize squared error
+error_ukfonly = (x_r(:,1) - x_ukfonly(:,1)).^2;
 
 RMSE_nofilter =RMSE_r;
 RMSE_ekfonly = RMSE_r;
 RMSE_kfonly = RMSE_r;
+RMSE_ukf = RMSE_r;
+RMSE_ukfonly = RMSE_r;
 
 %% Simulate dynamics (for loop)
 for k = 1:length(t)-1 % For loop that simulates 1 second
@@ -157,6 +163,7 @@ for k = 1:length(t)-1 % For loop that simulates 1 second
     
     %z_r_ekf=C_r*(xNon([x_ekf_r(:,k);z_kf_m;vs_r(:,k)])+mvnrnd(zeros(n_r,1), 1e-20*eye(3), 1)'*T)+mvnrnd(zeros(n_r,1), 1e-20*eye(3), 1)'; %calculate the position based on the filtered motors
     z_r_ekf=C_r*(xNon([x_ekf_r(:,k);z_kf_m;vs_r(:,k)])+w_r(:,k))+v_r(:,k+1);
+    z_r_ukf=C_r*(xNon([x_ukf_r(:,k);z_kf_m;vs_r(:,k)])+w_r(:,k))+v_r(:,k+1);
     z_r_onlyekf=C_r*(xNon([x_ekfonly(:,k);z_m_unfiltered;vs_r(:,k)])+w_r(:,k))+v_r(:,k+1); %calculate the position based on the unfiltered motors
     %z_r_ekf=C_r*x_ekf_r(:,k)+v_r(:,k); %calculate the position based on the filtered motors
     %z_r_onlyekf=C_r*x_ekfonly(:,k)+v_r(:,k); %calculate the position based on the unfiltered motors
@@ -170,11 +177,14 @@ for k = 1:length(t)-1 % For loop that simulates 1 second
     x_kfonly(:,k+1)=xNon([x_kfonly(:,k);z_kf_m;vs_r(:,k)]);
     [x_ekfonly(:,k+1), P_ekfonly(:,:,k+1)]=ekf(x_ekfonly(:,k), z_r_onlyekf, z_m_unfiltered, vshat_r(:,k), P_ekfonly(:,:,k), xNon, Alin, C_r, Q_r, R_r);
     x_nofilter(:,k+1)=xNon([x_nofilter(:,k);z_m_unfiltered;vshat_r(:,k)]);
-%    [x_ukf_r(:,k+1), P_ukf_r(:,:,k+1)] = ukf(x_ukf_r(:,k),z_r(:,k+1), z_kf_m, vshat_r(:,k), P_ukf_r(:,:,k), xNon, C_r, Q_r, R_r);
+    [x_ukf_r(:,k+1), P_ukf_r(:,:,k+1)] = ukf(x_ukf_r(:,k),z_r_ekf, z_kf_m, vshat_r(:,k), P_ukf_r(:,:,k), xNon, C_r, Q_r, R_r);
+    [x_ukfonly(:,k+1), P_ukfonly(:,:,k+1)] = ukf(x_ukfonly(:,k),z_r_onlyekf, z_m_unfiltered, vshat_r(:,k), P_ukfonly(:,:,k), xNon, C_r, Q_r, R_r);
     
 %     z_r_ekf=C_r*x_ekf_r(:,k+1)+v_r(:,k+1) %calculate the position based on the filtered motors
 %     z_r_onlyekf=C_r*x_ekfonly(:,k+1)+v_r(:,k+1) %calculate the position based on the unfiltered motors
     
+    error_ukf = (x_r(:,k+1)-x_ukf_r(:,k+1)).^2;
+    error_ukfonly = (x_r(:,k+1)-x_ukfonly(:,k+1)).^2;
     error_r(:,k+1) = (x_r(:,k+1) - x_ekf_r(:,k+1)).^2;
     error_m(:,k+1) = (x_m(:,k+1) - x_kf_m(:,k+1)).^2;
     error_nofilter(:,k+1) = (x_r(:,k+1) - x_nofilter(:,k+1)).^2; % Initializes squared error
@@ -190,12 +200,16 @@ for k = 1:n_r
     RMSE_nofilter(k) = (sum(error_nofilter(k,:))/length(t))^0.5;
     RMSE_ekfonly(k) = (sum(error_ekfonly(k,:))/length(t))^0.5;
     RMSE_kfonly(k) = (sum(error_kfonly(k,:))/length(t))^0.5;
+    RMSE_ukf(k) = (sum(error_ukf(k,:))/length(t))^0.5;
+    RMSE_ukfonly(k) = (sum(error_ukfonly(k,:))/length(t))^0.5;
 end
 fprintf('RMSE (KF): %s\n', RMSE_m)
 fprintf('RMSE (EKF): %s\n', RMSE_r)
 fprintf('RMSE (nofilter): %s\n', RMSE_nofilter)
 fprintf('RMSE (EKFonly): %s\n', RMSE_ekfonly)
 fprintf('RMSE (KFonly): %s\n', RMSE_kfonly)
+fprintf('RMSE (UKF): %s\n', RMSE_ukf)
+fprintf('RMSE (UKF): %s\n', RMSE_ukfonly)
 %% Results
 figure; plot(t, x_m(3,:)); hold all; plot(t, x_kf_m(3,:)); xlabel('Time (sec)'); ylabel('Angular Velocity'); legend('True','KF');hold off; % Plots position and estimated position with time
 figure; plot(t, x_m(2,:)); hold all; plot(t, x_kf_m(2,:));xlabel('Time (sec)'); ylabel('Current (A)'); legend('True','KF');hold off; % Plots velocity with time
@@ -207,7 +221,7 @@ figure; plot(t, x_r(1,:)); hold all; plot(t, x_ekf_r(1,:));plot(t, x_d_r(1,:)); 
 
 
 
-figure;  plot(x_r(1,:), x_r(2,:));hold all; plot(x_ekf_r(1,:), x_ekf_r(2,:));  plot(x_ekfonly(1,:), x_ekfonly(2,:));  plot(x_kfonly(1,:), x_kfonly(2,:));  plot(x_nofilter(1,:), x_nofilter(2,:));xlabel('x (m)'); plot(x_ukf_r(1,:), x_ukf_r(2,:)); xlabel('x (m)'); ylabel('y (m)');legend('True','EKF+KF','EKF','KF','No Filter','UKF+KF');hold off;%xlim([-1.1,1.1]);ylim([-1.1,1.1]);
+figure;  plot(x_r(1,:), x_r(2,:));hold all; plot(x_ekf_r(1,:), x_ekf_r(2,:));  plot(x_ekfonly(1,:), x_ekfonly(2,:));  plot(x_kfonly(1,:), x_kfonly(2,:));  plot(x_nofilter(1,:), x_nofilter(2,:));xlabel('x (m)'); plot(x_ukf_r(1,:), x_ukf_r(2,:));plot(x_ukfonly(1,:), x_ukfonly(2,:)); xlabel('x (m)'); ylabel('y (m)');legend('True','EKF+KF','EKF','KF','No Filter','UKF+KF','UKF');hold off;%xlim([-1.1,1.1]);ylim([-1.1,1.1]);
 figure;  plot(t, x_r(3,:));hold all; plot(t, x_ekf_r(3,:));  plot(t, x_ekfonly(3,:));  plot(t, x_kfonly(3,:));  plot(t, x_nofilter(3,:));xlabel('time (s)'); ylabel('theta (rad)');legend('True','EKF+KF','EKF','KF','No Filter');hold off;
 
 

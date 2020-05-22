@@ -37,7 +37,7 @@ Pxz = zeros(n,m); % Starts predicted cross-covariance
 for i = 1:2*n+1 % For loop that calculates predicted cross-covariance
     Pxz = Pxz + W(i)*(X(:,i)-x)*transpose(Z(:,i)-zk);
 end
-K = Pxz*pinv(Pzz); % Calculates UKF gain
+K = Pxz/Pzz; % Calculates UKF gain
 x = x + K*(z-zk); % Updates state estimates
 P = P - K*Pzz*transpose(K); % Updates state error covariance
 end
