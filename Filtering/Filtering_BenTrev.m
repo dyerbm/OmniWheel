@@ -209,7 +209,7 @@ fprintf('RMSE (nofilter): %s\n', RMSE_nofilter)
 fprintf('RMSE (EKFonly): %s\n', RMSE_ekfonly)
 fprintf('RMSE (KFonly): %s\n', RMSE_kfonly)
 fprintf('RMSE (UKF): %s\n', RMSE_ukf)
-fprintf('RMSE (UKF): %s\n', RMSE_ukfonly)
+fprintf('RMSE (UKFonly): %s\n', RMSE_ukfonly)
 %% Results
 figure; plot(t, x_m(3,:)); hold all; plot(t, x_kf_m(3,:)); xlabel('Time (sec)'); ylabel('Angular Velocity'); legend('True','KF');hold off; % Plots position and estimated position with time
 figure; plot(t, x_m(2,:)); hold all; plot(t, x_kf_m(2,:));xlabel('Time (sec)'); ylabel('Current (A)'); legend('True','KF');hold off; % Plots velocity with time
