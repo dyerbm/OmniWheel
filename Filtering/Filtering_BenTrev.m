@@ -3,7 +3,7 @@ close all; % Close all figures and windows
 %clear; % Clear workspace
 %clc; % Clears screen
 %% Initializing parameters
-tf = 300; % Final time in simulation
+tf = 20; % Final time in simulation
 T = 2e-2; % Sample rate
 t = 0:T:tf; % Time vector
 
@@ -55,7 +55,7 @@ e_r = x_r; %set up error term
 z_r = zeros(m_r,length(t)); % Initialize measurements
 u_r = zeros(p_r,length(t)); % Initialize input
 Q_r = 1e-2*eye(n_r); % Defines system noise covariance
-R_r = 1e-10*eye(n_r); % Defines measurement noise covariance
+R_r = 1e-20*eye(n_r); % Defines measurement noise covariance
 P_ekf_r = 10*Q_r; % Iniitialize EKF state error covariance
 x_ekf_r = x_r; % Initialize EKF estimates
 w_r = mvnrnd(zeros(n_r,1), Q_r, length(t))'*T; % Defines system noise (zero mean and covariance Q)
@@ -211,17 +211,16 @@ fprintf('RMSE (KFonly): %s\n', RMSE_kfonly)
 fprintf('RMSE (UKF): %s\n', RMSE_ukf)
 fprintf('RMSE (UKFonly): %s\n', RMSE_ukfonly)
 %% Results
-figure; plot(t, x_m(3,:)); hold all; plot(t, x_kf_m(3,:)); xlabel('Time (sec)'); ylabel('Angular Velocity'); legend('True','KF');hold off; % Plots position and estimated position with time
-figure; plot(t, x_m(2,:)); hold all; plot(t, x_kf_m(2,:));xlabel('Time (sec)'); ylabel('Current (A)'); legend('True','KF');hold off; % Plots velocity with time
+figure; plot(t, x_m(1,:)); hold all; plot(t, x_m_unfiltered(1,:)); plot(t, x_kf_m(1,:)); xlabel('Time (sec)'); ylabel('Angular Velocity (rad/s^{-1})'); legend('True','KF','No Filter');hold off; % Plots position and estimated position with time
+figure; plot(t, x_m(2,:)); hold all; plot(t, x_m_unfiltered(2,:)); plot(t, x_kf_m(2,:));xlabel('Time (sec)'); ylabel('Current (A)'); legend('True','KF','No Filter');hold off; % Plots velocity with time
 % figure; plot(t, u); xlabel('Time (sec)'); ylabel('Input'); % Plots input with time
 
-figure; plot(t, x_r(1,:)); hold all; plot(t, x_ekf_r(1,:));plot(t, x_d_r(1,:)); xlabel('Time (sec)'); ylabel('x position (m)'); legend('True','KF','desired');hold off; % Plots position and estimated position with time
+%figure; plot(t, x_r(1,:)); hold all; plot(t, x_ekf_r(1,:));plot(t, x_d_r(1,:)); xlabel('Time (sec)'); ylabel('x position (m)'); legend('True','KF','desired');hold off; % Plots position and estimated position with time
 % figure; plot(x_ekf_r(1,:), x_ekf_r(2,:)); hold all; plot(x_r(1,:), x_r(2,:));plot(x_d_r(1,:), x_d_r(2,:)); xlabel('x (m)'); ylabel('y (m)');xlim([-1.1,1.1]);ylim([-1.1,1.1]); legend('Filtered','True','Desired');hold off; % Plots position and estimated position with time
 % figure; plot(t, x_ekf_r(3,:)); hold all; plot(t, x_r(3,:));plot(t, x_d_r(3,:)); xlabel('time (s)'); ylabel('theta (rad)'); legend('Filtered','True','Desired');hold off;
 
 
-
-figure;  plot(x_r(1,:), x_r(2,:));hold all; plot(x_ekf_r(1,:), x_ekf_r(2,:));  plot(x_ekfonly(1,:), x_ekfonly(2,:));  plot(x_kfonly(1,:), x_kfonly(2,:));  plot(x_nofilter(1,:), x_nofilter(2,:));xlabel('x (m)'); plot(x_ukf_r(1,:), x_ukf_r(2,:));plot(x_ukfonly(1,:), x_ukfonly(2,:)); xlabel('x (m)'); ylabel('y (m)');legend('True','EKF+KF','EKF','KF','No Filter','UKF+KF','UKF');hold off;%xlim([-1.1,1.1]);ylim([-1.1,1.1]);
-figure;  plot(t, x_r(3,:));hold all; plot(t, x_ekf_r(3,:));  plot(t, x_ekfonly(3,:));  plot(t, x_kfonly(3,:));  plot(t, x_nofilter(3,:));xlabel('time (s)'); ylabel('theta (rad)');legend('True','EKF+KF','EKF','KF','No Filter');hold off;
+figure;  plot(x_r(1,:), x_r(2,:));hold all; plot(x_ekf_r(1,:), x_ekf_r(2,:));  plot(x_ekfonly(1,:), x_ekfonly(2,:));  plot(x_kfonly(1,:), x_kfonly(2,:));  plot(x_nofilter(1,:), x_nofilter(2,:)); plot(x_ukf_r(1,:), x_ukf_r(2,:));plot(x_ukfonly(1,:), x_ukfonly(2,:)); xlabel('x (m)'); ylabel('y (m)');legend('True','EKF+KF','EKF','KF','No Filter','UKF+KF','UKF');hold off;%xlim([-1.1,1.1]);ylim([-1.1,1.1]);
+figure;  plot(t, x_r(3,:));hold all; plot(t, x_ekf_r(3,:));  plot(t, x_ekfonly(3,:));  plot(t, x_kfonly(3,:));  plot(t, x_nofilter(3,:)); plot(t, x_ukf_r(3,:));plot(t, x_ukfonly(3,:)); xlabel('time (s)');ylabel('theta (rad)');legend('True','EKF+KF','EKF','KF','No Filter','UKF+KF','UKF');hold off;
 
 
