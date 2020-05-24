@@ -3,7 +3,7 @@ function [x, P] = ukf(x, z, u, vs, P, xNon, C, Q, R)
 % a) Iniitalize stage
 n = size(x,1); % Defines number of states
 m = size(z,1); % Defines number of measurements
-kappa = 1e-3; % Defines kappa value (user defined)
+kappa = 2; % Defines kappa value (user defined)
 sqrtnkp = sqrtm((n+kappa)*P); % Calculates square root of (n+kappa)*P
 X = zeros(n,2*n+1); % Initializes sigma points to zero
 W = zeros(1,2*n+1); % Initializes weights to zero for each sigma point
