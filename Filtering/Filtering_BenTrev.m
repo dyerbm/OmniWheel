@@ -3,7 +3,7 @@ close all; % Close all figures and windows
 %clear; % Clear workspace
 %clc; % Clears screen
 %% Initializing parameters
-tf = 20; % Final time in simulation
+tf = 60; % Final time in simulation
 T = 2e-2; % Sample rate
 t = 0:T:tf; % Time vector
 
@@ -54,8 +54,8 @@ xdot_d_r = x_r; %initialises desired xdot states
 e_r = x_r; %set up error term
 z_r = zeros(m_r,length(t)); % Initialize measurements
 u_r = zeros(p_r,length(t)); % Initialize input
-Q_r = 1e-2*eye(n_r); % Defines system noise covariance
-R_r = 1e-40*eye(n_r); % Defines measurement noise covariance
+Q_r = 1e-3*eye(n_r); % Defines system noise covariance
+R_r = 1e-20*eye(n_r); % Defines measurement noise covariance
 P_ekf_r = 10*Q_r; % Iniitialize EKF state error covariance
 x_ekf_r = x_r; % Initialize EKF estimates
 w_r = mvnrnd(zeros(n_r,1), Q_r, length(t))'*T; % Defines system noise (zero mean and covariance Q)

@@ -2,10 +2,10 @@
 function [x, P, errk,q] = svsfn(x, z, err, u, vs, P, xNon, A, C, Q, R) % SVSF function for linear system and measurements example (note: you just need to change the state and measurement equations)
 n = size(x,1); % Defines number of states
 m = size(z,1); % Defines number of measurements
-Psi = 1e0*[1; 1; 1; 1]; % Defines smoothing boundary layer widths (user defined)
-% Psi = 10*[0.00001; 0.0001; .001; 1e-6]; % Defines smoothing boundary layer widths (user defined)
+Psi = 0.8e-1*[1.1e-2; 0.4e-2; 0.5e-2]; % OK for R=1e-20 Defines smoothing boundary layer widths (user defined)
+% Psi = [1e-2; 1e-3; 1e-4]; % Defines smoothing boundary layer widths (user defined)
 % Psi = 5*[0.013; 0.015; 0.0000096; 3e-3];  % Tuned
-Gamma = 0.1*1e1; % Defines gamma (SVSF 'memory')
+Gamma = 0.05*1e1; % Defines gamma (SVSF 'memory')
 sat = zeros(m,1); % Initializes saturation terms
 % Prediction Stage
 x = xNon([x; u; vs]); % Predicts state estimates
