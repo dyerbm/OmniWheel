@@ -1,8 +1,8 @@
 %% SVSF code (with a covariance derivation)
-function [x, P, errk,q] = svsfn(x, z, err, u, vs, P, xNon, A, C, Q, R) % SVSF function for linear system and measurements example (note: you just need to change the state and measurement equations)
+function [x, P, errk] = svsfn(x, z, err, u, vs, P, xNon, A, C, Q, R) % SVSF function for linear system and measurements example (note: you just need to change the state and measurement equations)
 n = size(x,1); % Defines number of states
 m = size(z,1); % Defines number of measurements
-Psi = 0.8e-1*[1.1e-2; 0.4e-2; 0.5e-2]; % OK for R=1e-20 Defines smoothing boundary layer widths (user defined)
+Psi = 1e-2*[1.1e-2; 0.4e-2; 0.5e-2]; % OK for R=1e-20 Defines smoothing boundary layer widths (user defined)
 % Psi = [1e-2; 1e-3; 1e-4]; % Defines smoothing boundary layer widths (user defined)
 % Psi = 5*[0.013; 0.015; 0.0000096; 3e-3];  % Tuned
 Gamma = 0.05*1e1; % Defines gamma (SVSF 'memory')
@@ -24,5 +24,4 @@ K = (pinv(C)*diag(E.*sat))/diag(errk); % Calculates SVSF gain
 x = x + K*(z - C*x); % Updates state estimates
 P = (eye(n) - K*C)*P*(eye(n) - K*C)' + K*R*K'; % Updates state error covariance
 errk = z - C*x; % Updates measurement error (innovation)
-q = (errk)'/(C*P*C' + R)*(errk);
 end
