@@ -47,9 +47,9 @@ const float T=20; //Desired time step in milliseconds
 double omega_desired[3] = {0,0,0};
 double u_m[3] = {0,0,0};
 
-const double K_p = -5;
-const double K_d = -0.1;
-const double K_i = -0.8;
+const double K_p = -10;
+const double K_d = -0;
+const double K_i = -500;
 
 int time_m=0; //Current time (for the motors)
 int time_previous_m=0; //Last time step for the motors
@@ -121,7 +121,7 @@ void loop() {
     }
 
     if (u_m[0]>0) {
-      pwm1.setPWM(motor_a_n, 0, (int) abs(u_m[0])/12*4000);
+      pwm1.setPWM(motor_a_n, 0, (int) ((u_m[0])/12*4000));
       pwm1.setPWM(motor_a_p, 0, 0);
     }
     else {
