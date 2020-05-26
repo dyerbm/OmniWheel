@@ -8,11 +8,14 @@
 
 #include <Wire.h>
 #include <Adafruit_PWMServoDriver.h>
+#include <CircularBuffer.h>
 
 #define MAX_PWM_FREQ 1600
 #define FULL_ON_VAL 4096
 
 Adafruit_PWMServoDriver pwm1 = Adafruit_PWMServoDriver(0x40);
+
+char* output_string;
 
 const int interruptPin_a_MSB = 2;
 const int interruptPin_a_LSB = 3;
@@ -38,6 +41,28 @@ int encoder_state[3];
 int encoder_state_prev[3];
 
 int incomingByte;
+
+//Variables for the controller
+const float T=20; //Desired time step in milliseconds
+double omega_desired[3] = {0,0,0};
+double u_m[3] = {0,0,0};
+
+const double K_p = -5;
+const double K_d = -0.1;
+const double K_i = -0.8;
+
+int time_m=0; //Current time (for the motors)
+int time_previous_m=0; //Last time step for the motors
+
+const int eint_m_length=100; //set bufer size based on desired integral loop
+CircularBuffer<double,eint_m_length> e_m_a; //Initialize buffer
+double eint_m_a=0;
+double ed_m_a=0;
+
+
+CircularBuffer<double,100> e_m_b; 
+CircularBuffer<double,100> e_m_c; 
+
 
 void setup() {
   Serial.begin(9600);
@@ -67,10 +92,51 @@ void setup() {
   pwm1.setPWM(motor_c_p, 0, FULL_ON_VAL);
   pwm1.setPWM(motor_c_n, 0, FULL_ON_VAL);
   delay(1000);
-  
+
+  for (int i=0;i<=eint_m_length;i++){
+    e_m_a.unshift(0);
+  }
 }
 
 void loop() {
+  time_m=millis();
+
+  if (time_m-time_previous_m>=T) {
+    CALC_VELOCITY(time_m-time_previous_m); //calculate each wheel velocity
+    time_previous_m=time_m;
+    //MOTOR_CONTROLLER(velocity[0], omega_desired[0]); //Call Motor Controller function, send desired state, real state, motor pins
+    //Serial.println(velocity[0]);
+    
+    e_m_a.unshift(velocity[0]-omega_desired[0]);
+    eint_m_a = eint_m_a+(e_m_a[0]-e_m_a[eint_m_length-1])*(T/1000)/eint_m_length;
+    ed_m_a = (e_m_a[0]-e_m_a[1])/(T/1000);
+
+    u_m[0] = K_p*e_m_a[0]+K_d*ed_m_a+K_i*eint_m_a; //calculate the controller in PWM
+    if (abs(u_m[0])>12 || abs(u_m[1])>12 || abs(u_m[2])>12) {
+      float quickcounter = u_m[0];
+      for (int i=1; i<3;i++){
+        if (abs(quickcounter)<abs(u_m[i])) (quickcounter=u_m[i]);
+      }
+      u_m[0]=u_m[0]/abs(quickcounter)*12;
+    }
+
+    if (u_m[0]>0) {
+      pwm1.setPWM(motor_a_n, 0, (int) abs(u_m[0])/12*4000);
+      pwm1.setPWM(motor_a_p, 0, 0);
+    }
+    else {
+      pwm1.setPWM(motor_a_n, 0, 0);
+      pwm1.setPWM(motor_a_p, 0, (int) abs(u_m[0])/12*4000);
+    }
+
+    //sprintf(output_string, "Error: %f\tController: %d",e_m_a[0],u_m[0]);
+    //Serial.println(output_string);
+    Serial.print("Error: ");
+    Serial.print(e_m_a[0]);
+    Serial.print("\t Controller: ");
+    Serial.print(u_m[0]);
+    Serial.print("\n");
+  }
 
   while (Serial.available()) {
         delay(10); 
@@ -80,17 +146,15 @@ void loop() {
         }
 
   if (echoString.length() >0) {
-    if (echoString=="encoder"){
+    /*if (echoString=="encoder"){
       Serial.println(tics[0]);
       tics[0]=0;
     }
-    else{
-      int motor = echoString.toInt();
+    else{*/
+      int motor = echoString.toFloat();
       Serial.println(echoString);
-      pwm1.setPWM(motor_a_p, motor, 0);
-      pwm1.setPWM(motor_b_p, motor, 0);
-      pwm1.setPWM(motor_c_p, motor, 0);
-    }
+      omega_desired[0]=motor; //Currently casting float to double array, should maybe fix this
+    //}
     echoString="";
   }
 }
@@ -151,3 +215,23 @@ void UPDATE_STATES_C() {
   encoder_state_prev[2] = encoder_state[2]; // Update previous int
   encoder_state[2] = digitalRead(interruptPin_c_MSB) * 2 + digitalRead(interruptPin_c_LSB);
 }
+
+void CALC_VELOCITY(float timestep) {
+  noInterrupts();
+  velocity[0] = tics[0] / (timestep); //give time in tics per time persiod
+  /*Serial.println("--------------");
+  Serial.println(tics[0]);
+  Serial.println(timestep);
+  Serial.println(tics[0]/timestep);
+  Serial.println(tics[0] / (timestep)/256*6);*/
+  velocity[1] = tics[1] / (timestep);
+  velocity[2] = tics[2] / (timestep);
+  tics[0] = 0;
+  tics[1] = 0;
+  tics[2] = 0;
+  interrupts();
+}
+
+/*void MOTOR_CONTROLLER(double velocity, double desired_velocity, double k_p, double k_d, double k_i) {
+  double error = 0;
+}*/
