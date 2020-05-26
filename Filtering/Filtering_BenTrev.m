@@ -3,7 +3,7 @@ close all; % Close all figures and windows
 %clear; % Clear workspace
 %clc; % Clears screen
 %% Initializing parameters
-tf = 600; % Final time in simulation
+tf = 300; % Final time in simulation
 T = 2e-2; % Sample rate
 t = 0:T:tf; % Time vector
 
@@ -114,6 +114,7 @@ x_SVSF_r=x_ekf_r;
 x_SVSFonly=x_ekf_r;
 P_SVSF_r=P_ekf_r;
 P_SVSFonly=P_ekf_r;
+P_SVSFm=P_kf_m;
 z_m_real = z_m; %create measurement with no noise for motors
 
 error_nofilter = (x_r(:,1) - x_nofilter(:,1)).^2; % Initializes squared error
@@ -130,6 +131,7 @@ RMSE_SVSFonly = RMSE_r;
 
 SVSFe=0;
 SVSFonlye=0;
+SVSFme=0;
 
 %% Simulate dynamics (for loop)
 for k = 1:length(t)-1 % For loop that simulates 1 second
@@ -143,6 +145,7 @@ for k = 1:length(t)-1 % For loop that simulates 1 second
     
     [x_kf_m(:,k+1), P_kf_m(:,:,k+1)] = kf(x_kf_m(:,k), z_m(:,k+1), u_m(:,k), P_kf_m(:,:,k), A_m, B_m, C_m, Q_m, R_m); % Calls KF function to estimate states
     x_m_unfiltered(:,k+1) = A_m*x_m_unfiltered(:,k)+ B_m*u_m(:,k); %calculate wheel without filter
+    %[x_m_unfiltered(:,k+1), P_SVSFm(:,:,k+1), SVSFme] = svsf(x_m_unfiltered(:,k), z_m(:,k+1), SVSFme, u_m(:,k), P_SVSFm(:,:,k), A_m, B_m, C_m, Q_m, R_m); % Calls KF function to estimate states
     
     z_kf_m=C_m*x_kf_m(:,k+1); %get state with kf
     z_m_unfiltered=C_m*x_m_unfiltered(:,k+1); %get state without kf

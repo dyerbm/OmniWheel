@@ -3,7 +3,7 @@ function [x, P, errk] = svsf(x, z, err, u, P, A, B, C, Q, R) % SVSF function for
 n = size(x,1); % Defines number of states
 m = size(z,1); % Defines number of measurements
 Gamma = 0.1; % Defines SVSF memory term
-Psi = 5*[0.01; 0.1; 1]; % Defines SVSF boundary layer terms
+Psi = 1e-3*[1; 1; 1; 1]; % Defines SVSF boundary layer terms
 sat = zeros(m,1); % Iniitalizes saturation terms
 % Prediction stage
 x = A*x + B*u; % Predicts state estimates
