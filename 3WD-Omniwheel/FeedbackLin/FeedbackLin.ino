@@ -58,9 +58,12 @@ const int eint_m_length=200; //set bufer size based on desired integral loop
 CircularBuffer<double,eint_m_length> e_m_a; //Initialize buffer
 double eint_m_a=0;
 double ed_m_a=0;
-
 CircularBuffer<double,100> e_m_b;
-CircularBuffer<double,100> e_m_c; 
+double eint_m_b=0;
+double ed_m_b=0;
+CircularBuffer<double,100> e_m_c;
+double eint_m_c=0;
+double ed_m_c=0; 
 
 
 void setup() {
@@ -94,6 +97,8 @@ void setup() {
 
   for (int i=0;i<=eint_m_length;i++){
     e_m_a.unshift(0);
+    e_m_b.unshift(0);
+    e_m_c.unshift(0);
   }
 }
 
@@ -109,16 +114,29 @@ void loop() {
     e_m_a.unshift(velocity[0]-omega_desired[0]);
     eint_m_a = eint_m_a+(e_m_a[0]-e_m_a[eint_m_length-1])*(T/1000)/eint_m_length;
     ed_m_a = (e_m_a[0]-e_m_a[1])/(T/1000);
-
     u_m[0] = K_p*e_m_a[0]+K_d*ed_m_a+K_i*eint_m_a; //calculate the controller in PWM
+
+    e_m_b.unshift(velocity[1]-omega_desired[1]);
+    eint_m_b = eint_m_b+(e_m_b[0]-e_m_b[eint_m_length-1])*(T/1000)/eint_m_length;
+    ed_m_b = (e_m_b[0]-e_m_b[1])/(T/1000);
+    u_m[1] = K_p*e_m_b[0]+K_d*ed_m_b+K_i*eint_m_b; //calculate the controller in PWM
+
+    e_m_c.unshift(velocity[2]-omega_desired[2]);
+    eint_m_c = eint_m_c+(e_m_c[0]-e_m_c[eint_m_length-1])*(T/1000)/eint_m_length;
+    ed_m_c = (e_m_c[0]-e_m_c[1])/(T/1000);
+    u_m[2] = K_p*e_m_c[0]+K_d*ed_m_a+K_i*eint_m_a; //calculate the controller in PWM
+    
     if (abs(u_m[0])>12 || abs(u_m[1])>12 || abs(u_m[2])>12) {
       float quickcounter = u_m[0];
       for (int i=1; i<3;i++){
         if (abs(quickcounter)<abs(u_m[i])) (quickcounter=u_m[i]);
       }
       u_m[0]=u_m[0]/abs(quickcounter)*12;
+      u_m[1]=u_m[1]/abs(quickcounter)*12;
+      u_m[2]=u_m[2]/abs(quickcounter)*12;
     }
 
+    //-----Set each motor accordingly-----//
     if (u_m[0]>0) {
       pwm1.setPWM(motor_a_n, 0, (int) (abs(u_m[0])/12*4096));
       pwm1.setPWM(motor_a_p, 0, 0);
@@ -127,6 +145,24 @@ void loop() {
       pwm1.setPWM(motor_a_n, 0, 0);
       pwm1.setPWM(motor_a_p, 0, (int) (abs(u_m[0])/12*4096));
     }
+    if (u_m[1]>0) {
+      pwm1.setPWM(motor_b_n, 0, (int) (abs(u_m[1])/12*4096));
+      pwm1.setPWM(motor_b_p, 0, 0);
+    }
+    else {
+      pwm1.setPWM(motor_b_n, 0, 0);
+      pwm1.setPWM(motor_b_p, 0, (int) (abs(u_m[1])/12*4096));
+    }
+    if (u_m[2]>0) {
+      pwm1.setPWM(motor_c_n, 0, (int) (abs(u_m[2])/12*4096));
+      pwm1.setPWM(motor_c_p, 0, 0);
+    }
+    else {
+      pwm1.setPWM(motor_c_n, 0, 0);
+      pwm1.setPWM(motor_c_p, 0, (int) (abs(u_m[2])/12*4096));
+    }
+
+
 
     //sprintf(output_string, "Error: %f\tController: %d",e_m_a[0],u_m[0]);
     //Serial.println(output_string);
@@ -155,6 +191,8 @@ void loop() {
       double motor = echoString.toFloat();
       Serial.println(echoString);
       omega_desired[0]=motor; //Currently casting float to double array, should maybe fix this
+      omega_desired[1]=motor;
+      omega_desired[2]=motor;
     //}
     echoString="";
   }
@@ -220,13 +258,8 @@ void UPDATE_STATES_C() {
 void CALC_VELOCITY(float timestep) {
   noInterrupts();
   velocity[0] = tics[0] / ((timestep)/1000) / 9600*2*3.14156; //give time in tics per time persiod
-  /*Serial.println("--------------");
-  Serial.println(tics[0]);
-  Serial.println(timestep);
-  Serial.println(tics[0]/timestep);
-  Serial.println(tics[0] / (timestep)/256*6);*/
-  velocity[1] = tics[1] / (timestep);
-  velocity[2] = tics[2] / (timestep);
+  velocity[1] = tics[1] / ((timestep)/1000) / 9600*2*3.14156;
+  velocity[2] = tics[2] / ((timestep)/1000) / 9600*2*3.14156;
   tics[0] = 0;
   tics[1] = 0;
   tics[2] = 0;

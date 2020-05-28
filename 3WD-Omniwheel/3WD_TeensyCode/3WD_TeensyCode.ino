@@ -61,7 +61,7 @@ void setup() {
 
   //set all motors to not move
   pwm1.setPWM(motor_a_p, 0, FULL_ON_VAL);
-  pwm1.setPWM(motor_a_n, 0, FULL_ON_VAL);
+  pwm1.setPWM(motor_a_n, FULL_ON_VAL, 0);
   pwm1.setPWM(motor_b_p, 0, FULL_ON_VAL);
   pwm1.setPWM(motor_b_n, 0, FULL_ON_VAL);
   pwm1.setPWM(motor_c_p, 0, FULL_ON_VAL);
@@ -72,7 +72,7 @@ void setup() {
 
 void loop() {
 
-  while (Serial.available()) {
+  /*while (Serial.available()) {
         delay(10); 
       if (Serial.available() >0) {
         char c = Serial.read();
@@ -92,6 +92,11 @@ void loop() {
       pwm1.setPWM(motor_c_p, motor, 0);
     }
     echoString="";
+  }*/
+  if (millis()%1000==0){
+    Serial.println(tics[0]);
+    tics[0]=0;
+    delay(1);
   }
 }
 
