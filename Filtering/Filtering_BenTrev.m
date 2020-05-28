@@ -3,7 +3,7 @@ close all; % Close all figures and windows
 %clear; % Clear workspace
 %clc; % Clears screen
 %% Initializing parameters
-tf = 300; % Final time in simulation
+tf = 600; % Final time in simulation
 T = 2e-2; % Sample rate
 t = 0:T:tf; % Time vector
 
@@ -231,16 +231,7 @@ figure; plot(t, x_m(2,:)); hold all; plot(t, x_m_unfiltered(2,:)); plot(t, x_kf_
 % figure; plot(t, x_ekf_r(3,:)); hold all; plot(t, x_r(3,:));plot(t, x_d_r(3,:)); xlabel('time (s)'); ylabel('theta (rad)'); legend('Filtered','True','Desired');hold off;
 
 
-figure; hold all;
-plot(x_r(1,:), x_r(2,:))
-plot(x_ekf_r(1,:), x_ekf_r(2,:))
-plot(x_ekfonly(1,:), x_ekfonly(2,:))
-plot(x_kfonly(1,:), x_kfonly(2,:))
-plot(x_nofilter(1,:), x_nofilter(2,:))
-plot(x_SVSF_r(1,:), x_SVSF_r(2,:))
-plot(x_SVSFonly(1,:), x_SVSFonly(2,:)) 
-xlabel('x (m)'); ylabel('y (m)');
-legend('True','EKF+KF','EKF','KF','No Filter','SVSF+KF','SVSF'); hold off;
+figure; plot(x_r(1,:), x_r(2,:));hold all;plot(x_ekf_r(1,:), x_ekf_r(2,:));plot(x_ekfonly(1,:), x_ekfonly(2,:));plot(x_kfonly(1,:), x_kfonly(2,:));plot(x_nofilter(1,:), x_nofilter(2,:));plot(x_SVSF_r(1,:), x_SVSF_r(2,:));plot(x_SVSFonly(1,:), x_SVSFonly(2,:)); xlabel('x (m)'); ylabel('y (m)');legend('True','EKF+KF','EKF','KF','No Filter','SVSF+KF','SVSF'); hold off;
 
 
 figure;  plot(t, x_r(3,:));hold all; plot(t, x_ekf_r(3,:));  plot(t, x_ekfonly(3,:));  plot(t, x_kfonly(3,:));  plot(t, x_nofilter(3,:)); plot(t, x_SVSF_r(3,:));plot(t, x_SVSFonly(3,:)); xlabel('Time (s)');ylabel('Angular Position (rad)');legend('True','EKF+KF','EKF','KF','No Filter','SVSF+KF','SVSF');hold off;
