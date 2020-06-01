@@ -42,7 +42,21 @@ int encoder_state_prev[3];
 
 int incomingByte;
 
-//Variables for the controller
+//Variables for the feedback lienarization controller
+double v_r[3]={0, 0, 0}; //Linearized controller
+double u_r[3]={0, 0, 0}; //Non-linear controller
+double x_r[3]={0,0,0}; //Position of the robot
+double x_r_desired[3]={0,0,0}; //desired position of robot
+
+const double K_p_r[3]={-5,-5,-3}; //proportional gains
+const double K_d_r[3]={0,0,0}; //derivative gain
+const double K_i_r[3]={-1,-1,-1}; //integral gain (in sim was -2000)
+
+CircularBuffer<double,eint_r_length> e_r; //defines robot error
+double eint_r=0; //define integral error
+double ed_r; //define derivative error
+
+//Variables for the motor controller
 const float T=20; //Desired time step in milliseconds
 double omega_desired[3] = {0,0,0};
 double u_m[3] = {0,0,0};
@@ -107,10 +121,23 @@ void loop() {
 
   if (time_m-time_previous_m>=T) {
     CALC_VELOCITY(time_m-time_previous_m); //calculate each wheel velocity
-    time_previous_m=time_m;
     //MOTOR_CONTROLLER(velocity[0], omega_desired[0]); //Call Motor Controller function, send desired state, real state, motor pins
     //Serial.println(velocity[0]);
+
+    //-----------Calculate Feedback linearization--------------//
+    //Calculate current position
+    x_r[0] = x_r[0] + ((2/3*sin(x_r[2]))*velocity[0]+(cos(x_r[2])/sqrt(3)-sin(x_r[2])/3)*velocity[1]+(-cos(x_r[2])/sqrt(3)-sin(x_r[2])/3)*velocity[2])*(time_m-time_previous_m)*wr
+    x_r[1] = x_r[1] + ((2/3*cos(x_r[2]))*velocity[0]+(sin(x_r[2])/sqrt(3)+cos(x_r[2])/3)*velocity[1]+(-sin(x_r[2])/sqrt(3)+cos(x_r[2])/3)*velocity[2])*(time_m-time_previous_m)*wr
+    x_r[2] = x_r[2] + (-1/rr*(velocity[0]+velocity[1]+velocity[2]))*(time_m-time_previous_m)*wr
     
+    //x_r[0]=x_r[0] + (sin(x_r[2])*velocity[0]-cos(x_r[2])*velocity[1]-rr*velocity[2])*(time_m-time_previous_m)*wr //x position
+    //x_r[1]=x_r[1] + ((sqrt(3)/2*cos(x_r[2])-sin(x_r[2])/2)*velocity[0]+((sqrt(3)/2*sin(x_r[2])+cos(x_r[2])/2)*velocity[1]+(-rr)*velocity[2])*(time_m-time_previous_m)*wr//y position
+    //x_r[2]=x_r[2] + ((-sqrt(3)/2*cos(x_r[2])-sin(x_r[2])/2)*velocity[0]+((-sqrt(3)/2*sin(x_r[2])+cos(x_r[2])/2)*velocity[1]+(-rr)*velocity[2])*(time_m-time_previous_m)*wr //theta position
+    
+    
+    
+    
+    //Calculate Motor Controllers
     e_m_a.unshift(velocity[0]-omega_desired[0]);
     eint_m_a = eint_m_a+(e_m_a[0]-e_m_a[eint_m_length-1])*(T/1000)/eint_m_length;
     ed_m_a = (e_m_a[0]-e_m_a[1])/(T/1000);
@@ -163,7 +190,9 @@ void loop() {
     }
 
 
+    time_previous_m=time_m; //set previous time to current time
 
+    
     //sprintf(output_string, "Error: %f\tController: %d",e_m_a[0],u_m[0]);
     //Serial.println(output_string);
     Serial.print("Error: ");
