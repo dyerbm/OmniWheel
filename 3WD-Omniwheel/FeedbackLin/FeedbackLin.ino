@@ -45,16 +45,25 @@ int incomingByte;
 //Variables for the feedback lienarization controller
 double v_r[3]={0, 0, 0}; //Linearized controller
 double u_r[3]={0, 0, 0}; //Non-linear controller
-double x_r[3]={0,0,0}; //Position of the robot
+double x_r[3]={1,-1.5,3}; //Position of the robot
 double x_r_desired[3]={0,0,0}; //desired position of robot
+const double wr=0.0508;//define wheel radius
+const double rr=0.2667;//define robot radius
 
-const double K_p_r[3]={-5,-5,-3}; //proportional gains
+const double K_p_r[3]={-10,-10,-3}; //proportional gains
 const double K_d_r[3]={0,0,0}; //derivative gain
-const double K_i_r[3]={-1,-1,-1}; //integral gain (in sim was -2000)
+const double K_i_r[3]={-500,-500,-500}; //integral gain (in sim was -2000)
 
-CircularBuffer<double,eint_r_length> e_r; //defines robot error
-double eint_r=0; //define integral error
-double ed_r; //define derivative error
+const int eint_r_length=100;
+CircularBuffer<double,eint_r_length> e_r_x; //defines robot x error
+double eint_r_x=0; //define integral error
+double ed_r_x; //define derivative error
+CircularBuffer<double,eint_r_length> e_r_y; //defines robot x error
+double eint_r_y=0; //define integral error
+double ed_r_y; //define derivative error
+CircularBuffer<double,eint_r_length> e_r_t; //defines robot x error
+double eint_r_t=0; //define integral error
+double ed_r_t; //define derivative error
 
 //Variables for the motor controller
 const float T=20; //Desired time step in milliseconds
@@ -68,7 +77,7 @@ const double K_i = -300;
 float time_m=0; //Current time (for the motors)
 float time_previous_m=0; //Last time step for the motors
 
-const int eint_m_length=200; //set bufer size based on desired integral loop
+const int eint_m_length=100; //set bufer size based on desired integral loop
 CircularBuffer<double,eint_m_length> e_m_a; //Initialize buffer
 double eint_m_a=0;
 double ed_m_a=0;
@@ -113,7 +122,12 @@ void setup() {
     e_m_a.unshift(0);
     e_m_b.unshift(0);
     e_m_c.unshift(0);
+    e_r_x.unshift(0);
+    e_r_y.unshift(0);
+    e_r_t.unshift(0);
   }
+
+  delay(1000); //make sure motors stop turning so the robot starts at origin
 }
 
 void loop() {
@@ -126,16 +140,37 @@ void loop() {
 
     //-----------Calculate Feedback linearization--------------//
     //Calculate current position
-    x_r[0] = x_r[0] + ((2/3*sin(x_r[2]))*velocity[0]+(cos(x_r[2])/sqrt(3)-sin(x_r[2])/3)*velocity[1]+(-cos(x_r[2])/sqrt(3)-sin(x_r[2])/3)*velocity[2])*(time_m-time_previous_m)*wr
-    x_r[1] = x_r[1] + ((2/3*cos(x_r[2]))*velocity[0]+(sin(x_r[2])/sqrt(3)+cos(x_r[2])/3)*velocity[1]+(-sin(x_r[2])/sqrt(3)+cos(x_r[2])/3)*velocity[2])*(time_m-time_previous_m)*wr
-    x_r[2] = x_r[2] + (-1/rr*(velocity[0]+velocity[1]+velocity[2]))*(time_m-time_previous_m)*wr
-    
-    //x_r[0]=x_r[0] + (sin(x_r[2])*velocity[0]-cos(x_r[2])*velocity[1]-rr*velocity[2])*(time_m-time_previous_m)*wr //x position
-    //x_r[1]=x_r[1] + ((sqrt(3)/2*cos(x_r[2])-sin(x_r[2])/2)*velocity[0]+((sqrt(3)/2*sin(x_r[2])+cos(x_r[2])/2)*velocity[1]+(-rr)*velocity[2])*(time_m-time_previous_m)*wr//y position
-    //x_r[2]=x_r[2] + ((-sqrt(3)/2*cos(x_r[2])-sin(x_r[2])/2)*velocity[0]+((-sqrt(3)/2*sin(x_r[2])+cos(x_r[2])/2)*velocity[1]+(-rr)*velocity[2])*(time_m-time_previous_m)*wr //theta position
-    
-    
-    
+    x_r[0] = x_r[0] + ((2/3*sin(x_r[2]))*velocity[0]+(cos(x_r[2])/sqrt(3)-sin(x_r[2])/3)*velocity[1]+(-cos(x_r[2])/sqrt(3)-sin(x_r[2])/3)*velocity[2])*(time_m-time_previous_m)/1000*wr;
+    x_r[1] = x_r[1] + ((2/3*cos(x_r[2]))*velocity[0]+(sin(x_r[2])/sqrt(3)+cos(x_r[2])/3)*velocity[1]+(-sin(x_r[2])/sqrt(3)+cos(x_r[2])/3)*velocity[2])*(time_m-time_previous_m)/1000*wr;
+    x_r[2] = x_r[2] + (-1/rr*(velocity[0]+velocity[1]+velocity[2]))*(time_m-time_previous_m)/1000*wr;
+
+    e_r_x.unshift(x_r[0]-x_r_desired[0]);//calculate new error
+    e_r_y.unshift(x_r[1]-x_r_desired[1]);
+    e_r_t.unshift(x_r[2]-x_r_desired[2]);
+    eint_r_x = eint_r_x+(e_r_x[0]-e_r_x[eint_r_length-1])*(T/1000)/eint_r_length;//recalculate integral error
+    eint_r_y = eint_r_y+(e_r_y[0]-e_r_y[eint_r_length-1])*(T/1000)/eint_r_length;
+    eint_r_t = eint_r_t+(e_r_t[0]-e_r_t[eint_r_length-1])*(T/1000)/eint_r_length;
+    ed_r_x = (e_r_x[0]-e_r_x[1])/(T/1000); //recalculate derivative error
+    ed_r_y = (e_r_y[0]-e_r_y[1])/(T/1000);
+    ed_r_t = (e_r_t[0]-e_r_t[1])/(T/1000);
+
+    v_r[0]= K_p_r[0]*e_r_x[0]+K_d_r[0]*ed_r_x+K_i_r[0]*eint_r_x; //calculate linear controller
+    v_r[1]= K_p_r[1]*e_r_y[0]+K_d_r[1]*ed_r_y+K_i_r[1]*eint_r_y;
+    v_r[2]= K_p_r[2]*e_r_t[0]+K_d_r[2]*ed_r_t+K_i_r[2]*eint_r_t;
+
+    omega_desired[0] = (sin(x_r[2])*v_r[0]-cos(x_r[2])*v_r[1]-rr*v_r[2])*(time_m-time_previous_m)*wr; //x position
+    omega_desired[1] = (sqrt(3)/2*cos(x_r[2])-sin(x_r[2])/2)*v_r[0]+(sqrt(3)/2*sin(x_r[2])+cos(x_r[2])/2)*v_r[1]+(-rr)*v_r[2];
+    omega_desired[2] = (-sqrt(3)/2*cos(x_r[2])-sin(x_r[2])/2)*v_r[0]+(-sqrt(3)/2*sin(x_r[2])+cos(x_r[2])/2)*v_r[1]+(-rr)*v_r[2];
+
+    if (abs(omega_desired[0])>6 || abs(omega_desired[1])>6 || abs(omega_desired[2])>6) {
+      float quickcounter = omega_desired[0];
+      for (int i=1; i<3;i++){
+        if (abs(quickcounter)<abs(omega_desired[i])) (quickcounter=omega_desired[i]);
+      }
+      omega_desired[0]=omega_desired[0]/abs(quickcounter)*12;
+      omega_desired[1]=omega_desired[1]/abs(quickcounter)*12;
+      omega_desired[2]=omega_desired[2]/abs(quickcounter)*12;
+    }
     
     //Calculate Motor Controllers
     e_m_a.unshift(velocity[0]-omega_desired[0]);
@@ -202,6 +237,14 @@ void loop() {
     Serial.print("\t Velocity: ");
     Serial.print(velocity[0]);
     Serial.print("\n");
+
+    Serial.print("x Position: ");
+    Serial.print(x_r[0]);
+    Serial.print("\t y Position: ");
+    Serial.print(x_r[1]);
+    Serial.print("\t theta Position: ");
+    Serial.print(x_r[2]);
+    Serial.print("\n");
   }
 
   while (Serial.available()) {
@@ -219,9 +262,10 @@ void loop() {
     else{*/
       double motor = echoString.toFloat();
       Serial.println(echoString);
-      omega_desired[0]=motor; //Currently casting float to double array, should maybe fix this
-      omega_desired[1]=motor;
-      omega_desired[2]=motor;
+      //omega_desired[0]=motor; //Currently casting float to double array, should maybe fix this
+      //omega_desired[1]=motor;
+      //omega_desired[2]=motor;
+      x_r_desired[2]=motor;
     //}
     echoString="";
   }
