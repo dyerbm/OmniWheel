@@ -45,14 +45,14 @@ int incomingByte;
 //Variables for the feedback lienarization controller
 double v_r[3]={0, 0, 0}; //Linearized controller
 double u_r[3]={0, 0, 0}; //Non-linear controller
-double x_r[3]={1,-1.5,3}; //Position of the robot
+double x_r[3]={0,0,2*3.1415}; //Position of the robot
 double x_r_desired[3]={0,0,0}; //desired position of robot
 const double wr=0.0508;//define wheel radius
-const double rr=0.2667;//define robot radius
+const double rr=1.290;//define robot radius
 
-const double K_p_r[3]={-10,-10,-3}; //proportional gains
+const double K_p_r[3]={-20,-20,-6}; //proportional gains
 const double K_d_r[3]={0,0,0}; //derivative gain
-const double K_i_r[3]={-500,-500,-500}; //integral gain (in sim was -2000)
+const double K_i_r[3]={-50,-50,-30}; //integral gain (in sim was -2000)
 
 const int eint_r_length=100;
 CircularBuffer<double,eint_r_length> e_r_x; //defines robot x error
@@ -70,9 +70,9 @@ const float T=20; //Desired time step in milliseconds
 double omega_desired[3] = {0,0,0};
 double u_m[3] = {0,0,0};
 
-const double K_p = -15;
+const double K_p = -10;
 const double K_d = -0;
-const double K_i = -300;
+const double K_i = -30;
 
 float time_m=0; //Current time (for the motors)
 float time_previous_m=0; //Last time step for the motors
@@ -90,7 +90,8 @@ double ed_m_c=0;
 
 
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(115200);
+  delay(3000);
 
   pwm1.begin();
   pwm1.setPWMFreq(MAX_PWM_FREQ);
@@ -134,6 +135,9 @@ void loop() {
   time_m=millis();
 
   if (time_m-time_previous_m>=T) {
+    //Serial.println(tics[0]);
+    //Serial.println(tics[1]);
+    //Serial.println(tics[2]);
     CALC_VELOCITY(time_m-time_previous_m); //calculate each wheel velocity
     //MOTOR_CONTROLLER(velocity[0], omega_desired[0]); //Call Motor Controller function, send desired state, real state, motor pins
     //Serial.println(velocity[0]);
@@ -141,7 +145,7 @@ void loop() {
     //-----------Calculate Feedback linearization--------------//
     //Calculate current position
     x_r[0] = x_r[0] + ((2/3*sin(x_r[2]))*velocity[0]+(cos(x_r[2])/sqrt(3)-sin(x_r[2])/3)*velocity[1]+(-cos(x_r[2])/sqrt(3)-sin(x_r[2])/3)*velocity[2])*(time_m-time_previous_m)/1000*wr;
-    x_r[1] = x_r[1] + ((2/3*cos(x_r[2]))*velocity[0]+(sin(x_r[2])/sqrt(3)+cos(x_r[2])/3)*velocity[1]+(-sin(x_r[2])/sqrt(3)+cos(x_r[2])/3)*velocity[2])*(time_m-time_previous_m)/1000*wr;
+    x_r[1] = x_r[1] + ((-2/3*cos(x_r[2]))*velocity[0]+(sin(x_r[2])/sqrt(3)+cos(x_r[2])/3)*velocity[1]+(-sin(x_r[2])/sqrt(3)+cos(x_r[2])/3)*velocity[2])*(time_m-time_previous_m)/1000*wr;
     x_r[2] = x_r[2] + (-1/rr*(velocity[0]+velocity[1]+velocity[2]))*(time_m-time_previous_m)/1000*wr;
 
     e_r_x.unshift(x_r[0]-x_r_desired[0]);//calculate new error
@@ -162,14 +166,14 @@ void loop() {
     omega_desired[1] = (sqrt(3)/2*cos(x_r[2])-sin(x_r[2])/2)*v_r[0]+(sqrt(3)/2*sin(x_r[2])+cos(x_r[2])/2)*v_r[1]+(-rr)*v_r[2];
     omega_desired[2] = (-sqrt(3)/2*cos(x_r[2])-sin(x_r[2])/2)*v_r[0]+(-sqrt(3)/2*sin(x_r[2])+cos(x_r[2])/2)*v_r[1]+(-rr)*v_r[2];
 
-    if (abs(omega_desired[0])>6 || abs(omega_desired[1])>6 || abs(omega_desired[2])>6) {
+    if (abs(omega_desired[0])>4 || abs(omega_desired[1])>4 || abs(omega_desired[2])>4) {
       float quickcounter = omega_desired[0];
       for (int i=1; i<3;i++){
         if (abs(quickcounter)<abs(omega_desired[i])) (quickcounter=omega_desired[i]);
       }
-      omega_desired[0]=omega_desired[0]/abs(quickcounter)*12;
-      omega_desired[1]=omega_desired[1]/abs(quickcounter)*12;
-      omega_desired[2]=omega_desired[2]/abs(quickcounter)*12;
+      omega_desired[0]=omega_desired[0]/abs(quickcounter)*4;
+      omega_desired[1]=omega_desired[1]/abs(quickcounter)*4;
+      omega_desired[2]=omega_desired[2]/abs(quickcounter)*4;
     }
     
     //Calculate Motor Controllers
@@ -196,7 +200,14 @@ void loop() {
       u_m[0]=u_m[0]/abs(quickcounter)*12;
       u_m[1]=u_m[1]/abs(quickcounter)*12;
       u_m[2]=u_m[2]/abs(quickcounter)*12;
+      Serial.println(millis());
     }
+
+    /*if (abs(u_m[0])<3.5) u_m[0]=0; //Cut off voltage, save battery, stop ringing
+    if (abs(u_m[1])<3.5) u_m[1]=0;
+    if (abs(u_m[2])<3.5) u_m[2]=0;*/
+
+    //u_m[0]=u_m[0]*0.95;u_m[1]=u_m[1]*0.95;u_m[2]=u_m[0]; //This forces a spinning controller
 
     //-----Set each motor accordingly-----//
     if (u_m[0]>0) {
@@ -330,9 +341,9 @@ void UPDATE_STATES_C() {
 
 void CALC_VELOCITY(float timestep) {
   noInterrupts();
-  velocity[0] = tics[0] / ((timestep)/1000) / 9600*2*3.14156; //give time in tics per time persiod
-  velocity[1] = tics[1] / ((timestep)/1000) / 9600*2*3.14156;
-  velocity[2] = tics[2] / ((timestep)/1000) / 9600*2*3.14156;
+  velocity[0] = tics[0] / ((timestep)/1000) / 10000*2*3.14156; //give time in tics per time persiod
+  velocity[1] = tics[1] / ((timestep)/1000) / 10000*2*3.14156;
+  velocity[2] = tics[2] / ((timestep)/1000) / 10000*2*3.14156;
   tics[0] = 0;
   tics[1] = 0;
   tics[2] = 0;
