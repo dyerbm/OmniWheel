@@ -45,10 +45,10 @@ int incomingByte;
 //Variables for the feedback lienarization controller
 double v_r[3]={0, 0, 0}; //Linearized controller
 double u_r[3]={0, 0, 0}; //Non-linear controller
-double x_r[3]={0,0,2*3.1415}; //Position of the robot
+double x_r[3]={0,1,0}; //Position of the robot
 double x_r_desired[3]={0,0,0}; //desired position of robot
 const double wr=0.0508;//define wheel radius
-const double rr=1.290;//define robot radius
+const double rr=0.290;//define robot radius
 
 const double K_p_r[3]={-20,-20,-6}; //proportional gains
 const double K_d_r[3]={0,0,0}; //derivative gain
@@ -135,9 +135,9 @@ void loop() {
   time_m=millis();
 
   if (time_m-time_previous_m>=T) {
-    //Serial.println(tics[0]);
-    //Serial.println(tics[1]);
-    //Serial.println(tics[2]);
+    Serial.println(tics[0]);
+    Serial.println(tics[1]);
+    Serial.println(tics[2]);
     CALC_VELOCITY(time_m-time_previous_m); //calculate each wheel velocity
     //MOTOR_CONTROLLER(velocity[0], omega_desired[0]); //Call Motor Controller function, send desired state, real state, motor pins
     //Serial.println(velocity[0]);
@@ -145,8 +145,9 @@ void loop() {
     //-----------Calculate Feedback linearization--------------//
     //Calculate current position
     x_r[0] = x_r[0] + ((2/3*sin(x_r[2]))*velocity[0]+(cos(x_r[2])/sqrt(3)-sin(x_r[2])/3)*velocity[1]+(-cos(x_r[2])/sqrt(3)-sin(x_r[2])/3)*velocity[2])*(time_m-time_previous_m)/1000*wr;
-    x_r[1] = x_r[1] + ((-2/3*cos(x_r[2]))*velocity[0]+(sin(x_r[2])/sqrt(3)+cos(x_r[2])/3)*velocity[1]+(-sin(x_r[2])/sqrt(3)+cos(x_r[2])/3)*velocity[2])*(time_m-time_previous_m)/1000*wr;
-    x_r[2] = x_r[2] + (-1/rr*(velocity[0]+velocity[1]+velocity[2]))*(time_m-time_previous_m)/1000*wr;
+    x_r[1] = x_r[1] + ((-2/3*cos(x_r[2]))*velocity[0]+(cos(x_r[2])/3)*velocity[1]+(+cos(x_r[2])/3)*velocity[2])*(time_m-time_previous_m)/1000*wr;
+    x_r[2] = x_r[2] + (-1/(3*rr)*(velocity[0]+velocity[1]+velocity[2]))*(time_m-time_previous_m)/1000*wr;
+    //x_r[1] = x_r[1] - velocity[0]*wr*(time_m-time_previous_m)/1000;
 
     e_r_x.unshift(x_r[0]-x_r_desired[0]);//calculate new error
     e_r_y.unshift(x_r[1]-x_r_desired[1]);
@@ -163,8 +164,8 @@ void loop() {
     v_r[2]= K_p_r[2]*e_r_t[0]+K_d_r[2]*ed_r_t+K_i_r[2]*eint_r_t;
 
     omega_desired[0] = (sin(x_r[2])*v_r[0]-cos(x_r[2])*v_r[1]-rr*v_r[2])*(time_m-time_previous_m)*wr; //x position
-    omega_desired[1] = (sqrt(3)/2*cos(x_r[2])-sin(x_r[2])/2)*v_r[0]+(sqrt(3)/2*sin(x_r[2])+cos(x_r[2])/2)*v_r[1]+(-rr)*v_r[2];
-    omega_desired[2] = (-sqrt(3)/2*cos(x_r[2])-sin(x_r[2])/2)*v_r[0]+(-sqrt(3)/2*sin(x_r[2])+cos(x_r[2])/2)*v_r[1]+(-rr)*v_r[2];
+    omega_desired[1] = ((sqrt(3)/2*cos(x_r[2])-sin(x_r[2])/2)*v_r[0]+(sqrt(3)/2*sin(x_r[2])+cos(x_r[2])/2)*v_r[1]+(-rr)*v_r[2])*(time_m-time_previous_m)*wr;
+    omega_desired[2] = ((-sqrt(3)/2*cos(x_r[2])-sin(x_r[2])/2)*v_r[0]+(-sqrt(3)/2*sin(x_r[2])+cos(x_r[2])/2)*v_r[1]+(-rr)*v_r[2])*(time_m-time_previous_m)*wr;
 
     if (abs(omega_desired[0])>4 || abs(omega_desired[1])>4 || abs(omega_desired[2])>4) {
       float quickcounter = omega_desired[0];
@@ -207,7 +208,7 @@ void loop() {
     if (abs(u_m[1])<3.5) u_m[1]=0;
     if (abs(u_m[2])<3.5) u_m[2]=0;*/
 
-    //u_m[0]=u_m[0]*0.95;u_m[1]=u_m[1]*0.95;u_m[2]=u_m[0]; //This forces a spinning controller
+    //u_m[0]=8;u_m[1]=-4;u_m[2]=-4; //This forces a spinning controller
 
     //-----Set each motor accordingly-----//
     if (u_m[0]>0) {
@@ -242,7 +243,8 @@ void loop() {
     //sprintf(output_string, "Error: %f\tController: %d",e_m_a[0],u_m[0]);
     //Serial.println(output_string);
     Serial.print("Error: ");
-    Serial.print(e_m_a[0]);
+    //Serial.print(e_m_a[0]);
+    Serial.print(e_r_y[0]);
     Serial.print("\t Controller: ");
     Serial.print(u_m[0]);
     Serial.print("\t Velocity: ");
