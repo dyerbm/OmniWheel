@@ -47,7 +47,7 @@ int incomingByte;
 //Variables for the feedback lienarization controller
 double v_r[3]={0, 0, 0}; //Linearized controller
 double u_r[3]={0, 0, 0}; //Non-linear controller
-double x_r[3]={0,1,0}; //Position of the robot
+double x_r[3]={0,0,0}; //Position of the robot
 double x_r_desired[3]={0,0,0}; //desired position of robot
 const double wr=0.0508;//define wheel radius
 const double rr=0.290;//define robot radius
@@ -137,6 +137,9 @@ void loop() {
   time_m=millis();
 
   if (time_m-time_previous_m>=T) {
+
+    x_r_desired[0] = 0.3*sin(millis()/1000.*2.*3.14159/10);
+    x_r_desired[1] = 0.3*cos(millis()/1000.*2.*3.14159/10);
     Serial.println(velocity[0]);
     Serial.println(velocity[1]);
     Serial.println(velocity[2]);
@@ -160,10 +163,10 @@ void loop() {
     Serial.print("\n");
 
     
-    x_r[0] = x_r[0] + ((2.0/3.0*sin(x_r[2]))*velocity[0]+(cos(x_r[2])/sqrt(3)-sin(x_r[2])/3.0)*velocity[1]+(-cos(x_r[2])/sqrt(3)-sin(x_r[2])/3.0)*velocity[2])*(time_m-time_previous_m)/1000.0*wr;
-    x_r[1] = x_r[1] + ((-2.0/3.0*cos(x_r[2]))*velocity[0]+(sin(x_r[2])/sqrt(3)+cos(x_r[2])/3.0)*velocity[1]+(-sin(x_r[2])/sqrt(3)+cos(x_r[2])/3)*velocity[2])*(time_m-time_previous_m)/1000*wr;
-    x_r[2] = x_r[2] + (-1/(3*rr)*(velocity[0]+velocity[1]+velocity[2]))*(time_m-time_previous_m)/1000*wr;
-    //x_r[1] = x_r[1] + ((-2/3*cos(x_r[2]))*velocity[0]+(sin(x_r[2])/sqrt(3)+cos(x_r[2])/3)*velocity[1]+(cos(x_r[2])/3)*velocity[2])*(time_m-time_previous_m)/1000*wr;
+    x_r[0] = x_r[0] + ((2.0/3.0*sin(x_r[2]))*velocity[0]+(cos(x_r[2])/sqrt(3.0)-sin(x_r[2])/3.0)*velocity[1]+(-cos(x_r[2])/sqrt(3.0)-sin(x_r[2])/3.0)*velocity[2])*(time_m-time_previous_m)/1000.0*wr;
+    x_r[1] = x_r[1] + ((-2.0/3.0*cos(x_r[2]))*velocity[0]+(sin(x_r[2])/sqrt(3.0)+cos(x_r[2])/3.0)*velocity[1]+(-sin(x_r[2])/sqrt(3.0)+cos(x_r[2])/3.0)*velocity[2])*(time_m-time_previous_m)/1000.0*wr;
+    x_r[2] = x_r[2] + (-1./(3.*rr)*(velocity[0]+velocity[1]+velocity[2]))*(time_m-time_previous_m)/1000.*wr;
+    //x_r[1] = x_r[1] + ((-2/3*cos(x_r[2]))*velocity[0]+(sin(x_r[2])/sqrt(3)+cos(x_r[2])/3)*velocity[1]+(cos(x_r[2])/3)*velocity[2])*(time_m-time_previous_m)/1000.0*wr;
 
     e_r_x.unshift(x_r[0]-x_r_desired[0]);//calculate new error
     e_r_y.unshift(x_r[1]-x_r_desired[1]);
