@@ -3,6 +3,8 @@
   Code ot run 3WD - Omniwheel Robot using custom Motor Drivers
 
   Benjamin Dyer - May 25, 2020
+
+  Trevor Smith ^^ -  hehe ;)
  
  *****************************************************************/
 
@@ -66,7 +68,7 @@ double eint_r_t=0; //define integral error
 double ed_r_t; //define derivative error
 
 //Variables for the motor controller
-const float T=20; //Desired time step in milliseconds
+const float T=20.0; //Desired time step in milliseconds
 double omega_desired[3] = {0,0,0};
 double u_m[3] = {0,0,0};
 
@@ -135,29 +137,43 @@ void loop() {
   time_m=millis();
 
   if (time_m-time_previous_m>=T) {
-    Serial.println(tics[0]);
-    Serial.println(tics[1]);
-    Serial.println(tics[2]);
+    Serial.println(velocity[0]);
+    Serial.println(velocity[1]);
+    Serial.println(velocity[2]);
     CALC_VELOCITY(time_m-time_previous_m); //calculate each wheel velocity
     //MOTOR_CONTROLLER(velocity[0], omega_desired[0]); //Call Motor Controller function, send desired state, real state, motor pins
     //Serial.println(velocity[0]);
 
     //-----------Calculate Feedback linearization--------------//
     //Calculate current position
-    x_r[0] = x_r[0] + ((2/3*sin(x_r[2]))*velocity[0]+(cos(x_r[2])/sqrt(3)-sin(x_r[2])/3)*velocity[1]+(-cos(x_r[2])/sqrt(3)-sin(x_r[2])/3)*velocity[2])*(time_m-time_previous_m)/1000*wr;
-    x_r[1] = x_r[1] + ((-2/3*cos(x_r[2]))*velocity[0]+(cos(x_r[2])/3)*velocity[1]+(+cos(x_r[2])/3)*velocity[2])*(time_m-time_previous_m)/1000*wr;
+
+
+    Serial.print(x_r[1]);
+    Serial.print("\n");
+    Serial.print((-2.0/3.0*cos(x_r[2]))*velocity[0]);
+    Serial.print("\n");
+    Serial.print((sin(x_r[2])/sqrt(3)+cos(x_r[2])/3.0)*velocity[1]);
+    Serial.print("\n");
+    Serial.print((-sin(x_r[2])/sqrt(3)+cos(x_r[2])/3.0)*velocity[2]);
+    Serial.print("\n");
+    Serial.print((time_m-time_previous_m)/1000.0*wr);
+    Serial.print("\n");
+
+    
+    x_r[0] = x_r[0] + ((2.0/3.0*sin(x_r[2]))*velocity[0]+(cos(x_r[2])/sqrt(3)-sin(x_r[2])/3.0)*velocity[1]+(-cos(x_r[2])/sqrt(3)-sin(x_r[2])/3.0)*velocity[2])*(time_m-time_previous_m)/1000.0*wr;
+    x_r[1] = x_r[1] + ((-2.0/3.0*cos(x_r[2]))*velocity[0]+(sin(x_r[2])/sqrt(3)+cos(x_r[2])/3.0)*velocity[1]+(-sin(x_r[2])/sqrt(3)+cos(x_r[2])/3)*velocity[2])*(time_m-time_previous_m)/1000*wr;
     x_r[2] = x_r[2] + (-1/(3*rr)*(velocity[0]+velocity[1]+velocity[2]))*(time_m-time_previous_m)/1000*wr;
-    //x_r[1] = x_r[1] - velocity[0]*wr*(time_m-time_previous_m)/1000;
+    //x_r[1] = x_r[1] + ((-2/3*cos(x_r[2]))*velocity[0]+(sin(x_r[2])/sqrt(3)+cos(x_r[2])/3)*velocity[1]+(cos(x_r[2])/3)*velocity[2])*(time_m-time_previous_m)/1000*wr;
 
     e_r_x.unshift(x_r[0]-x_r_desired[0]);//calculate new error
     e_r_y.unshift(x_r[1]-x_r_desired[1]);
     e_r_t.unshift(x_r[2]-x_r_desired[2]);
-    eint_r_x = eint_r_x+(e_r_x[0]-e_r_x[eint_r_length-1])*(T/1000)/eint_r_length;//recalculate integral error
-    eint_r_y = eint_r_y+(e_r_y[0]-e_r_y[eint_r_length-1])*(T/1000)/eint_r_length;
-    eint_r_t = eint_r_t+(e_r_t[0]-e_r_t[eint_r_length-1])*(T/1000)/eint_r_length;
-    ed_r_x = (e_r_x[0]-e_r_x[1])/(T/1000); //recalculate derivative error
-    ed_r_y = (e_r_y[0]-e_r_y[1])/(T/1000);
-    ed_r_t = (e_r_t[0]-e_r_t[1])/(T/1000);
+    eint_r_x = eint_r_x+(e_r_x[0]-e_r_x[eint_r_length-1])*(T/1000.0)/(double)eint_r_length;//recalculate integral error
+    eint_r_y = eint_r_y+(e_r_y[0]-e_r_y[eint_r_length-1])*(T/1000.0)/(double)eint_r_length;
+    eint_r_t = eint_r_t+(e_r_t[0]-e_r_t[eint_r_length-1])*(T/1000.0)/(double)eint_r_length;
+    ed_r_x = (e_r_x[0]-e_r_x[1])/(T/1000.0); //recalculate derivative error
+    ed_r_y = (e_r_y[0]-e_r_y[1])/(T/1000.0);
+    ed_r_t = (e_r_t[0]-e_r_t[1])/(T/1000.0);
 
     v_r[0]= K_p_r[0]*e_r_x[0]+K_d_r[0]*ed_r_x+K_i_r[0]*eint_r_x; //calculate linear controller
     v_r[1]= K_p_r[1]*e_r_y[0]+K_d_r[1]*ed_r_y+K_i_r[1]*eint_r_y;
