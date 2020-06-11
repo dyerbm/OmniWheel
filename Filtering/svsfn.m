@@ -1,4 +1,4 @@
-%% SVSF code (with a covariance derivation)
+.5%% SVSF code (with a covariance derivation)
 function [x, P, errk] = svsfn(x, z, err, u, vs, P, xNon, A, C, Q, R) % SVSF function for linear system and measurements example (note: you just need to change the state and measurement equations)
 n = size(x,1); % Defines number of states
 m = size(z,1); % Defines number of measurements
