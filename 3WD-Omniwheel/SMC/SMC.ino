@@ -47,14 +47,16 @@ int incomingByte;
 //Variables for the feedback lienarization controller
 double v_r[3]={0, 0, 0}; //Linearized controller
 double u_r[3]={0, 0, 0}; //Non-linear controller
-double x_r[3]={0,0,0}; //Position of the robot
+double x_r[3]={1,0,0}; //Position of the robot
 double x_r_desired[3]={0,0,0}; //desired position of robot
+double xd_r_desired[3]={0,0,0}; //desired velocity of robot
 const double wr=0.0508;//define wheel radius
 const double rr=0.290;//define robot radius
 
-const double K_p_r[3]={-20,-20,-6}; //proportional gains
-const double K_d_r[3]={0,0,0}; //derivative gain
-const double K_i_r[3]={-50,-50,-30}; //integral gain (in sim was -2000)
+const double lambda[3]={7,7,6}; //SMC lambda
+const double K_r[3]={0.01,0.01,0.01}; //SMC K
+double s[3] = {0,0,0}; //define sliding surface
+double vshat[3] = {0,0,0}; //define measured slip
 
 const int eint_r_length=100;
 CircularBuffer<double,eint_r_length> e_r_x; //defines robot x error
@@ -178,14 +180,17 @@ void loop() {
     ed_r_y = (e_r_y[0]-e_r_y[1])/(T/1000.0);
     ed_r_t = (e_r_t[0]-e_r_t[1])/(T/1000.0);
 
-    v_r[0]= K_p_r[0]*e_r_x[0]+K_d_r[0]*ed_r_x+K_i_r[0]*eint_r_x; //calculate linear controller
-    v_r[1]= K_p_r[1]*e_r_y[0]+K_d_r[1]*ed_r_y+K_i_r[1]*eint_r_y;
-    v_r[2]= K_p_r[2]*e_r_t[0]+K_d_r[2]*ed_r_t+K_i_r[2]*eint_r_t;
+    //PUT UR CONTROLLER HERE!
 
-    omega_desired[0] = (sin(x_r[2])*v_r[0]-cos(x_r[2])*v_r[1]-rr*v_r[2])*(time_m-time_previous_m)*wr; //x position
-    omega_desired[1] = ((sqrt(3)/2*cos(x_r[2])-sin(x_r[2])/2)*v_r[0]+(sqrt(3)/2*sin(x_r[2])+cos(x_r[2])/2)*v_r[1]+(-rr)*v_r[2])*(time_m-time_previous_m)*wr;
-    omega_desired[2] = ((-sqrt(3)/2*cos(x_r[2])-sin(x_r[2])/2)*v_r[0]+(-sqrt(3)/2*sin(x_r[2])+cos(x_r[2])/2)*v_r[1]+(-rr)*v_r[2])*(time_m-time_previous_m)*wr;
+    s[0]=e_r_x[0]+lambda[0]*eint_r_x; //calculate sliding surface
+    s[1]=e_r_y[0]+lambda[1]*eint_r_y;
+    s[2]=e_r_t[0]+lambda[2]*eint_r_t;
 
+    omega_desired[0]=1/wr*(sin(x_r[2])*(-lambda[0]*e_r_x[0]+xd_r_desired[0]-K_r[0]*sgn(s[0]))-cos(x_r[2])*(-lambda[1]*e_r_y[0]+xd_r_desired[1]-K_r[1]*sgn(s[1]))-rr*(-lambda[2]*e_r_t[0]+xd_r_desired[2]-K_r[2]*sgn(s[2])))-vshat[0];
+    omega_desired[1]=1/wr*((sqrt(3.)/2.*cos(x_r[2])-sin(x_r[2])/2.)*(-lambda[0]*e_r_x[0]+xd_r_desired[0]-K_r[0]*sgn(s[0]))+(sqrt(3.)/2.*sin(x_r[2])+cos(x_r[2])/2.)*(-lambda[1]*e_r_y[0]+xd_r_desired[1]-K_r[1]*sgn(s[1]))-rr*(-lambda[2]*e_r_t[0]+xd_r_desired[2]-K_r[2]*sgn(s[2])))-vshat[1];
+    omega_desired[2]=1/wr*((-sqrt(3.)/2.*cos(x_r[2])-sin(x_r[2])/2.)*(-lambda[0]*e_r_x[0]+xd_r_desired[0]-K_r[0]*sgn(s[0]))+(-sqrt(3.)/2.*sin(x_r[2])+cos(x_r[2])/2.)*(-lambda[1]*e_r_y[0]+xd_r_desired[1]-K_r[1]*sgn(s[1]))-rr*(-lambda[2]*e_r_t[0]+xd_r_desired[2]-K_r[2]*sgn(s[2])))-vshat[2];
+
+    
     if (abs(omega_desired[0])>4 || abs(omega_desired[1])>4 || abs(omega_desired[2])>4) {
       float quickcounter = omega_desired[0];
       for (int i=1; i<3;i++){
@@ -301,6 +306,12 @@ void loop() {
     //}
     echoString="";
   }
+}
+
+static inline double sgn(double val) {
+ if (val < 0) return -1.;
+ if (val==0) return 0.;
+ return 1.;
 }
 
 // Encoder A
