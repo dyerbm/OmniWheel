@@ -5,6 +5,8 @@
   Benjamin Dyer - May 25, 2020
 
   Trevor Smith ^^ -  hehe ;)
+
+  This man, sneaking in here, he wrote the encoder bit, mostly
  
  *****************************************************************/
 
