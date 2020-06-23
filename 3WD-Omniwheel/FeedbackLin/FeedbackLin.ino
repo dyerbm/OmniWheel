@@ -133,16 +133,20 @@ void setup() {
   delay(1000); //make sure motors stop turning so the robot starts at origin
 }
 
+int start_time = millis();
+
 void loop() {
   time_m=millis();
 
   if (time_m-time_previous_m>=T) {
 
-    x_r_desired[0] = 0.3*sin(millis()/1000.*2.*3.14159/10);
-    x_r_desired[1] = 0.3*cos(millis()/1000.*2.*3.14159/10);
-    Serial.println(velocity[0]);
+    //if (millis()-start_time<20000){
+      x_r_desired[0] = -0.3*sin((millis()-start_time)/1000.*2.*3.14159/10);
+      x_r_desired[1] = 0.3*cos((millis()-start_time)/1000.*2.*3.14159/10);
+    //}  
+    /*Serial.println(velocity[0]);
     Serial.println(velocity[1]);
-    Serial.println(velocity[2]);
+    Serial.println(velocity[2]);*/
     CALC_VELOCITY(time_m-time_previous_m); //calculate each wheel velocity
     //MOTOR_CONTROLLER(velocity[0], omega_desired[0]); //Call Motor Controller function, send desired state, real state, motor pins
     //Serial.println(velocity[0]);
@@ -151,7 +155,7 @@ void loop() {
     //Calculate current position
 
 
-    Serial.print(x_r[1]);
+    /*Serial.print(x_r[1]);
     Serial.print("\n");
     Serial.print((-2.0/3.0*cos(x_r[2]))*velocity[0]);
     Serial.print("\n");
@@ -160,7 +164,7 @@ void loop() {
     Serial.print((-sin(x_r[2])/sqrt(3)+cos(x_r[2])/3.0)*velocity[2]);
     Serial.print("\n");
     Serial.print((time_m-time_previous_m)/1000.0*wr);
-    Serial.print("\n");
+    Serial.print("\n");*/
 
     
     x_r[0] = x_r[0] + ((2.0/3.0*sin(x_r[2]))*velocity[0]+(cos(x_r[2])/sqrt(3.0)-sin(x_r[2])/3.0)*velocity[1]+(-cos(x_r[2])/sqrt(3.0)-sin(x_r[2])/3.0)*velocity[2])*(time_m-time_previous_m)/1000.0*wr;
@@ -220,7 +224,7 @@ void loop() {
       u_m[0]=u_m[0]/abs(quickcounter)*12;
       u_m[1]=u_m[1]/abs(quickcounter)*12;
       u_m[2]=u_m[2]/abs(quickcounter)*12;
-      Serial.println(millis());
+      //Serial.println(millis());
     }
 
     /*if (abs(u_m[0])<3.5) u_m[0]=0; //Cut off voltage, save battery, stop ringing
@@ -261,22 +265,13 @@ void loop() {
     
     //sprintf(output_string, "Error: %f\tController: %d",e_m_a[0],u_m[0]);
     //Serial.println(output_string);
-    Serial.print("Error: ");
-    //Serial.print(e_m_a[0]);
-    Serial.print(e_r_y[0]);
-    Serial.print("\t Controller: ");
-    Serial.print(u_m[0]);
-    Serial.print("\t Velocity: ");
-    Serial.print(velocity[0]);
-    Serial.print("\n");
-
-    Serial.print("x Position: ");
-    Serial.print(x_r[0]);
-    Serial.print("\t y Position: ");
-    Serial.print(x_r[1]);
-    Serial.print("\t theta Position: ");
-    Serial.print(x_r[2]);
-    Serial.print("\n");
+    Serial.print(x_r[0],5);
+    Serial.print(",");
+    Serial.print(x_r[1],5);
+    Serial.print(",");
+    Serial.print(x_r[2],5);
+    Serial.print(",");
+    Serial.println(sqrt(pow(x_r[0],2)+pow(x_r[1],2))-0.3,5);
   }
 
   while (Serial.available()) {
