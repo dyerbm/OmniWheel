@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<Trial name="July 28 202001" notes="">
+
+  <Parameters>
+    <Param header="0" name="Capture Date" value="2020-Jul-28 14:22:58"/>
+    <Param header="0" name="x2d" value="July 28 202001.x2d"/>
+  </Parameters>
+
+  <Run name="" notes="">
+    <Parameters>
+      <Param header="0" name="Version" value="2.9.2.118349h"/>
+      <Param header="0" name="Start Date" value="2020-Jul-28 14:23:19"/>
+    </Parameters>
+    <OperationType name="Core Processing" notes="">
+      <OperationSubType name="Reconstruct" notes="">
+        <Parameters>
+          <Param header="0" name="Date" value="2020-Jul-28 14:23:19"/>
+          <Param header="1" name="Frame Range" value=""/>
+          <Param header="0" name="First Frame" value="1"/>
+          <Param header="0" name="Last Frame" value="261"/>
+          <Param header="1" name="Grayscale Circle Fitting" value=""/>
+          <Param header="0" name="Enable" value="Yes"/>
+          <Param header="0" name="Circularity Threshold Tweak" value="0"/>
+          <Param header="1" name="Reconstruction" value=""/>
+          <Param header="0" name="3D Predictions" value="No"/>
+          <Param header="0" name="Environmental Drift Tolerance" value="1.5"/>
+          <Param header="0" name="Minimum Cameras to Start Trajectory" value="3"/>
+          <Param header="0" name="Minimum Cameras to Continue Trajectory" value="2"/>
+          <Param header="0" name="Reconstruction Minimum Separation" value="14"/>
+          <Param header="0" name="Minimum Centroid Radius" value="0"/>
+          <Param header="0" name="Maximum Centroid Radius" value="50"/>
+          <Param header="0" name="Minimum Reconstruction Radius" value="0"/>
+          <Param header="0" name="Maximum Reconstruction Radius" value="1000"/>
+          <Param header="0" name="Volume min X" value="-100000"/>
+          <Param header="0" name="Volume min Y" value="-100000"/>
+          <Param header="0" name="Volume min Z" value="-100000"/>
+          <Param header="0" name="Volume max X" value="100000"/>
+          <Param header="0" name="Volume max Y" value="100000"/>
+          <Param header="0" name="Volume max Z" value="100000"/>
+          <Param header="1" name="Trajectory Tracking" value=""/>
+          <Param header="0" name="Trajectory Startup Error" value="150"/>
+          <Param header="0" name="Trajectory Prediction Error" value="150"/>
+          <Param header="0" name="Max Trajectory Length to Delete" value="0"/>
+        </Parameters>
+      </OperationSubType>
+    </OperationType>
+    <OperationType name="Manual Edits" notes="">
+      <OperationSubType name="Remove Subject" notes="">
+        <Parameters>
+          <Param header="0" name="Date" value="2020-Jul-28 14:30:23"/>
+        </Parameters>
+      </OperationSubType>
+      <OperationSubType name="Remove Subject" notes="">
+        <Parameters>
+          <Param header="0" name="Date" value="2020-Jul-28 14:34:02"/>
+        </Parameters>
+      </OperationSubType>
+      <OperationSubType name="Remove Subject" notes="">
+        <Parameters>
+          <Param header="0" name="Date" value="2020-Jul-28 14:35:25"/>
+        </Parameters>
+      </OperationSubType>
+      <OperationSubType name="Remove Subject" notes="">
+        <Parameters>
+          <Param header="0" name="Date" value="2020-Jul-28 14:45:35"/>
+        </Parameters>
+      </OperationSubType>
+    </OperationType>
+  </Run>
+
+</Trial>
