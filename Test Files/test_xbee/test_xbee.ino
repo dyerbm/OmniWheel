@@ -11,12 +11,13 @@ void setup() {
 String cString;
 float v1,v2,v3;
 int ind1,ind2,ind3;
+int timer = micros();
 
 void loop() {
   // put your main code here, to run repeatedly:
-  if (Serial1.available()) {
+  timer=micros();
+  while (Serial1.available()>0) {
     digitalWrite(ledPin, HIGH);
-    digitalWrite(ledPin, LOW);
     char c = Serial1.read();
     /*cString = cString + (char)c;
     if (c !='\n') {
@@ -47,6 +48,7 @@ void loop() {
       v1 = 0;
       v2 = 0;
       v3 = 0;
+      Serial.println(micros()-timer);
     }
 
     else {
@@ -54,8 +56,9 @@ void loop() {
     }
     
     //Serial.println(sizeof(cString));
-    //Serial.println(cString);
   }
+  digitalWrite(ledPin, LOW);
+  
   if (Serial.available()) {
     digitalWrite(ledPin, HIGH);
     delay(50);
