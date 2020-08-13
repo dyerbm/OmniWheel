@@ -1,7 +1,7 @@
 timenow=0.02;
 timeglobal=0;
 tglobal=tic;
-u=[0,0,0,0];
+desired=[0,0,0];
 
 marker_1_lost = false;
 marker_2_lost = false;
@@ -13,19 +13,19 @@ marker_7_lost = false;
 marker_8_lost = false;
 
 matcounter = 1; % Starting row for output matrix
-max_operation = 300; % Time to record (max time robot will move if sending signal)
+max_operation = 20; % Time to record (max time robot will move if sending signal)
 matrixsize = max_operation * 50 + 50; % Based on the time for operation, will wait 1 second after robot stops to end recording
  
-Sheet1Mat = zeros(matrixsize,26);
+Sheet1Mat = zeros(matrixsize,29);
 
 % Below are the headings for the files commented, feel 
 %Raw_Headings = ['GlobalTime', 'Time', 'M1X', 'M1Y', 'M1Z', 'M2X', 'M2Y', 'M2Z', 'M3X', 'M3Y', 'M3Z', 'M4X', 'M4Y', 'M4Z', 'M5X', 'M5Y', 'M5Z','M6X', 'M6Y', 'M6Z','M7X', 'M7Y', 'M7Z','M8X', 'M8Y', 'M8Z'];
 
-% %% select serial port.
-% delete(instrfind);
-% port = 'COM7'; % Replace with whatever the USB serial bus from the XBee module is on (was 7)
-% serialPortObj = serial(port, 'BaudRate', 9600);
-% fopen(serialPortObj);
+%% select serial port.
+delete(instrfind);
+port = 'COM7'; % Replace with whatever the USB serial bus from the XBee module is on (was 7)
+serialPortObj = serial(port, 'BaudRate', 9600);
+fopen(serialPortObj);
 
 %% Get name of notebook from user
 prompt={'Please enter the name of the desired notebook'};
@@ -134,19 +134,6 @@ while(matcounter <= matrixsize)
 
                     MarkerTranslation = MyClient.GetMarkerGlobalTranslation( SubjectName, MarkerName );
                     
-                    if strcmpi(MarkerName, 'rb5')
-                        
-                        %Added for filling missed frames
-                        if MarkerTranslation.Translation(1) ~= 0 && MarkerTranslation.Translation(2) ~= 0 && MarkerTranslation.Translation(3) ~= 0
-                            rb5 = [MarkerTranslation.Translation(1) MarkerTranslation.Translation(2) MarkerTranslation.Translation(3)];
-                            marker_5_lost = false;
-                        else
-                            if matcounter > 3
-                                marker_5_lost = true;
-                            end
-                        end
-                        
-                    end
                     if strcmpi(MarkerName, 'rb1')
                         
                         %Added for filling missed frames
@@ -199,6 +186,58 @@ while(matcounter <= matrixsize)
                         end
                         
                     end
+                    if strcmpi(MarkerName, 'rb5')
+                        
+                        %Added for filling missed frames
+                        if MarkerTranslation.Translation(1) ~= 0 && MarkerTranslation.Translation(2) ~= 0 && MarkerTranslation.Translation(3) ~= 0
+                            rb5 = [MarkerTranslation.Translation(1) MarkerTranslation.Translation(2) MarkerTranslation.Translation(3)];
+                            marker_5_lost = false;
+                        else
+                            if matcounter > 3
+                                marker_5_lost = true;
+                            end
+                        end
+                        
+                    end
+                    if strcmpi(MarkerName, 'rb6')
+                        
+                        %Added for filling missed frames
+                        if MarkerTranslation.Translation(1) ~= 0 && MarkerTranslation.Translation(2) ~= 0 && MarkerTranslation.Translation(3) ~= 0
+                            rb6 = [MarkerTranslation.Translation(1) MarkerTranslation.Translation(2) MarkerTranslation.Translation(3)];
+                            marker_6_lost = false;
+                        else
+                            if matcounter > 3
+                                marker_6_lost = true;
+                            end
+                        end
+                        
+                    end
+                    if strcmpi(MarkerName, 'rb7')
+                        
+                        %Added for filling missed frames
+                        if MarkerTranslation.Translation(1) ~= 0 && MarkerTranslation.Translation(2) ~= 0 && MarkerTranslation.Translation(3) ~= 0
+                            rb7 = [MarkerTranslation.Translation(1) MarkerTranslation.Translation(2) MarkerTranslation.Translation(3)];
+                            marker_7_lost = false;
+                        else
+                            if matcounter > 3
+                                marker_7_lost = true;
+                            end
+                        end
+                        
+                    end
+                    if strcmpi(MarkerName, 'rb8')
+                        
+                        %Added for filling missed frames
+                        if MarkerTranslation.Translation(1) ~= 0 && MarkerTranslation.Translation(2) ~= 0 && MarkerTranslation.Translation(3) ~= 0
+                            rb8 = [MarkerTranslation.Translation(1) MarkerTranslation.Translation(2) MarkerTranslation.Translation(3)];
+                            marker_8_lost = false;
+                        else
+                            if matcounter > 3
+                                marker_8_lost = true;
+                            end
+                        end
+                        
+                    end
                     
                 end % end of if for checking to make sure the marker is valid
                 
@@ -210,27 +249,11 @@ while(matcounter <= matrixsize)
         % iteration
         timenow = 0.020;
         
-        if (timeglobal > max_operation)
-            volts_to_send = '0,0,0,0*';
-            u = [0,0,0,0];
-            fprintf(serialPortObj, volts_to_send);
-        else
-            circletime=15;
-            speed=240;
-            spinspeed = 90;
-            %u = [int16(sin(2*pi/circletime*timeglobal)*speed),int16(cos(2*pi/circletime*timeglobal)*speed),int16(-sin(2*pi/circletime*timeglobal)*speed),int16(-cos(2*pi/circletime*timeglobal)*speed)];
-            %u=u+int16(spinspeed*sin(2*pi/(circletime+2)*timeglobal));
-            u=[int16(speed*sin(2*pi/circletime*timeglobal)), int16(speed*sin(2*pi/circletime*timeglobal)), int16(speed*sin(2*pi/circletime*timeglobal)), int16(speed*sin(2*pi/circletime*timeglobal))]; %spin in place at a variety of speed
-            volts_to_send = strcat(int2str(u(1)),',',int2str(u(2)),',',int2str(u(3)),',',int2str(u(4)),'*');
-            timeglobal
-            fprintf(serialPortObj, volts_to_send);
-        end
-
-
+        
+        fprintf(serialPortObj, '0,0,6.14*');
         % Save Sheet1 Data
         format long
-        u=[double(u(1)) double(u(2)) double(u(3)) double(u(4))]
-        Sheet1Mat(matcounter,:) = [timeglobal, timenow, rb1, rb2, rb3, rb4, rb5, u]; % Gives raw data
+        Sheet1Mat(matcounter,:) = [timeglobal, timenow, rb1, rb2, rb3, rb4, rb5, rb6, rb7, rb8, desired]; % Gives raw data
         
         matcounter = matcounter + 1;
 
@@ -239,8 +262,8 @@ while(matcounter <= matrixsize)
 end % end of while loop, everything before this runs until the end of the script
 
 
-volts_to_send = '0,0,0,0*';
-u = [0,0,0,0];
+volts_to_send = '0,0,0*';
+desired = [0,0,0];
 fprintf(serialPortObj, volts_to_send);
 %xlswrite("./Raw Data/test_r.xlsx", Sheet1Mat);
 xlswrite(notebook_name_raw, Sheet1Mat);

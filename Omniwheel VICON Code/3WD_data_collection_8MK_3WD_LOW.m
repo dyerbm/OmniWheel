@@ -1,7 +1,7 @@
 timenow=0.02;
 timeglobal=0;
 tglobal=tic;
-u=[0,0,0,0];
+desired=[0,0,0];
 
 marker_1_lost = false;
 marker_2_lost = false;
@@ -16,7 +16,7 @@ matcounter = 1; % Starting row for output matrix
 max_operation = 20; % Time to record (max time robot will move if sending signal)
 matrixsize = max_operation * 50 + 50; % Based on the time for operation, will wait 1 second after robot stops to end recording
  
-Sheet1Mat = zeros(matrixsize,26);
+Sheet1Mat = zeros(matrixsize,29);
 
 % Below are the headings for the files commented, feel 
 %Raw_Headings = ['GlobalTime', 'Time', 'M1X', 'M1Y', 'M1Z', 'M2X', 'M2Y', 'M2Z', 'M3X', 'M3Y', 'M3Z', 'M4X', 'M4Y', 'M4Z', 'M5X', 'M5Y', 'M5Z','M6X', 'M6Y', 'M6Z','M7X', 'M7Y', 'M7Z','M8X', 'M8Y', 'M8Z'];
@@ -249,11 +249,11 @@ while(matcounter <= matrixsize)
         % iteration
         timenow = 0.020;
         
-
-
+        
+        fprintf(SerialPortObj, '1,0,0*'
         % Save Sheet1 Data
         format long
-        Sheet1Mat(matcounter,:) = [timeglobal, timenow, rb1, rb2, rb3, rb4, rb5, rb6, rb7, rb8]; % Gives raw data
+        Sheet1Mat(matcounter,:) = [timeglobal, timenow, rb1, rb2, rb3, rb4, rb5, rb6, rb7, rb8, desired]; % Gives raw data
         
         matcounter = matcounter + 1;
 
@@ -262,8 +262,8 @@ while(matcounter <= matrixsize)
 end % end of while loop, everything before this runs until the end of the script
 
 
-volts_to_send = '0,0,0,0*';
-u = [0,0,0,0];
+volts_to_send = '0,0,0*';
+desired = [0,0,0];
 fprintf(serialPortObj, volts_to_send);
 %xlswrite("./Raw Data/test_r.xlsx", Sheet1Mat);
 xlswrite(notebook_name_raw, Sheet1Mat);
