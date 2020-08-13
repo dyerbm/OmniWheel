@@ -49,8 +49,8 @@ int incomingByte;
 //Variables for the feedback lienarization controller
 double v_r[3]={0, 0, 0}; //Linearized controller
 double u_r[3]={0, 0, 0}; //Non-linear controller
-double x_r[3]={0,0.3,0}; //Position of the robot
-double x_r_desired[3]={0,0,0}; //desired position of robot
+double x_r[3]={0,0,0}; //Position of the robot
+float x_r_desired[3]={0,0,0}; //desired position of robot
 double xd_r_desired[3]={0,0,0}; //desired velocity of robot
 const double wr=0.0508;//define wheel radius
 const double rr=0.290;//define robot radius
@@ -96,8 +96,8 @@ double ed_m_c=0;
 
 
 void setup() {
-  Serial.begin(115200);
-  Serial1.begin(9600); //Begin serial for XBee module
+  Serial1.begin(9600);
+  Serial.begin(9600); //Begin serial for XBee module
   delay(3000);
 
   pwm1.begin();
@@ -145,17 +145,19 @@ int ind1,ind2,ind3; //TODO: Move this
 void loop() {
   time_m=millis();
 
-  while (Serial1.available()>0) {
+  if (Serial1.available()>0) {
 //    digitalWrite(ledPin, HIGH); //indicate serial is being read
-    int c = Serial1.read();
+    char c = Serial1.read();
     
     if (c=='*'){
+      Serial.println(cString);
       ind1 = cString.indexOf(',');  //finds location of first,
       x_r_desired[0] = cString.substring(0, ind1).toFloat();   //captures first data String
       ind2 = cString.indexOf(',', ind1+1 ); //finds location of second ,
       x_r_desired[1] = cString.substring(ind1 + 1,ind2).toFloat(); //captures second data String
       ind3 = cString.indexOf(',', ind2 +1  ); //finds location of second ,
-      x_r_desired[2] = cString.substring(ind2+1,ind3).toFloat(); //finds location of second ,
+      x_r_desired[2] = cString.substring(ind2+1,ind3).toFloat(); //finds location of second
+      
       
       cString="";
     }
@@ -305,9 +307,9 @@ void loop() {
     Serial.print(u_m[0]);
     Serial.print("\t Velocity: ");
     Serial.print(velocity[0]);
-    Serial.print("\n");
+    Serial.print("\n");*/
 
-    Serial.print("x Position: ");
+    /*Serial.print("x Position: ");
     Serial.print(x_r[0]);
     Serial.print("\t y Position: ");
     Serial.print(x_r[1]);
@@ -315,13 +317,21 @@ void loop() {
     Serial.print(x_r[2]);
     Serial.print("\n");*/
 
-    Serial.print(x_r[0],5);
+    /*Serial.print("xd Position: ");
+    Serial.print(x_r_desired[0]);
+    Serial.print("\t yd Position: ");
+    Serial.print(x_r_desired[1]);
+    Serial.print("\t thetad Position: ");
+    Serial.print(x_r_desired[2]);
+    Serial.print("\n");*/
+
+    /*Serial.print(x_r[0],5);
     Serial.print(",");
     Serial.print(x_r[1],5);
     Serial.print(",");
     Serial.print(x_r[2],5);
     Serial.print(",");
-    Serial.println(sqrt(pow(x_r[0],2)+pow(x_r[1],2))-0.3,5);
+    Serial.println(sqrt(pow(x_r[0],2)+pow(x_r[1],2))-0.3,5);*/
   }
 
   while (Serial.available()) {

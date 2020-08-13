@@ -9,6 +9,7 @@ void setup() {
 }
 
 String cString;
+float v[3] = {0,0,0};
 float v1,v2,v3;
 int ind1,ind2,ind3;
 int timer = micros();
@@ -30,24 +31,22 @@ void loop() {
     }*/
 
     if (c=='*'){
+      Serial.print(cString);
       ind1 = cString.indexOf(',');  //finds location of first ,                                                      //saperating the data in formof motor on off signal and the degree input
-      v1 = cString.substring(0, ind1).toFloat();   //captures first data String
+      v[0] = cString.substring(0, ind1).toFloat();   //captures first data String
       ind2 = cString.indexOf(',', ind1+1 ); //finds location of second ,
-      v2 = cString.substring(ind1 + 1,ind2).toFloat(); //captures second data String
+      v[1] = cString.substring(ind1 + 1,ind2).toFloat(); //captures second data String
       ind3 = cString.indexOf(',', ind2 +1  ); //finds location of second ,
-      v3 = cString.substring(ind2+1,ind3).toFloat(); //finds location of second ,
+      v[2] = cString.substring(ind2+1,ind3).toFloat(); //finds location of second ,
       
       //Serial.println(String(v1int)+ "," + String(v2int)+ "," +String(v3int)+ "," +String(v4int));
-      Serial.print(v1);
+      Serial.print(v[0]);
       Serial.print(",\t");
-      Serial.print(v2);
+      Serial.print(v[1]);
       Serial.print(",\t");
-      Serial.print(v3);
+      Serial.print(v[2]);
       Serial.print("\n");
       cString="";
-      v1 = 0;
-      v2 = 0;
-      v3 = 0;
       Serial.println(micros()-timer);
     }
 
