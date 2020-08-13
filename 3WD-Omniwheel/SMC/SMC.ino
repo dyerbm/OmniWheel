@@ -50,7 +50,7 @@ int incomingByte;
 double v_r[3]={0, 0, 0}; //Linearized controller
 double u_r[3]={0, 0, 0}; //Non-linear controller
 double x_r[3]={0,0,0}; //Position of the robot
-float x_r_desired[3]={0,0,0}; //desired position of robot
+double x_r_desired[3]={0,0,0}; //desired position of robot
 double xd_r_desired[3]={0,0,0}; //desired velocity of robot
 const double wr=0.0508;//define wheel radius
 const double rr=0.290;//define robot radius
@@ -97,7 +97,7 @@ double ed_m_c=0;
 
 void setup() {
   Serial1.begin(9600);
-  Serial.begin(9600); //Begin serial for XBee module
+  Serial.begin(115200); //Begin serial for XBee module
   delay(3000);
 
   pwm1.begin();
@@ -309,13 +309,13 @@ void loop() {
     Serial.print(velocity[0]);
     Serial.print("\n");*/
 
-    /*Serial.print("x Position: ");
+    Serial.print("x Position: ");
     Serial.print(x_r[0]);
     Serial.print("\t y Position: ");
     Serial.print(x_r[1]);
     Serial.print("\t theta Position: ");
     Serial.print(x_r[2]);
-    Serial.print("\n");*/
+    Serial.print("\n");
 
     /*Serial.print("xd Position: ");
     Serial.print(x_r_desired[0]);
@@ -334,7 +334,7 @@ void loop() {
     Serial.println(sqrt(pow(x_r[0],2)+pow(x_r[1],2))-0.3,5);*/
   }
 
-  while (Serial.available()) {
+  /*while (Serial.available()) {
         delay(10); 
       if (Serial.available() >0) {
         char c = Serial.read();
@@ -346,7 +346,7 @@ void loop() {
       Serial.println(tics[0]);
       tics[0]=0;
     }
-    else{*/
+    else{
       double motor = echoString.toFloat();
       Serial.println(echoString);
       //omega_desired[0]=motor; //Currently casting float to double array, should maybe fix this
@@ -355,7 +355,7 @@ void loop() {
       x_r_desired[2]=motor;
     //}
     echoString="";
-  }
+  }*/
 }
 
 static inline double sgn(double val) {
