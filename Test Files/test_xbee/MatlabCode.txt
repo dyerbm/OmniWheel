@@ -1,0 +1,6 @@
+tic;
+for (i=1:0.02:100)
+toc;
+fprintf(serialPortObj, strcat(num2str(i/10),",",num2str(i/10),",",num2str(i/10),"*"))
+java.lang.Thread.sleep((i-toc)*1000);
+end
