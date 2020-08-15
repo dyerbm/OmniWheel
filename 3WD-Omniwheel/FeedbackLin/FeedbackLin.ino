@@ -300,7 +300,7 @@ void loop() {
     Serial.println(sqrt(pow(x_r[0],2)+pow(x_r[1],2))-0.3,5);
   }
 
-  while (Serial.available()) {
+  /*while (Serial.available()) {
         delay(10); 
       if (Serial.available() >0) {
         char c = Serial.read();
@@ -308,11 +308,11 @@ void loop() {
         }
 
   if (echoString.length() >0) {
-    /*if (echoString=="encoder"){
+    if (echoString=="encoder"){
       Serial.println(tics[0]);
       tics[0]=0;
     }
-    else{*/
+    else{
       double motor = echoString.toFloat();
       Serial.println(echoString);
       //omega_desired[0]=motor; //Currently casting float to double array, should maybe fix this
@@ -321,7 +321,7 @@ void loop() {
       x_r_desired[2]=motor;
     //}
     echoString="";
-  }
+  }*/
 }
 
 // Encoder A
