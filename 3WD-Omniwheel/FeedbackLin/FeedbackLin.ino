@@ -93,6 +93,7 @@ double ed_m_c=0;
 
 void setup() {
   Serial.begin(115200);
+  Serial1.begin(9600);
   delay(3000);
 
   pwm1.begin();
@@ -134,16 +135,41 @@ void setup() {
 }
 
 int start_time = millis();
+String cString; //TODO:Move this
+int ind1,ind2,ind3; //TODO: Move this
 
 void loop() {
   time_m=millis();
 
+  if (Serial1.available()>0) {
+//    digitalWrite(ledPin, HIGH); //indicate serial is being read
+    char c = Serial1.read();
+    
+    if (c=='*'){
+      Serial.println(cString);
+      ind1 = cString.indexOf(',');  //finds location of first,
+      x_r_desired[0] = cString.substring(0, ind1).toFloat();   //captures first data String
+      ind2 = cString.indexOf(',', ind1+1 ); //finds location of second ,
+      x_r_desired[1] = cString.substring(ind1 + 1,ind2).toFloat(); //captures second data String
+      ind3 = cString.indexOf(',', ind2 +1  ); //finds location of second ,
+      x_r_desired[2] = cString.substring(ind2+1,ind3).toFloat(); //finds location of second
+      
+      
+      cString="";
+    }
+
+    else {
+      cString += c; //makes the string controlString
+    }
+  }
+//  digitalWrite(ledPin, LOW);
+
   if (time_m-time_previous_m>=T) {
 
-    //if (millis()-start_time<20000){
+    /*if (millis()-start_time<20000){
       x_r_desired[0] = -0.3*sin((millis()-start_time)/1000.*2.*3.14159/10);
       x_r_desired[1] = 0.3*cos((millis()-start_time)/1000.*2.*3.14159/10);
-    //}  
+    }*/  
     /*Serial.println(velocity[0]);
     Serial.println(velocity[1]);
     Serial.println(velocity[2]);*/
