@@ -53,7 +53,7 @@ double x_r[3]={0,0,0}; //Position of the robot
 double x_r_desired[3]={0,0,0}; //desired position of robot
 double xd_r_desired[3]={0,0,0}; //desired velocity of robot
 const double wr=0.0508;//define wheel radius
-const double rr=0.290;//define robot radius
+const double rr=0.2632456;//define robot radius
 
 const double lambda[3]={7,7,6}; //SMC lambda
 const double K_r[3]={0.01,0.01,0.01}; //SMC K
@@ -423,7 +423,7 @@ void UPDATE_STATES_C() {
 
 void CALC_VELOCITY(float timestep) {
   noInterrupts();
-  velocity[0] = tics[0] / ((timestep)/1000) / 10000*2*3.14156; //give time in tics per time persiod
+  velocity[0] = tics[0] / ((timestep)/1000) / 10000*2*3.14156; //give time in tics per time period
   velocity[1] = tics[1] / ((timestep)/1000) / 10000*2*3.14156;
   velocity[2] = tics[2] / ((timestep)/1000) / 10000*2*3.14156;
   tics[0] = 0;
