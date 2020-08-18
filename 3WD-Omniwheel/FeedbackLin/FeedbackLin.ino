@@ -296,8 +296,7 @@ void loop() {
     Serial.print(x_r[1],5);
     Serial.print(",");
     Serial.print(x_r[2],5);
-    Serial.print(",");
-    Serial.println(sqrt(pow(x_r[0],2)+pow(x_r[1],2))-0.3,5);
+    Serial.print("\n");
   }
 
   /*while (Serial.available()) {
