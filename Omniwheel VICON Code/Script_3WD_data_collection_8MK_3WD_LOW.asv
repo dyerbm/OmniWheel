@@ -252,14 +252,13 @@ while(matcounter <= matrixsize)
         %%%-------------set desired position---------------------%%%
         %fprintf(serialPortObj, '1,0,0*');
         
-        desired = [sin(2*pi*timeglobal/20),cos(2*pi*timeglobal/20), 0]; %Circle (r=1m, T=20s)
-        
-        fprintf(serialPortObj, strcat(num2str(desired(1)),",",num2str(desired(2)),",",num2str(desired(3)),"*"));
+        desired = [sin(2*pi*timeglobal),cos(2*pi*timeglobal), 0];
+        fprintf(serialPortObj, float2str() + ',' + float2str() +);
         
         % Save Sheet1 Data
         format long
         Sheet1Mat(matcounter,:) = [timeglobal, timenow, rb1, rb2, rb3, rb4, rb5, rb6, rb7, rb8, desired]; % Gives raw data
-
+        
         matcounter = matcounter + 1;
 
     end
@@ -267,7 +266,8 @@ while(matcounter <= matrixsize)
 end % end of while loop, everything before this runs until the end of the script
 
 
+volts_to_send = '0,0,0*';
 desired = [0,0,0];
-fprintf(serialPortObj, '0,0,0*');
+fprintf(serialPortObj, volts_to_send);
 %xlswrite("./Raw Data/test_r.xlsx", Sheet1Mat);
 xlswrite(notebook_name_raw, Sheet1Mat);
