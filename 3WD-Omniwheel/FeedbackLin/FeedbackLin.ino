@@ -19,19 +19,19 @@ Adafruit_PWMServoDriver pwm1 = Adafruit_PWMServoDriver(0x40);
 
 char* output_string;
 
-const int interruptPin_a_MSB = 2;
-const int interruptPin_a_LSB = 3;
-const int interruptPin_b_MSB = 4;
-const int interruptPin_b_LSB = 5;
-const int interruptPin_c_MSB = 6;
-const int interruptPin_c_LSB = 7;
+const int interruptPin_a_MSB = 3;
+const int interruptPin_a_LSB = 2;
+const int interruptPin_b_MSB = 7;
+const int interruptPin_b_LSB = 6;
+const int interruptPin_c_MSB = 5;
+const int interruptPin_c_LSB = 4;
 
 const int motor_a_p = 9;
 const int motor_a_n = 8;
-const int motor_b_p = 3;
-const int motor_b_n = 2;
-const int motor_c_p = 13;
-const int motor_c_n = 14;
+const int motor_b_p = 13;
+const int motor_b_n = 14;
+const int motor_c_p = 3;
+const int motor_c_n = 2;
 
 String echoString;
 

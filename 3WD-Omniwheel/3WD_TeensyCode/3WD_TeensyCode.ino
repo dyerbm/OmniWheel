@@ -16,17 +16,17 @@ Adafruit_PWMServoDriver pwm1 = Adafruit_PWMServoDriver(0x40);
 
 const int interruptPin_a_MSB = 2;
 const int interruptPin_a_LSB = 3;
-const int interruptPin_b_MSB = 4;
-const int interruptPin_b_LSB = 5;
-const int interruptPin_c_MSB = 6;
-const int interruptPin_c_LSB = 7;
+const int interruptPin_b_MSB = 6;
+const int interruptPin_b_LSB = 7;
+const int interruptPin_c_MSB = 4;
+const int interruptPin_c_LSB = 5;
 
 const int motor_a_p = 9;
 const int motor_a_n = 8;
-const int motor_b_p = 3;
-const int motor_b_n = 2;
-const int motor_c_p = 13;
-const int motor_c_n = 14;
+const int motor_b_p = 13;
+const int motor_b_n = 14;
+const int motor_c_p = 3;
+const int motor_c_n = 2;
 
 String echoString;
 
@@ -61,10 +61,10 @@ void setup() {
 
   //set all motors to not move
   pwm1.setPWM(motor_a_p, 0, FULL_ON_VAL);
-  pwm1.setPWM(motor_a_n, FULL_ON_VAL, 0);
+  pwm1.setPWM(motor_a_n, 0, FULL_ON_VAL);
   pwm1.setPWM(motor_b_p, 0, FULL_ON_VAL);
   pwm1.setPWM(motor_b_n, 0, FULL_ON_VAL);
-  pwm1.setPWM(motor_c_p, 0, FULL_ON_VAL);
+  pwm1.setPWM(motor_c_p, FULL_ON_VAL, 0);
   pwm1.setPWM(motor_c_n, 0, FULL_ON_VAL);
   delay(1000);
   
@@ -94,8 +94,8 @@ void loop() {
     echoString="";
   }*/
   if (millis()%1000==0){
-    Serial.println(tics[0]);
-    tics[0]=0;
+    Serial.println(tics[2]);
+    tics[2]=0;
     delay(1);
   }
 }
