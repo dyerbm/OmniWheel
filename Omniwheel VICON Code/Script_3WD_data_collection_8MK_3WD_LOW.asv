@@ -13,7 +13,7 @@ marker_7_lost = false;
 marker_8_lost = false;
 
 matcounter = 1; % Starting row for output matrix
-max_operation = 20; % Time to record (max time robot will move if sending signal)
+max_operation = 40; % Time to record (max time robot will move if sending signal)
 matrixsize = max_operation * 50 + 50; % Based on the time for operation, will wait 1 second after robot stops to end recording
  
 Sheet1Mat = zeros(matrixsize,29);
@@ -252,13 +252,14 @@ while(matcounter <= matrixsize)
         %%%-------------set desired position---------------------%%%
         %fprintf(serialPortObj, '1,0,0*');
         
-        desired = [sin(2*pi*timeglobal),cos(2*pi*timeglobal), 0];
-        fprintf(serialPortObj, float2str() + ',' + float2str() +);
+        desired = [sin(2*pi*timeglobal/40),cos(2*pi*timeglobal/40), 0]; %Circle (r=1m, T=20s)
+        
+        fprintf(serialPortObj, strcat(num2str(desired(1)),",",num2str(desired(2)),",",num2str(desired(3)),"*"));
         
         % Save Sheet1 Data
         format long
         Sheet1Mat(matcounter,:) = [timeglobal, timenow, rb1, rb2, rb3, rb4, rb5, rb6, rb7, rb8, desired]; % Gives raw data
-        
+
         matcounter = matcounter + 1;
 
     end
@@ -266,8 +267,7 @@ while(matcounter <= matrixsize)
 end % end of while loop, everything before this runs until the end of the script
 
 
-volts_to_send = '0,0,0*';
 desired = [0,0,0];
-fprintf(serialPortObj, volts_to_send);
+fprintf(serialPortObj, '0,0,0*');
 %xlswrite("./Raw Data/test_r.xlsx", Sheet1Mat);
 xlswrite(notebook_name_raw, Sheet1Mat);
