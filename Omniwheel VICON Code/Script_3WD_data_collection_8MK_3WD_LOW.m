@@ -16,7 +16,7 @@ marker_7_lost = false;
 marker_8_lost = false;
 
 matcounter = 1; % Starting row for output matrix
-max_operation = 120; % Time to record (max time robot will move if sending signal)
+max_operation = 60; % Time to record (max time robot will move if sending signal)
 matrixsize = max_operation * 50 + 50; % Based on the time for operation, will wait 1 second after robot stops to end recording
  
 Sheet1Mat = zeros(matrixsize,29);
