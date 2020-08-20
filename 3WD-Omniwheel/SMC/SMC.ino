@@ -140,7 +140,7 @@ void setup() {
 
 int start_time = millis();
 String cString; //TODO:Move this
-int ind1,ind2,ind3; //TODO: Move this
+int ind1,ind2,ind3,ind4,ind5,ind6; //TODO: Move this
 
 void loop() {
   time_m=millis();
@@ -157,6 +157,12 @@ void loop() {
       x_r_desired[1] = cString.substring(ind1 + 1,ind2).toFloat(); //captures second data String
       ind3 = cString.indexOf(',', ind2 +1  ); //finds location of second ,
       x_r_desired[2] = cString.substring(ind2+1,ind3).toFloat(); //finds location of second
+      ind4 = cString.indexOf(',');  //finds location of first,
+      xd_r_desired[0] = cString.substring(ind3+1, ind4).toFloat();   //captures first data String
+      ind5 = cString.indexOf(',', ind1+1 ); //finds location of second ,
+      xd_r_desired[1] = cString.substring(ind4 + 1,ind5).toFloat(); //captures second data String
+      ind6 = cString.indexOf(',', ind2 +1  ); //finds location of second ,
+      xd_r_desired[2] = cString.substring(ind5+1,ind6).toFloat(); //finds location of second
       
       
       cString="";
