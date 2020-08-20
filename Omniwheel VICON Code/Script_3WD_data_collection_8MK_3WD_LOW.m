@@ -1,10 +1,7 @@
 timenow=0.02;
 timeglobal=0;
 tglobal=tic;
-time_previous=0;
 desired=[0,0,0];
-desired_previous=[0,0,0];
-desired_v=[0,0,0];
 
 marker_1_lost = false;
 marker_2_lost = false;
@@ -16,7 +13,7 @@ marker_7_lost = false;
 marker_8_lost = false;
 
 matcounter = 1; % Starting row for output matrix
-max_operation = 60; % Time to record (max time robot will move if sending signal)
+max_operation = 120; % Time to record (max time robot will move if sending signal)
 matrixsize = max_operation * 50 + 50; % Based on the time for operation, will wait 1 second after robot stops to end recording
  
 Sheet1Mat = zeros(matrixsize,29);
@@ -262,17 +259,14 @@ while(matcounter <= matrixsize)
         %desired = [sin(2*pi*timeglobal/Period),cos(2*pi*timeglobal/Period), 0]; %Circle (r=1m)
         desired = [cos(rose*2*pi*timeglobal/Period)*cos(2*pi*timeglobal/Period), cos(rose*2*pi*timeglobal/Period)*sin(2*pi*timeglobal/Period),0];
         
-        desired_v = (desired-desired_previous)/(timeglobal-time_previous); %calculate desired velocity
-        fprintf(serialPortObj, strcat(num2str(desired(1)),",",num2str(desired(2)),",",num2str(desired(3)),',',num2str(desired_v(1)),",",num2str(desired_v(2)),",",num2str(desired_v(3)),"*"));
+        fprintf(serialPortObj, strcat(num2str(desired(1)),",",num2str(desired(2)),",",num2str(desired(3)),"*"));
         
         % Save Sheet1 Data
         format long
         Sheet1Mat(matcounter,:) = [timeglobal, timenow, rb1, rb2, rb3, rb4, rb5, rb6, rb7, rb8, desired]; % Gives raw data
 
         matcounter = matcounter + 1;
-        
-        desired_previous = desired;
-        time_previous = timeglobal;
+
     end
 
 end % end of while loop, everything before this runs until the end of the script
