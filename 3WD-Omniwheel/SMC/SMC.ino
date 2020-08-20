@@ -55,7 +55,7 @@ double xd_r_desired[3]={0,0,0}; //desired velocity of robot
 const double wr=0.0508;//define wheel radius
 const double rr=0.2632456;//define robot radius
 
-const double lambda[3]={7,7,6}; //SMC lambda
+const double lambda[3]={14,14,12}; //SMC lambda
 const double K_r[3]={0.01,0.01,0.01}; //SMC K
 double s[3] = {0,0,0}; //define sliding surface
 double vshat[3] = {0,0,0}; //define measured slip
