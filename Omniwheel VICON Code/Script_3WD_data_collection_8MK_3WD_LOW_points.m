@@ -2,6 +2,7 @@ timenow=0.02;
 timeglobal=0;
 tglobal=tic;
 desired=[0,0,0];
+wait_time=30
 
 marker_1_lost = false;
 marker_2_lost = false;
@@ -13,8 +14,8 @@ marker_7_lost = false;
 marker_8_lost = false;
 
 matcounter = 1; % Starting row for output matrix
-max_operation = 120; % Time to record (max time robot will move if sending signal)
-matrixsize = max_operation * 50 + 50; % Based on the time for operation, will wait 1 second after robot stops to end recording
+max_operation = 50; % Number of random points to go to
+matrixsize = max_operation; % Based on the time for operation, will wait 1 second after robot stops to end recording
  
 Sheet1Mat = zeros(matrixsize,29);
 
@@ -252,24 +253,16 @@ while(matcounter <= matrixsize)
         %%%-------------set desired position---------------------%%%
         %fprintf(serialPortObj, '1,0,0*');
         
-        Period=60; %period in seconds
-        rose = 2; %determines number of pedals (2k pedals for even k, k pedals for odd k)
-        
-        %desired = [1,0,0];
-        %desired = [sin(2*pi*timeglobal/Period),cos(2*pi*timeglobal/Period), 0]; %Circle (r=1m)
-        desired = [cos(rose*2*pi*timeglobal/Period)*cos(2*pi*timeglobal/Period), cos(rose*2*pi*timeglobal/Period)*sin(2*pi*timeglobal/Period),0];
-        
-        desired_v = (desired-desired_previous)/(
-        fprintf(serialPortObj, strcat(num2str(desired(1)),",",num2str(desired(2)),",",num2str(desired(3)),"*"));
-        
         % Save Sheet1 Data
         format long
         Sheet1Mat(matcounter,:) = [timeglobal, timenow, rb1, rb2, rb3, rb4, rb5, rb6, rb7, rb8, desired]; % Gives raw data
 
-        matcounter = matcounter + 1;
+        matcounter = matcounter + 1
         
-        desired_previous = desired;
-        time_previous = timeglobal;
+        desired = [2.5*rand()-1.25,2.5*rand()-1.25,6.*rand()];
+        fprintf(serialPortObj, strcat(num2str(desired(1)),",",num2str(desired(2)),",",num2str(desired(3)),"*"));
+        pause(wait_time)
+        
     end
 
 end % end of while loop, everything before this runs until the end of the script
