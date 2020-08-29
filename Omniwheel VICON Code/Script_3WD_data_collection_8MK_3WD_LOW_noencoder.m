@@ -14,25 +14,25 @@ marker_7_lost = false;
 marker_8_lost = false;
 
 matcounter = 1; % Starting row for output matrix
-max_operation = 15*wait_time; % Number of random points to go to
+max_operation = 8*wait_time; % Number of random points to go to
 matrixsize = 50*max_operation+50; % Based on the time for operation, will wait 1 second after robot stops to end recording
 
-%path = [rand(max_operation/wait_time+5,1)*2-1 rand(max_operation/wait_time+5,1)*2-1 rand(max_operation/wait_time+5,1)*2*pi]; %define random points to go to
-path = [0.00 0.00 0
-        0.75 0.00 0
-        1.50 0.00 0
-        1.50 0.75 0
-        0.75 0.75 0
-        0.00 0.75 0
-        0.00 1.50 0
-        0.75 1.50 0
-        1.50 1.50 0
-        1.50 2.25 0
-        0.75 2.25 0
-        0.00 2.25 0
-        0.00 3.00 0
-        0.75 3.00 0
-        1.50 3.00 0];
+path = [rand(max_operation/wait_time+5,1)*2-1 rand(max_operation/wait_time+5,1)*2-1 rand(max_operation/wait_time+5,1)*2*pi]; %define random points to go to
+% path = [0.00 0.00 0
+%         0.75 0.00 0
+%         1.50 0.00 0
+%         1.50 0.75 0
+%         0.75 0.75 0
+%         0.00 0.75 0
+%         0.00 1.50 0
+%         0.75 1.50 0
+%         1.50 1.50 0
+%         1.50 2.25 0
+%         0.75 2.25 0
+%         0.00 2.25 0
+%         0.00 3.00 0
+%         0.75 3.00 0
+%         1.50 3.00 0];
 Sheet1Mat = zeros(matrixsize,8);
 
 % Below are the headings for the files commented, feel 
@@ -278,7 +278,7 @@ while(matcounter <= matrixsize)
         
         x_mid = (rb1(1)+rb8(1))/2./1000.;
         y_mid = (rb1(2)+rb8(2))/2./1000.;
-        theta_r = arctan2(y_mid-y_r,x_mid-x_r);
+        theta_r = atan2(y_mid-y_r,x_mid-x_r);
         
         %%%-------------set desired position---------------------%%%
         %fprintf(serialPortObj, '1,0,0*');
