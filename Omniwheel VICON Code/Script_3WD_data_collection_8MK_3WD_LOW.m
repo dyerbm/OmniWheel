@@ -257,7 +257,7 @@ while(matcounter <= matrixsize)
         
         %desired = [1,0,0];
         %desired = [sin(2*pi*timeglobal/Period),cos(2*pi*timeglobal/Period), 0]; %Circle (r=1m)
-        desired = [cos(rose*2*pi*timeglobal/Period)*cos(2*pi*timeglobal/Period), cos(rose*2*pi*timeglobal/Period)*sin(2*pi*timeglobal/Period),0];
+        %desired = [cos(rose*2*pi*timeglobal/Period)*cos(2*pi*timeglobal/Period), cos(rose*2*pi*timeglobal/Period)*sin(2*pi*timeglobal/Period),0];
         
         fprintf(serialPortObj, strcat(num2str(desired(1)),",",num2str(desired(2)),",",num2str(desired(3)),"*"));
         

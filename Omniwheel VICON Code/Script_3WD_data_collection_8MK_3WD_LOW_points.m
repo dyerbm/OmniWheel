@@ -2,7 +2,7 @@ timenow=0.02;
 timeglobal=0;
 tglobal=tic;
 desired=[0,0,0];
-wait_time=30
+wait_time=10
 
 marker_1_lost = false;
 marker_2_lost = false;
@@ -14,9 +14,25 @@ marker_7_lost = false;
 marker_8_lost = false;
 
 matcounter = 1; % Starting row for output matrix
-max_operation = 50; % Number of random points to go to
-matrixsize = max_operation; % Based on the time for operation, will wait 1 second after robot stops to end recording
- 
+max_operation = 15*wait_time; % Number of random points to go to
+matrixsize = 50*max_operation+50; % Based on the time for operation, will wait 1 second after robot stops to end recording
+
+%path = [rand(max_operation/wait_time+5,1)*2-1 rand(max_operation/wait_time+5,1)*2-1 rand(max_operation/wait_time+5,1)*2*pi]; %define random points to go to
+path = [0.00 0.00 0
+        0.75 0.00 0
+        1.50 0.00 0
+        1.50 0.75 0
+        0.75 0.75 0
+        0.00 0.75 0
+        0.00 1.50 0
+        0.75 1.50 0
+        1.50 1.50 0
+        1.50 2.25 0
+        0.75 2.25 0
+        0.00 2.25 0
+        0.00 3.00 0
+        0.75 3.00 0
+        1.50 3.00 0];
 Sheet1Mat = zeros(matrixsize,29);
 
 % Below are the headings for the files commented, feel 
@@ -257,11 +273,12 @@ while(matcounter <= matrixsize)
         format long
         Sheet1Mat(matcounter,:) = [timeglobal, timenow, rb1, rb2, rb3, rb4, rb5, rb6, rb7, rb8, desired]; % Gives raw data
 
-        matcounter = matcounter + 1
+        matcounter = matcounter + 1;
         
-        desired = [2.5*rand()-1.25,2.5*rand()-1.25,6.*rand()];
+        desired = path(floor(timeglobal/wait_time)+1,:)
+        %desired = [0,0,mod(2*pi*timeglobal/5,2*pi)]
         fprintf(serialPortObj, strcat(num2str(desired(1)),",",num2str(desired(2)),",",num2str(desired(3)),"*"));
-        pause(wait_time)
+        %pause(wait_time)
         
     end
 
