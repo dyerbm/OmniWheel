@@ -283,14 +283,19 @@ while(matcounter <= matrixsize)
         timenow = 0.020;
         
         %%%-------------set desired position---------------------%%%
-        desired = path(matcounter)
-        fprintf(serialPortObj, strcat(num2str(desired(1)),",",num2str(desired(2)),",",num2str(desired(3)),",",num2str(x_r),",",num2str(y_r),",",num2str(theta_r),"*"));   
+        %fprintf(serialPortObj, '1,0,0*');
         
         % Save Sheet1 Data
         format long
         Sheet1Mat(matcounter,:) = [timeglobal, timenow, rb1, rb2, rb3, rb4, rb5, rb6, rb7, rb8, desired]; % Gives raw data
 
         matcounter = matcounter + 1;
+        
+        desired = path(floor(timeglobal/wait_time)+1,:)
+        %desired = [0,0,mod(2*pi*timeglobal/5,2*pi)]
+        fprintf(serialPortObj, strcat(num2str(desired(1)),",",num2str(desired(2)),",",num2str(desired(3)),"*"));
+        %pause(wait_time)
+        
     end
 
 end % end of while loop, everything before this runs until the end of the script
