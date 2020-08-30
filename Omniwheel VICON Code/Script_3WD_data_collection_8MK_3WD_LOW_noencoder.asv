@@ -317,13 +317,19 @@ while(matcounter <= matrixsize)
         %fprintf(serialPortObj, '1,0,0*');
         
         desired = path(matcounter)
-        fprintf(serialPortObj, strcat(num2str(desired(1)),",",num2str(desired(2)),",",num2str(desired(3)),",",num2str(x_r),",",num2str(y_r),",",num2str(theta_r),"*"));
-
+        
         
         % Save Sheet1 Data
         format long
-        Sheet1Mat(matcounter,:) = [timeglobal, timenow, x_r, y_r, theta_r, desired]; % Gives raw data        
+        Sheet1Mat(matcounter,:) = [timeglobal, timenow, x_r, y_r, theta_r, desired]; % Gives raw data
+        fprintf(serialPortObj, strcat(num2str(desired(1)),",",num2str(desired(2)),",",num2str(desired(3)),",",num2str(x_r),",",num2str(y_r),",",num2str(theta_r),"*"));
+        
         matcounter = matcounter + 1;
+        
+        desired = path(matcounter)
+        %desired = [0,0,mod(2*pi*timeglobal/5,2*pi)]
+        fprintf(serialPortObj, strcat(num2str(desired(1)),",",num2str(desired(2)),",",num2str(desired(3)),",",num2str(x_r),",",num2str(y_r),",",num2str(theta_r),"*"));
+        %pause(wait_time)
         
     end
 
