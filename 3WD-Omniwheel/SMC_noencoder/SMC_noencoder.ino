@@ -72,7 +72,7 @@ double eint_r_t=0; //define integral error
 double ed_r_t; //define derivative error
 
 //Variables for the motor controller
-const float T=20.0; //Desired time step in milliseconds
+const float T=25.0; //Desired time step in milliseconds
 double omega_desired[3] = {0,0,0};
 double u_m[3] = {0,0,0};
 
@@ -152,13 +152,13 @@ void loop() {
     if (c=='*'){
       Serial.println(cString);
       ind1 = cString.indexOf(',');  //finds location of first,
-      x_r_desired[0] = cString.substring(0, ind1).toFloat();   //captures first data String
+      e_r_x.unshift(cString.substring(0, ind1).toFloat());
       ind2 = cString.indexOf(',', ind1+1 ); //finds location of second ,
-      x_r_desired[1] = cString.substring(ind1 + 1,ind2).toFloat(); //captures second data String
+      e_r_y.unshift(cString.substring(ind1+1, ind2).toFloat());
       ind3 = cString.indexOf(',', ind2 +1  ); //finds location of second ,
-      x_r_desired[2] = cString.substring(ind2+1,ind3).toFloat(); //finds location of second
+      e_r_t.unshift(cString.substring(ind2+2, ind3).toFloat());
       ind4 = cString.indexOf(',');  //finds location of first,
-      x_r[0] = cString.substring(ind3+1, ind4).toFloat();   //captures first data String
+      /*x_r[0] = cString.substring(ind3+1, ind4).toFloat();   //captures first data String
       ind5 = cString.indexOf(',', ind1+1 ); //finds location of second ,
       x_r[1] = cString.substring(ind4 + 1,ind5).toFloat(); //captures second data String
       ind6 = cString.indexOf(',', ind2 +1  ); //finds location of second ,
@@ -210,9 +210,9 @@ void loop() {
     //x_r[2] = x_r[2] + (-1./(3.*rr)*(velocity[0]+velocity[1]+velocity[2]))*(time_m-time_previous_m)/1000.*wr;
     //x_r[1] = x_r[1] + ((-2/3*cos(x_r[2]))*velocity[0]+(sin(x_r[2])/sqrt(3)+cos(x_r[2])/3)*velocity[1]+(cos(x_r[2])/3)*velocity[2])*(time_m-time_previous_m)/1000.0*wr;
 
-    e_r_x.unshift(x_r[0]-x_r_desired[0]);//calculate new error
-    e_r_y.unshift(x_r[1]-x_r_desired[1]);
-    e_r_t.unshift(x_r[2]-x_r_desired[2]);
+    //e_r_x.unshift(x_r[0]-x_r_desired[0]);//calculate new error
+    //e_r_y.unshift(x_r[1]-x_r_desired[1]);
+    //e_r_t.unshift(x_r[2]-x_r_desired[2]);
     eint_r_x = eint_r_x+(e_r_x[0]-e_r_x[eint_r_length-1])*(T/1000.0)/(double)eint_r_length;//recalculate integral error
     eint_r_y = eint_r_y+(e_r_y[0]-e_r_y[eint_r_length-1])*(T/1000.0)/(double)eint_r_length;
     eint_r_t = eint_r_t+(e_r_t[0]-e_r_t[eint_r_length-1])*(T/1000.0)/(double)eint_r_length;
