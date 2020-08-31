@@ -72,7 +72,7 @@ double eint_r_t=0; //define integral error
 double ed_r_t; //define derivative error
 
 //Variables for the motor controller
-const float T=20.0; //Desired time step in milliseconds
+const float T=50.0; //Desired time step in milliseconds
 double omega_desired[3] = {0,0,0};
 double u_m[3] = {0,0,0};
 
