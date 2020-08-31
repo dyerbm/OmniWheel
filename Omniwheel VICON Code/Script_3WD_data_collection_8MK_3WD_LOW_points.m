@@ -283,8 +283,8 @@ while(matcounter <= matrixsize)
         timenow = 0.020;
         
         %%%-------------set desired position---------------------%%%
-        desired = path(matcounter)
-        fprintf(serialPortObj, strcat(num2str(desired(1)),",",num2str(desired(2)),",",num2str(desired(3)),",",num2str(x_r),",",num2str(y_r),",",num2str(theta_r),"*"));   
+        desired = path(matcounter,:)
+        fprintf(serialPortObj, strcat(num2str(desired(1)),",",num2str(desired(2)),",",num2str(desired(3)),"*"));   
         
         % Save Sheet1 Data
         format long
