@@ -3,7 +3,7 @@ timeglobal=0;
 tglobal=tic;
 desired=[0,0,0];
 wait_time=10
-frequency = 20 %set this to be the same as the VICON
+frequency = 40 %set this to be the same as the VICON
 
 marker_1_lost = false;
 marker_2_lost = false;
@@ -316,8 +316,12 @@ while(matcounter <= matrixsize)
         %%%-------------set desired position---------------------%%%
         %fprintf(serialPortObj, '1,0,0*');
         
-        desired = path(matcounter)
-        fprintf(serialPortObj, strcat(num2str(desired(1)),",",num2str(desired(2)),",",num2str(desired(3)),",",num2str(x_r),",",num2str(y_r),",",num2str(theta_r),"*"));
+        %if matcounter<length(desired)
+            desired = path(matcounter,:);
+        %end
+        
+        strcat(num2str(x_r-desired(1)),",",num2str(y_r-desired(2)),",",num2str(theta_r-desired(3)),"*")
+        fprintf(serialPortObj, strcat(num2str(x_r-desired(1)),",",num2str(y_r-desired(2)),",",num2str(theta_r-desired(3)),"*"));
 
         
         % Save Sheet1 Data
