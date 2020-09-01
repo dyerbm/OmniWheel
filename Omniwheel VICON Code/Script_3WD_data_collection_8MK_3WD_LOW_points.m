@@ -1,8 +1,12 @@
+clc;
+clear all;
+
 timenow=0.02;
 timeglobal=0;
 tglobal=tic;
 desired=[0,0,0];
 wait_time=10
+frequency=50 %frequency in Hz
 
 marker_1_lost = false;
 marker_2_lost = false;
