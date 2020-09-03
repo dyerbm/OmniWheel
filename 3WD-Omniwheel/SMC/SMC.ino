@@ -205,9 +205,9 @@ void loop() {
     Serial.print("\n");*/
 
     
-    x_r[0] = x_r[0] + ((2.0/3.0*sin(x_r[2]))*velocity[0]+(cos(x_r[2])/sqrt(3.0)-sin(x_r[2])/3.0)*velocity[1]+(-cos(x_r[2])/sqrt(3.0)-sin(x_r[2])/3.0)*velocity[2])*(time_m-time_previous_m)/1000.0*wr;
-    x_r[1] = x_r[1] + ((-2.0/3.0*cos(x_r[2]))*velocity[0]+(sin(x_r[2])/sqrt(3.0)+cos(x_r[2])/3.0)*velocity[1]+(-sin(x_r[2])/sqrt(3.0)+cos(x_r[2])/3.0)*velocity[2])*(time_m-time_previous_m)/1000.0*wr;
-    x_r[2] = x_r[2] + (-1./(3.*rr)*(velocity[0]+velocity[1]+velocity[2]))*(time_m-time_previous_m)/1000.*wr;
+    x_r[0] = x_r[0] + ((2.0/3.0*sin(x_r[2]))*velocity[0]+(cos(x_r[2])/sqrt(3.0)-sin(x_r[2])/3.0)*velocity[1]+(-cos(x_r[2])/sqrt(3.0)-sin(x_r[2])/3.0)*velocity[2])*(time_m-time_previous_m)/1000.0*wr*0.98077; //calculate new position, use scaling factor
+    x_r[1] = x_r[1] + ((-2.0/3.0*cos(x_r[2]))*velocity[0]+(sin(x_r[2])/sqrt(3.0)+cos(x_r[2])/3.0)*velocity[1]+(-sin(x_r[2])/sqrt(3.0)+cos(x_r[2])/3.0)*velocity[2])*(time_m-time_previous_m)/1000.0*wr*0.9752; //calculate new position, use scaling factor
+    x_r[2] = x_r[2] + (-1./(3.*rr)*(velocity[0]+velocity[1]+velocity[2]))*(time_m-time_previous_m)/1000.*wr*0.9977; //calculate new position, use scaling factor
     //x_r[1] = x_r[1] + ((-2/3*cos(x_r[2]))*velocity[0]+(sin(x_r[2])/sqrt(3)+cos(x_r[2])/3)*velocity[1]+(cos(x_r[2])/3)*velocity[2])*(time_m-time_previous_m)/1000.0*wr;
 
     e_r_x.unshift(x_r[0]-x_r_desired[0]);//calculate new error
