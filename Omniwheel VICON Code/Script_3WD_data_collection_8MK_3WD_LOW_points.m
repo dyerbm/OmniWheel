@@ -53,7 +53,7 @@ path = [repmat([0.00 0.00 0],frequency*5,1); %wait at point for 5 seconds
         repmat([1.50 3.00 0],frequency*5,1);
         ];
     
-%path(:,[1 2]) = path(:,[2 1]); %swap column so it moves in the y first then x
+path(:,[1 2]) = path(:,[2 1]); %swap column so it moves in the y first then x
 matrixsize = length(path)+frequency; %define matrix off the path
 Sheet1Mat = zeros(matrixsize,29);
 
