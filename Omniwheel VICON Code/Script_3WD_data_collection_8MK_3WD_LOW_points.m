@@ -6,7 +6,7 @@ timeglobal=0;
 tglobal=tic;
 desired=[0,0,0];
 wait_time=10
-frequency=50 %frequency in Hz
+frequency=50 %frequency of vicon system in Hz
 
 marker_1_lost = false;
 marker_2_lost = false;
