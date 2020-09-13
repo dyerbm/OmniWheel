@@ -1,0 +1,30 @@
+PCAD Importer Log
+Project : DRV8871DDAR.LibPkg
+
+Section : C:\Users\jdiro\Desktop\3WD-PCBs\ImportLibaries\DRV8871DDAR\DRV8871DDAR.lia
+    Section : PCB Library - DRV8871DDAR.PcbLib
+        Section : Load Messages
+            Warning - 1 : Skipping Token DRV8871DDAR On Line 164
+            Warning - 1 : Skipping Token attachedSymbol On Line 281
+        EndSection
+
+        Section : Import Messages
+        EndSection
+    EndSection
+
+    Section : SCH Library - DRV8871DDAR.SchLib
+        Section : Parsing Messages
+            Warning - 1 : Skipping Token padStyleDef On Line 9
+            Warning - 1 : Skipping Token padStyleDef On Line 21
+            Warning - 1 : Skipping Token multiLayer On Line 96
+            Warning - 1 : Skipping Token layerContents On Line 107
+            Warning - 1 : Skipping Token layerContents On Line 116
+            Warning - 1 : Skipping Token layerContents On Line 125
+            Warning - 1 : Skipping Token layerContents On Line 130
+            Warning - 1 : Skipping Token layerContents On Line 156
+        EndSection
+
+        Section : Generating SCH Library - DRV8871DDAR.SchLib
+        EndSection
+    EndSection
+EndSection

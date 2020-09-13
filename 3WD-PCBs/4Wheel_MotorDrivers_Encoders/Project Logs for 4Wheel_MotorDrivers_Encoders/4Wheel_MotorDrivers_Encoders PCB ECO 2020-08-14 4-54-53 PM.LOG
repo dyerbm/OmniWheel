@@ -1,0 +1,6 @@
+Removed Pin From Net: NetName=12V Pin=VR2-1
+Removed Pin From Net: NetName=GND Pin=VR2-2
+Removed Pin From Net: NetName=3V3 Pin=VR2-3
+Added Pin To Net: NetName=GND Pin=VR2-1
+Added Pin To Net: NetName=3V3 Pin=VR2-2
+Added Pin To Net: NetName=12V Pin=VR2-3

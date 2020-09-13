@@ -1,0 +1,12 @@
+Output: NC Drill Files
+Type  : NC Drill
+From  : Project [4Wheel_MotorDrivers_Encoders.PrjPcb]
+   Generated File[4Wheel_MotorDrivers_Encoders.TXT]
+   Generated File[4Wheel_MotorDrivers_Encoders.LDP]
+   Generated File[4Wheel_MotorDrivers_Encoders.DRR]
+
+
+Files Generated   : 3
+Documents Printed : 0
+
+Finished Output Generation At 11:20:02 AM On 2020-08-21

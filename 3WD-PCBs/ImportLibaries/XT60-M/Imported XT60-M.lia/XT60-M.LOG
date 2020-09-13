@@ -1,0 +1,29 @@
+PCAD Importer Log
+Project : XT60-M.LibPkg
+
+Section : C:\Users\jdiro\Desktop\3WD-PCBs\ImportLibaries\XT60-M\XT60-M.lia
+    Section : PCB Library - XT60-M.PcbLib
+        Section : Load Messages
+            Warning - 1 : Skipping Token XT60-M On Line 139
+            Warning - 1 : Skipping Token attachedSymbol On Line 186
+        EndSection
+
+        Section : Import Messages
+        EndSection
+    EndSection
+
+    Section : SCH Library - XT60-M.SchLib
+        Section : Parsing Messages
+            Warning - 1 : Skipping Token padStyleDef On Line 9
+            Warning - 1 : Skipping Token padStyleDef On Line 21
+            Warning - 1 : Skipping Token multiLayer On Line 96
+            Warning - 1 : Skipping Token layerContents On Line 100
+            Warning - 1 : Skipping Token layerContents On Line 111
+            Warning - 1 : Skipping Token layerContents On Line 121
+            Warning - 1 : Skipping Token layerContents On Line 127
+        EndSection
+
+        Section : Generating SCH Library - XT60-M.SchLib
+        EndSection
+    EndSection
+EndSection

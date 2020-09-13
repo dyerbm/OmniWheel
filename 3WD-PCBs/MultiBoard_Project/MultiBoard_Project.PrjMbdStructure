@@ -1,0 +1,6 @@
+Record=DiagramHierarchy|SourceDocument=MultiBoardSchematic1.MbsDoc|Kind=Multi-board Schematic Module|Designator=1|Source=..\12V_BuckConverter\12V_BuckConverter.PrjPcb
+Record=SubProject|SourceDocument=MultiBoardSchematic1.MbsDoc|ProjectPath=..\12V_BuckConverter\12V_BuckConverter.PrjPcb
+Record=DiagramHierarchy|SourceDocument=MultiBoardSchematic1.MbsDoc|Kind=Multi-board Schematic Module|Designator=2|Source=..\3V3_5V_PCBProject\3V3_5V_BuckConverter.PrjPcb
+Record=SubProject|SourceDocument=MultiBoardSchematic1.MbsDoc|ProjectPath=..\3V3_5V_PCBProject\3V3_5V_BuckConverter.PrjPcb
+Record=DiagramHierarchy|SourceDocument=MultiBoardSchematic1.MbsDoc|Kind=Multi-board Schematic Module|Designator=3|Source=..\3Wheel_MotorDrivers_Encoders\3Wheel_MotorDrivers_Encoders.PrjPCB
+Record=SubProject|SourceDocument=MultiBoardSchematic1.MbsDoc|ProjectPath=..\3Wheel_MotorDrivers_Encoders\3Wheel_MotorDrivers_Encoders.PrjPCB

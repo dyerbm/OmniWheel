@@ -1,0 +1,19 @@
+----------------------------------------------------------------------------------------------------------------------------------
+NCDrill File Report For: 4Wheel_MotorDrivers_Encoders.PcbDoc   2020-08-21  11:20:02 AM
+----------------------------------------------------------------------------------------------------------------------------------
+
+Layer Pair : Top Layer to Bottom Layer
+ASCII RoundHoles File : 4Wheel_MotorDrivers_Encoders.TXT
+
+Tool       Hole Size               Hole Tolerance               Hole Type       Hole Count   Plated         Tool Travel
+----------------------------------------------------------------------------------------------------------------------------------
+T1      15mil (0.381mm)                                           Round             136       PTH        0.00inch (0.00mm)
+T2      24mil (0.599mm)                                           Round             12        PTH        0.00inch (0.00mm)
+T3      28mil (0.711mm)                                           Round             3         PTH        0.00inch (0.00mm)
+T4      35mil (0.899mm)                                           Round             38        PTH        0.00inch (0.00mm)
+T5      118mil (3mm)                                              Round             4         PTH        0.00inch (0.00mm)
+T6      177mil (4.501mm)                                          Round             2         PTH        0.00inch (0.00mm)
+----------------------------------------------------------------------------------------------------------------------------------
+Totals                                                                              195
+
+Total Processing Time (hh:mm:ss) : 00:00:00

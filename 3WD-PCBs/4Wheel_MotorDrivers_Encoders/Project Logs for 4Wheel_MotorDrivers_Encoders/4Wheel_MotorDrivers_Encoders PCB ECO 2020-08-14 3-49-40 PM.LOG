@@ -1,0 +1,4 @@
+Removed Pin From Net: NetName=3V3CHA2 Pin=U6-6
+Removed Pin From Net: NetName=5VCHA2 Pin=U6-7
+Added Pin To Net: NetName=5VCHA2 Pin=U6-11
+Added Pin To Net: NetName=3V3CHA2 Pin=U6-12

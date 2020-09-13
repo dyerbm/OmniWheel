@@ -1,0 +1,21 @@
+Output: Gerber Files
+Type  : Gerber
+From  : Variant [[No Variations]] of Project [12V_BuckConverter.PrjPcb]
+   Generated File[12V_BuckConverter.GTO]
+   Generated File[12V_BuckConverter.GTP]
+   Generated File[12V_BuckConverter.GTS]
+   Generated File[12V_BuckConverter.GTL]
+   Generated File[12V_BuckConverter.GBL]
+   Generated File[12V_BuckConverter.GBS]
+   Generated File[12V_BuckConverter.GBP]
+   Generated File[12V_BuckConverter.GBO]
+   Generated File[12V_BuckConverter.GKO]
+   Generated File[12V_BuckConverter.RUL]
+   Generated File[12V_BuckConverter.EXTREP]
+   Generated File[12V_BuckConverter.REP]
+
+
+Files Generated   : 12
+Documents Printed : 0
+
+Finished Output Generation At 3:26:13 PM On 2020-02-18

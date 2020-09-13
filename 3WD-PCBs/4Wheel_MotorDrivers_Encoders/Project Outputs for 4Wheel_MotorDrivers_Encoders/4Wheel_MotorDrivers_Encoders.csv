@@ -1,0 +1,16 @@
+Line #,Name,Description,Designator,Quantity,TargetPrice,Manufacturer 1,Manufacturer Part Number 1,Manufacturer Lifecycle 1,Supplier 1,Supplier Part Number 1,Supplier Unit Price 1,Supplier Subtotal 1
+,Cap,Capacitor,"C1, C10, C11, C12",4,0,KEMET,C0805C106K8PACTU,Volume Production,Digi-Key,399-4925-1-ND,0.21118,0.84473
+,0.1uF,Capacitor,"C2, C4, C6, C8",4,0,KEMET,C0805C104K5RACTU,Volume Production,Digi-Key,399-1170-6-ND,0.21118,0.84473
+,47uF,No Description Available,"C3, C5, C7, C9",4,0,Nichicon,UWT1H470MCL1GS,Volume Production,Digi-Key,493-2225-1-ND,0.63355,2.53
+,XT60-M,Plug; DC supply; XT60; male; PIN: 2; for cable; soldered; 30A; 500V,J1,1,0,SparkFun,PRT-10474,Unknown,Digi-Key,1568-1816-ND,1.98,1.98
+,MHDR2X6,"Header, 6-Pin, Dual row",P1,1,0,Amphenol FCI,20021111-00012T4LF,Volume Production,Digi-Key,609-3713-ND,1,1
+,Header 6,"Header, 6-Pin","P7, P8, P9, P10",4,0,Amphenol FCI,68000-406HLF,Volume Production,Digi-Key,609-3263-ND,0.35637,1.43
+,Header 7X2,"Header, 7-Pin, Dual row",P11,1,0,Adam Equipment,PH1-14-UA,Not Recommended for New Design,Digi-Key,2057-PH1-14-UA-ND,0.27718,0.27718
+,Res1,Resistor,R1,1,0,Yageo,RC0805-FR-07-10KL,Volume Production,Digi-Key,311-10.0KCRDKR-ND,0.13199,0.13199
+,CAY16-103J4LF,"10k Ohm ±5% 62.5mW Power Per Element Isolated Resistor Network/Array ±200ppm/°C 1206 _3216 Metric_, Convex, Long Side Terminals","R2, R3",2,0,Bourns,CAY16-103J4LF,Volume Production,Digi-Key,CAY16-103J4LFCT-ND,0.13199,0.26398
+,Res1,Resistor,"R8, R9, R10, R11",4,0,Vishay,CRCW080533K0FKEA,Volume Production,Digi-Key,541-33.0KCCT-ND,0.13199,0.52796
+,"PCA9685PW/Q900,118",LED Driver IC 16 Output Linear PWM Dimming 25mA 28-TSSOP,U1,1,0,NXP Semiconductors,"PCA9685PW/Q900,118",Volume Production,Digi-Key,568-5931-1-ND,3.14,3.14
+,DRV8871DDAR,Unipolar Motor Driver NMOS PWM 8-SO PowerPad,"U2, U3, U4, U5",4,0,Texas Instruments,DRV8871DDAR,Volume Production,Digi-Key,296-43024-1-ND,3.31,13.25
+,Part Number: MC14504BDR2G,No Description Available,"U6, U7",2,0,Texas Instruments,CD4504BM96,Volume Production,Digi-Key,296-14150-6-ND,0.58075,1.16
+,Volt Reg,Voltage Regulator,VR1,1,0,Microchip,MIC29300-5.0WU,Volume Production,Digi-Key,576-1122-ND,4.59,4.59
+,LM1117,Voltage Regulator,VR2,1,0,TI National Semiconductor,LM1117MP-3.3/NOPB,Volume Production,Digi-Key,LM1117MP-3.3/NOPBDKR-ND,1.45,1.45

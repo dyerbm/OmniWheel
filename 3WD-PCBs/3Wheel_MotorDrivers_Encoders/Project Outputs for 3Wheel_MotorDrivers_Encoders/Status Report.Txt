@@ -1,0 +1,12 @@
+Output: NC Drill Files
+Type  : NC Drill
+From  : Project [3Wheel_MotorDrivers_Encoders.PrjPCB]
+   Generated File[3Wheel_MotorDrivers_Encoders.TXT]
+   Generated File[3Wheel_MotorDrivers_Encoders.LDP]
+   Generated File[3Wheel_MotorDrivers_Encoders.DRR]
+
+
+Files Generated   : 3
+Documents Printed : 0
+
+Finished Output Generation At 12:41:48 PM On 2020-05-28

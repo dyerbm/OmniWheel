@@ -1,0 +1,27 @@
+PCAD Importer Log
+Project : PCA9685PW_Q900_118.LibPkg
+
+Section : C:\Users\jdiro\Desktop\3WD-PCBs\ImportLibaries\PCA9685PW_Q900_118\PCA9685PW_Q900_118.lia
+    Section : PCB Library - PCA9685PW_Q900_118.PcbLib
+        Section : Load Messages
+            Warning - 1 : Skipping Token PCA9685PW/Q900,118 On Line 373
+            Warning - 1 : Skipping Token attachedSymbol On Line 680
+        EndSection
+
+        Section : Import Messages
+        EndSection
+    EndSection
+
+    Section : SCH Library - PCA9685PW_Q900_118.SchLib
+        Section : Parsing Messages
+            Warning - 1 : Skipping Token padStyleDef On Line 9
+            Warning - 1 : Skipping Token multiLayer On Line 84
+            Warning - 1 : Skipping Token layerContents On Line 114
+            Warning - 1 : Skipping Token layerContents On Line 237
+            Warning - 1 : Skipping Token layerContents On Line 360
+        EndSection
+
+        Section : Generating SCH Library - PCA9685PW_Q900_118.SchLib
+        EndSection
+    EndSection
+EndSection

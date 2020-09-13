@@ -1,0 +1,31 @@
+PCAD Importer Log
+Project : LT8650SEV_PBF.LibPkg
+
+Section : C:\Users\jdiro\Desktop\3WD-PCBs\ImportLibaries\LT8650SEV_PBF.lia
+    Section : PCB Library - LT8650SEV_PBF.PcbLib
+        Section : Load Messages
+            Warning - 1 : Skipping Token LT8650SEV#PBF On Line 213
+            Warning - 1 : Skipping Token attachedSymbol On Line 580
+        EndSection
+
+        Section : Import Messages
+        EndSection
+    EndSection
+
+    Section : SCH Library - LT8650SEV_PBF.SchLib
+        Section : Parsing Messages
+            Warning - 1 : Skipping Token padStyleDef On Line 9
+            Warning - 1 : Skipping Token padStyleDef On Line 21
+            Warning - 1 : Skipping Token padStyleDef On Line 33
+            Warning - 1 : Skipping Token multiLayer On Line 108
+            Warning - 1 : Skipping Token layerContents On Line 148
+            Warning - 1 : Skipping Token layerContents On Line 151
+            Warning - 1 : Skipping Token layerContents On Line 189
+            Warning - 1 : Skipping Token layerContents On Line 195
+            Warning - 1 : Skipping Token layerContents On Line 203
+        EndSection
+
+        Section : Generating SCH Library - LT8650SEV_PBF.SchLib
+        EndSection
+    EndSection
+EndSection
