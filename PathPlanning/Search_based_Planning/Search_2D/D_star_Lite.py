@@ -47,6 +47,7 @@ class DStar:
         self.plot_path(self.extract_path())
         self.fig.canvas.mpl_connect('button_press_event', self.on_press)
         plt.show()
+        self.save_path(self.extract_path())
 
     def on_press(self, event):
         x, y = event.xdata, event.ydata
@@ -214,6 +215,17 @@ class DStar:
         plt.plot(px, py, linewidth=2)
         plt.plot(self.s_start[0], self.s_start[1], "bs")
         plt.plot(self.s_goal[0], self.s_goal[1], "gs")
+
+    def save_path(self,path):
+        px = [x[0] for x in path]
+        py = [x[1] for x in path]
+        print(os.path.dirname(os.path.abspath(__file__)))
+        with open(os.path.dirname(os.path.abspath(__file__))+"\output.txt", "w") as txt_file:
+            for i in range(len(px)):
+                txt_file.write("\t".join([str(px[i]), str(py[i]), str(0)])+"\n")
+        print(txt_file)
+        print(os.getcwd())
+        txt_file.close()
 
     def plot_visited(self, visited):
         color = ['gainsboro', 'lightgray', 'silver', 'darkgray',
