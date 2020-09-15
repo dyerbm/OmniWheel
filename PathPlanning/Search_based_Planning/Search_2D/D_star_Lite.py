@@ -197,7 +197,7 @@ class DStar:
         path = [self.s_start]
         s = self.s_start
 
-        for k in range(100):
+        for k in range(1000):
             g_list = {}
             for x in self.get_neighbor(s):
                 if not self.is_collision(s, x):
@@ -241,7 +241,7 @@ class DStar:
 
 def main():
     s_start = (5, 5)
-    s_goal = (45, 25)
+    s_goal = (150, 257)
 
     dstar = DStar(s_start, s_goal, "euclidean")
     dstar.run()
