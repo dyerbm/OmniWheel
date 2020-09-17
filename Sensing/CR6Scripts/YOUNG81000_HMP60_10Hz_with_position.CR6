@@ -1,0 +1,93 @@
+'CR6 Datalogger
+'The datalogger type listed on line 1 determines the default instruction set,
+'compiler, and help files used for a program that uses the .DLD or .CRB program
+'extension. These options can also be set using the Set Datalogger Type dialog box
+'(CRBasic Editor|Tools|Set Datalogger Type).
+
+'For programming tips, copy this address to your browser
+'search window:https://www.campbellsci.com/videos/datalogger-programming
+
+'To create a different opening program template, type in new
+'instructions and select Template | Save as Default Template
+
+'Date:
+'Program author:
+
+'Declare Constants
+'Example:
+'CONST PI = 3.141592654
+
+'Declare Public Variables
+'Example:
+Public PTemp_C, BattV, DiffVolt_1, DiffVolt_2, DiffVolt_3, DiffVolt_4, T_HMP60, RH
+Dim Flag As Boolean
+
+Alias DiffVolt_1 = U 
+Alias DiffVolt_2 = V 
+Alias DiffVolt_3 = W 
+Alias DiffVolt_4 = TSonic
+
+Units BattV=Volts
+Units PTemp_C=Deg C
+Units DiffVolt_1=mV
+Units DiffVolt_2=mV
+Units DiffVolt_3=mV
+Units DiffVolt_4=mV
+Units T_HMP60=Deg C
+Units RH=%
+
+'Declare Private Variables
+'Example:
+'Dim Counter
+
+'Define Data Tables
+DataTable (Young10Hz,True,-1) 'Set table size to # of records, or -1 to autoallocate.
+	DataInterval (0,100,mSec,10)
+	Sample(1,DiffVolt_1,FP2)
+	Sample(1,DiffVolt_2,FP2)
+	Sample(1,DiffVolt_3,FP2)
+	Sample(1,DiffVolt_4,FP2)
+	Sample(1,RH,FP2)
+	Sample(1,T_HMP60,FP2)
+EndTable
+
+DataTable(CR6,True,-1)
+  DataInterval(0,1440,Min,10)
+  Minimum(1,BattV,FP2,False,False)
+EndTable
+
+'Define Subroutines
+'Sub
+	'EnterSub instructions here
+'EndSub
+
+'Main Program
+BeginProg
+	Scan (100,mSec,8,0)
+		VoltDiff(DiffVolt_1,1,mV5000,U1,False,20,15000,0.004,-10)
+		VoltDiff(DiffVolt_2,1,mV5000,U3,False,20,15000,0.004,-10)
+		VoltDiff(DiffVolt_3,1,mV5000,U5,False,20,15000,0.004,-10)
+		VoltDiff(DiffVolt_4,1,mV5000,U7,False,20,15000,0.02,220)
+		
+    VoltSe(T_HMP60,1,mV1000,U9,False,0,60,0.1,-40)
+		VoltSe(RH,1,mV1000,U10,False,0,60,0.1,0)
+		If (RH>100) AND (RH<108) Then RH=100
+    If TimeIntoInterval(0,5,Sec) Then Flag=true
+    
+    CallTable Young10Hz
+    CallTable CR6
+    
+	NextScan
+	
+SlowSequence
+Do
+  If Flag=true Then
+    Flag = false
+    
+    Battery(BattV)
+    PanelTemp(PTemp_C,60)
+  EndIf
+Loop
+
+EndProg
+
