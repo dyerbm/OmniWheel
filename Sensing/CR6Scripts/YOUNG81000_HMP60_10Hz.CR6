@@ -51,8 +51,8 @@ DataTable (Young10Hz,True,-1) 'Set table size to # of records, or -1 to autoallo
 	Sample(1,T_HMP60,FP2)
 EndTable
 
-DataTable(CR6,True,-1)
-  DataInterval(0,1440,Min,10)
+DataTable(CR6_tab,True,-1)
+  DataInterval(0,1,Min,10)
   Minimum(1,BattV,FP2,False,False)
 EndTable
 
@@ -75,19 +75,19 @@ BeginProg
     If TimeIntoInterval(0,5,Sec) Then Flag=true
     
     CallTable Young10Hz
-    CallTable CR6
+    CallTable CR6_tab
     
 	NextScan
 	
-SlowSequence
-Do
-  If Flag=true Then
-    Flag = false
+'SlowSequence
+'Do
+'  If Flag=true Then
+'    Flag = false
     
-    Battery(BattV)
-    PanelTemp(PTemp_C,60)
-  EndIf
-Loop
+'    Battery(BattV)
+'    PanelTemp(PTemp_C,60)
+'  EndIf
+'Loop
 
 EndProg
 
