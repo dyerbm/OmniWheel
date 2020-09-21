@@ -19,6 +19,9 @@
 
 'Declare Public Variables
 'Example:
+
+PipeLineMode
+
 Public PTemp_C, BattV, DiffVolt_1, DiffVolt_2, DiffVolt_3, DiffVolt_4, T_HMP60, RH
 Dim Flag As Boolean
 
@@ -41,8 +44,10 @@ Units RH=%
 'Dim Counter
 
 'Define Data Tables
-DataTable (Young10Hz,True,-1) 'Set table size to # of records, or -1 to autoallocate.
+DataTable (Young10Hz_hmp,True,10000) 'Set table size to # of records, or -1 to autoallocate.
+  TableFile ("CRD:Younng10Hz",8,-1,600,0,Min,0,0)
 	DataInterval (0,100,mSec,10)
+  'TableFile ("CRD:Test",64,-1,0,60,Min,0,0)
 	Sample(1,DiffVolt_1,FP2)
 	Sample(1,DiffVolt_2,FP2)
 	Sample(1,DiffVolt_3,FP2)
@@ -74,7 +79,7 @@ BeginProg
 		If (RH>100) AND (RH<108) Then RH=100
     If TimeIntoInterval(0,5,Sec) Then Flag=true
     
-    CallTable Young10Hz
+    CallTable Young10Hz_hmp
     CallTable CR6_tab
     
 	NextScan
