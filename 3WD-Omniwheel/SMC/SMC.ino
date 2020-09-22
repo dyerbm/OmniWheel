@@ -275,29 +275,39 @@ void loop() {
     //u_m[0]=8;u_m[1]=-4;u_m[2]=-4; //This forces a spinning controller
 
     //-----Set each motor accordingly-----//
-    if (u_m[0]>0) {
-      pwm1.setPWM(motor_a_n, 0, (int) (abs(u_m[0])/12*4096));
-      pwm1.setPWM(motor_a_p, 0, 0);
+    if (e_r_x[0]>0.002 || e_r_y[0]>0.002 || e_r_t[0]>0.05){ //Make sure the robot doesn't move if it's within 2 mm and 5 degrees
+      if (u_m[0]>0) {
+        pwm1.setPWM(motor_a_n, 0, (int) (abs(u_m[0])/12*4096));
+        pwm1.setPWM(motor_a_p, 0, 0);
+      }
+      else {
+        pwm1.setPWM(motor_a_n, 0, 0);
+        pwm1.setPWM(motor_a_p, 0, (int) (abs(u_m[0])/12*4096));
+      }
+      if (u_m[1]>0) {
+        pwm1.setPWM(motor_b_n, 0, (int) (abs(u_m[1])/12*4096));
+        pwm1.setPWM(motor_b_p, 0, 0);
+      }
+      else {
+        pwm1.setPWM(motor_b_n, 0, 0);
+        pwm1.setPWM(motor_b_p, 0, (int) (abs(u_m[1])/12*4096));
+      }
+      if (u_m[2]>0) {
+        pwm1.setPWM(motor_c_n, 0, (int) (abs(u_m[2])/12*4096));
+        pwm1.setPWM(motor_c_p, 0, 0);
+      }
+      else {
+        pwm1.setPWM(motor_c_n, 0, 0);
+        pwm1.setPWM(motor_c_p, 0, (int) (abs(u_m[2])/12*4096));
+      }
     }
-    else {
+    else { //if robot is close enough, stop moving the motors (will help stop the noise)
       pwm1.setPWM(motor_a_n, 0, 0);
-      pwm1.setPWM(motor_a_p, 0, (int) (abs(u_m[0])/12*4096));
-    }
-    if (u_m[1]>0) {
-      pwm1.setPWM(motor_b_n, 0, (int) (abs(u_m[1])/12*4096));
-      pwm1.setPWM(motor_b_p, 0, 0);
-    }
-    else {
+      pwm1.setPWM(motor_a_p, 0, 0);
       pwm1.setPWM(motor_b_n, 0, 0);
-      pwm1.setPWM(motor_b_p, 0, (int) (abs(u_m[1])/12*4096));
-    }
-    if (u_m[2]>0) {
-      pwm1.setPWM(motor_c_n, 0, (int) (abs(u_m[2])/12*4096));
-      pwm1.setPWM(motor_c_p, 0, 0);
-    }
-    else {
+      pwm1.setPWM(motor_b_p, 0, 0);
       pwm1.setPWM(motor_c_n, 0, 0);
-      pwm1.setPWM(motor_c_p, 0, (int) (abs(u_m[2])/12*4096));
+      pwm1.setPWM(motor_c_p, 0, 0);
     }
 
 
