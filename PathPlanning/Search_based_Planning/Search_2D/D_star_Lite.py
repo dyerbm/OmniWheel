@@ -240,8 +240,8 @@ class DStar:
 
 
 def main():
-    s_start = (389, 749)
-    s_goal = (551, 824)
+    s_start = (1024-33.5, 77)
+    s_goal = (551, 77)
 
     dstar = DStar(s_start, s_goal, "euclidean")
     dstar.run()

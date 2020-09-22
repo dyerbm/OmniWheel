@@ -35,7 +35,7 @@ class Env:
         for i in range(y): #set up walls
             obs.add((expansion, i))
         for i in range(y):
-            obs.add((x - 1 - expansion, i))
+            obs.add((x - 1, i))
 
         for i in range(102-expansion, 102+366+expansion): #set up desks x
             obs.add((i, 140-expansion)) #desk 1
