@@ -65,9 +65,9 @@ class Plotting:
         obs_x = [x[0] for x in self.obs]
         obs_y = [x[1] for x in self.obs]
 
-        plt.plot(self.xI[0], self.xI[1], "bs")
-        plt.plot(self.xG[0], self.xG[1], "gs")
-        plt.plot(obs_x, obs_y, "sk")
+        plt.plot(self.xI[0], self.xI[1], "bs", ms=0.01)
+        plt.plot(self.xG[0], self.xG[1], "gs", ms=0.01)
+        plt.plot(obs_x, obs_y, "sk", ms=0.01)
         plt.title(name)
         plt.axis("equal")
 

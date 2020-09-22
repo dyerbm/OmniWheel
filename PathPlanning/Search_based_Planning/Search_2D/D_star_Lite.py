@@ -75,12 +75,12 @@ class DStar:
                     s_last = s_curr
                     if (x, y) not in self.obs:
                         self.obs.add((x, y))
-                        plt.plot(x, y, 'sk')
+                        plt.plot(x, y, 'sk', ms=1)
                         self.g[(x, y)] = float("inf")
                         self.rhs[(x, y)] = float("inf")
                     else:
                         self.obs.remove((x, y))
-                        plt.plot(x, y, marker='s', color='white')
+                        plt.plot(x, y, marker='s', color='white', ms=1)
                         self.UpdateVertex((x, y))
                     for s in self.get_neighbor((x, y)):
                         self.UpdateVertex(s)
@@ -197,7 +197,7 @@ class DStar:
         path = [self.s_start]
         s = self.s_start
 
-        for k in range(1000):
+        for k in range(2000):
             g_list = {}
             for x in self.get_neighbor(s):
                 if not self.is_collision(s, x):
@@ -240,8 +240,8 @@ class DStar:
 
 
 def main():
-    s_start = (5, 5)
-    s_goal = (150, 257)
+    s_start = (389, 749)
+    s_goal = (551, 824)
 
     dstar = DStar(s_start, s_goal, "euclidean")
     dstar.run()
