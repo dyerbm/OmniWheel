@@ -9,7 +9,7 @@ fopen(serialPortObj);
 
 %% Read in trajectory
 % Change the path as necissary
-filename = 'C:\Users\jdiro\Desktop\Git\PathPlanning\Search_based_Planning\Search_2D\Path\testoutput.csv';
+filename = 'C:\Users\jdiro\Desktop\Git\PathPlanning\Search_based_Planning\Search_2D\testoutput.csv';
 delimiter = ',';
 startRow = 2;
 formatSpec = '%f%f%f%[^\n\r]';
@@ -27,7 +27,7 @@ for i=1:size(path)
     
     fprintf(serialPortObj, strcat(num2str(path(i,1)),",",num2str(path(i,2)),",",num2str(path(i,3)),"*"));
     
-    value=toc(timerval)
+    strcat(num2str(path(i,1)),",",num2str(path(i,2)),",",num2str(path(i,3)),"*")
     
     pause(0.02-toc) %send the data at the right speed
 end
