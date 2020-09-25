@@ -145,12 +145,12 @@ int ind1,ind2,ind3,ind4,ind5,ind6; //TODO: Move this
 void loop() {
   time_m=millis();
 
-  if (Serial1.available()>0) {
+  if (Serial.available()>0) {
 //    digitalWrite(ledPin, HIGH); //indicate serial is being read
-    char c = Serial1.read();
+    char c = Serial.read();
     
     if (c=='*'){
-      Serial.println(cString);
+      //Serial.println(cString);
       ind1 = cString.indexOf(',');  //finds location of first,
       x_r_desired[0] = cString.substring(0, ind1).toFloat();   //captures first data String
       ind2 = cString.indexOf(',', ind1+1 ); //finds location of second ,
@@ -176,7 +176,6 @@ void loop() {
   
   // Main control loop, should be changed to run on a watchdog interupt
   if (time_m-time_previous_m>=T) {
-
     /*if (millis()-start_time<20000){ #hard program path into robot
       x_r_desired[0] = -0.3*sin((millis()-start_time)/1000.*2.*3.14159/10);
       x_r_desired[1] = 0.3*cos((millis()-start_time)/1000.*2.*3.14159/10);
@@ -275,7 +274,7 @@ void loop() {
     //u_m[0]=8;u_m[1]=-4;u_m[2]=-4; //This forces a spinning controller
 
     //-----Set each motor accordingly-----//
-    if (e_r_x[0]>0.002 || e_r_y[0]>0.002 || e_r_t[0]>0.05){ //Make sure the robot doesn't move if it's within 2 mm and 5 degrees
+    if (abs(e_r_x[0])>0.002 || abs(e_r_y[0])>0.002 || abs(e_r_t[0])>0.05){ //Make sure the robot doesn't move if it's within 2 mm and 5 degrees
       if (u_m[0]>0) {
         pwm1.setPWM(motor_a_n, 0, (int) (abs(u_m[0])/12*4096));
         pwm1.setPWM(motor_a_p, 0, 0);
@@ -311,7 +310,7 @@ void loop() {
     }
 
 
-    time_previous_m=time_m; //set previous time to current time
+    time_previous_m=time_temp; //set previous time to current time
 
     
     /*//sprintf(output_string, "Error: %f\tController: %d",e_m_a[0],u_m[0]);
@@ -325,13 +324,13 @@ void loop() {
     Serial.print(velocity[0]);
     Serial.print("\n");*/
 
-    Serial.print("x Position: ");
+    /*Serial.print("x Position: ");
     Serial.print(x_r[0]);
     Serial.print("\t y Position: ");
     Serial.print(x_r[1]);
     Serial.print("\t theta Position: ");
     Serial.print(x_r[2]);
-    Serial.print("\n");
+    Serial.print("\n");*/
 
     /*Serial.print("xd Position: ");
     Serial.print(x_r_desired[0]);
