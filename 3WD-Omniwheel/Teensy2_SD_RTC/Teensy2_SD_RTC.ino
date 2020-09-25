@@ -7,6 +7,10 @@
 
 #include <DS3231.h>
 #include <Wire.h>
+#include <SD.h>
+#include <SPI.h>
+
+const int chipSelect = 10; //CS pin on Teensy4.0
 
 DS3231 Clock;
 
@@ -72,13 +76,34 @@ void GetDateStuff(byte& Year, byte& Month, byte& Day, byte& DoW,
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(115200);
+  Serial1.begin(115200);
 
   // Start the I2C interface
   Wire.begin();
+
+  Serial.print("Initializing SD card...");
+  if (!SD.begin(chipSelect)) {
+    Serial.println("Card failed, or not present");
+    // don't do anything more:
+    return;
+  }
+  Serial.println("card initialized.");
+
+
+  File pathFile = SD.open("path.txt");
+  
+  
 }
+
+String positionString = "";
+File dataFile = SD.open("datalog.txt", O_CREAT | O_WRITE);
+
+int time_previous_r=millis()
+int time_previous_w=millis()
 
 void loop() {
   // put your main code here, to run repeatedly:
+  
   if (Serial.available()) {
     GetDateStuff(Year, Month, Date, DoW, Hour, Minute, Second);
 
@@ -93,5 +118,21 @@ void loop() {
     Clock.setMinute(Minute);
     Clock.setSecond(Second);
 
+  }
+
+  if (Serial1.available()) {
+     if (dataFile) {
+      dataFile.print(Serial1.read());
+      dataFile.flush();
+     }
+
+   }
+
+  if (millis()-time_previous_r>=T) { //run every 20 milliseconds
+    time_previous_r=millis();
+  }
+
+  if (millis()-time_previous_w>=Twrite) { //reset the files every minute
+    time_previous_w=millis();
   }
 }
