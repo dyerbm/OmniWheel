@@ -78,6 +78,10 @@ void setup() {
   Serial.begin(115200);
   Serial1.begin(115200);
 
+  SPI.setMOSI(12);
+  SPI.setMISO(11);
+  SPI.setSCK(13);
+
   // Start the I2C interface
   Wire.begin();
 
@@ -87,22 +91,22 @@ void setup() {
     // don't do anything more:
     return;
   }
-  Serial.println("card initialized.");
-
-
-  File pathFile = SD.open("path.txt");
-  
-  
+  Serial.println("card initialized."); 
 }
 
 String positionString = "";
 File dataFile = SD.open("datalog.txt", O_CREAT | O_WRITE);
+File pathFile = SD.open("Younng10Hz10.dat", O_READ);
+char line[50];
+int n;
 
-int time_previous_r=millis()
-int time_previous_w=millis()
+int time_previous_r=millis();
+int time_previous_w=millis();
+int T=20;
+int Twrite=1000;
 
 void loop() {
-  // put your main code here, to run repeatedly:
+  /*// put your main code here, to run repeatedly:
   
   if (Serial.available()) {
     GetDateStuff(Year, Month, Date, DoW, Hour, Minute, Second);
@@ -130,9 +134,17 @@ void loop() {
 
   if (millis()-time_previous_r>=T) { //run every 20 milliseconds
     time_previous_r=millis();
+
+    while (line[n-1]!='\n') {
+      line[n]=pathFile.read();
+      n++;
+    }
+    Serial.println(line);
+    
+    
   }
 
   if (millis()-time_previous_w>=Twrite) { //reset the files every minute
     time_previous_w=millis();
-  }
+  }*/
 }
