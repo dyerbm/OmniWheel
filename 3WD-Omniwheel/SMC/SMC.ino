@@ -310,7 +310,7 @@ void loop() {
     }
 
 
-    time_previous_m=time_temp; //set previous time to current time
+    time_previous_m=time_m; //set previous time to current time
 
     
     /*//sprintf(output_string, "Error: %f\tController: %d",e_m_a[0],u_m[0]);
