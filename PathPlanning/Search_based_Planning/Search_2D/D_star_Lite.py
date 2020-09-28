@@ -220,7 +220,7 @@ class DStar:
         px = [x[0] for x in path]
         py = [x[1] for x in path]
         print(os.path.dirname(os.path.abspath(__file__)))
-        with open(os.path.dirname(os.path.abspath(__file__))+"\output.txt", "w") as txt_file:
+        with open(os.path.dirname(os.path.abspath(__file__))+"\path7.txt", "w") as txt_file:
             for i in range(len(px)):
                 txt_file.write("\t".join([str(px[i]), str(py[i]), str(0)])+"\n")
         print(txt_file)
@@ -240,8 +240,8 @@ class DStar:
 
 
 def main():
-    s_start = (1024-33, 77)
-    s_goal = (551, 400)
+    s_start = (600, 773)
+    s_goal = (390, 773)
 
     dstar = DStar(s_start, s_goal, "euclidean")
     dstar.run()
