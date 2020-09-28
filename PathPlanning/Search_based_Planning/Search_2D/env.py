@@ -42,15 +42,15 @@ class Env:
             obs.add((i, 140+154+expansion))
             obs.add((i, 140+154+192-expansion)) #desk 2
             obs.add((i, 140+154*2+192+expansion))
-            obs.add((i, 140+154*2+192+175-expansion)) #desk 3
-            obs.add((i, 140+154*3+192+175+expansion))
+            obs.add((i, 140+154*2+192+210-expansion)) #desk 3
+            obs.add((i, 140+154*3+192+210+expansion))
         for i in range(154+expansion*2):
             obs.add((102-expansion, i+140-expansion)) #desk 1
             obs.add((102+366+expansion, i+140-expansion))
             obs.add((102-expansion, i+140+154+192-expansion)) #desk 2
             obs.add((102+366+expansion, i+140+154+192-expansion))
-            obs.add((102-expansion, i+140+154*2+192+175-expansion)) #desk 3
-            obs.add((102+366+expansion, i+140+154*2+192+175-expansion))
+            obs.add((102-expansion, i+140+154*2+192+210-expansion)) #desk 3
+            obs.add((102+366+expansion, i+140+154*2+192+210-expansion))
 
         for i in range(248-expansion,248+100+expansion): #Desk 1 box (near Newton)
             obs.add((i, 140+154-expansion))

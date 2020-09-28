@@ -145,9 +145,9 @@ int ind1,ind2,ind3,ind4,ind5,ind6; //TODO: Move this
 void loop() {
   time_m=millis();
 
-  if (Serial.available()>0) {
+  if (Serial1.available()>0) {
 //    digitalWrite(ledPin, HIGH); //indicate serial is being read
-    char c = Serial.read();
+    char c = Serial1.read();
     
     if (c=='*'){
       //Serial.println(cString);
