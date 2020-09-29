@@ -21,7 +21,7 @@ path = path{:,:};
 path = path/100.; %convert from cm to m
 
 %% Create output file
-output_filename = datestr(now,'yyyy-mm-dd HH-MM')+"xlsx";
+output_filename = datestr(now,'yyyy-mm-dd HH-MM')+".xlsx";
 output_table = zeros(length(path),4);
 
 %% Send data to robot
