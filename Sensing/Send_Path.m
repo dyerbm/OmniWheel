@@ -9,7 +9,7 @@ fopen(serialPortObj);
 
 %% Read in trajectory
 % Change the path as necissary
-filename = 'C:\Users\jdiro\Desktop\Git\PathPlanning\Search_based_Planning\Search_2D\finalpath.csv';
+filename = 'C:\Users\jdiro\Desktop\Git\PathPlanning\Search_based_Planning\Search_2D\finalpath_fast.csv';
 delimiter = ',';
 startRow = 2;
 formatSpec = '%f%f%f%[^\n\r]';
