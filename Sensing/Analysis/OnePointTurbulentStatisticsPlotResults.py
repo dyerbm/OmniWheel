@@ -8,7 +8,7 @@ import matplotlib.dates as mdates
 import datetime
 
 #Define file names
-fileName = "c:/Users/jdiro/Desktop/git/Sensing/OnePointStatisticsOutput.txt"
+fileName = "c:/Users/jdiro/Desktop/git/Sensing/Analysis/OnePointStatisticsOutput.txt"
 
 #Load all data in a matrix
 data = numpy.loadtxt(fileName)
