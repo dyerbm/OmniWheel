@@ -259,8 +259,9 @@ while(matcounter <= matrixsize)
         %desired = [sin(2*pi*timeglobal/Period),cos(2*pi*timeglobal/Period), 0]; %Circle (r=1m)
         %desired = [cos(rose*2*pi*timeglobal/Period)*cos(2*pi*timeglobal/Period), cos(rose*2*pi*timeglobal/Period)*sin(2*pi*timeglobal/Period),0];
         
-        desired = [0 0 2*pi*timeglobal/12.]; %pspin
+        %desired = [0 0 2*pi*timeglobal/12.]; %pspin
         %desired = [0 0 -2*pi*timeglobal/12.]; %nspin
+        desired = [0 0 sin(2*pi*timeglobal/24.)*0.9*pi]; %sin
         
         fprintf(serialPortObj, strcat(num2str(desired(1)),",",num2str(desired(2)),",",num2str(desired(3)),"*"));
         desired
