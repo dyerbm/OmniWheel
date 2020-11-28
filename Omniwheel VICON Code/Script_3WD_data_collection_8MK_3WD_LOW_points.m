@@ -5,7 +5,7 @@ timenow=0.02;
 timeglobal=0;
 tglobal=tic;
 desired=[0,0,0];
-wait_time=10
+wait_time=20
 frequency=50 %frequency of vicon system in Hz
 
 marker_1_lost = false;
@@ -18,43 +18,43 @@ marker_7_lost = false;
 marker_8_lost = false;
 
 matcounter = 1; % Starting row for output matrix
-max_operation = 15*wait_time; % Number of random points to go to
-matrixsize = 50*max_operation+50; % Based on the time for operation, will wait 1 second after robot stops to end recording
+max_operation = 8*wait_time; % Number of random points to go to
+matrixsize = 50*160+50; % Based on the time for operation, will wait 1 second after robot stops to end recording
 
-%path = [rand(max_operation/wait_time+5,1)*2-1 rand(max_operation/wait_time+5,1)*2-1 rand(max_operation/wait_time+5,1)*2*pi]; %define random points to go to
-path = [repmat([0.00 0.00 0],frequency*5,1); %wait at point for 5 seconds
-        linspace(0,0.75,frequency*5)' linspace(0,0,frequency*5)' linspace(0,0,frequency*5)'%move to next point over 5 seconds
-        repmat([0.75 0.00 0],frequency*5,1);
-        linspace(0.75,1.5,frequency*5)' linspace(0,0,frequency*5)' linspace(0,0,frequency*5)'
-        repmat([1.50 0.00 0],frequency*5,1);
-        linspace(1.5,1.5,frequency*5)' linspace(0,0.75,frequency*5)' linspace(0,0,frequency*5)'
-        repmat([1.50 0.75 0],frequency*5,1);
-        linspace(1.5,0.75,frequency*5)' linspace(0.75,0.75,frequency*5)' linspace(0,0,frequency*5)'
-        repmat([0.75 0.75 0],frequency*5,1);
-        linspace(0.75,0,frequency*5)' linspace(0.75,0.75,frequency*5)' linspace(0,0,frequency*5)'
-        repmat([0.00 0.75 0],frequency*5,1);
-        linspace(0,0,frequency*5)' linspace(0.75,1.5,frequency*5)' linspace(0,0,frequency*5)'
-        repmat([0.00 1.50 0],frequency*5,1);
-        linspace(0,0.75,frequency*5)' linspace(1.5,1.5,frequency*5)' linspace(0,0,frequency*5)'
-        repmat([0.75 1.50 0],frequency*5,1);
-        linspace(0.75,1.5,frequency*5)' linspace(1.5,1.5,frequency*5)' linspace(0,0,frequency*5)'
-        repmat([1.50 1.50 0],frequency*5,1);
-        linspace(1.5,1.5,frequency*5)' linspace(1.5,2.25,frequency*5)' linspace(0,0,frequency*5)'
-        repmat([1.50 2.25 0],frequency*5,1);
-        linspace(1.5,0.75,frequency*5)' linspace(2.25,2.25,frequency*5)' linspace(0,0,frequency*5)'
-        repmat([0.75 2.25 0],frequency*5,1);
-        linspace(0.75,0,frequency*5)' linspace(2.25,2.25,frequency*5)' linspace(0,0,frequency*5)'
-        repmat([0.00 2.25 0],frequency*5,1);
-        linspace(0,0,frequency*5)' linspace(2.25,3,frequency*5)' linspace(0,0,frequency*5)'
-        repmat([0.00 3.00 0],frequency*5,1);
-        linspace(0,0.75,frequency*5)' linspace(3,3,frequency*5)' linspace(0,0,frequency*5)'
-        repmat([0.75 3.00 0],frequency*5,1);
-        linspace(0.75,1.5,frequency*5)' linspace(3,3,frequency*5)' linspace(0,0,frequency*5)'
-        repmat([1.50 3.00 0],frequency*5,1);
-        ];
+path = [rand(max_operation/wait_time+5,1)*2-1 rand(max_operation/wait_time+5,1)*2-1 rand(max_operation/wait_time+5,1)*2*pi-pi]; %define random points to go to
+% path = [repmat([0.00 0.00 0],frequency*5,1); %wait at point for 5 seconds
+%         linspace(0,0.75,frequency*5)' linspace(0,0,frequency*5)' linspace(0,0,frequency*5)'%move to next point over 5 seconds
+%         repmat([0.75 0.00 0],frequency*5,1);
+%         linspace(0.75,1.5,frequency*5)' linspace(0,0,frequency*5)' linspace(0,0,frequency*5)'
+%         repmat([1.50 0.00 0],frequency*5,1);
+%         linspace(1.5,1.5,frequency*5)' linspace(0,0.75,frequency*5)' linspace(0,0,frequency*5)'
+%         repmat([1.50 0.75 0],frequency*5,1);
+%         linspace(1.5,0.75,frequency*5)' linspace(0.75,0.75,frequency*5)' linspace(0,0,frequency*5)'
+%         repmat([0.75 0.75 0],frequency*5,1);
+%         linspace(0.75,0,frequency*5)' linspace(0.75,0.75,frequency*5)' linspace(0,0,frequency*5)'
+%         repmat([0.00 0.75 0],frequency*5,1);
+%         linspace(0,0,frequency*5)' linspace(0.75,1.5,frequency*5)' linspace(0,0,frequency*5)'
+%         repmat([0.00 1.50 0],frequency*5,1);
+%         linspace(0,0.75,frequency*5)' linspace(1.5,1.5,frequency*5)' linspace(0,0,frequency*5)'
+%         repmat([0.75 1.50 0],frequency*5,1);
+%         linspace(0.75,1.5,frequency*5)' linspace(1.5,1.5,frequency*5)' linspace(0,0,frequency*5)'
+%         repmat([1.50 1.50 0],frequency*5,1);
+%         linspace(1.5,1.5,frequency*5)' linspace(1.5,2.25,frequency*5)' linspace(0,0,frequency*5)'
+%         repmat([1.50 2.25 0],frequency*5,1);
+%         linspace(1.5,0.75,frequency*5)' linspace(2.25,2.25,frequency*5)' linspace(0,0,frequency*5)'
+%         repmat([0.75 2.25 0],frequency*5,1);
+%         linspace(0.75,0,frequency*5)' linspace(2.25,2.25,frequency*5)' linspace(0,0,frequency*5)'
+%         repmat([0.00 2.25 0],frequency*5,1);
+%         linspace(0,0,frequency*5)' linspace(2.25,3,frequency*5)' linspace(0,0,frequency*5)'
+%         repmat([0.00 3.00 0],frequency*5,1);
+%         linspace(0,0.75,frequency*5)' linspace(3,3,frequency*5)' linspace(0,0,frequency*5)'
+%         repmat([0.75 3.00 0],frequency*5,1);
+%         linspace(0.75,1.5,frequency*5)' linspace(3,3,frequency*5)' linspace(0,0,frequency*5)'
+%         repmat([1.50 3.00 0],frequency*5,1);
+%         ];
     
-path(:,[1 2]) = path(:,[2 1]); %swap column so it moves in the y first then x
-matrixsize = length(path)+frequency; %define matrix off the path
+%path(:,[1 2]) = path(:,[2 1]); %swap column so it moves in the y first then x
+%matrixsize = length(path)+frequency; %define matrix off the path
 Sheet1Mat = zeros(matrixsize,29);
 
 % Below are the headings for the files commented, feel 
@@ -289,7 +289,9 @@ while(matcounter <= matrixsize)
         timenow = 0.020;
         
         %%%-------------set desired position---------------------%%%
-        desired = path(matcounter,:)
+        %desired = path(matcounter,:)
+        desired = path(floor(timeglobal/wait_time+1),:)
+        matcounter
         fprintf(serialPortObj, strcat(num2str(desired(1)),",",num2str(desired(2)),",",num2str(desired(3)),"*"));   
         
         % Save Sheet1 Data
