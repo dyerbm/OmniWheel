@@ -49,8 +49,8 @@ int incomingByte;
 //Variables for the feedback lienarization controller
 double v_r[3]={0, 0, 0}; //Linearized controller
 double u_r[3]={0, 0, 0}; //Non-linear controller
-double x_r[3]={9.80,0.77,0}; //Position of the robot
-double x_r_desired[3]={9.80,0.77,0}; //desired position of robot
+double x_r[3]={0, 0, 0}; //Position of the robot
+double x_r_desired[3]={0, 0, 0}; //desired position of robot
 double xd_r_desired[3]={0,0,0}; //desired velocity of robot
 const double wr=0.0508;//define wheel radius
 const double rr=0.2632456;//define robot radius
