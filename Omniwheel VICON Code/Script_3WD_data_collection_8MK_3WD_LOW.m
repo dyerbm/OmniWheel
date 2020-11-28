@@ -262,6 +262,7 @@ while(matcounter <= matrixsize)
         desired = [0 0 2*pi*timeglobal/15.];
         
         fprintf(serialPortObj, strcat(num2str(desired(1)),",",num2str(desired(2)),",",num2str(desired(3)),"*"));
+        desired
         
         % Save Sheet1 Data
         format long
