@@ -56,7 +56,8 @@ while(timeglobal <= max_operation)
     v2=150;
     
     
-    volts_to_send=strcat(int2str(v1),',',int2str(v2),',',int2str(v3),',',int2str(v4),'*')
+    %volts_to_send=strcat(int2str(v1),',',int2str(v2),',',int2str(v3),',',int2str(v4),'*');
+    volts_to_send=[cos(2*pi/20*timeglobal)-1, sin(2*pi/20*timeglobal), 0];
     
     
     fprintf(serialPortObj, volts_to_send);
