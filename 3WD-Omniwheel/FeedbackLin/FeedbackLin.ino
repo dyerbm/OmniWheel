@@ -5,6 +5,8 @@
   Benjamin Dyer - May 25, 2020
 
   Trevor Smith ^^ -  hehe ;)
+
+  This man, sneaking in here, he wrote the encoder bit, mostly
  
  *****************************************************************/
 
@@ -166,31 +168,12 @@ void loop() {
 
   if (time_m-time_previous_m>=T) {
 
-    /*if (millis()-start_time<20000){
-      x_r_desired[0] = -0.3*sin((millis()-start_time)/1000.*2.*3.14159/10);
-      x_r_desired[1] = 0.3*cos((millis()-start_time)/1000.*2.*3.14159/10);
-    }*/  
-    /*Serial.println(velocity[0]);
-    Serial.println(velocity[1]);
-    Serial.println(velocity[2]);*/
+  
     CALC_VELOCITY(time_m-time_previous_m); //calculate each wheel velocity
-    //MOTOR_CONTROLLER(velocity[0], omega_desired[0]); //Call Motor Controller function, send desired state, real state, motor pins
-    //Serial.println(velocity[0]);
+    
 
     //-----------Calculate Feedback linearization--------------//
     //Calculate current position
-
-
-    /*Serial.print(x_r[1]);
-    Serial.print("\n");
-    Serial.print((-2.0/3.0*cos(x_r[2]))*velocity[0]);
-    Serial.print("\n");
-    Serial.print((sin(x_r[2])/sqrt(3)+cos(x_r[2])/3.0)*velocity[1]);
-    Serial.print("\n");
-    Serial.print((-sin(x_r[2])/sqrt(3)+cos(x_r[2])/3.0)*velocity[2]);
-    Serial.print("\n");
-    Serial.print((time_m-time_previous_m)/1000.0*wr);
-    Serial.print("\n");*/
 
     
     x_r[0] = x_r[0] + ((2.0/3.0*sin(x_r[2]))*velocity[0]+(cos(x_r[2])/sqrt(3.0)-sin(x_r[2])/3.0)*velocity[1]+(-cos(x_r[2])/sqrt(3.0)-sin(x_r[2])/3.0)*velocity[2])*(time_m-time_previous_m)/1000.0*wr*1.0196; //calculate new position, use scaling factor
@@ -253,10 +236,6 @@ void loop() {
       //Serial.println(millis());
     }
 
-    /*if (abs(u_m[0])<3.5) u_m[0]=0; //Cut off voltage, save battery, stop ringing
-    if (abs(u_m[1])<3.5) u_m[1]=0;
-    if (abs(u_m[2])<3.5) u_m[2]=0;*/
-
     //u_m[0]=8;u_m[1]=-4;u_m[2]=-4; //This forces a spinning controller
 
     //-----Set each motor accordingly-----//
@@ -299,28 +278,6 @@ void loop() {
     Serial.print("\n");
   }
 
-  /*while (Serial.available()) {
-        delay(10); 
-      if (Serial.available() >0) {
-        char c = Serial.read();
-        echoString += c;}
-        }
-
-  if (echoString.length() >0) {
-    if (echoString=="encoder"){
-      Serial.println(tics[0]);
-      tics[0]=0;
-    }
-    else{
-      double motor = echoString.toFloat();
-      Serial.println(echoString);
-      //omega_desired[0]=motor; //Currently casting float to double array, should maybe fix this
-      //omega_desired[1]=motor;
-      //omega_desired[2]=motor;
-      x_r_desired[2]=motor;
-    //}
-    echoString="";
-  }*/
 }
 
 // Encoder A
