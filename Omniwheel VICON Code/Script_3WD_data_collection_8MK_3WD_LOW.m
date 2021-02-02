@@ -1,3 +1,8 @@
+% A lot of this code was provided by Amit Patel
+% It has been modified to work with a different robot at a different
+% frequency for custom trajectories
+
+
 timenow=0.02;
 timeglobal=0;
 tglobal=tic;
